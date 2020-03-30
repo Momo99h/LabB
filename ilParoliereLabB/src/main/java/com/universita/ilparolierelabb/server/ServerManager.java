@@ -14,6 +14,6 @@ public class ServerManager
     public static void launchServer()
     {
         /**/
-        
+        new ServerSettings().setVisible(true);
     }    
 }

@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package com.universita.ilparolierelabb.common.settings;
+import com.universita.ilparolierelabb.common.sql.SQLConnectionParameters;
 
 /**
  *
@@ -11,5 +12,5 @@ package com.universita.ilparolierelabb.common.settings;
  */
 public class Settings 
 {
-    public static Boolean ServerIP = false;
+    public static SQLConnectionParameters connectionParam;
 }

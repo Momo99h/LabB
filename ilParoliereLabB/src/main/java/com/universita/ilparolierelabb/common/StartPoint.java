@@ -16,6 +16,6 @@ public class StartPoint
 {
     public static void main(String args[]) 
     {
-        
+        new ApplicationSelector().setVisible(true);
     }
 }

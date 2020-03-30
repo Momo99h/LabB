@@ -17,6 +17,6 @@ public class StartPoint
     public static void main(String args[]) 
     {
         int Andrea;
-        int Momo;
+        int Momo2;
     }
 }

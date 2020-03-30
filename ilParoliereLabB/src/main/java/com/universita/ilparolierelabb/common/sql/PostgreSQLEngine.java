@@ -18,7 +18,7 @@ import java.sql.Statement;
  */
 public class PostgreSQLEngine extends sqlEngine
 {
-    private String _DbConnectionString = "";
+    private String _DbConnectionString = "jdbc:postgresql://%s/%s?user=%s&password=%s";
     private Connection con = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;
@@ -37,9 +37,10 @@ public class PostgreSQLEngine extends sqlEngine
     }
     
     @Override
-    public void setConnectionString(String val) 
+    public void setConnectionString(SQLConnectionParameters param) 
     {
-        this._DbConnectionString = val;
+        _DbConnectionString = String.format(_DbConnectionString,
+                param.getIP(),param.getDBName(),param.getUsername(),param.getPassword());
     }
 
     @Override

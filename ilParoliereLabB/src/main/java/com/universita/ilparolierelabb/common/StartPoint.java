@@ -17,8 +17,7 @@ public class StartPoint
     public static void main(String args[]) 
     {
         int x;
-        fiehwjdioewdfjweiodfjweiofjweiofjw
-                wefjkpowefjwer
+        int Ciao;
                 
     }
 }

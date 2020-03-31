@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.sql.PostgreSQLEngine;
 
 /**
@@ -19,5 +20,14 @@ public class ServerDBInterface
     {
         _db = db;
     }
+
+    public static boolean serverHasAdmin() 
+    {
+        String query = "Select Count(*) from server.\"Admins\"";
+        String[][] return_val = _db.executeQueryRead(query);
+        return !return_val[0][0].equals("0");
+    }
     
+    
+            
 }

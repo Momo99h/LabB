@@ -16,6 +16,11 @@ public class ServerManager
         SettingsResult _ConResult = ServerSettings.ConfigureServer();
         if(_ConResult == SettingsResult.ConnectionOk) ServerDBInterface.setDBReference(ServerSettings.getDbReference());
         else System.exit(0);
-        
-    }    
+        checkAdmins();
+    }
+    private static void checkAdmins()
+    {
+        if(!ServerDBInterface.serverHasAdmin())
+            new ServerRegistration().setVisible(true);
+    }
 }

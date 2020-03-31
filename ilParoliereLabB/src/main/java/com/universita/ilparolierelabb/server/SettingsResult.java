@@ -9,12 +9,8 @@ package com.universita.ilparolierelabb.server;
  *
  * @author Momo
  */
-public class ServerManager 
+public enum SettingsResult
 {
-    public static void launchServer()
-    {
-        /**/
-        System.out.println(ServerSettings.ConfigureServer().toString());
-        
-    }    
+        ConnectionOk,
+        ConnectionFailed
 }

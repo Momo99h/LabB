@@ -8,6 +8,8 @@ package com.universita.ilparolierelabb.server;
 import com.universita.ilparolierelabb.common.*;
 import com.universita.ilparolierelabb.common.settings.Settings;
 import com.universita.ilparolierelabb.common.sql.*;
+import java.awt.Dialog;
+import java.awt.Window;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 
@@ -16,12 +18,14 @@ import javax.swing.JOptionPane;
  * @author Momo
  */
 public class ServerSettings extends JDialog {
-
     
     private Boolean _ConnOk = false;
     private PostgreSQLEngine db = new PostgreSQLEngine();
+    private SettingsResult connectionResult = SettingsResult.ConnectionFailed;
     
-    public ServerSettings() {
+    public ServerSettings(java.awt.Frame parent, boolean modal) 
+    {
+        super(parent, modal);
         initComponents();
     }
 
@@ -152,12 +156,16 @@ public class ServerSettings extends JDialog {
         Settings.connectionParam.setPassword(textPassword.getText());
         
         _ConnOk = checkConnection(Settings.connectionParam);
-        System.out.println(db.getConnectionString());
         if(!_ConnOk)
-        JOptionPane.showMessageDialog(this, "Connessione fallita.", "IlParoliereLabB - server", JOptionPane.ERROR_MESSAGE);
-        
-        
-        
+        {
+            JOptionPane.showMessageDialog(this, "Connessione fallita.", "IlParoliereLabB - server", JOptionPane.ERROR_MESSAGE);
+            connectionResult = SettingsResult.ConnectionFailed;
+        }
+        else 
+        {
+            connectionResult = SettingsResult.ConnectionOk;
+            this.dispose();
+        }
     }//GEN-LAST:event_buttonNextActionPerformed
 
     private Boolean checkConnection(SQLConnectionParameters param)
@@ -166,6 +174,12 @@ public class ServerSettings extends JDialog {
         return db.checkConnection();
     }
     
+    public static SettingsResult ConfigureServer()
+    {
+        ServerSettings form = new ServerSettings(new javax.swing.JFrame(), true);
+        form.setVisible(true);
+        return form.connectionResult;
+    }
     
     /**
      * @param args the command line arguments

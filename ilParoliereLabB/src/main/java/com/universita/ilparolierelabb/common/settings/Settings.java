@@ -12,5 +12,5 @@ import com.universita.ilparolierelabb.common.sql.SQLConnectionParameters;
  */
 public class Settings 
 {
-    public static SQLConnectionParameters connectionParam;
+    public static SQLConnectionParameters connectionParam = new SQLConnectionParameters();
 }

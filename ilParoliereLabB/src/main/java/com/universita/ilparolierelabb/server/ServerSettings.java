@@ -145,18 +145,16 @@ public class ServerSettings extends JDialog {
 
     private void buttonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextActionPerformed
         // TODO add your handling code here:
-        String ip = textIP.getText();
-        String db = textDatabase.getText();
-        String usr = textUsername.getText();
-        String psw = textPassword.getText();
-        Settings.connectionParam.setIP(ip);
-        Settings.connectionParam.setDBName(db);
-        Settings.connectionParam.setUsername(usr);
-        Settings.connectionParam.setPassword(psw);
+        
+        Settings.connectionParam.setIP(textIP.getText());
+        Settings.connectionParam.setDBName(textDatabase.getText());
+        Settings.connectionParam.setUsername(textUsername.getText());
+        Settings.connectionParam.setPassword(textPassword.getText());
         
         _ConnOk = checkConnection(Settings.connectionParam);
+        System.out.println(db.getConnectionString());
         if(!_ConnOk)
-        JOptionPane.showMessageDialog(this, "Server settings", "Connessione fallita.", JOptionPane.ERROR);
+        JOptionPane.showMessageDialog(this, "Connessione fallita.", "IlParoliereLabB - server", JOptionPane.ERROR_MESSAGE);
         
         
         

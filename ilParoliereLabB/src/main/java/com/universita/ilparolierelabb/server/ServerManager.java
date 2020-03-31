@@ -13,8 +13,9 @@ public class ServerManager
 {
     public static void launchServer()
     {
-        /**/
-        System.out.println(ServerSettings.ConfigureServer().toString());
+        SettingsResult _ConResult = ServerSettings.ConfigureServer();
+        if(_ConResult == SettingsResult.ConnectionOk) ServerDBInterface.setDBReference(ServerSettings.getDbReference());
+        else System.exit(0);
         
     }    
 }

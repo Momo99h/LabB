@@ -18,11 +18,11 @@ import javax.swing.JOptionPane;
  * @author Momo
  */
 public class ServerSettings extends JDialog {
-    
-    private Boolean _ConnOk = false;
+
     private PostgreSQLEngine db = new PostgreSQLEngine();
+    private static PostgreSQLEngine parDB = new PostgreSQLEngine();
     private SettingsResult connectionResult = SettingsResult.ConnectionFailed;
-    
+
     public ServerSettings(java.awt.Frame parent, boolean modal) 
     {
         super(parent, modal);
@@ -155,8 +155,7 @@ public class ServerSettings extends JDialog {
         Settings.connectionParam.setUsername(textUsername.getText());
         Settings.connectionParam.setPassword(textPassword.getText());
         
-        _ConnOk = checkConnection(Settings.connectionParam);
-        if(!_ConnOk)
+        if(!checkConnection(Settings.connectionParam))
         {
             JOptionPane.showMessageDialog(this, "Connessione fallita.", "IlParoliereLabB - server", JOptionPane.ERROR_MESSAGE);
             connectionResult = SettingsResult.ConnectionFailed;
@@ -164,6 +163,7 @@ public class ServerSettings extends JDialog {
         else 
         {
             connectionResult = SettingsResult.ConnectionOk;
+            parDB = this.db;
             this.dispose();
         }
     }//GEN-LAST:event_buttonNextActionPerformed
@@ -179,6 +179,11 @@ public class ServerSettings extends JDialog {
         ServerSettings form = new ServerSettings(new javax.swing.JFrame(), true);
         form.setVisible(true);
         return form.connectionResult;
+    }
+
+     public static PostgreSQLEngine getDbReference()
+    {
+        return parDB;
     }
     
     /**

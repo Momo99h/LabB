@@ -89,8 +89,10 @@ public class ApplicationSelector extends javax.swing.JFrame {
         Utility.ConsolePrintLine(db.checkConnection());
         
         String[][] result = db.executeQueryRead("Select * from Utenti");
-        int x = 0;
         
+        String s = "Il nome nella prima riga è:"+result[0][1];
+        
+        Utility.ConsolePrintLine(s);
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

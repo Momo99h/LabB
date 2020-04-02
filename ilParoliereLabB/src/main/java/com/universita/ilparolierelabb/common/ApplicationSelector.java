@@ -88,6 +88,9 @@ public class ApplicationSelector extends javax.swing.JFrame {
         
         Utility.ConsolePrintLine(db.checkConnection());
         
+        String[][] result = db.executeQueryRead("Select * from Utenti");
+        int x = 0;
+        
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

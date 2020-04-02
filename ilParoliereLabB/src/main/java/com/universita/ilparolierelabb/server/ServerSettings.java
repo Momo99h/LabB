@@ -80,10 +80,10 @@ public class ServerSettings extends JDialog {
         textDatabase.setText("iZFGEQFcMu");
 
         textPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        textPassword.setText("1234");
+        textPassword.setText("zktaLtxcpV");
 
         textIP.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        textIP.setText("localhost");
+        textIP.setText("remotemysql.com");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

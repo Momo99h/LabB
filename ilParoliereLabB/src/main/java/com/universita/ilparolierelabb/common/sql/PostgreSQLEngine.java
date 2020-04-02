@@ -80,7 +80,24 @@ public class PostgreSQLEngine extends sqlEngine
     @Override
     public Boolean executeQuery(String query) 
     {
-        return null;
+         try
+        {
+           con = DriverManager.getConnection(_DbConnectionString);
+           st = con.createStatement();
+           st.executeUpdate(query);
+           return true;
+        }
+        catch(Exception sql_ex)
+        {
+            sql_ex.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            try { st.close(); } catch (Exception e) { /* ignored */ }
+            try { ps.close(); } catch (Exception e) { /* ignored */ }
+            try { con.close(); } catch (Exception e) { /* ignored */ }
+        }
     }
 
     @Override

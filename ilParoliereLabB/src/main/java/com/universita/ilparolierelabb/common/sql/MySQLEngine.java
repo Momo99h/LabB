@@ -83,7 +83,24 @@ public class MySQLEngine extends sqlEngine
     @Override
     public Boolean executeQuery(String query) 
     {
-        return null;
+        try
+        {
+           con = DriverManager.getConnection(_DbConnectionString,this._usr,this._psw);
+           st = con.createStatement();
+           st.executeUpdate(query);
+           return true;
+        }
+        catch(Exception sql_ex)
+        {
+            sql_ex.printStackTrace();
+            return false;
+        }
+        finally
+        {
+            try { st.close(); } catch (Exception e) { /* ignored */ }
+            try { ps.close(); } catch (Exception e) { /* ignored */ }
+            try { con.close(); } catch (Exception e) { /* ignored */ }
+        }
     }
 
     @Override

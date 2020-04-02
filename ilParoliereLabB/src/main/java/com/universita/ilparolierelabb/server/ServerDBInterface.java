@@ -23,7 +23,7 @@ public class ServerDBInterface
 
     public static boolean serverHasAdmin() 
     {
-        String query = "Select Count(*) from server.Admins";
+        String query = "Select Count(*) from Admins";
         String[][] return_val = _db.executeQueryRead(query);
         return !return_val[0][0].equals("0");
     }

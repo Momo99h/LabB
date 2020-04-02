@@ -15,9 +15,9 @@ public class Utility
     {
         System.out.println(msg);
     }
-    public static void ConsolePrint(Object msg)
+    public static void ConsolePrint(Object ms)
     {
-        System.out.print(msg);
+        System.out.print(ms);
     }
     
 }

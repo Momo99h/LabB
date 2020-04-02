@@ -6,7 +6,7 @@
 package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.common.Utility;
-import com.universita.ilparolierelabb.common.sql.PostgreSQLEngine;
+import com.universita.ilparolierelabb.common.sql.*;
 
 /**
  *
@@ -14,16 +14,16 @@ import com.universita.ilparolierelabb.common.sql.PostgreSQLEngine;
  */
 public class ServerDBInterface 
 {
-    private static PostgreSQLEngine _db = new PostgreSQLEngine();
+    private static MySQLEngine _db = new MySQLEngine();
     
-    public static void setDBReference(PostgreSQLEngine db)
+    public static void setDBReference(MySQLEngine db)
     {
         _db = db;
     }
 
     public static boolean serverHasAdmin() 
     {
-        String query = "Select Count(*) from server.\"Admins\"";
+        String query = "Select Count(*) from server.Admins";
         String[][] return_val = _db.executeQueryRead(query);
         return !return_val[0][0].equals("0");
     }

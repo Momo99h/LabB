@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.common;
 
+import com.universita.ilparolierelabb.client.ClientManager;
 import com.universita.ilparolierelabb.common.sql.MySQLEngine;
 import com.universita.ilparolierelabb.common.sql.SQLConnectionParameters;
 import com.universita.ilparolierelabb.server.ServerManager;
@@ -78,23 +79,8 @@ public class ApplicationSelector extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        MySQLEngine db = new MySQLEngine();
-        SQLConnectionParameters param = new SQLConnectionParameters();
-        param.setIP("remotemysql.com");
-        param.setDBName("iZFGEQFcMu");
-        param.setUsername("iZFGEQFcMu");
-        param.setPassword("zktaLtxcpV");
-        db.setConnectionString(param);
-        
-        Utility.ConsolePrintLine(db.checkConnection());
-        
-        String[][] result = db.executeQueryRead("Select * from Utenti");
-        
-        String s = "Il nome nella prima riga è:"+result[0][1];
-        
-        Utility.ConsolePrintLine(s);
-        
+        ClientManager.Launch();
+        this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void buttonLaunchServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLaunchServerActionPerformed

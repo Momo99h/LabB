@@ -5,6 +5,9 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.common.SettingsResult;
+import com.universita.ilparolierelabb.common.ServerSettings;
+
 /**
  *
  * @author Momo

@@ -22,11 +22,11 @@ public class Client
     public static void main(String[] args) throws MalformedURLException, RemoteException, NotBoundException 
     {
 		Server.Launch();
-		/*look_up = (RMIInterface) Naming.lookup("//localhost/Server");
+		look_up = (RMIInterface) Server.rgsty.lookup("hello");
 		String txt = JOptionPane.showInputDialog("What is your name?");
 			
 		String response = look_up.helloTo(txt);
-		JOptionPane.showMessageDialog(null, response);*/
-
-	}
+		JOptionPane.showMessageDialog(null, response);
+                System.exit(0);
+    }
 }

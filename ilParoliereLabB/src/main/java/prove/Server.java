@@ -7,6 +7,8 @@ package prove;
 
 import java.rmi.Naming;
 import java.rmi.RemoteException;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
@@ -16,7 +18,7 @@ import java.rmi.server.UnicastRemoteObject;
 public class Server extends UnicastRemoteObject implements RMIInterface{
 
     private static final long serialVersionUID = 1L;
-
+    public static Registry rgsty;
     private Server() throws RemoteException 
     {
         super();
@@ -31,9 +33,11 @@ public class Server extends UnicastRemoteObject implements RMIInterface{
     
     public static void Launch()
     {
-         try {
-
-            Naming.rebind("//localhost/Server", new Server());            
+         try 
+         {
+            Server obj = new Server();
+            rgsty = LocateRegistry.createRegistry(1888);
+            rgsty.rebind("hello", obj);      
             System.err.println("Server ready");
 
         } catch (Exception e) {

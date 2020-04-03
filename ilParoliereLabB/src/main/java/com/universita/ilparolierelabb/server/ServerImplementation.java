@@ -8,6 +8,7 @@ package com.universita.ilparolierelabb.server;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.settings.Settings;
 import com.universita.ilparolierelabb.common.toServerRMI;
+import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -17,10 +18,10 @@ import java.rmi.server.UnicastRemoteObject;
  *
  * @author Momo
  */
-public class Server extends UnicastRemoteObject implements toServerRMI
+public class ServerImplementation extends UnicastRemoteObject implements toServerRMI
 {
     private static Registry rgsty;
-    private Server() throws RemoteException 
+    private ServerImplementation() throws RemoteException 
     {
         super();
     }
@@ -28,12 +29,14 @@ public class Server extends UnicastRemoteObject implements toServerRMI
     {
         try 
         {
-            Server obj = new Server();
-            rgsty = LocateRegistry.createRegistry(10);
+            ServerImplementation obj = new ServerImplementation();
+            rgsty = LocateRegistry.createRegistry(1099);
             rgsty.rebind("Server", obj);
+            /*String name = "//localhost/Server";
+            Naming.rebind(name, obj);*/
             Utility.ConsolePrintLine("Server ready");
 
-        } catch (RemoteException e) 
+        } catch (Exception e) 
         {
             Utility.ShowErrorPopUp(Settings.serverName, "Server exception: "+e.toString());
             System.exit(1);

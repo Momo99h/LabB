@@ -4,19 +4,12 @@
  * and open the template in the editor.
  */
 package com.universita.ilparolierelabb.client;
-import com.universita.ilparolierelabb.common.sql.*;
 
 /**
  *
  * @author Momo
  */
-public class ClientDBInterface 
+public class ClientImplementation 
 {
-    private static MySQLEngine _db = new MySQLEngine();
-    
-    public static void setDBReference(MySQLEngine db)
-    {
-        _db = db;
-    }
     
 }

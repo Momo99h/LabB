@@ -34,7 +34,7 @@ public class ServerManager
     }
     public static void Run()
     {
-        Server.Init();        
+        ServerImplementation.Init();        
         ServerMainFrame serverFrame = new ServerMainFrame();
         serverFrame.setVisible(true);
     }

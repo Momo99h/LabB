@@ -11,9 +11,10 @@ import java.lang.*;
  *
  * @author andreagirola
  */
-public class Dice {
-    private final int _min=1; 
-    private final int _max=6; 
+public class DiceFactory implements DiceInterface {
+    
+    private int _min=1; 
+    private int _max=6; 
     private int _id; 
     private String[] _faces;
     
@@ -21,14 +22,14 @@ public class Dice {
     //constructor
     //gli si passa un id (numero del dado da 1 a 16)
     //e un array di lettere corrispondenti al dado in base alle specifiche 
-    public Dice(int id, String[] face){ 
+    public DiceFactory(int id, String[] face){ 
         this._id = id; 
         this._faces = face; 
         
     }
     
     //getter
-    public int getId(){
+    public int getDiceId(){
         return this._id; 
     }
     

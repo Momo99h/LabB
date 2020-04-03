@@ -12,6 +12,7 @@ import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.settings.Settings;
 import com.universita.ilparolierelabb.common.toServerRMI;
 import java.rmi.Naming;
+import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 
@@ -21,14 +22,14 @@ import java.rmi.registry.Registry;
  */
 public class ClientManager 
 {
-    private static toServerRMI look_up;
+    private static toServerRMI _server;
     
     public static void Launch()
     {
         try
         {
             Registry registry = LocateRegistry.getRegistry(1099);
-            look_up = (toServerRMI) registry.lookup("Server");
+            _server = (toServerRMI) registry.lookup("Server");
             new ClientLogin().setVisible(true);
         }
         catch(Exception e)
@@ -37,5 +38,21 @@ public class ClientManager
             System.exit(1);
         }
     }
-    
+    public static void Run()
+    {
+        
+    }
+    public static Boolean getLogin(String usr,String psw)
+    {
+       Boolean success = false;
+       try
+       {
+           success = _server.clientLogin(usr, psw);
+       }
+       catch(RemoteException e)
+       {
+           Utility.ShowErrorPopUp(Settings.clientName, e.getMessage());
+       }
+       return success;
+    }
 }

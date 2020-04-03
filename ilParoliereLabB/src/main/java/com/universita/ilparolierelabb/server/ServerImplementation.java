@@ -32,8 +32,6 @@ public class ServerImplementation extends UnicastRemoteObject implements toServe
             ServerImplementation obj = new ServerImplementation();
             rgsty = LocateRegistry.createRegistry(1099);
             rgsty.rebind("Server", obj);
-            /*String name = "//localhost/Server";
-            Naming.rebind(name, obj);*/
             Utility.ConsolePrintLine("Server ready");
 
         } catch (Exception e) 

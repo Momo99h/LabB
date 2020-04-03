@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.client.frames;
 
+import com.universita.ilparolierelabb.client.ClientManager;
 import com.universita.ilparolierelabb.server.*;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.settings.Settings;
@@ -149,6 +150,18 @@ public class ClientLogin extends javax.swing.JFrame {
 
     private void btnLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLoginActionPerformed
 
+        String usr = textUsername.getText();
+        String psw = textPassword.getText(); 
+        if(usr.equals("") || usr.equals("")) 
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, "Fields cannot be empty");
+            return;
+        }
+        if(ClientManager.getLogin(usr, psw))
+        {
+            ClientManager.Run();
+            this.dispose();
+        }
         
     }//GEN-LAST:event_btnLoginActionPerformed
 

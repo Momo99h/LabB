@@ -5,6 +5,9 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.server.frames.ServerLogin;
+import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
+import com.universita.ilparolierelabb.server.frames.ServerRegistration;
 import com.universita.ilparolierelabb.common.SettingsResult;
 import com.universita.ilparolierelabb.common.ServerSettings;
 
@@ -12,7 +15,7 @@ import com.universita.ilparolierelabb.common.ServerSettings;
  *
  * @author Momo
  */
-public class ServerManager 
+public class ServerManager
 {
     public static void Launch()
     {
@@ -27,10 +30,12 @@ public class ServerManager
             new ServerRegistration().setVisible(true);
         else
             new ServerLogin().setVisible(true);
+            
     }
     public static void Run()
     {
-        Server serverFrame = new Server();
+        Server.Init();        
+        ServerMainFrame serverFrame = new ServerMainFrame();
         serverFrame.setVisible(true);
     }
 }

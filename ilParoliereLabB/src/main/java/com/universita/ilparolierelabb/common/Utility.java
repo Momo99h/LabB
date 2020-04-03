@@ -5,6 +5,8 @@
  */
 package com.universita.ilparolierelabb.common;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Momo
@@ -18,6 +20,14 @@ public class Utility
     public static void ConsolePrint(Object msg)
     {
         System.out.print(msg);
+    }
+    public static void ShowErrorPopUp(String header,String msg)
+    {
+        JOptionPane.showMessageDialog(null,msg,header, JOptionPane.ERROR_MESSAGE);
+    }
+    public static void ShowInfoPopUp(String header,String msg)
+    {
+        JOptionPane.showMessageDialog(null,msg,header, JOptionPane.INFORMATION_MESSAGE);
     }
     
 }

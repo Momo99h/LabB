@@ -161,7 +161,7 @@ public class ServerSettings extends JDialog {
         
         if(!checkConnection(Settings.connectionParam))
         {
-            JOptionPane.showMessageDialog(this, "Connessione fallita.", "IlParoliereLabB - server", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Connessione fallita.", Settings.serverName, JOptionPane.ERROR_MESSAGE);
             connectionResult = SettingsResult.ConnectionFailed;
         }
         else 

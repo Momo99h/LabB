@@ -20,7 +20,9 @@ public class ServerManager
     }
     private static void checkAdmins()
     {
-        if(!ServerDBInterface.serverHasAdmin())
+        if(!ServerDBInterface.HasAdmin())
             new ServerRegistration().setVisible(true);
+        else
+            new ServerLogin().setVisible(true);
     }
 }

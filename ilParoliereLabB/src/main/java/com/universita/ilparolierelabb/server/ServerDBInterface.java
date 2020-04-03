@@ -21,11 +21,18 @@ public class ServerDBInterface
         _db = db;
     }
 
-    public static boolean serverHasAdmin() 
+    public static boolean HasAdmin() 
     {
         String query = "Select Count(*) from Admins";
         String[][] return_val = _db.executeQueryRead(query);
         return !return_val[0][0].equals("0");
+    }
+    
+    public static boolean RegisterAdmin(String usr,String psw) 
+    {
+        String query = "Insert into Admins(Username,Password) Values ('%s','%s')";
+        query = String.format(query,usr,psw);
+        return _db.executeQuery(query);
     }
     
     

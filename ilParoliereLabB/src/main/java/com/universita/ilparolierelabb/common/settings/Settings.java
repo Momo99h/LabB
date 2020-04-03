@@ -13,4 +13,6 @@ import com.universita.ilparolierelabb.common.sql.SQLConnectionParameters;
 public class Settings 
 {
     public static SQLConnectionParameters connectionParam = new SQLConnectionParameters();
+    public static String serverName = "IlParoliereLabB - server";
+    public static String clientName = "IlParoliereLabB - client";
 }

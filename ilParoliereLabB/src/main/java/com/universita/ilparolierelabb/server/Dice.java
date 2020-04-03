@@ -12,8 +12,8 @@ import java.lang.*;
  * @author andreagirola
  */
 public class Dice {
-    private int _min=1; 
-    private int _max=6; 
+    private final int _min=1; 
+    private final int _max=6; 
     private int _id; 
     private String[] _faces;
     

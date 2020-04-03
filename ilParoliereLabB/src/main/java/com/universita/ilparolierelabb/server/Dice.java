@@ -28,7 +28,7 @@ public class Dice {
     }
     
     //getter
-    public int getDiceId(){
+    public int getId(){
         return this._id; 
     }
     

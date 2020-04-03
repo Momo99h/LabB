@@ -5,6 +5,8 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author Momo
@@ -16,6 +18,7 @@ public class Server extends javax.swing.JFrame {
      */
     public Server() {
         initComponents();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
 
     /**

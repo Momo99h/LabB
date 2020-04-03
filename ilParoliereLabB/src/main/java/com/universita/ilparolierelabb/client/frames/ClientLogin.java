@@ -162,6 +162,7 @@ public class ClientLogin extends javax.swing.JFrame {
             ClientManager.Run();
             this.dispose();
         }
+        Utility.ShowErrorPopUp(Settings.clientName, "Login failed");
         
     }//GEN-LAST:event_btnLoginActionPerformed
 

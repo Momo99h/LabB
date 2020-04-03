@@ -10,6 +10,8 @@ import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
 import com.universita.ilparolierelabb.server.frames.ServerRegistration;
 import com.universita.ilparolierelabb.common.SettingsResult;
 import com.universita.ilparolierelabb.common.ServerSettings;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -17,6 +19,8 @@ import com.universita.ilparolierelabb.common.ServerSettings;
  */
 public class ServerManager
 {
+    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    
     public static void Launch()
     {
         SettingsResult _ConResult = ServerSettings.ConfigureServer();
@@ -37,5 +41,10 @@ public class ServerManager
         ServerImplementation.Init();        
         ServerMainFrame serverFrame = new ServerMainFrame();
         serverFrame.setVisible(true);
+    }
+    public static void addLogData(String logdata)
+    {
+        String s = sdf.format(new Date())+" -   "+logdata;
+        ServerMainFrame.Console_Log_Model.add(0, s);
     }
 }

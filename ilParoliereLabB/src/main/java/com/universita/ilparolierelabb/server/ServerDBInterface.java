@@ -42,6 +42,13 @@ public class ServerDBInterface
         String[][] return_val = _db.executeQueryRead(query);
         return !return_val[0][0].equals("0");
     }
+    public static boolean ClientLogin(String usr,String psw)
+    {
+        String query = "Select Count(*) from Users Where Nickname='%s' AND Password='%s'";
+        query = String.format(query,usr,psw);
+        String[][] return_val = _db.executeQueryRead(query);
+        return !return_val[0][0].equals("0");
+    }
     
     
             

@@ -8,6 +8,7 @@ package com.universita.ilparolierelabb.server;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.settings.Settings;
 import com.universita.ilparolierelabb.common.toServerRMI;
+import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -42,8 +43,13 @@ public class ServerImplementation extends UnicastRemoteObject implements toServe
     }
     
     @Override
-    public Boolean clientLogin(String usr, String psw) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Boolean clientLogin(String usr, String psw) 
+    {
+        Boolean b = ServerDBInterface.ClientLogin(usr, psw);
+        String msg = usr;
+        msg += (b)?" LOGGED SUCCESSFULLY":" FAILED LOGIN";
+        ServerManager.addLogData(msg);
+        return b;
     }
     
 }

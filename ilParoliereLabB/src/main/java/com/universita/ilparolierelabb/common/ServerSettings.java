@@ -28,6 +28,7 @@ public class ServerSettings extends JDialog {
         super(parent, modal);
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**

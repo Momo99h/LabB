@@ -22,6 +22,7 @@ public class ApplicationSelector extends javax.swing.JFrame {
     public ApplicationSelector() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**

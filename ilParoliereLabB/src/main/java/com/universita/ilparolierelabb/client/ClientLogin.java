@@ -21,6 +21,7 @@ public class ClientLogin extends javax.swing.JFrame {
     public ClientLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**

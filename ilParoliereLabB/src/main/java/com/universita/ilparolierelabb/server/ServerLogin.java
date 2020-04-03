@@ -20,6 +20,7 @@ public class ServerLogin extends javax.swing.JFrame {
     public ServerLogin() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**

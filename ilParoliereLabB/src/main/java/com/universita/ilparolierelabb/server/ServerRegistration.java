@@ -20,6 +20,7 @@ public class ServerRegistration extends javax.swing.JFrame {
     public ServerRegistration() {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.setResizable(false);
     }
 
     /**

@@ -20,6 +20,7 @@ public class ApplicationSelector extends javax.swing.JFrame {
      */
     public ApplicationSelector() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -98,7 +99,7 @@ public class ApplicationSelector extends javax.swing.JFrame {
 
     private void buttonLaunchServerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLaunchServerActionPerformed
         // TODO add your handling code here:
-        ServerManager.launchServer();
+        ServerManager.Launch();
         this.dispose();
     }//GEN-LAST:event_buttonLaunchServerActionPerformed
 

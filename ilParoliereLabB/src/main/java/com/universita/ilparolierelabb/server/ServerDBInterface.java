@@ -35,6 +35,14 @@ public class ServerDBInterface
         return _db.executeQuery(query);
     }
     
+    public static boolean LoginAdmin(String usr,String psw) 
+    {
+        String query = "Select Count(*) from Admins Where Username='%s' AND Password='%s'";
+        query = String.format(query,usr,psw);
+        String[][] return_val = _db.executeQueryRead(query);
+        return !return_val[0][0].equals("0");
+    }
+    
     
             
 }

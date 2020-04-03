@@ -19,6 +19,7 @@ public class ServerRegistration extends javax.swing.JFrame {
      */
     public ServerRegistration() {
         initComponents();
+        this.setLocationRelativeTo(null);
     }
 
     /**
@@ -41,6 +42,7 @@ public class ServerRegistration extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("Server admin registration");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N

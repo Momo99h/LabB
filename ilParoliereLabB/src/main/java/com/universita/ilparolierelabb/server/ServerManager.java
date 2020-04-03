@@ -11,7 +11,7 @@ package com.universita.ilparolierelabb.server;
  */
 public class ServerManager 
 {
-    public static void launchServer()
+    public static void Launch()
     {
         SettingsResult _ConResult = ServerSettings.ConfigureServer();
         if(_ConResult == SettingsResult.ConnectionOk) ServerDBInterface.setDBReference(ServerSettings.getDbReference());
@@ -24,5 +24,10 @@ public class ServerManager
             new ServerRegistration().setVisible(true);
         else
             new ServerLogin().setVisible(true);
+    }
+    public static void Run()
+    {
+        Server serverFrame = new Server();
+        serverFrame.setVisible(true);
     }
 }

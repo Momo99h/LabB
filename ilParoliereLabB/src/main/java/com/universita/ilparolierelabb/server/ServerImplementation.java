@@ -6,7 +6,7 @@
 package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.common.Utility;
-import com.universita.ilparolierelabb.common.settings.Settings;
+import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.toServerRMI;
 import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
 import java.rmi.Naming;
@@ -47,7 +47,7 @@ public class ServerImplementation extends UnicastRemoteObject implements toServe
     {
         Boolean b = ServerDBInterface.ClientLogin(usr, psw);
         String msg = usr;
-        msg += (b)?" LOGGED SUCCESSFULLY":" FAILED LOGIN";
+        msg += (b)?" logged successfully":" failed login";
         ServerManager.addLogData(msg);
         return b;
     }

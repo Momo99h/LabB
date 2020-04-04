@@ -6,10 +6,10 @@
 package com.universita.ilparolierelabb.client;
 
 import com.universita.ilparolierelabb.client.frames.ClientLogin;
-import com.universita.ilparolierelabb.common.ServerSettings;
+import com.universita.ilparolierelabb.common.frames.ServerSettings;
 import com.universita.ilparolierelabb.common.SettingsResult;
 import com.universita.ilparolierelabb.common.Utility;
-import com.universita.ilparolierelabb.common.settings.Settings;
+import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.toServerRMI;
 import java.rmi.Naming;
 import java.rmi.RemoteException;

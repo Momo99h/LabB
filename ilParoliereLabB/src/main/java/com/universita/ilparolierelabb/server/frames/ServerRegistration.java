@@ -6,7 +6,7 @@
 package com.universita.ilparolierelabb.server.frames;
 
 import com.universita.ilparolierelabb.common.Utility;
-import com.universita.ilparolierelabb.common.settings.Settings;
+import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.server.ServerDBInterface;
 
 /**

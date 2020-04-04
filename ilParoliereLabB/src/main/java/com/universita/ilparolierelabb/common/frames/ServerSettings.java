@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.universita.ilparolierelabb.common;
+package com.universita.ilparolierelabb.common.frames;
 
 import com.universita.ilparolierelabb.common.*;
-import com.universita.ilparolierelabb.common.settings.Settings;
+import com.universita.ilparolierelabb.common.SettingsResult;
+import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.sql.*;
 import java.awt.Dialog;
 import java.awt.Window;

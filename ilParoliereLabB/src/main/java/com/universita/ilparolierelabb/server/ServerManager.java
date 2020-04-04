@@ -9,7 +9,7 @@ import com.universita.ilparolierelabb.server.frames.ServerLogin;
 import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
 import com.universita.ilparolierelabb.server.frames.ServerRegistration;
 import com.universita.ilparolierelabb.common.SettingsResult;
-import com.universita.ilparolierelabb.common.ServerSettings;
+import com.universita.ilparolierelabb.common.frames.ServerSettings;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 

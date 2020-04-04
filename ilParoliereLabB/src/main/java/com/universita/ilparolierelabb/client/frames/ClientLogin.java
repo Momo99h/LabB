@@ -8,7 +8,7 @@ package com.universita.ilparolierelabb.client.frames;
 import com.universita.ilparolierelabb.client.ClientManager;
 import com.universita.ilparolierelabb.server.*;
 import com.universita.ilparolierelabb.common.Utility;
-import com.universita.ilparolierelabb.common.settings.Settings;
+import com.universita.ilparolierelabb.common.Settings;
 
 /**
  *
@@ -80,6 +80,11 @@ public class ClientLogin extends javax.swing.JFrame {
         lblRegister.setForeground(new java.awt.Color(0, 153, 255));
         lblRegister.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRegister.setText("Register account");
+        lblRegister.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblRegisterMouseClicked(evt);
+            }
+        });
 
         lblLost.setFont(new java.awt.Font("Tahoma", 2, 11)); // NOI18N
         lblLost.setForeground(new java.awt.Color(0, 153, 255));
@@ -165,6 +170,11 @@ public class ClientLogin extends javax.swing.JFrame {
         Utility.ShowErrorPopUp(Settings.clientName, "Login failed");
         
     }//GEN-LAST:event_btnLoginActionPerformed
+
+    private void lblRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegisterMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_lblRegisterMouseClicked
 
     /**
      * @param args the command line arguments

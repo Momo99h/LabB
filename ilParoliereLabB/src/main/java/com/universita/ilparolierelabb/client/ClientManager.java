@@ -45,4 +45,9 @@ public class ClientManager
     {
         return ClientImplementation.registerAccount(code);
     }
+    public static void Run()
+    {     
+        ClientMainFrame serverFrame = new ClientMainFrame();
+        serverFrame.setVisible(true);
+    }  
 }

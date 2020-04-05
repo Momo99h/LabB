@@ -14,6 +14,8 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -24,7 +26,7 @@ public class ServerImplementation extends Observable implements ServerInterface
     private static Registry rmiRegistry;
     private static ServerInterface rmiService;
     private static ServerImplementation server;
-    private static ArrayList<WrappedObserver> WrappedObserver;
+    public static ArrayList<WrappedObserver> WrappedObserver;
     public  static ArrayList<RegisterData> registerUserWaiting;
     
     private ServerImplementation() throws RemoteException 
@@ -143,6 +145,20 @@ public class ServerImplementation extends Observable implements ServerInterface
             return true;
         }
         return false;
+    }
+    public static void notifyClientsCount(int count)
+    {
+        for(WrappedObserver d : WrappedObserver)
+        {
+            try 
+            {
+                d.getOb().notifyClientsCount(rmiService, count);
+            } 
+            catch (RemoteException ex) 
+            {
+                ex.printStackTrace();
+            }
+        }
     }
     
 }

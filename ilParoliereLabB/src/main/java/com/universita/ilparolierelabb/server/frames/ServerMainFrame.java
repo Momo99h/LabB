@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JProgressBar;
+import javax.swing.Timer;
 
 /**
  *
@@ -19,8 +20,20 @@ import javax.swing.JProgressBar;
 public class ServerMainFrame extends javax.swing.JFrame {
 
     public static DefaultListModel Console_Log_Model = new DefaultListModel();
-    public static JProgressBar Par_progressBarRunning;
-    
+    private static Timer _tmrRefresh;
+    private int tempInt = 0;
+    private int increment = 1;
+    private ActionListener _funRefresh = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) 
+        {
+            tempInt = progressBarRunning.getValue();
+            if(tempInt == progressBarRunning.getMaximum()) increment = -1;
+            else if(tempInt == progressBarRunning.getMinimum()) increment = +1;
+            progressBarRunning.setValue(tempInt+increment);
+            progressBarRunning.repaint();
+        }
+    };
     public ServerMainFrame() 
     {
         initComponents();
@@ -145,6 +158,7 @@ public class ServerMainFrame extends javax.swing.JFrame {
        listLog.setModel(Console_Log_Model);
        this.progressBarRunning.setMaximum(20);
        this.progressBarRunning.setMinimum(0);
-       Par_progressBarRunning = this.progressBarRunning;
+       _tmrRefresh = new Timer(100,_funRefresh);
+       _tmrRefresh.start();
     }
 }

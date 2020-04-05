@@ -20,6 +20,7 @@ import javax.swing.Timer;
 public class ServerThread extends Thread implements ActionListener
 {
     private ServerFSMachine _serverStep = ServerFSMachine.Idle;
+    private int _lastClientsCount;
     private int tempInt = 0;
     private String tempString = "";
     public static void Run()
@@ -46,10 +47,7 @@ public class ServerThread extends Thread implements ActionListener
 
     private void doIdlestuff() 
     {
-       /*tempInt = ServerMainFrame.Par_progressBarRunning.getValue();
-       if(tempInt == ServerMainFrame.Par_progressBarRunning.getMaximum() - 1) tempInt = 0;
-       ServerMainFrame.Par_progressBarRunning.setValue(tempInt);
-       ServerMainFrame.Par_progressBarRunning.repaint();*/
+        ServerImplementation.notifyClientsCount(ServerImplementation.WrappedObserver.size());
        _serverStep = ServerFSMachine.Email;
     }
 

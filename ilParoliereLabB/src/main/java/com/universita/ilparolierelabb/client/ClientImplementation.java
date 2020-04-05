@@ -6,6 +6,7 @@
 package com.universita.ilparolierelabb.client;
 
 import com.universita.ilparolierelabb.client.frames.ClientLogin;
+import com.universita.ilparolierelabb.client.frames.ClientMainFrame;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.server.RemoteObserver;
@@ -125,5 +126,18 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     public void update(Object observable, Object updateMsg) throws RemoteException 
     {
         
+    }
+
+    @Override
+    public void notifyClientsCount(Object observable, int count) throws RemoteException 
+    {
+        try
+        {
+            ClientMainFrame.Par_lblUtentiConnessi.setText(String.valueOf(count));
+        }
+        catch(Exception e)
+        {
+            
+        }
     }
 }

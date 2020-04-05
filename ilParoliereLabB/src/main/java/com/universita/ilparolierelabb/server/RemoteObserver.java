@@ -14,5 +14,6 @@ import java.rmi.RemoteException;
 
 public interface RemoteObserver extends Remote {
 
-    void update(Object observable, Object updateMsg) throws RemoteException;
+    public void update(Object observable, Object updateMsg) throws RemoteException;
+    public void notifyClientsCount(Object observable, int count)throws RemoteException;
 }

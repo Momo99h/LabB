@@ -166,6 +166,7 @@ public class ClientLogin extends javax.swing.JFrame {
         }
         if(ClientManager.getLogin(usr, Utility.StringMD5Hash(psw)))
         {
+            ClientManager.Run();
             this.dispose();
             return;
         }

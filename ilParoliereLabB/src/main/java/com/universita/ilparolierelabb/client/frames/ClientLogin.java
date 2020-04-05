@@ -164,9 +164,10 @@ public class ClientLogin extends javax.swing.JFrame {
             Utility.ShowErrorPopUp(Settings.clientName, "Fields cannot be empty");
             return;
         }
-        if(ClientManager.getLogin(usr, psw))
+        if(ClientManager.getLogin(usr, Utility.StringMD5Hash(psw)))
         {
             this.dispose();
+            return;
         }
         Utility.ShowErrorPopUp(Settings.clientName, "Login failed");
         

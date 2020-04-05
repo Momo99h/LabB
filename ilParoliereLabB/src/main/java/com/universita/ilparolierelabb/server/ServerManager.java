@@ -42,6 +42,7 @@ public class ServerManager
         ServerMainFrame serverFrame = new ServerMainFrame();
         serverFrame.setVisible(true);
     }
+    
     public static void addLogData(String logdata)
     {
         String s = sdf.format(new Date())+" -   "+logdata;

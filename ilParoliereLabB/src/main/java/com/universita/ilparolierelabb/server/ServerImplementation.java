@@ -7,37 +7,42 @@ package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
-import com.universita.ilparolierelabb.common.toServerRMI;
-import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
-import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Observable;
 
 /**
  *
  * @author Momo
  */
-public class ServerImplementation extends UnicastRemoteObject implements toServerRMI
+public class ServerImplementation extends Observable implements ServerInterface
 {
-    private static Registry rgsty;
+    private static Registry rmiRegistry;
+    private static ServerInterface rmiService;
+    private static ServerImplementation server;
     private ServerImplementation() throws RemoteException 
     {
         super();
     }
+    
     public static void Init()
     {
         try 
         {
-            ServerImplementation obj = new ServerImplementation();
-            rgsty = LocateRegistry.createRegistry(1099);
-            rgsty.rebind("Server", obj);
+            
+            rmiRegistry = LocateRegistry.createRegistry(9999);
+            server = new ServerImplementation();
+            rmiService = (ServerInterface) UnicastRemoteObject
+                    .exportObject(server, 9999);
+            rmiRegistry.bind("IlParoliereLabB_Server", rmiService);
             Utility.ConsolePrintLine("Server ready");
 
         } catch (Exception e) 
         {
             Utility.ShowErrorPopUp(Settings.serverName, "Server exception: "+e.toString());
+            e.printStackTrace();
             System.exit(1);
         }
     }
@@ -50,6 +55,20 @@ public class ServerImplementation extends UnicastRemoteObject implements toServe
         msg += (b)?" logged successfully":" failed login";
         ServerManager.addLogData(msg);
         return b;
+    }
+
+    @Override
+    public void addObserver(RemoteObserver o) throws RemoteException {
+        WrappedObserver mo = new WrappedObserver(o);
+        addObserver(mo);
+        ServerManager.addLogData("New client opened; "+mo);
+    }
+
+    @Override
+    public void removeObserver(RemoteObserver o) throws RemoteException {
+        /*
+        deleteObserver(mo);
+        ServerManager.addLogData(mo+" client closed;");*/
     }
     
 }

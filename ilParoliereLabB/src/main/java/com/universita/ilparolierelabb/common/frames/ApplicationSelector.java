@@ -6,6 +6,7 @@
 package com.universita.ilparolierelabb.common.frames;
 
 import com.universita.ilparolierelabb.client.ClientImplementation;
+import com.universita.ilparolierelabb.client.ClientManager;
 import com.universita.ilparolierelabb.common.sql.MySQLEngine;
 import com.universita.ilparolierelabb.common.sql.SQLConnectionParameters;
 import com.universita.ilparolierelabb.server.ServerManager;
@@ -80,7 +81,7 @@ public class ApplicationSelector extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        ClientImplementation.Launch();
+        ClientManager.Launch();
         this.dispose();
     }//GEN-LAST:event_jButton1ActionPerformed
 

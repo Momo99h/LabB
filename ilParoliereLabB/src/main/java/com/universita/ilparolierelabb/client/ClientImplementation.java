@@ -36,7 +36,7 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             _server = (ServerInterface) registry.lookup("IlParoliereLabB_Server");
             _client = new ClientImplementation();
             _server.addObserver(_client);
-            new ClientLogin().setVisible(true);
+            ClientManager.Login();
             return true;
         }
         catch(Exception e)
@@ -56,10 +56,6 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
                 System.exit(1);
             }
         }
-    }
-    public static void Run()
-    {
-        
     }
     public static Boolean getLogin(String usr,String psw)
     {

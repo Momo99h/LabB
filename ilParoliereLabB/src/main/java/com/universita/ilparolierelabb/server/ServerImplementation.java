@@ -23,7 +23,7 @@ public class ServerImplementation extends Observable implements ServerInterface
     private static Registry rmiRegistry;
     private static ServerInterface rmiService;
     private static ServerImplementation server;
-    private ArrayList<WrappedObserver> WrappedObserver;
+    private static ArrayList<WrappedObserver> WrappedObserver;
     
     private ServerImplementation() throws RemoteException 
     {

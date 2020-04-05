@@ -9,9 +9,13 @@ import com.universita.ilparolierelabb.server.frames.ServerLogin;
 import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
 import com.universita.ilparolierelabb.server.frames.ServerRegistration;
 import com.universita.ilparolierelabb.common.SettingsResult;
-import com.universita.ilparolierelabb.common.frames.ServerSettings;
+import com.universita.ilparolierelabb.common.Utility;
+import com.universita.ilparolierelabb.server.frames.ServerSettings;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.Timer;
 
 /**
  *
@@ -19,8 +23,7 @@ import java.util.Date;
  */
 public class ServerManager
 {
-    private static SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-    
+    private static SimpleDateFormat _sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     public static void Launch()
     {
         SettingsResult _ConResult = ServerSettings.ConfigureServer();
@@ -42,11 +45,12 @@ public class ServerManager
         ServerMainFrame serverFrame = new ServerMainFrame();
         serverFrame.setVisible(true);
         addLogData("Server ready - Waiting connections..");
-    }
-    
+        ServerThread.Run();
+    }  
     public static void addLogData(String logdata)
     {
-        String s = sdf.format(new Date())+" -   "+logdata;
+        String s = _sdf.format(new Date())+" -   "+logdata;
         ServerMainFrame.Console_Log_Model.add(0, s);
     }
+    
 }

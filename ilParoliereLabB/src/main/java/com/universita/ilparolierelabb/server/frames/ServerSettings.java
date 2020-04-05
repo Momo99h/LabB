@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.universita.ilparolierelabb.common.frames;
+package com.universita.ilparolierelabb.server.frames;
 
 import com.universita.ilparolierelabb.common.*;
 import com.universita.ilparolierelabb.common.SettingsResult;

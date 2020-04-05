@@ -24,6 +24,7 @@ import javax.swing.Timer;
 public class ServerManager
 {
     private static SimpleDateFormat _sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    
     public static void Launch()
     {
         SettingsResult _ConResult = ServerSettings.ConfigureServer();
@@ -49,6 +50,7 @@ public class ServerManager
     }  
     public static void addLogData(String logdata)
     {
+        if(ServerMainFrame.Console_Log_Model.capacity() == 50)ServerMainFrame.Console_Log_Model.clear();
         String s = _sdf.format(new Date())+" -   "+logdata;
         ServerMainFrame.Console_Log_Model.add(0, s);
     }

@@ -9,6 +9,7 @@ import com.universita.ilparolierelabb.client.ClientManager;
 import com.universita.ilparolierelabb.client.RegistrationResult;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.Utility;
+import com.universita.ilparolierelabb.client.RegisterData;
 import javax.swing.JDialog;
 
 /**
@@ -201,7 +202,19 @@ public class ClientRegistration extends JDialog {
             return;
         }
         
-            
+        RegisterData d = new RegisterData();
+        d.setName(nome);
+        d.setSurname(cognome);
+        d.setUsername(usr);
+        d.setEmail(email);
+        d.setPassword(Utility.StringMD5Hash(psw));
+        d.setRemainingTime(Settings.emailCodeTimeOut);
+        
+        if(ClientManager.clientRegister(d))
+        {
+            this._regResult = RegistrationResult.NotConfirmed;
+            this.dispose();
+        }
         
     }//GEN-LAST:event_btnSubmitActionPerformed
 

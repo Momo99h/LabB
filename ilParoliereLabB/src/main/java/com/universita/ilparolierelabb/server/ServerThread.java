@@ -5,6 +5,9 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.client.RegisterData;
+import com.universita.ilparolierelabb.common.Settings;
+import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -51,6 +54,41 @@ public class ServerThread extends Thread implements ActionListener
 
     private void doEmailstuff() 
     {
+        for(RegisterData d : ServerImplementation.registerUserWaiting)
+        {
+            if(!d.getEmailStatus())
+            {
+                String code = Utility.randomAlphaNumeric(10);
+                String log;
+                if(Utility.sendEmail())
+                {
+                    d.setVerificationCode(code);
+                    d.setEmailStatus(true);
+                    log = "Email sent to %s (%s) with verification code: %s";
+                    log = String.format(log, d.getEmail(),d.getUsername(),code);
+                    ServerManager.addLogData(log);
+                }
+            }
+            else
+            {
+                String log;
+                tempInt = d.getRemainingTime();
+                d.setRemainingTime(tempInt-100);
+                if(tempInt == (Settings.emailCodeTimeOut/2))
+                {
+                    log = "Username: %s has not verified email yet. Time remaining: %s seconds";
+                    log = String.format(log, d.getUsername(),d.getRemainingTime());
+                    ServerManager.addLogData(log);
+                }
+                if(tempInt <= 0)
+                {
+                    log = "Username: %s verification time finished.";
+                    log = String.format(log, d.getUsername());
+                    ServerManager.addLogData(log);
+                    ServerImplementation.registerUserWaiting.remove(d);
+                }
+            }
+        }
         _serverStep = ServerFSMachine.Idle;
     }
 }

@@ -7,6 +7,7 @@ package com.universita.ilparolierelabb.common;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Random;
 import javax.swing.JOptionPane;
 
 /**
@@ -36,11 +37,6 @@ public class Utility
     {
         JOptionPane.showMessageDialog(null,msg,header, JOptionPane.INFORMATION_MESSAGE);
     }
-    /**
-	 * metodo usato per generare un hash md5 da una stringa
-	 * @param s stringa su cui lavorare
-	 * @return string con Hash MD5
-    */
     public static String StringMD5Hash(String s)
     {
         String stringToHash = s;
@@ -67,6 +63,19 @@ public class Utility
                 e.printStackTrace();
         }
         return stringHashed;
+    }
+    public static String randomAlphaNumeric(int length)
+    {
+        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        Random rnd = new Random();
+        StringBuilder sb = new StringBuilder(length);
+        for( int i = 0; i < length; i++ ) 
+            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+        return sb.toString();
+    }
+    public static Boolean sendEmail()
+    {
+        return true;
     }
     
 }

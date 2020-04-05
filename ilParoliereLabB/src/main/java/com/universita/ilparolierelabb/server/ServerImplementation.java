@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
 import java.rmi.RemoteException;
@@ -24,11 +25,13 @@ public class ServerImplementation extends Observable implements ServerInterface
     private static ServerInterface rmiService;
     private static ServerImplementation server;
     private static ArrayList<WrappedObserver> WrappedObserver;
+    public  static ArrayList<RegisterData> registerUserWaiting;
     
     private ServerImplementation() throws RemoteException 
     {
         super();
-        WrappedObserver= new ArrayList<WrappedObserver>();
+        WrappedObserver= new ArrayList<>();
+        registerUserWaiting = new ArrayList<>();
     }
     
     public static void Init()
@@ -98,6 +101,13 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
         
+    }
+
+    @Override
+    public void clientRegister(RegisterData d) throws RemoteException 
+    {
+        registerUserWaiting.add(d);
+        ServerManager.addLogData("New user opened registration: (Username) "+d.getUsername());
     }
     
 }

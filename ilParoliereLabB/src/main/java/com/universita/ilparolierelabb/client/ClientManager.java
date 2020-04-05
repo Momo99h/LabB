@@ -21,6 +21,10 @@ public class ClientManager
     {
         return ClientImplementation.getLogin(usr,psw);
     }
+    public static Boolean clientRegister(RegisterData d)
+    {
+        return ClientImplementation.clientRegister(d);
+    }
     public static void DisconnectFromServer()
     {
         ClientImplementation.DisconnectFromServer();
@@ -29,8 +33,8 @@ public class ClientManager
     {
         new ClientLogin().setVisible(true);
     }
-    public static void Register()
+    public static RegistrationResult Register()
     {
-        ClientRegistration.Register();
+        return ClientRegistration.Register();
     }
 }

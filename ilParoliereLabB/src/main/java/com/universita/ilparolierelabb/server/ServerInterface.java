@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.client.RegisterData;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -15,6 +16,7 @@ import java.rmi.RemoteException;
 public interface ServerInterface extends Remote 
 {
     public Boolean clientLogin(String usr,String psw) throws RemoteException;
+    public void clientRegister(RegisterData d) throws RemoteException;
     public void addObserver(RemoteObserver o) throws RemoteException;
     public void removeObserver(RemoteObserver o) throws RemoteException;
 }

@@ -7,6 +7,7 @@ package com.universita.ilparolierelabb.client.frames;
 
 
 import com.universita.ilparolierelabb.client.ClientManager;
+import com.universita.ilparolierelabb.client.RegistrationResult;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
 
@@ -173,7 +174,12 @@ public class ClientLogin extends javax.swing.JFrame {
 
     private void lblRegisterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblRegisterMouseClicked
         // TODO add your handling code here:
-        ClientManager.Register();
+        if(ClientManager.Register() == RegistrationResult.NotConfirmed)
+        {
+            String msg = "A verification code has been sent to your email.\nThe code is valid for %s seconds.\n Please check it and write it here:";
+            msg = String.format(msg,Settings.emailCodeTimeOut);
+            String code = Utility.ShowInfoInput(Settings.clientName, msg);
+        }
     }//GEN-LAST:event_lblRegisterMouseClicked
 
     /**

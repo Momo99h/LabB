@@ -70,6 +70,19 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
        }
        return success;
     }
+    public static Boolean clientRegister(RegisterData d)
+    {
+       try
+       {
+           _server.clientRegister(d);
+           return true;
+       }
+       catch(RemoteException e)
+       {
+           Utility.ShowErrorPopUp(Settings.clientName, e.getMessage());
+           return false;
+       }
+    }
     public static void DisconnectFromServer()
     {
         try

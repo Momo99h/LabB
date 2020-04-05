@@ -17,6 +17,8 @@ public interface ServerInterface extends Remote
 {
     public Boolean clientLogin(String usr,String psw) throws RemoteException;
     public void clientRegister(RegisterData d) throws RemoteException;
+    public Boolean registerWaitingEmailConfirmation(String usr)throws RemoteException;
+    public Boolean activateAccount(String code)throws RemoteException;
     public void addObserver(RemoteObserver o) throws RemoteException;
     public void removeObserver(RemoteObserver o) throws RemoteException;
 }

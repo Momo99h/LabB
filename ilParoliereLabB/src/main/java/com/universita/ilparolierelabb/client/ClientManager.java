@@ -37,4 +37,12 @@ public class ClientManager
     {
         return ClientRegistration.Register();
     }
+    public static Boolean registerInWaiting(String usr)
+    {
+        return ClientImplementation.registerInWaiting(usr);
+    }
+    public static Boolean registerAccount(String code)
+    {
+        return ClientImplementation.registerAccount(code);
+    }
 }

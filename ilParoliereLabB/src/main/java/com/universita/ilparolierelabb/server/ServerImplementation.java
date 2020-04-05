@@ -109,5 +109,40 @@ public class ServerImplementation extends Observable implements ServerInterface
         registerUserWaiting.add(d);
         ServerManager.addLogData("New user opened registration: (Username) "+d.getUsername());
     }
+
+    @Override
+    public Boolean registerWaitingEmailConfirmation(String usr) throws RemoteException 
+    {
+        for(RegisterData d : registerUserWaiting)
+        {
+            if(d.getUsername().equals(usr))
+            {
+                return true;               
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public Boolean activateAccount(String code) throws RemoteException 
+    {
+        RegisterData account = null;
+        for(RegisterData d : registerUserWaiting)
+        {
+            if(d.getVerificationCode().equals(code))
+            {
+                account = d;
+                break;
+            }
+        }
+        if(account == null) return false;
+        
+        if(ServerDBInterface.RegisterAccount(account))
+        {
+            registerUserWaiting.remove(account);
+            return true;
+        }
+        return false;
+    }
     
 }

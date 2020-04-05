@@ -95,6 +95,32 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             System.exit(1);
         }
     }
+    public static Boolean registerInWaiting(String usr)
+    {
+        try
+        {
+            return _server.registerWaitingEmailConfirmation(usr);
+        }
+        catch(Exception e)
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            return false;
+        }
+    }
+    public static Boolean registerAccount(String code)
+    {
+        try
+        {
+            return _server.activateAccount(code);
+        }
+        catch(Exception e)
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            return false;
+        }
+    }
     @Override
     public void update(Object observable, Object updateMsg) throws RemoteException 
     {

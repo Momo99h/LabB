@@ -201,6 +201,13 @@ public class ClientRegistration extends JDialog {
             Utility.ShowErrorPopUp(Settings.clientName, "Please enter a valid email.");
             return;
         }
+        if(ClientManager.registerInWaiting(usr))
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, "Questo account è in attesa di verifica.");
+            this._regResult = RegistrationResult.NotConfirmed;
+            this.dispose();
+            return;
+        }
         
         RegisterData d = new RegisterData();
         d.setName(nome);

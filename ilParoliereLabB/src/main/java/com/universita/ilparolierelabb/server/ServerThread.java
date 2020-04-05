@@ -21,6 +21,7 @@ public class ServerThread extends Thread implements ActionListener
 {
     private ServerFSMachine _serverStep = ServerFSMachine.Idle;
     private int tempInt = 0;
+    private String tempString = "";
     public static void Run()
     {
         ServerThread t = new ServerThread();
@@ -59,32 +60,30 @@ public class ServerThread extends Thread implements ActionListener
             if(!d.getEmailStatus())
             {
                 String code = Utility.randomAlphaNumeric(10);
-                String log;
                 if(Utility.sendEmail())
                 {
                     d.setVerificationCode(code);
                     d.setEmailStatus(true);
-                    log = "Email sent to %s (%s) with verification code: %s";
-                    log = String.format(log, d.getEmail(),d.getUsername(),code);
-                    ServerManager.addLogData(log);
+                    tempString = "Email sent to %s (%s) with verification code: %s";
+                    tempString = String.format(tempString, d.getEmail(),d.getUsername(),code);
+                    ServerManager.addLogData(tempString);
                 }
             }
             else
             {
-                String log;
                 tempInt = d.getRemainingTime();
-                d.setRemainingTime(tempInt-100);
+                d.setRemainingTime(tempInt-1);
                 if(tempInt == (Settings.emailCodeTimeOut/2))
                 {
-                    log = "Username: %s has not verified email yet. Time remaining: %s seconds";
-                    log = String.format(log, d.getUsername(),d.getRemainingTime());
-                    ServerManager.addLogData(log);
+                    tempString = "Username: %s has not verified email yet. Time remaining: %s seconds";
+                    tempString = String.format(tempString, d.getUsername(),tempInt);
+                    ServerManager.addLogData(tempString);
                 }
                 if(tempInt <= 0)
                 {
-                    log = "Username: %s verification time finished.";
-                    log = String.format(log, d.getUsername());
-                    ServerManager.addLogData(log);
+                    tempString = "Username: %s verification time finished.";
+                    tempString = String.format(tempString, d.getUsername());
+                    ServerManager.addLogData(tempString);
                     ServerImplementation.registerUserWaiting.remove(d);
                 }
             }

@@ -179,6 +179,10 @@ public class ClientLogin extends javax.swing.JFrame {
             String msg = "A verification code has been sent to your email.\nThe code is valid for %s seconds.\n Please check it and write it here:";
             msg = String.format(msg,Settings.emailCodeTimeOut);
             String code = Utility.ShowInfoInput(Settings.clientName, msg);
+            if(ClientManager.registerAccount(code))
+                Utility.ShowInfoPopUp(Settings.clientName, "Account submitted!\n Proceed with login.");
+            else
+                Utility.ShowErrorPopUp(Settings.clientName, "Wrong code.\nPlease try again");
         }
     }//GEN-LAST:event_lblRegisterMouseClicked
 

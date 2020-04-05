@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.sql.*;
 
@@ -32,6 +33,12 @@ public class ServerDBInterface
     {
         String query = "Insert into Admins(Username,Password) Values ('%s','%s')";
         query = String.format(query,usr,psw);
+        return _db.executeQuery(query);
+    }
+    public static boolean RegisterAccount(RegisterData d) 
+    {
+        String query = "Insert into Users(Nome,Cognome,Nickname,Email,Password) Values ('%s','%s','%s','%s','%s')";
+        query = String.format(query,d.getName(),d.getSurname(),d.getUsername(),d.getEmail(),d.getPassword());
         return _db.executeQuery(query);
     }
     

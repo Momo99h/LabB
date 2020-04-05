@@ -138,8 +138,8 @@ public class ServerRegistration extends javax.swing.JFrame {
             Utility.ShowErrorPopUp(Settings.serverName, "Fields cannot be empty");
             return;
         }
-        
-        if(ServerDBInterface.RegisterAdmin(usr, psw))
+        String protectedpsw = Utility.StringMD5Hash(psw);
+        if(ServerDBInterface.RegisterAdmin(usr, protectedpsw))
         {
             Utility.ShowInfoPopUp(Settings.serverName, "Registration completed.\n Please log in to confirm.");
             new ServerLogin().setVisible(true);

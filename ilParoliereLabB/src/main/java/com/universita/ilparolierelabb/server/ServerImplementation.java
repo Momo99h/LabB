@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 import java.util.Observable;
 
 /**
@@ -22,9 +23,12 @@ public class ServerImplementation extends Observable implements ServerInterface
     private static Registry rmiRegistry;
     private static ServerInterface rmiService;
     private static ServerImplementation server;
+    private ArrayList<WrappedObserver> WrappedObserver;
+    
     private ServerImplementation() throws RemoteException 
     {
         super();
+        WrappedObserver= new ArrayList<WrappedObserver>();
     }
     
     public static void Init()
@@ -60,15 +64,40 @@ public class ServerImplementation extends Observable implements ServerInterface
     @Override
     public void addObserver(RemoteObserver o) throws RemoteException {
         WrappedObserver mo = new WrappedObserver(o);
-        addObserver(mo);
-        ServerManager.addLogData("New client opened; "+mo);
+        try
+        {
+            WrappedObserver.add(mo);
+            addObserver(mo);
+            ServerManager.addLogData("New client opened; "+mo);
+        }
+        catch(Exception e)
+        {
+            ServerManager.addLogData("Cannot add client: "+mo+" Reason: "+e.toString());
+        }
+        
     }
 
     @Override
-    public void removeObserver(RemoteObserver o) throws RemoteException {
-        /*
-        deleteObserver(mo);
-        ServerManager.addLogData(mo+" client closed;");*/
+    public void removeObserver(RemoteObserver o) throws RemoteException 
+    {
+        for(WrappedObserver w : WrappedObserver)
+        {
+            if(w.getOb().equals(o))
+            {
+                try
+                {
+                    deleteObserver(w);
+                    ServerManager.addLogData("New client disconnected: "+w);
+                    WrappedObserver.remove(w);
+                    break;
+                }
+                catch(Exception e)
+                {
+                    ServerManager.addLogData("Cannot delete client: "+w+" Reason: "+e.toString());
+                }
+            }
+        }
+        
     }
     
 }

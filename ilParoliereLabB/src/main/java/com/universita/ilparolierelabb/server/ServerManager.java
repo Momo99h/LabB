@@ -41,6 +41,7 @@ public class ServerManager
         ServerImplementation.Init();        
         ServerMainFrame serverFrame = new ServerMainFrame();
         serverFrame.setVisible(true);
+        addLogData("Server ready - Waiting connections..");
     }
     
     public static void addLogData(String logdata)

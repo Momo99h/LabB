@@ -34,5 +34,8 @@ public class WrappedObserver implements Observer, Serializable {
                 o.deleteObserver(this);
             }
         }
-
-    }
+        public RemoteObserver getOb()
+        {
+	return this.ro;
+        }
+}

@@ -164,7 +164,7 @@ public class ServerSettings extends JDialog {
         
         if(!checkConnection(Settings.connectionParam))
         {
-            JOptionPane.showMessageDialog(this, "Connessione fallita.", Settings.serverName, JOptionPane.ERROR_MESSAGE);
+            Utility.ShowErrorPopUp(Settings.serverName, "Connection failed!");
             connectionResult = SettingsResult.ConnectionFailed;
         }
         else 

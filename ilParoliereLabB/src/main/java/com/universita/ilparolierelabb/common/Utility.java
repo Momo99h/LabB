@@ -66,7 +66,7 @@ public class Utility
     }
     public static String randomAlphaNumeric(int length)
     {
-        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+        String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";    
         Random rnd = new Random();
         StringBuilder sb = new StringBuilder(length);
         for( int i = 0; i < length; i++ ) 

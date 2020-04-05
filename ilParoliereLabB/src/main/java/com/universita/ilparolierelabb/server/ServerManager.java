@@ -9,13 +9,9 @@ import com.universita.ilparolierelabb.server.frames.ServerLogin;
 import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
 import com.universita.ilparolierelabb.server.frames.ServerRegistration;
 import com.universita.ilparolierelabb.common.SettingsResult;
-import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.server.frames.ServerSettings;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import javax.swing.Timer;
 
 /**
  *

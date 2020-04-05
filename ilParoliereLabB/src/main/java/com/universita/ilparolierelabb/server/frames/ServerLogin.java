@@ -136,7 +136,7 @@ public class ServerLogin extends javax.swing.JFrame {
         String usr = textUsername.getText();
         String psw = textPassword.getText();
         
-        if(usr.equals("") || usr.equals("")) 
+        if(usr.equals("") || psw.equals("")) 
         {
             Utility.ShowErrorPopUp(Settings.serverName, "Fields cannot be empty");
             return;

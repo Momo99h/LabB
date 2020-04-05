@@ -52,7 +52,7 @@ public class ServerImplementation extends Observable implements ServerInterface
     }
     
     @Override
-    public Boolean clientLogin(String usr, String psw) 
+    public Boolean clientLogin(String usr, String psw) throws RemoteException
     {
         Boolean b = ServerDBInterface.ClientLogin(usr, psw);
         String msg = usr;
@@ -68,11 +68,11 @@ public class ServerImplementation extends Observable implements ServerInterface
         {
             WrappedObserver.add(mo);
             addObserver(mo);
-            ServerManager.addLogData("New client opened; "+mo);
+            ServerManager.addLogData("New client opened: (ID) "+mo.getObId());
         }
         catch(Exception e)
         {
-            ServerManager.addLogData("Cannot add client: "+mo+" Reason: "+e.toString());
+            ServerManager.addLogData("Cannot add client: (ID) "+mo.getObId()+" Reason: "+e.toString());
         }
         
     }
@@ -87,13 +87,13 @@ public class ServerImplementation extends Observable implements ServerInterface
                 try
                 {
                     deleteObserver(w);
-                    ServerManager.addLogData("New client disconnected: "+w);
+                    ServerManager.addLogData("New client disconnected: (ID) "+w.getObId());
                     WrappedObserver.remove(w);
                     break;
                 }
                 catch(Exception e)
                 {
-                    ServerManager.addLogData("Cannot delete client: "+w+" Reason: "+e.toString());
+                    ServerManager.addLogData("Cannot delete client: (ID) "+w.getObId()+" Reason: "+e.toString());
                 }
             }
         }

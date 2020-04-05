@@ -28,21 +28,33 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     {
         super();
     }
-    
-    public static void Launch()
+    private static Boolean initConnection(String ip)
     {
         try
         {
-             Registry registry = LocateRegistry.getRegistry(9999);
+            Registry registry = LocateRegistry.getRegistry(ip,9999);
             _server = (ServerInterface) registry.lookup("IlParoliereLabB_Server");
             _client = new ClientImplementation();
             _server.addObserver(_client);
             new ClientLogin().setVisible(true);
+            return true;
         }
         catch(Exception e)
         {
-            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
-            System.exit(1);
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public static void Launch()
+    {
+        if(!initConnection("localhost"))
+        {
+            String newIp = Utility.ShowInfoInput(Settings.clientName, "Connection failed, please enter Server's ip:");
+            if(!initConnection(newIp))
+            {
+                Utility.ShowErrorPopUp(Settings.clientName, "Cannot reach server. Application is closing.");
+                System.exit(1);
+            }
         }
     }
     public static void Run()

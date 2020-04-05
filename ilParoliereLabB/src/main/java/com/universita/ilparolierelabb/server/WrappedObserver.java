@@ -36,6 +36,10 @@ public class WrappedObserver implements Observer, Serializable {
         }
         public RemoteObserver getOb()
         {
-	return this.ro;
+            return this.ro;
+        }
+        public int getObId()
+        {
+            return this.ro.hashCode();
         }
 }

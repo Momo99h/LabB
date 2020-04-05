@@ -27,6 +27,11 @@ public class Utility
     {
         JOptionPane.showMessageDialog(null,msg,header, JOptionPane.ERROR_MESSAGE);
     }
+    public static String ShowInfoInput(String header,String msg)
+    {
+        return JOptionPane.showInputDialog
+        (null, msg, header, JOptionPane.INFORMATION_MESSAGE);
+    }
     public static void ShowInfoPopUp(String header,String msg)
     {
         JOptionPane.showMessageDialog(null,msg,header, JOptionPane.INFORMATION_MESSAGE);

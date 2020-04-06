@@ -25,14 +25,9 @@ public class WrappedObserver implements Observer, Serializable {
         }
 
         @Override
-        public void update(Observable o, Object arg) {
-            try {
-                ro.update(o.toString(), arg);
-            } catch (RemoteException e) {
-                System.out
-                        .println("Remote exception removing observer:" + this);
-                o.deleteObserver(this);
-            }
+        public void update(Observable o, Object arg) 
+        {
+            
         }
         public RemoteObserver getOb()
         {

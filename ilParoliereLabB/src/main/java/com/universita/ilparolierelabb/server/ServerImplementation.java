@@ -188,5 +188,12 @@ public class ServerImplementation extends Observable implements ServerInterface
         ServerManager.addLogData("New user disconnected: (Username) "+usr);
     }
 
+    @Override
+    public GameRooms getGameRooms() throws RemoteException
+    {
+        ServerManager.addLogData("New request of rooms");
+        return ServerManager.gameRooms;
+    }
+
    
 }

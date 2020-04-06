@@ -139,12 +139,19 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return false;
         }
     }
-    @Override
-    public void update(Object observable, Object updateMsg) throws RemoteException 
+    public static GameRooms getGameRooms() 
     {
-        
+        try
+        {
+            return _server.getGameRooms();
+        }
+        catch(Exception e)
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            return null;
+        }
     }
-
     @Override
     public void notifyClientsCount(Object observable, int count) throws RemoteException 
     {
@@ -157,11 +164,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
-
     @Override
     public void notifyClientsRoomsData(Object observable, GameRooms rooms) throws RemoteException 
     {
         ClientManager.gameRooms = rooms;
-        ClientManager.RefreshRooms();
+        ClientManager.refreshRooms();
     }
 }

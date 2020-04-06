@@ -10,10 +10,7 @@ import com.universita.ilparolierelabb.client.ClientManager;
 import com.universita.ilparolierelabb.server.Room;
 import java.awt.BorderLayout;
 import java.awt.Frame;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JLabel;
-import javax.swing.Timer;
 
 /**
  *
@@ -25,16 +22,13 @@ public class ClientMainFrame extends javax.swing.JFrame {
     /*par*/
     public static JLabel Par_lblUtentiConnessi;
     private  LobbyUsrControl lobby;
-    
     public ClientMainFrame() 
     {
         initComponents();
+        initFunctions();
         initPar();
-        this.setExtendedState(Frame.MAXIMIZED_BOTH);
-        lobby = new LobbyUsrControl();
-        panelContainer.setLayout(new BorderLayout());
-        panelContainer.add(lobby,BorderLayout.CENTER);
-        refreshRooms();
+        
+        
     }
 
     /** This method is called from within the constructor to
@@ -190,13 +184,22 @@ public class ClientMainFrame extends javax.swing.JFrame {
     {
         Par_lblUtentiConnessi = lblUtentiConnessi;
     }
+
+    private void initFunctions()
+    {
+        this.setExtendedState(Frame.MAXIMIZED_BOTH);
+        this.lobby = new LobbyUsrControl();
+        this.panelContainer.setLayout(new BorderLayout());
+        this.panelContainer.add(lobby,BorderLayout.CENTER);
+        ClientManager.getGameRooms();
+        this.refreshRooms();
+    }
     public void refreshRooms()
     {
-        lobby.removeAllRooms();
-        System.out.print("Refresh lobby");
+        this.lobby.removeAllRooms();
         for(Room r : ClientManager.gameRooms.getAllRoomsData())
         {
-            lobby.addRoom(String.valueOf(r.getId()), r.getCreationDate(), r.getPlayersIn()+"/"+r.getPlayersNeeded());
+            this.lobby.addRoom(r.getId()+"", r.getCreationDate(), r.getPlayersIn()+"/"+r.getPlayersNeeded());
         }
     }
 

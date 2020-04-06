@@ -50,7 +50,6 @@ public class ServerThread extends Thread implements ActionListener
         ServerImplementation.notifyClientsCount(ServerDBInterface.OnlineClientsCount());
         if(ServerManager.gameRooms.isDataChanged())
         {
-            System.out.print("DataChanged\n");
             ServerManager.gameRooms.confirmDataChanged();
             ServerImplementation.notifyClientsRoomsData(ServerManager.gameRooms);
         }

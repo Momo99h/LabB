@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.client.frames;
 
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -13,16 +14,20 @@ import javax.swing.table.DefaultTableModel;
  */
 public class LobbyUsrControl extends javax.swing.JPanel {
 
-    public DefaultTableModel _tablemodel = new DefaultTableModel(new String[] {"Room ID","Date","Users"},0);
+    private DefaultTableModel _tablemodel = new DefaultTableModel(new String[] {"Room ID","Date","Users"},0);
     public LobbyUsrControl() 
     {
         initComponents();
         jTable1.setModel(_tablemodel);
+        _tablemodel.addRow(new String[] {"Room ID","Date","Users"});
     }
     public void addRoom(String id,String date,String players)
     {
         _tablemodel.addRow(new String[]{id,date,players});
         jTable1.setModel(_tablemodel);
+        jTable1.setAutoCreateRowSorter(true);
+        jTable1.setDefaultEditor(Object.class, null);
+        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jTable1.repaint();
     }
     public void removeRoom(String id)
@@ -34,6 +39,9 @@ public class LobbyUsrControl extends javax.swing.JPanel {
         for(int i = 0; i < _tablemodel.getRowCount();i++)
             _tablemodel.removeRow(i);
         jTable1.setModel(_tablemodel);
+        jTable1.setAutoCreateRowSorter(true);
+        jTable1.setDefaultEditor(Object.class, null);
+        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         jTable1.repaint();
     }
             

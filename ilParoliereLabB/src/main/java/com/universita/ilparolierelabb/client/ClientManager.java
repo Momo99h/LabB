@@ -6,12 +6,7 @@
 package com.universita.ilparolierelabb.client;
 
 import com.universita.ilparolierelabb.client.frames.*;
-import com.universita.ilparolierelabb.common.Settings;
-import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.server.GameRooms;
-import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -20,8 +15,11 @@ import java.util.logging.Logger;
 public class ClientManager 
 {
     public static String currentuser;
+    
     public static GameRooms gameRooms = new GameRooms();
+    
     private static ClientMainFrame clientFrame;
+    
     public static void Launch()
     {
         ClientImplementation.Launch();
@@ -58,14 +56,20 @@ public class ClientManager
     {
         return ClientImplementation.clientIsLogged(usr);
     }
+    public static void getGameRooms()
+    {
+        ClientManager.gameRooms = ClientImplementation.getGameRooms();
+    }
+    public static void refreshRooms() 
+    {
+        
+    }
     public static void Run()
     {     
         clientFrame = new ClientMainFrame();
         clientFrame.setVisible(true);
     }
-    public static void RefreshRooms()
-    {
-        clientFrame.refreshRooms();
-    }
+
+    
     
 }

@@ -55,12 +55,14 @@ public class ClientLogin extends javax.swing.JFrame {
         jLabel1.setText("Username:");
 
         textUsername.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        textUsername.setText("Pippo");
         textUsername.setToolTipText("Insert your username");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel3.setText("Password:");
 
         textPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        textPassword.setText("Pippo");
         textPassword.setToolTipText("Insert yout password");
 
         btnExit.setText("Exit");

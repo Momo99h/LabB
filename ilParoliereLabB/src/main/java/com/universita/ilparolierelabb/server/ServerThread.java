@@ -23,6 +23,7 @@ public class ServerThread extends Thread implements ActionListener
     private int _lastClientsCount;
     private int tempInt = 0;
     private String tempString = "";
+    private int _lastRoomCount = 0;
     public static void Run()
     {
         ServerThread t = new ServerThread();
@@ -48,6 +49,11 @@ public class ServerThread extends Thread implements ActionListener
     private void doIdlestuff() 
     {
         ServerImplementation.notifyClientsCount(ServerDBInterface.OnlineClientsCount());
+        if(ServerManager.gameRooms.isDataChanged())
+        {
+            ServerManager.gameRooms.confirmDataChanged();
+            ServerImplementation.notifyClientsRoomsData(ServerManager.gameRooms);
+        }
        _serverStep = ServerFSMachine.Email;
     }
 

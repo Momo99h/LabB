@@ -20,6 +20,7 @@ import java.util.Date;
 public class ServerManager
 {
     private static SimpleDateFormat _sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    public static GameRooms gameRooms = new GameRooms();
     
     public static void Launch()
     {
@@ -42,7 +43,14 @@ public class ServerManager
         ServerMainFrame serverFrame = new ServerMainFrame();
         serverFrame.setVisible(true);
         addLogData("Server ready - Waiting connections..");
+        ServerDBInterface.resetUsersState();
         ServerThread.Run();
+        Room r = new Room();
+        r.setAdmin("Pippo");
+        r.setId(1);
+        r.setPlayersIn(1);
+        r.setPlayersNeeded(1);
+        gameRooms.addRoom(r);
     }  
     public static void addLogData(String logdata)
     {

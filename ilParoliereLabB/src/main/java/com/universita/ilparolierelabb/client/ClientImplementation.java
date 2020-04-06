@@ -9,6 +9,7 @@ import com.universita.ilparolierelabb.client.frames.ClientLogin;
 import com.universita.ilparolierelabb.client.frames.ClientMainFrame;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
+import com.universita.ilparolierelabb.server.GameRooms;
 import com.universita.ilparolierelabb.server.RemoteObserver;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -155,5 +156,12 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         {
             
         }
+    }
+
+    @Override
+    public void notifyClientsRoomsData(Object observable, GameRooms rooms) throws RemoteException 
+    {
+        ClientManager.gameRooms = rooms;
+        ClientManager.refreshRooms = true;
     }
 }

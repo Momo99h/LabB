@@ -28,6 +28,8 @@ public class ServerImplementation extends Observable implements ServerInterface
     private static ServerImplementation server;
     public static ArrayList<WrappedObserver> WrappedObserver;
     public  static ArrayList<RegisterData> registerUserWaiting;
+
+    
     
     private ServerImplementation() throws RemoteException 
     {
@@ -166,7 +168,20 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
-
+    public static void notifyClientsRoomsData(GameRooms gameRooms) 
+    {
+        for(WrappedObserver d : WrappedObserver)
+        {
+            try 
+            {
+                d.getOb().notifyClientsRoomsData(rmiService, gameRooms);
+            } 
+            catch (RemoteException ex) 
+            {
+                ex.printStackTrace();
+            }
+        }
+    }
     @Override
     public void disconnectClient(String usr) throws RemoteException 
     {

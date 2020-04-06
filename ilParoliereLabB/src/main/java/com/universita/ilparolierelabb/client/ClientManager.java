@@ -6,6 +6,7 @@
 package com.universita.ilparolierelabb.client;
 
 import com.universita.ilparolierelabb.client.frames.*;
+import com.universita.ilparolierelabb.server.GameRooms;
 
 /**
  *
@@ -14,7 +15,8 @@ import com.universita.ilparolierelabb.client.frames.*;
 public class ClientManager 
 {
     public static String currentuser;
-    
+    public static GameRooms gameRooms = new GameRooms();
+    public static Boolean refreshRooms = false;
     public static void Launch()
     {
         ClientImplementation.Launch();

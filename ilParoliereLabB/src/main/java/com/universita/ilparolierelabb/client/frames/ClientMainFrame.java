@@ -7,8 +7,12 @@
 package com.universita.ilparolierelabb.client.frames;
 
 import com.universita.ilparolierelabb.client.ClientManager;
+import java.awt.BorderLayout;
 import java.awt.Frame;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JLabel;
+import javax.swing.Timer;
 
 /**
  *
@@ -16,13 +20,21 @@ import javax.swing.JLabel;
  */
 public class ClientMainFrame extends javax.swing.JFrame {
 
+    
     /*par*/
     public static JLabel Par_lblUtentiConnessi;
+    private static Timer _tmrRefresh;
+    private  LobbyUsrControl lobby;
     public ClientMainFrame() 
     {
         initComponents();
         initPar();
         this.setExtendedState(Frame.MAXIMIZED_BOTH);
+        lobby = new LobbyUsrControl();
+        panelContainer.setLayout(new BorderLayout());
+        panelContainer.add(lobby,BorderLayout.CENTER);
+        _tmrRefresh = new Timer(500,_funRefresh);
+       _tmrRefresh.start();
     }
 
     /** This method is called from within the constructor to
@@ -37,6 +49,9 @@ public class ClientMainFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblUtentiConnessi = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        lblRoomID = new javax.swing.JLabel();
+        panelContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -70,16 +85,52 @@ public class ClientMainFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        lblRoomID.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        lblRoomID.setText("Room: Lobby");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblRoomID, javax.swing.GroupLayout.DEFAULT_SIZE, 518, Short.MAX_VALUE)
+                .addGap(392, 392, 392))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblRoomID, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout panelContainerLayout = new javax.swing.GroupLayout(panelContainer);
+        panelContainer.setLayout(panelContainerLayout);
+        panelContainerLayout.setHorizontalGroup(
+            panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+        panelContainerLayout.setVerticalGroup(
+            panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 389, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 463, Short.MAX_VALUE)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -129,12 +180,26 @@ public class ClientMainFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblRoomID;
     private javax.swing.JLabel lblUtentiConnessi;
+    private javax.swing.JPanel panelContainer;
     // End of variables declaration//GEN-END:variables
 
     private void initPar() 
     {
         Par_lblUtentiConnessi = lblUtentiConnessi;
     }
+    private ActionListener _funRefresh = new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent ae) 
+        {
+            if(ClientManager.refreshRooms)
+            {
+                lobby.addRoom("1", "15", "58");
+                ClientManager.refreshRooms = false;
+            }
+        }
+    };
 
 }

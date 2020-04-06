@@ -164,6 +164,15 @@ public class ClientLogin extends javax.swing.JFrame {
             Utility.ShowErrorPopUp(Settings.clientName, "Fields cannot be empty");
             return;
         }
+        if(ClientManager.registerInWaiting(usr))
+        {
+            CheckEmailCode();
+        }
+        if(ClientManager.clientIsLogged(usr))
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, "This account is already logged in.");
+            return;
+        }
         if(ClientManager.getLogin(usr, Utility.StringMD5Hash(psw)))
         {
             ClientManager.currentuser = usr;
@@ -179,16 +188,21 @@ public class ClientLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(ClientManager.Register() == RegistrationResult.NotConfirmed)
         {
-            String msg = "A verification code has been sent to your email.\nThe code is valid for %s seconds.\n Please check it and write it here:";
-            msg = String.format(msg,Settings.emailCodeTimeOut);
-            String code = Utility.ShowInfoInput(Settings.clientName, msg);
-            if(ClientManager.registerAccount(code))
-                Utility.ShowInfoPopUp(Settings.clientName, "Account submitted!\n Proceed with login.");
-            else
-                Utility.ShowErrorPopUp(Settings.clientName, "Wrong code.\nPlease try again");
+            CheckEmailCode();
         }
     }//GEN-LAST:event_lblRegisterMouseClicked
 
+    private void CheckEmailCode()
+    {
+        String msg = "A verification code has been sent to your email.\nThe code is valid for %s seconds.\n Please check it and write it here:";
+        msg = String.format(msg,Settings.emailCodeTimeOut);
+        String code = Utility.ShowInfoInput(Settings.clientName, msg);
+        if(code == null) code = "";
+        if(ClientManager.registerAccount(code))
+            Utility.ShowInfoPopUp(Settings.clientName, "Account submitted!\n Proceed with login.");
+        else
+            Utility.ShowErrorPopUp(Settings.clientName, "Wrong code.\nPlease try again"); 
+    }
     /**
      * @param args the command line arguments
      */

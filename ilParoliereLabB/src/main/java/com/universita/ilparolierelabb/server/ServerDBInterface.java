@@ -69,6 +69,21 @@ public class ServerDBInterface
         query = String.format(query,UserStatus.Offline.getValue(),usr);
         return _db.executeQuery(query);
     }
+    public static int OnlineClientsCount()
+    {
+        String query = "Select Count(*) from UsersState Where NOT OnlineStatus='%s'";
+        query = String.format(query,0);
+        String[][] return_val = _db.executeQueryRead(query);
+        return Integer.parseInt(return_val[0][0]);
+    }
+
+    static boolean clientIsLogged(String usr) 
+    {
+        String query = "Select Count(*) from UsersState Where NOT OnlineStatus='%s' AND Nickname ='%s'";
+        query = String.format(query,0,usr);
+        String[][] return_val = _db.executeQueryRead(query);
+        return !return_val[0][0].equals("0");
+    }
     
     
             

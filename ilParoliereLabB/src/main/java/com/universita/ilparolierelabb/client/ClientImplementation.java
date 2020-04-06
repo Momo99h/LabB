@@ -25,6 +25,8 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
 {
     private static ServerInterface _server = null;
     private static ClientImplementation _client;
+
+    
     private ClientImplementation() throws RemoteException 
     {
         super();
@@ -115,6 +117,19 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         try
         {
             return _server.activateAccount(code);
+        }
+        catch(Exception e)
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            return false;
+        }
+    }
+    public static boolean clientIsLogged(String usr) 
+    {
+        try
+        {
+            return _server.clientIsLogged(usr);
         }
         catch(Exception e)
         {

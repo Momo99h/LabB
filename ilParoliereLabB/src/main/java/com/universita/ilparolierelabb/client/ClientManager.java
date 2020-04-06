@@ -47,9 +47,14 @@ public class ClientManager
     {
         return ClientImplementation.registerAccount(code);
     }
+    public static boolean clientIsLogged(String usr) 
+    {
+        return ClientImplementation.clientIsLogged(usr);
+    }
     public static void Run()
     {     
         ClientMainFrame serverFrame = new ClientMainFrame();
         serverFrame.setVisible(true);
     }  
+    
 }

@@ -47,7 +47,7 @@ public class ServerThread extends Thread implements ActionListener
 
     private void doIdlestuff() 
     {
-        ServerImplementation.notifyClientsCount(ServerImplementation.WrappedObserver.size());
+        ServerImplementation.notifyClientsCount(ServerDBInterface.OnlineClientsCount());
        _serverStep = ServerFSMachine.Email;
     }
 

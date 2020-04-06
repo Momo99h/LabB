@@ -77,14 +77,18 @@ public class ServerDBInterface
         return Integer.parseInt(return_val[0][0]);
     }
 
-    static boolean clientIsLogged(String usr) 
+    public static boolean clientIsLogged(String usr) 
     {
         String query = "Select Count(*) from UsersState Where NOT OnlineStatus='%s' AND Nickname ='%s'";
         query = String.format(query,0,usr);
         String[][] return_val = _db.executeQueryRead(query);
         return !return_val[0][0].equals("0");
     }
-    
-    
-            
+
+    public static void resetUsersState()
+    {
+        String query = "Update UsersState set OnlineStatus='%s'";
+        query = String.format(query,0);
+        _db.executeQuery(query);
+    }            
 }

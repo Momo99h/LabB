@@ -39,7 +39,6 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             Registry registry = LocateRegistry.getRegistry(ip,9999);
             _server = (ServerInterface) registry.lookup("IlParoliereLabB_Server");
             _client = new ClientImplementation();
-            _server.addObserver(_client);
             ClientManager.Login();
             return true;
         }
@@ -47,6 +46,18 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         {
             e.printStackTrace();
             return false;
+        }
+    }
+    public static void ClientOnline()
+    {
+        try
+        {
+            _server.addObserver(_client);
+        }
+        catch(Exception e)
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, e.getMessage());
+            System.exit(1);
         }
     }
     public static void Launch()

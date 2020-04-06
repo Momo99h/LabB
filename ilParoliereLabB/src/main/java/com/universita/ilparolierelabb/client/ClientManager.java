@@ -62,12 +62,13 @@ public class ClientManager
     }
     public static void refreshRooms() 
     {
-        
+        clientFrame.refreshRooms();
     }
     public static void Run()
-    {     
+    {
         clientFrame = new ClientMainFrame();
         clientFrame.setVisible(true);
+        ClientImplementation.ClientOnline();
     }
 
     

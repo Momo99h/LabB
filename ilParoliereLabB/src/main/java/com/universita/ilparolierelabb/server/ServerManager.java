@@ -37,6 +37,10 @@ public class ServerManager
             new ServerLogin().setVisible(true);
             
     }
+    public static int ObserversOnline()
+    {
+        return ServerImplementation.WrappedObserver.size();
+    }
     public static void Run()
     {
         ServerImplementation.Init();        
@@ -45,12 +49,6 @@ public class ServerManager
         addLogData("Server ready - Waiting connections..");
         ServerDBInterface.resetUsersState();
         ServerThread.Run();
-        Room r = new Room();
-        r.setAdmin("Pippo");
-        r.setId(1);
-        r.setPlayersIn(1);
-        r.setPlayersNeeded(1);
-        gameRooms.addRoom(r);
     }  
     public static void addLogData(String logdata)
     {

@@ -22,6 +22,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
     /*par*/
     public static JLabel Par_lblUtentiConnessi;
     private  LobbyUsrControl lobby;
+    private Room _tempRoom;
     public ClientMainFrame() 
     {
         initComponents();
@@ -197,9 +198,10 @@ public class ClientMainFrame extends javax.swing.JFrame {
     public void refreshRooms()
     {
         this.lobby.removeAllRooms();
-        for(Room r : ClientManager.gameRooms.getAllRoomsData())
+        for(int i = 0; i < ClientManager.gameRooms.getRoomsCount();i++)
         {
-            this.lobby.addRoom(r.getId()+"", r.getCreationDate(), r.getPlayersIn()+"/"+r.getPlayersNeeded());
+            this._tempRoom = ClientManager.gameRooms.getRoomObject(i);
+            this.lobby.addRoom(_tempRoom.getId()+"", _tempRoom.getCreationDate(), _tempRoom.getPlayersIn()+"/"+_tempRoom.getPlayersNeeded());
         }
     }
 

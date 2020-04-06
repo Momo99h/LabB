@@ -47,7 +47,7 @@ public class ServerThread extends Thread implements ActionListener
 
     private void doIdlestuff() 
     {
-        ServerImplementation.notifyClientsCount(ServerDBInterface.OnlineClientsCount());
+        ServerImplementation.notifyClientsCount(ServerManager.ObserversOnline());
         if(ServerManager.gameRooms.isDataChanged())
         {
             ServerManager.gameRooms.confirmDataChanged();

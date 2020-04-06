@@ -18,17 +18,15 @@ public class LobbyUsrControl extends javax.swing.JPanel {
     public LobbyUsrControl() 
     {
         initComponents();
-        jTable1.setModel(_tablemodel);
-        _tablemodel.addRow(new String[] {"Room ID","Date","Users"});
+        jTableRooms.setModel(_tablemodel);
+        jTableRooms.setDefaultEditor(Object.class, null);
+        jTableRooms.setColumnSelectionAllowed(false);
+        jTableRooms.setRowSelectionAllowed(true);
+        jTableRooms.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
     public void addRoom(String id,String date,String players)
     {
         _tablemodel.addRow(new String[]{id,date,players});
-        jTable1.setModel(_tablemodel);
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setDefaultEditor(Object.class, null);
-        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jTable1.repaint();
     }
     public void removeRoom(String id)
     {
@@ -36,13 +34,7 @@ public class LobbyUsrControl extends javax.swing.JPanel {
     }
     public void removeAllRooms()
     {
-        for(int i = 0; i < _tablemodel.getRowCount();i++)
-            _tablemodel.removeRow(i);
-        jTable1.setModel(_tablemodel);
-        jTable1.setAutoCreateRowSorter(true);
-        jTable1.setDefaultEditor(Object.class, null);
-        jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-        jTable1.repaint();
+        _tablemodel.setRowCount(0);
     }
             
     /**
@@ -54,15 +46,17 @@ public class LobbyUsrControl extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        panelTableContainer = new javax.swing.JScrollPane();
+        jTableRooms = new javax.swing.JTable();
+        panelListContainer = new javax.swing.JScrollPane();
+        jListPlayers = new javax.swing.JList<>();
+        jPanel1 = new javax.swing.JPanel();
+        btnAddRoom = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 204, 204));
         setLayout(new java.awt.BorderLayout());
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTableRooms.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -85,21 +79,41 @@ public class LobbyUsrControl extends javax.swing.JPanel {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jTableRooms.setColumnSelectionAllowed(true);
+        jTableRooms.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableRoomsMouseClicked(evt);
+            }
+        });
+        panelTableContainer.setViewportView(jTableRooms);
+        jTableRooms.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
-        add(jScrollPane1, java.awt.BorderLayout.CENTER);
+        add(panelTableContainer, java.awt.BorderLayout.CENTER);
 
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane2.setViewportView(jList1);
+        jListPlayers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        panelListContainer.setViewportView(jListPlayers);
 
-        add(jScrollPane2, java.awt.BorderLayout.LINE_END);
+        add(panelListContainer, java.awt.BorderLayout.LINE_END);
+
+        btnAddRoom.setText("Add room");
+        jPanel1.add(btnAddRoom);
+
+        add(jPanel1, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jTableRoomsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRoomsMouseClicked
+        // TODO add your handling code here:
+        int selected = jTableRooms.getSelectedRow();
+        if(selected == -1) return;
+    }//GEN-LAST:event_jTableRoomsMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JButton btnAddRoom;
+    private javax.swing.JList<String> jListPlayers;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JTable jTableRooms;
+    private javax.swing.JScrollPane panelListContainer;
+    private javax.swing.JScrollPane panelTableContainer;
     // End of variables declaration//GEN-END:variables
 }

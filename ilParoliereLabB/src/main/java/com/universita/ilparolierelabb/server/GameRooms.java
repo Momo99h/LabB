@@ -39,6 +39,10 @@ public class GameRooms implements Serializable
         }
         return null;
     }
+    public Room getRoomObject(int position)
+    {
+        return this._rooms.get(position);
+    }
     public void addRoom(Room r)
     {
         this.dataChanged = true;

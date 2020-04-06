@@ -5,6 +5,8 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.common.Utility;
+
 /**
  *
  * @author andreagirola
@@ -41,125 +43,75 @@ public class GameMatrix extends javax.swing.JFrame {
         box10 = new javax.swing.JLabel();
         box11 = new javax.swing.JLabel();
         box13 = new javax.swing.JLabel();
-        jLabel14 = new javax.swing.JLabel();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
+        box16 = new javax.swing.JLabel();
+        box14 = new javax.swing.JLabel();
+        box15 = new javax.swing.JLabel();
         fillMatrix = new javax.swing.JToggleButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
         box1.setText("jLabel1");
+        jPanel1.add(box1, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 11, -1, 39));
 
         box2.setText("jLabel2");
+        jPanel1.add(box2, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 11, -1, 39));
 
         box4.setText("jLabel4");
+        jPanel1.add(box4, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 11, -1, 39));
 
         box3.setText("jLabel3");
+        jPanel1.add(box3, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 11, -1, 39));
 
         box5.setText("jLabel1");
+        jPanel1.add(box5, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 68, -1, 39));
 
         box6.setText("jLabel2");
+        jPanel1.add(box6, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 68, -1, 39));
 
         box7.setText("jLabel3");
+        jPanel1.add(box7, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 68, -1, 39));
 
         box8.setText("jLabel4");
+        jPanel1.add(box8, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 68, -1, 39));
 
         box9.setText("jLabel1");
+        jPanel1.add(box9, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 125, -1, 39));
 
         box12.setText("jLabel4");
+        jPanel1.add(box12, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 125, -1, 39));
 
         box10.setText("jLabel2");
+        jPanel1.add(box10, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 125, -1, 39));
 
         box11.setText("jLabel3");
+        jPanel1.add(box11, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 125, -1, 39));
 
         box13.setText("jLabel1");
+        jPanel1.add(box13, new org.netbeans.lib.awtextra.AbsoluteConstraints(14, 175, -1, 39));
 
-        jLabel14.setText("jLabel4");
+        box16.setText("jLabel4");
+        jPanel1.add(box16, new org.netbeans.lib.awtextra.AbsoluteConstraints(134, 175, -1, 39));
 
-        jLabel15.setText("jLabel2");
+        box14.setText("jLabel2");
+        jPanel1.add(box14, new org.netbeans.lib.awtextra.AbsoluteConstraints(54, 175, -1, 39));
 
-        jLabel16.setText("jLabel3");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(box5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(box6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(box7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(box8))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(box13)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel15)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel16)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel14))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(box1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(box2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(box3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(box4))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(box9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(box10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(box11)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(box12)))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {box1, box10, box11, box12, box13, box2, box3, box4, box5, box6, box7, box8, box9, jLabel14, jLabel15, jLabel16});
-
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(box1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box4, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(box5, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box6, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box8, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box7, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(box9, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box10, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box12, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box11, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(box13, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(15, Short.MAX_VALUE))
-        );
-
-        jPanel1Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {box1, box10, box11, box12, box13, box2, box3, box4, box5, box6, box7, box8, box9, jLabel14, jLabel15, jLabel16});
+        box15.setText("jLabel3");
+        jPanel1.add(box15, new org.netbeans.lib.awtextra.AbsoluteConstraints(94, 175, -1, 39));
 
         fillMatrix.setText("jToggleButton1");
         fillMatrix.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fillMatrixActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("jButton1");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -170,8 +122,10 @@ public class GameMatrix extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(14, 14, 14)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
-                .addComponent(fillMatrix)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(fillMatrix, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(97, 97, 97))
         );
         layout.setVerticalGroup(
@@ -183,20 +137,42 @@ public class GameMatrix extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(fillMatrix)))
-                .addContainerGap(312, Short.MAX_VALUE))
+                        .addComponent(fillMatrix)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)))
+                .addContainerGap(327, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void fillMatrixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fillMatrixActionPerformed
-   
-        //PROVA DI FUNZIONAMENTO
-        box1.setText("prova");
-        box2.setText("prova2");
-        box12.setText("prova");
+
+        
+        
     }//GEN-LAST:event_fillMatrixActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        Dice[] d = DiceFactory.CreateDices();
+        
+        box1.setText(d[0].getRandomFace());
+        box2.setText(d[1].getRandomFace());
+        box3.setText(d[2].getRandomFace());
+        box4.setText(d[3].getRandomFace());
+        box5.setText(d[4].getRandomFace());
+        box6.setText(d[5].getRandomFace());
+        box7.setText(d[6].getRandomFace());
+        box8.setText(d[7].getRandomFace());
+        box9.setText(d[8].getRandomFace());
+        box10.setText(d[9].getRandomFace());
+        box11.setText(d[10].getRandomFace());
+        box12.setText(d[11].getRandomFace());
+        box13.setText(d[12].getRandomFace());
+        box14.setText(d[13].getRandomFace());
+        box15.setText(d[14].getRandomFace());
+        box16.setText(d[15].getRandomFace());
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -239,6 +215,9 @@ public class GameMatrix extends javax.swing.JFrame {
     private javax.swing.JLabel box11;
     private javax.swing.JLabel box12;
     private javax.swing.JLabel box13;
+    private javax.swing.JLabel box14;
+    private javax.swing.JLabel box15;
+    private javax.swing.JLabel box16;
     private javax.swing.JLabel box2;
     private javax.swing.JLabel box3;
     private javax.swing.JLabel box4;
@@ -248,9 +227,7 @@ public class GameMatrix extends javax.swing.JFrame {
     private javax.swing.JLabel box8;
     private javax.swing.JLabel box9;
     private javax.swing.JToggleButton fillMatrix;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

@@ -9,8 +9,8 @@ package com.universita.ilparolierelabb.server;
  *
  * @author andreagirola
  */
-public interface DiceInterface {
+public interface DiceInterface 
+{
     public int getDiceId(); 
     public String getRandomFace(); 
-    
 }

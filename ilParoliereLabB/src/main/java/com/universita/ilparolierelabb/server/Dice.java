@@ -45,6 +45,11 @@ public class Dice implements DiceInterface {
         this._faces = face; 
     }
     
+    //getter letterMatrix
+    public String[][] getLetterMatrix(){ 
+        return this._letterMatrix; 
+    }
+    
     //getter
     public int getDiceId(){
         return this._id; 
@@ -59,7 +64,7 @@ public class Dice implements DiceInterface {
     public void createDices(){
         for(int i=0; i<15; i++){
             for(int j=0; j<5; j++){ 
-                //to-do \
+                
             }
         }
     }

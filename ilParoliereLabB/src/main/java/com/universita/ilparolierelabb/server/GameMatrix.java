@@ -191,7 +191,7 @@ public class GameMatrix extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void fillMatrixActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fillMatrixActionPerformed
-        
+   
         //PROVA DI FUNZIONAMENTO
         box1.setText("prova");
         box2.setText("prova2");

@@ -88,7 +88,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        ClientManager.DisconnectFromServer();
+        ClientManager.DisconnectFromServer(ClientManager.currentuser);
     }//GEN-LAST:event_formWindowClosing
 
     /**

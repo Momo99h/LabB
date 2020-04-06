@@ -160,5 +160,13 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
+
+    @Override
+    public void disconnectClient(String usr) throws RemoteException 
+    {
+        if(usr.equals("")) return;
+        if(ServerDBInterface.ClientDisconnect(usr))
+        ServerManager.addLogData("New user disconnected: (Username) "+usr);
+    }
     
 }

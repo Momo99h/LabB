@@ -151,7 +151,7 @@ public class ClientLogin extends javax.swing.JFrame {
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
 
-        ClientManager.DisconnectFromServer();
+        ClientManager.DisconnectFromServer("");
         System.exit(0);
     }//GEN-LAST:event_btnExitActionPerformed
 
@@ -166,6 +166,7 @@ public class ClientLogin extends javax.swing.JFrame {
         }
         if(ClientManager.getLogin(usr, Utility.StringMD5Hash(psw)))
         {
+            ClientManager.currentuser = usr;
             ClientManager.Run();
             this.dispose();
             return;

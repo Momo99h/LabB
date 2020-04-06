@@ -21,4 +21,5 @@ public interface ServerInterface extends Remote
     public Boolean activateAccount(String code)throws RemoteException;
     public void addObserver(RemoteObserver o) throws RemoteException;
     public void removeObserver(RemoteObserver o) throws RemoteException;
+    public void disconnectClient(String usr) throws RemoteException;
 }

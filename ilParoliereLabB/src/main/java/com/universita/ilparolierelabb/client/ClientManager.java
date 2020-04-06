@@ -13,6 +13,8 @@ import com.universita.ilparolierelabb.client.frames.*;
  */
 public class ClientManager 
 {
+    public static String currentuser;
+    
     public static void Launch()
     {
         ClientImplementation.Launch();
@@ -25,9 +27,9 @@ public class ClientManager
     {
         return ClientImplementation.clientRegister(d);
     }
-    public static void DisconnectFromServer()
+    public static void DisconnectFromServer(String usr)
     {
-        ClientImplementation.DisconnectFromServer();
+        ClientImplementation.DisconnectFromServer(usr);
     }
     public static void Login() 
     {

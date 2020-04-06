@@ -84,10 +84,11 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
            return false;
        }
     }
-    public static void DisconnectFromServer()
+    public static void DisconnectFromServer(String usr)
     {
         try
         {
+            _server.disconnectClient(usr);
             _server.removeObserver(_client);
         }
         catch(Exception e)

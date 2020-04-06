@@ -24,8 +24,8 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class ClientImplementation extends UnicastRemoteObject implements RemoteObserver
 {
-    private static ServerInterface _server = null;
-    private static ClientImplementation _client;
+    public static ServerInterface _server = null;
+    public static ClientImplementation _client;
 
     
     private ClientImplementation() throws RemoteException 
@@ -162,6 +162,6 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     public void notifyClientsRoomsData(Object observable, GameRooms rooms) throws RemoteException 
     {
         ClientManager.gameRooms = rooms;
-        ClientManager.refreshRooms = true;
+        ClientManager.RefreshRooms();
     }
 }

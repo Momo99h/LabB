@@ -7,6 +7,7 @@
 package com.universita.ilparolierelabb.client.frames;
 
 import com.universita.ilparolierelabb.client.ClientManager;
+import com.universita.ilparolierelabb.server.Room;
 import java.awt.BorderLayout;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
@@ -23,8 +24,8 @@ public class ClientMainFrame extends javax.swing.JFrame {
     
     /*par*/
     public static JLabel Par_lblUtentiConnessi;
-    private static Timer _tmrRefresh;
     private  LobbyUsrControl lobby;
+    
     public ClientMainFrame() 
     {
         initComponents();
@@ -33,8 +34,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
         lobby = new LobbyUsrControl();
         panelContainer.setLayout(new BorderLayout());
         panelContainer.add(lobby,BorderLayout.CENTER);
-        _tmrRefresh = new Timer(500,_funRefresh);
-       _tmrRefresh.start();
+        refreshRooms();
     }
 
     /** This method is called from within the constructor to
@@ -190,16 +190,14 @@ public class ClientMainFrame extends javax.swing.JFrame {
     {
         Par_lblUtentiConnessi = lblUtentiConnessi;
     }
-    private ActionListener _funRefresh = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent ae) 
+    public void refreshRooms()
+    {
+        lobby.removeAllRooms();
+        System.out.print("Refresh lobby");
+        for(Room r : ClientManager.gameRooms.getAllRoomsData())
         {
-            if(ClientManager.refreshRooms)
-            {
-                lobby.addRoom("1", "15", "58");
-                ClientManager.refreshRooms = false;
-            }
+            lobby.addRoom(String.valueOf(r.getId()), r.getCreationDate(), r.getPlayersIn()+"/"+r.getPlayersNeeded());
         }
-    };
+    }
 
 }

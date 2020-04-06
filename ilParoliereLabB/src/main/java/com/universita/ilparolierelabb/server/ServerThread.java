@@ -20,7 +20,6 @@ import javax.swing.Timer;
 public class ServerThread extends Thread implements ActionListener
 {
     private ServerFSMachine _serverStep = ServerFSMachine.Idle;
-    private int _lastClientsCount;
     private int tempInt = 0;
     private String tempString = "";
     private int _lastRoomCount = 0;
@@ -51,6 +50,7 @@ public class ServerThread extends Thread implements ActionListener
         ServerImplementation.notifyClientsCount(ServerDBInterface.OnlineClientsCount());
         if(ServerManager.gameRooms.isDataChanged())
         {
+            System.out.print("DataChanged\n");
             ServerManager.gameRooms.confirmDataChanged();
             ServerImplementation.notifyClientsRoomsData(ServerManager.gameRooms);
         }

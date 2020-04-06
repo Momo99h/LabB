@@ -17,15 +17,24 @@ public class LobbyUsrControl extends javax.swing.JPanel {
     public LobbyUsrControl() 
     {
         initComponents();
+        jTable1.setModel(_tablemodel);
     }
     public void addRoom(String id,String date,String players)
     {
         _tablemodel.addRow(new String[]{id,date,players});
+        jTable1.setModel(_tablemodel);
         jTable1.repaint();
     }
     public void removeRoom(String id)
     {
         //_tablemodel.removeRow();
+    }
+    public void removeAllRooms()
+    {
+        for(int i = 0; i < _tablemodel.getRowCount();i++)
+            _tablemodel.removeRow(i);
+        jTable1.setModel(_tablemodel);
+        jTable1.repaint();
     }
             
     /**

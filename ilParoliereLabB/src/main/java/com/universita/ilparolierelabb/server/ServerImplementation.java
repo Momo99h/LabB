@@ -124,6 +124,12 @@ public class ServerImplementation extends Observable implements ServerInterface
         }
         return false;
     }
+     @Override
+    public boolean clientIsLogged(String usr) throws RemoteException 
+    {
+        return ServerDBInterface.clientIsLogged(usr);
+    }
+    
 
     @Override
     public Boolean activateAccount(String code) throws RemoteException 
@@ -168,5 +174,6 @@ public class ServerImplementation extends Observable implements ServerInterface
         if(ServerDBInterface.ClientDisconnect(usr))
         ServerManager.addLogData("New user disconnected: (Username) "+usr);
     }
-    
+
+   
 }

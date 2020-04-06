@@ -12,7 +12,8 @@ package com.universita.ilparolierelabb.server;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-public interface RemoteObserver extends Remote {
+public interface RemoteObserver extends Remote 
+{
 
     public void update(Object observable, Object updateMsg) throws RemoteException;
     public void notifyClientsCount(Object observable, int count)throws RemoteException;

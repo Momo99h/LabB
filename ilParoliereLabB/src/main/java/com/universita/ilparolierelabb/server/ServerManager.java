@@ -47,7 +47,7 @@ public class ServerManager
     public static void addLogData(String logdata)
     {
         if(ServerMainFrame.Console_Log_Model.getSize() == 50)ServerMainFrame.Console_Log_Model.clear();
-        String s = _sdf.format(new Date())+" -   "+logdata;
+        String s = _sdf.format(new Date())+"    -   "+logdata;
         ServerMainFrame.Console_Log_Model.add(0, s);
     }
     

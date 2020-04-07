@@ -11,6 +11,7 @@ import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.server.GameRooms;
 import com.universita.ilparolierelabb.server.RemoteObserver;
+import com.universita.ilparolierelabb.server.Room;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -163,6 +164,33 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
+    public static int getLastRoomID() 
+    {
+        try
+        {
+            return _server.getLastRoomID();
+        }
+        catch(Exception e)
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            return -1;
+        }
+    }
+    public static void addRoom(Room r) 
+    {
+        try
+        {
+            _server.addRoom(r);
+        }
+        catch(Exception e)
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            
+        }
+    }
+
     @Override
     public void notifyClientsCount(Object observable, int count) throws RemoteException 
     {

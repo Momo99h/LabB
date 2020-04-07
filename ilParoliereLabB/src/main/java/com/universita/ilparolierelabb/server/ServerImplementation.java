@@ -195,5 +195,18 @@ public class ServerImplementation extends Observable implements ServerInterface
         return ServerManager.gameRooms;
     }
 
+    @Override
+    public int getLastRoomID() throws RemoteException 
+    {
+        return ServerManager.gameRooms.getLastID();
+    }
+
+    @Override
+    public void addRoom(Room r) throws RemoteException 
+    {
+        ServerManager.addLogData(r.getAdmin()+" added new room: "+r.getId()+" - "+r.getRoomName());
+        ServerManager.gameRooms.addRoom(r);
+    }
+
    
 }

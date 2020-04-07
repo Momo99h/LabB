@@ -17,20 +17,22 @@ import java.util.Date;
 public class Room implements Serializable
 {
     private int _id;
-    private Date _dataCreazione;
+    private Date _date;
     private String _adminUsername;
+    private String _roomName;
     private int _playersNeeded;
     private int _playersIn = 0;
     private ArrayList<String> _users = new ArrayList<>();
     private SimpleDateFormat _sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     public Room()
     {
-        this._dataCreazione = new Date();
+        this._date = new Date();
     }
     
     public void setId(int value){this._id = value;}
     public void setAdmin(String value){this._adminUsername = value;}
     public void setPlayersNeeded(int value){this._playersNeeded = value;}
+    public void setRoomName(String value){this._roomName = value;}
     public void addPlayer(String value){this._users.add(value); this._playersIn++;}
     public void removePlayer(String value){this._users.remove(value);this._playersIn--;}
     
@@ -38,7 +40,8 @@ public class Room implements Serializable
     public String getAdmin(){return this._adminUsername;}
     public int getPlayersNeeded(){return this._playersNeeded;}
     public int getPlayersIn(){return this._playersIn;}
-    public String getCreationDate(){return this._sdf.format(_dataCreazione);}
+    public String getCreationDate(){return this._sdf.format(_date);}
+    public String getRoomName(){return this._roomName;}
     public Boolean isPlayerIn(String player){return this._users.contains(player);}
     public String[] getListPlayerNamesIn()
     {

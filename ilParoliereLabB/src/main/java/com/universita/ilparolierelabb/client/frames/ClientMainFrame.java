@@ -44,6 +44,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblUtentiConnessi = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         lblRoomID = new javax.swing.JLabel();
         panelContainer = new javax.swing.JPanel();
@@ -59,6 +60,13 @@ public class ClientMainFrame extends javax.swing.JFrame {
 
         lblUtentiConnessi.setText("1");
 
+        jButton1.setText("Add room");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -68,7 +76,9 @@ public class ClientMainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUtentiConnessi)
-                .addContainerGap(821, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -76,7 +86,8 @@ public class ClientMainFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(lblUtentiConnessi))
+                    .addComponent(lblUtentiConnessi)
+                    .addComponent(jButton1))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -108,7 +119,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
         );
         panelContainerLayout.setVerticalGroup(
             panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 389, Short.MAX_VALUE)
+            .addGap(0, 380, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -136,6 +147,12 @@ public class ClientMainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         ClientManager.DisconnectFromServer(ClientManager.currentuser);
     }//GEN-LAST:event_formWindowClosing
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+
+        int roomId = ClientAddRoom.addRoom();
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -173,6 +190,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
@@ -201,7 +219,8 @@ public class ClientMainFrame extends javax.swing.JFrame {
         for(int i = 0; i < ClientManager.gameRooms.getRoomsCount();i++)
         {
             this._tempRoom = ClientManager.gameRooms.getRoomObject(i);
-            this.lobby.addRoom(_tempRoom.getId()+"", _tempRoom.getCreationDate(), _tempRoom.getPlayersIn()+"/"+_tempRoom.getPlayersNeeded());
+            this.lobby.addRoom
+            (_tempRoom.getId()+"",_tempRoom.getRoomName(), _tempRoom.getCreationDate(), _tempRoom.getPlayersIn()+"/"+_tempRoom.getPlayersNeeded());
         }
     }
 

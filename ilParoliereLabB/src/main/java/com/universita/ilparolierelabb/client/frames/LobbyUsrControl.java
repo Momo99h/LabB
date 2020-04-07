@@ -19,7 +19,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class LobbyUsrControl extends javax.swing.JPanel {
 
-    private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Room ID","Date","Users"},0);
+    private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Room ID","Room Name","Date","Users"},0);
     private DefaultListModel _listModel = new DefaultListModel();
     public LobbyUsrControl() 
     {
@@ -31,9 +31,9 @@ public class LobbyUsrControl extends javax.swing.JPanel {
         jTableRooms.setRowSelectionAllowed(true);
         jTableRooms.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
-    public void addRoom(String id,String date,String players)
+    public void addRoom(String id,String name,String date,String players)
     {
-        _tableModel.addRow(new String[]{id,date,players});
+        _tableModel.addRow(new String[]{id,name,date,players});
     }
     public void removeRoom(String id)
     {
@@ -57,8 +57,6 @@ public class LobbyUsrControl extends javax.swing.JPanel {
         jTableRooms = new javax.swing.JTable();
         panelListContainer = new javax.swing.JScrollPane();
         jListPlayers = new javax.swing.JList<>();
-        jPanel1 = new javax.swing.JPanel();
-        btnAddRoom = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 204, 204));
         setLayout(new java.awt.BorderLayout());
@@ -69,14 +67,14 @@ public class LobbyUsrControl extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Room ID", "Date", "Users"
+                "Room ID", "Room Name", "Date", "Users"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -104,11 +102,6 @@ public class LobbyUsrControl extends javax.swing.JPanel {
         panelListContainer.setViewportView(jListPlayers);
 
         add(panelListContainer, java.awt.BorderLayout.LINE_END);
-
-        btnAddRoom.setText("Add room");
-        jPanel1.add(btnAddRoom);
-
-        add(jPanel1, java.awt.BorderLayout.PAGE_END);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jTableRoomsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRoomsMouseClicked
@@ -126,9 +119,7 @@ public class LobbyUsrControl extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAddRoom;
     private javax.swing.JList<String> jListPlayers;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JTable jTableRooms;
     private javax.swing.JScrollPane panelListContainer;
     private javax.swing.JScrollPane panelTableContainer;

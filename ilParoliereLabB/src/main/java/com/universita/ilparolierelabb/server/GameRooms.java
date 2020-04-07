@@ -15,7 +15,8 @@ import java.util.ArrayList;
 public class GameRooms implements Serializable
 {
     private ArrayList<Room> _rooms = new ArrayList<>();
-    private boolean dataChanged = false;
+    private boolean _dataChanged = false;
+    private int _lastID = 0;
     public GameRooms(){}
     
     public ArrayList<Room> getAllRoomsData()
@@ -24,7 +25,7 @@ public class GameRooms implements Serializable
     }
     public void setAllRoomsData(ArrayList<Room> rooms)
     {
-        this.dataChanged = true;
+        this._dataChanged = true;
         this._rooms = rooms;
     }
     public int getRoomsCount()
@@ -45,20 +46,25 @@ public class GameRooms implements Serializable
     }
     public void addRoom(Room r)
     {
-        this.dataChanged = true;
+        this._dataChanged = true;
         this._rooms.add(r);
+        if(r.getId() > _lastID) _lastID = r.getId();
     }
     public void removeRoom(Room r)
     {
-        this.dataChanged = true;
+        this._dataChanged = true;
         this._rooms.remove(r);
     }
     public Boolean isDataChanged()
     {
-        return this.dataChanged;
+        return this._dataChanged;
     }
     public void confirmDataChanged()
     {
-        this.dataChanged = false;
+        this._dataChanged = false;
+    }
+    public int getLastID()
+    {
+        return this._lastID;
     }
 }

@@ -7,6 +7,7 @@ package com.universita.ilparolierelabb.client;
 
 import com.universita.ilparolierelabb.client.frames.*;
 import com.universita.ilparolierelabb.server.GameRooms;
+import com.universita.ilparolierelabb.server.Room;
 
 /**
  *
@@ -59,6 +60,14 @@ public class ClientManager
     public static void getGameRooms()
     {
         ClientManager.gameRooms = ClientImplementation.getGameRooms();
+    }
+    public static int getLastRoomID()
+    {
+        return ClientImplementation.getLastRoomID();
+    }
+    public static void addRoom(Room r)
+    {
+        ClientImplementation.addRoom(r);
     }
     public static void refreshRooms() 
     {

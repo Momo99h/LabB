@@ -48,22 +48,6 @@ public class ServerManager
         serverFrame.setVisible(true);
         addLogData("Server ready - Waiting connections..");
         ServerDBInterface.resetUsersState();
-        Room r = new Room();
-        r.setId(1);
-        r.setAdmin("Server");
-        r.setPlayersNeeded(6);
-        r.addPlayer("Momo");
-        r.addPlayer("Momo1");
-        r.addPlayer("Momo2");
-        r.addPlayer("Momo3");
-        Room r2 = new Room();
-        r2.setId(2);
-        r2.setAdmin("Server");
-        r2.setPlayersNeeded(6);
-        r2.addPlayer("Momo");
-        r2.addPlayer("Momo1");
-        gameRooms.addRoom(r);
-        gameRooms.addRoom(r2);
         ServerThread.Run();
     }  
     public static void addLogData(String logdata)

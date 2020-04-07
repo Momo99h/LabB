@@ -7,6 +7,8 @@
 package com.universita.ilparolierelabb.client.frames;
 
 import com.universita.ilparolierelabb.client.ClientManager;
+import com.universita.ilparolierelabb.common.Settings;
+import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.server.Room;
 import java.awt.BorderLayout;
 import java.awt.Frame;
@@ -21,7 +23,8 @@ public class ClientMainFrame extends javax.swing.JFrame {
     
     /*par*/
     public static JLabel Par_lblUtentiConnessi;
-    private  LobbyUsrControl lobby;
+    private LobbyUsrControl lobby;
+    private GameUsrControl game;
     private Room _tempRoom;
     public ClientMainFrame() 
     {
@@ -151,7 +154,11 @@ public class ClientMainFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         int roomId = ClientAddRoom.addRoom();
-        
+        enterRoom(roomId);
+        this.panelContainer.remove(lobby);
+        this.panelContainer.add(game,BorderLayout.CENTER);
+        this.panelContainer.validate();
+        this.panelContainer.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -208,6 +215,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
     {
         this.setExtendedState(Frame.MAXIMIZED_BOTH);
         this.lobby = new LobbyUsrControl();
+        this.game = new GameUsrControl();
         this.panelContainer.setLayout(new BorderLayout());
         this.panelContainer.add(lobby,BorderLayout.CENTER);
         ClientManager.getGameRooms();
@@ -222,6 +230,11 @@ public class ClientMainFrame extends javax.swing.JFrame {
             this.lobby.addRoom
             (_tempRoom.getId()+"",_tempRoom.getRoomName(), _tempRoom.getCreationDate(), _tempRoom.getPlayersIn()+"/"+_tempRoom.getPlayersNeeded());
         }
+    }
+
+    private void enterRoom(int roomId) 
+    {
+        
     }
 
 }

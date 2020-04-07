@@ -5,7 +5,12 @@
  */
 package com.universita.ilparolierelabb.client.frames;
 
+import com.universita.ilparolierelabb.client.ClientManager;
+import com.universita.ilparolierelabb.server.Room;
+import javax.swing.DefaultListModel;
 import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -14,11 +19,13 @@ import javax.swing.table.DefaultTableModel;
  */
 public class LobbyUsrControl extends javax.swing.JPanel {
 
-    private DefaultTableModel _tablemodel = new DefaultTableModel(new String[] {"Room ID","Date","Users"},0);
+    private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Room ID","Date","Users"},0);
+    private DefaultListModel _listModel = new DefaultListModel();
     public LobbyUsrControl() 
     {
         initComponents();
-        jTableRooms.setModel(_tablemodel);
+        jTableRooms.setModel(_tableModel);
+        jListPlayers.setModel(_listModel);
         jTableRooms.setDefaultEditor(Object.class, null);
         jTableRooms.setColumnSelectionAllowed(false);
         jTableRooms.setRowSelectionAllowed(true);
@@ -26,7 +33,7 @@ public class LobbyUsrControl extends javax.swing.JPanel {
     }
     public void addRoom(String id,String date,String players)
     {
-        _tablemodel.addRow(new String[]{id,date,players});
+        _tableModel.addRow(new String[]{id,date,players});
     }
     public void removeRoom(String id)
     {
@@ -34,7 +41,7 @@ public class LobbyUsrControl extends javax.swing.JPanel {
     }
     public void removeAllRooms()
     {
-        _tablemodel.setRowCount(0);
+        _tableModel.setRowCount(0);
     }
             
     /**
@@ -56,6 +63,7 @@ public class LobbyUsrControl extends javax.swing.JPanel {
         setBackground(new java.awt.Color(255, 204, 204));
         setLayout(new java.awt.BorderLayout());
 
+        jTableRooms.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTableRooms.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -80,6 +88,7 @@ public class LobbyUsrControl extends javax.swing.JPanel {
             }
         });
         jTableRooms.setColumnSelectionAllowed(true);
+        jTableRooms.setRowHeight(30);
         jTableRooms.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTableRoomsMouseClicked(evt);
@@ -90,6 +99,7 @@ public class LobbyUsrControl extends javax.swing.JPanel {
 
         add(panelTableContainer, java.awt.BorderLayout.CENTER);
 
+        jListPlayers.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jListPlayers.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         panelListContainer.setViewportView(jListPlayers);
 
@@ -104,7 +114,14 @@ public class LobbyUsrControl extends javax.swing.JPanel {
     private void jTableRoomsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRoomsMouseClicked
         // TODO add your handling code here:
         int selected = jTableRooms.getSelectedRow();
+        int id = 0;
         if(selected == -1) return;
+        id = Integer.parseInt((String) jTableRooms.getValueAt(selected, 0));
+        Room r = ClientManager.gameRooms.getRoom(id);
+        String[] players = r.getListPlayerNamesIn();
+        _listModel.clear();
+        _listModel.addElement("Players inside room:");
+        for(int i = 0; i < players.length;i++) _listModel.addElement(players[i]);
     }//GEN-LAST:event_jTableRoomsMouseClicked
 
 

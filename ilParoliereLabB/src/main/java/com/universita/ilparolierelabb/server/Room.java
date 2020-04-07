@@ -20,7 +20,7 @@ public class Room implements Serializable
     private Date _dataCreazione;
     private String _adminUsername;
     private int _playersNeeded;
-    private int _playersIn;
+    private int _playersIn = 0;
     private ArrayList<String> _users = new ArrayList<>();
     private SimpleDateFormat _sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     public Room()
@@ -31,9 +31,8 @@ public class Room implements Serializable
     public void setId(int value){this._id = value;}
     public void setAdmin(String value){this._adminUsername = value;}
     public void setPlayersNeeded(int value){this._playersNeeded = value;}
-    public void setPlayersIn(int value){this._playersIn = value;}
-    public void addPlayer(String value){this._users.add(value);}
-    public void removePlayer(String value){this._users.remove(value);}
+    public void addPlayer(String value){this._users.add(value); this._playersIn++;}
+    public void removePlayer(String value){this._users.remove(value);this._playersIn--;}
     
     public int getId(){return this._id;}
     public String getAdmin(){return this._adminUsername;}
@@ -41,4 +40,13 @@ public class Room implements Serializable
     public int getPlayersIn(){return this._playersIn;}
     public String getCreationDate(){return this._sdf.format(_dataCreazione);}
     public Boolean isPlayerIn(String player){return this._users.contains(player);}
+    public String[] getListPlayerNamesIn()
+    {
+        String[] s = new String[this._users.size()];
+        for(int i = 0; i < this._users.size();i++)
+        {
+            s[i] = this._users.get(i);
+        }
+        return s;
+    }
 }

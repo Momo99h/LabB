@@ -5,14 +5,10 @@
  */
 package com.universita.ilparolierelabb.server.frames;
 
-import com.universita.ilparolierelabb.common.Utility;
-import com.universita.ilparolierelabb.server.Room;
-import static com.universita.ilparolierelabb.server.ServerManager.gameRooms;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
-import javax.swing.JProgressBar;
 import javax.swing.Timer;
 
 /**

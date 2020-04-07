@@ -27,8 +27,6 @@ public class ServerImplementation extends Observable implements ServerInterface
     public static ArrayList<WrappedObserver> WrappedObserver;
     public  static ArrayList<RegisterData> registerUserWaiting;
 
-    
-    
     private ServerImplementation() throws RemoteException 
     {
         super();
@@ -125,7 +123,7 @@ public class ServerImplementation extends Observable implements ServerInterface
         return false;
     }
      @Override
-    public boolean clientIsLogged(String usr) throws RemoteException 
+    public Boolean clientIsLogged(String usr) throws RemoteException 
     {
         return ServerDBInterface.clientIsLogged(usr);
     }
@@ -206,6 +204,19 @@ public class ServerImplementation extends Observable implements ServerInterface
     {
         ServerManager.addLogData(r.getAdmin()+" added new room: "+r.getId()+" - "+r.getRoomName());
         ServerManager.gameRooms.addRoom(r);
+    }
+
+    @Override
+    public void enterRoom(int roomId,String usr) throws RemoteException 
+    {
+        ServerManager.gameRooms.getRoom(roomId).addPlayer(usr);
+        ServerManager.gameRooms.setDataChanged(true);
+    }
+
+    @Override
+    public void leaveRoom(String usr) throws RemoteException 
+    {
+            ServerManager.gameRooms.removePlayerFromRoom(usr);
     }
 
    

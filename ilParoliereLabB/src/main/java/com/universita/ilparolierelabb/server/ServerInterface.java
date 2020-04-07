@@ -22,8 +22,10 @@ public interface ServerInterface extends Remote
     public void addObserver(RemoteObserver o) throws RemoteException;
     public void removeObserver(RemoteObserver o) throws RemoteException;
     public void disconnectClient(String usr) throws RemoteException;
-    public boolean clientIsLogged(String usr) throws RemoteException;
+    public Boolean clientIsLogged(String usr) throws RemoteException;
     public GameRooms getGameRooms()throws RemoteException;
     public int getLastRoomID()throws RemoteException;
     public void addRoom(Room r)throws RemoteException;
+    public void enterRoom(int roomId,String usr)throws RemoteException;
+    public void leaveRoom(String usr)throws RemoteException;
 }

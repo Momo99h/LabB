@@ -69,6 +69,14 @@ public class ClientManager
     {
         ClientImplementation.addRoom(r);
     }
+    public static void enterRoom(int roomID,String usr) 
+    {
+        ClientImplementation.enterRoom(roomID,usr);
+    }
+    public static void leaveRoom(String usr) 
+    {
+        ClientImplementation.leaveRoom(usr);
+    }
     public static void refreshRooms() 
     {
         clientFrame.refreshRooms();

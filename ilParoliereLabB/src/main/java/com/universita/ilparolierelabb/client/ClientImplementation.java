@@ -190,6 +190,32 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
+    public static void enterRoom(int roomID, String usr)
+    {
+        try
+        {
+            _server.enterRoom(roomID,usr);
+        }
+        catch(Exception e)
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            
+        }
+    }
+    public static void leaveRoom(String usr) 
+    {
+       try
+        {
+            _server.leaveRoom(usr);
+        }
+        catch(Exception e)
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            
+        }
+    }
 
     @Override
     public void notifyClientsCount(Object observable, int count) throws RemoteException 

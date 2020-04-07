@@ -55,6 +55,10 @@ public class GameRooms implements Serializable
         this._dataChanged = true;
         this._rooms.remove(r);
     }
+    public void setDataChanged(Boolean value)
+    {
+        this._dataChanged = value;
+    }
     public Boolean isDataChanged()
     {
         return this._dataChanged;
@@ -66,5 +70,36 @@ public class GameRooms implements Serializable
     public int getLastID()
     {
         return this._lastID;
+    }
+    public boolean isPlayerInAnyRoom(String player)
+    {
+        for(int i = 0; i < _rooms.size(); i++)
+        {
+            if(getRoomObject(i).isPlayerIn(player)) return true;
+        }
+        return false;
+    }
+    public Room getRoomWherePlayer(String player)
+    {
+        Room r = null;
+        for(int i = 0; i < _rooms.size(); i++)
+        {
+            r = getRoomObject(i);
+            if(r.isPlayerIn(player)) return r;
+        }
+        return null;
+    }
+    public void removePlayerFromRoom(String player)
+    {
+        Room r = null;
+        for(int i = 0; i < _rooms.size(); i++)
+        {
+            r = getRoomObject(i);
+            if(r.isPlayerIn(player)) 
+            {
+                r.removePlayer(player);
+                _dataChanged = true;
+            }
+        }
     }
 }

@@ -149,16 +149,13 @@ public class ClientMainFrame extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         ClientManager.DisconnectFromServer(ClientManager.currentuser);
+        ClientManager.leaveRoom(ClientManager.currentuser);
     }//GEN-LAST:event_formWindowClosing
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
 
         int roomId = ClientAddRoom.addRoom();
         enterRoom(roomId);
-        this.panelContainer.remove(lobby);
-        this.panelContainer.add(game,BorderLayout.CENTER);
-        this.panelContainer.validate();
-        this.panelContainer.repaint();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
@@ -234,7 +231,12 @@ public class ClientMainFrame extends javax.swing.JFrame {
 
     private void enterRoom(int roomId) 
     {
-        
+        ClientManager.enterRoom(roomId, ClientManager.currentuser);
+        game.setRoom(roomId);
+        this.panelContainer.remove(lobby);
+        this.panelContainer.add(game,BorderLayout.CENTER);
+        this.panelContainer.validate();
+        this.panelContainer.repaint();
     }
 
 }

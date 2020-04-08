@@ -163,14 +163,15 @@ public class ClientMainFrame extends javax.swing.JFrame {
         if(!Utility.ShowQuestionPopUp(Settings.clientName, "Confirm operation?")) return;
         ClientManager.leaveRoom(ClientManager.currentuser);
         ClientManager.getGameRooms();
-        this.buttonAddRoom.setVisible(false);
-        this.buttonLeaveRoom.setVisible(true);
         this.showLobby();
         this.refreshRooms();
     }//GEN-LAST:event_buttonLeaveRoomActionPerformed
 
     private void buttonEnterRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEnterRoomActionPerformed
         // TODO add your handling code here:
+        int id = lobby.getselectedRoomID();
+        if(id == -1 )return;
+        this.enterRoom(id);
     }//GEN-LAST:event_buttonEnterRoomActionPerformed
 
     /**

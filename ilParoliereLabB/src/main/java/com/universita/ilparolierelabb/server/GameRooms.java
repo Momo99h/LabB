@@ -89,7 +89,7 @@ public class GameRooms implements Serializable
         }
         return null;
     }
-    public void removePlayerFromRoom(String player)
+    public boolean removePlayerFromRoom(String player)
     {
         Room r = null;
         for(int i = 0; i < _rooms.size(); i++)
@@ -99,7 +99,9 @@ public class GameRooms implements Serializable
             {
                 r.removePlayer(player);
                 _dataChanged = true;
+                return true;
             }
         }
+        return false;
     }
 }

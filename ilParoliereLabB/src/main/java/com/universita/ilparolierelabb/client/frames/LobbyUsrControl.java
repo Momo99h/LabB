@@ -41,7 +41,11 @@ public class LobbyUsrControl extends javax.swing.JPanel {
     {
         _tableModel.setRowCount(0);
     }
-            
+    public int getselectedRoomID()
+    {
+        int selected = jTableRooms.getSelectedRow();
+        return (selected == - 1) ? -1 : Integer.parseInt((String) jTableRooms.getValueAt(selected, 0));
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

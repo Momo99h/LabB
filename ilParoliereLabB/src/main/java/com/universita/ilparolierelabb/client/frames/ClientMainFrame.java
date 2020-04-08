@@ -49,6 +49,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
         lblUtentiConnessi = new javax.swing.JLabel();
         buttonAddRoom = new javax.swing.JButton();
         buttonLeaveRoom = new javax.swing.JButton();
+        buttonEnterRoom = new javax.swing.JButton();
         panelContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -76,6 +77,13 @@ public class ClientMainFrame extends javax.swing.JFrame {
             }
         });
 
+        buttonEnterRoom.setText("Enter room");
+        buttonEnterRoom.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buttonEnterRoomActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -85,7 +93,9 @@ public class ClientMainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUtentiConnessi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 633, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 538, Short.MAX_VALUE)
+                .addComponent(buttonEnterRoom)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonLeaveRoom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonAddRoom)
@@ -101,7 +111,8 @@ public class ClientMainFrame extends javax.swing.JFrame {
                         .addComponent(lblUtentiConnessi))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(buttonAddRoom)
-                        .addComponent(buttonLeaveRoom)))
+                        .addComponent(buttonLeaveRoom)
+                        .addComponent(buttonEnterRoom)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -158,6 +169,10 @@ public class ClientMainFrame extends javax.swing.JFrame {
         this.refreshRooms();
     }//GEN-LAST:event_buttonLeaveRoomActionPerformed
 
+    private void buttonEnterRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonEnterRoomActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buttonEnterRoomActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -195,6 +210,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonAddRoom;
+    private javax.swing.JButton buttonEnterRoom;
     private javax.swing.JButton buttonLeaveRoom;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
@@ -233,14 +249,16 @@ public class ClientMainFrame extends javax.swing.JFrame {
     {
         ClientManager.enterRoom(roomId, ClientManager.currentuser);
         ClientManager.getGameRooms();
-        this.buttonAddRoom.setVisible(false);
-        this.buttonLeaveRoom.setVisible(true);
+        
         game.setRoom(roomId);
         this.showGame();
        
     }
     private void showGame()
     {
+        this.buttonAddRoom.setVisible(false);
+        this.buttonLeaveRoom.setVisible(true);
+        this.buttonEnterRoom.setVisible(false);
         this.panelContainer.remove(lobby);
         this.panelContainer.add(game,BorderLayout.CENTER);
         this.panelContainer.validate();
@@ -248,6 +266,9 @@ public class ClientMainFrame extends javax.swing.JFrame {
     }
     private void showLobby()
     {
+        this.buttonAddRoom.setVisible(true);
+        this.buttonLeaveRoom.setVisible(false);
+        this.buttonEnterRoom.setVisible(true);
         this.panelContainer.remove(game);
         this.panelContainer.add(lobby,BorderLayout.CENTER);
         this.panelContainer.validate();

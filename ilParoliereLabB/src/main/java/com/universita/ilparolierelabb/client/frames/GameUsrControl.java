@@ -5,12 +5,16 @@
  */
 package com.universita.ilparolierelabb.client.frames;
 
+import com.universita.ilparolierelabb.client.ClientManager;
+import com.universita.ilparolierelabb.server.Room;
+
 /**
  *
  * @author Momo
  */
 public class GameUsrControl extends javax.swing.JPanel {
 
+    private Room _room;
     /**
      * Creates new form GameUsrControl
      */
@@ -27,26 +31,44 @@ public class GameUsrControl extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        setBackground(new java.awt.Color(255, 204, 204));
+        jPanel2 = new javax.swing.JPanel();
+        lblRoomName = new javax.swing.JLabel();
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
-        this.setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+        setBackground(new java.awt.Color(255, 204, 204));
+        setLayout(new java.awt.BorderLayout());
+
+        lblRoomName.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        lblRoomName.setText("Room: Lobby");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(lblRoomName, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
+                .addGap(392, 392, 392))
         );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(lblRoomName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
+
+        add(jPanel2, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
     public void setRoom(int roomID) 
     {
-        
+        _room = ClientManager.gameRooms.getRoom(roomID);
+        this.lblRoomName.setText(_room.getRoomName());
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel lblRoomName;
     // End of variables declaration//GEN-END:variables
 }

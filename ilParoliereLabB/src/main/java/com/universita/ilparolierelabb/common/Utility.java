@@ -37,6 +37,10 @@ public class Utility
     {
         JOptionPane.showMessageDialog(null,msg,header, JOptionPane.INFORMATION_MESSAGE);
     }
+    public static Boolean ShowQuestionPopUp(String header,String msg)
+    {
+        return JOptionPane.showConfirmDialog(null,msg,header,JOptionPane.YES_NO_OPTION,JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION;
+    }
     public static String StringMD5Hash(String s)
     {
         String stringToHash = s;

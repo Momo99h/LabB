@@ -22,7 +22,6 @@ public class ServerThread extends Thread implements ActionListener
     private ServerFSMachine _serverStep = ServerFSMachine.Idle;
     private int tempInt = 0;
     private String tempString = "";
-    private int _lastRoomCount = 0;
     public static void Run()
     {
         ServerThread t = new ServerThread();

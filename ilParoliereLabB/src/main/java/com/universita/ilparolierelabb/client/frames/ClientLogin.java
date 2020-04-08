@@ -161,7 +161,7 @@ public class ClientLogin extends javax.swing.JFrame {
 
         String usr = textUsername.getText();
         String psw = textPassword.getText(); 
-        if(usr.equals("") || usr.equals("")) 
+        if(usr.equals("") || psw.equals("")) 
         {
             Utility.ShowErrorPopUp(Settings.clientName, "Fields cannot be empty");
             return;

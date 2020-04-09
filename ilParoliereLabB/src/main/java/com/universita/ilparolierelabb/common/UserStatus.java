@@ -11,7 +11,7 @@ package com.universita.ilparolierelabb.common;
  */
 public enum UserStatus 
 {
-    Offline(0), Online(1), InGame(2);
+    Offline(0), Online(1), InRoom(2), InGame(3),Ready(4);
     
     private final int value;
 

@@ -10,6 +10,7 @@ import com.universita.ilparolierelabb.client.ClientManager;
 import com.universita.ilparolierelabb.client.RegistrationResult;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
+import com.universita.ilparolierelabb.common.UserStatus;
 
 /**
  *
@@ -177,7 +178,8 @@ public class ClientLogin extends javax.swing.JFrame {
         }
         if(ClientManager.getLogin(usr, Utility.StringMD5Hash(psw)))
         {
-            ClientManager.currentuser = usr;
+            ClientManager.currentuser.setUsername(usr);
+            ClientManager.currentuser.setStatus(UserStatus.Online);
             ClientManager.Run();
             this.dispose();
             return;

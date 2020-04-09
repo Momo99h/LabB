@@ -91,4 +91,18 @@ public class ServerDBInterface
         query = String.format(query,0);
         _db.executeQuery(query);
     }            
+
+    public static boolean clientEnterRoom(int roomId, String usr) 
+    {
+        String query = "Update UsersState set OnlineStatus = '%s',IdRoom = '%s' where Nickname = '%s'";
+        query = String.format(query,UserStatus.InRoom.getValue(),roomId,usr);
+        return _db.executeQuery(query);
+    }
+
+    public static boolean clientLeaveRoom(String usr) 
+    {
+        String query = "Update UsersState set OnlineStatus = '%s',IdRoom = '%s' where Nickname = '%s'";
+        query = String.format(query,UserStatus.Online.getValue(),0,usr);
+        return _db.executeQuery(query);
+    }
 }

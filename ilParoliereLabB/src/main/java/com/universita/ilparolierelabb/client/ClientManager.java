@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.client;
 
+import com.universita.ilparolierelabb.client.frames.User;
 import com.universita.ilparolierelabb.client.frames.*;
 import com.universita.ilparolierelabb.server.GameRooms;
 import com.universita.ilparolierelabb.server.Room;
@@ -15,7 +16,7 @@ import com.universita.ilparolierelabb.server.Room;
  */
 public class ClientManager 
 {
-    public static String currentuser;
+    public static User currentuser = new User();
     
     public static GameRooms gameRooms = new GameRooms();
     

@@ -104,10 +104,27 @@ public class GameUsrControl extends javax.swing.JPanel {
         this._currentRoomID = roomID;
         this._room = ClientManager.gameRooms.getRoom(roomID);
         this.lblRoomName.setText(this._room.getRoomName());
-        String waiting = "Waiting for %s player%s...";
+        this.refreshHeaderMessage();
+        this.refreshTable();
+        
+    }
+    private void refreshHeaderMessage()
+    {
+        String waiting = "";
         int missing = this._room.getPlayersNeeded()-this._room.getPlayersIn();
-        waiting = (missing > 1) ? String.format(waiting,missing,"s") :String.format(waiting,missing,""); 
+        if(missing != 0)
+        {
+            waiting  = "Waiting for %s player%s...";
+            waiting = (missing > 1) ? String.format(waiting,missing,"s") : String.format(waiting,missing,""); 
+        }
+        else
+        {
+            waiting  = "Waiting players to be ready..";
+        }    
         this.lblWaitingPlayers.setText(waiting);
+    }
+    private void refreshTable()
+    {
         _tableModel.setRowCount(0);
         String [] players = this._room.getListPlayerNamesIn();
         for(int i = 0; i < players.length; i++)

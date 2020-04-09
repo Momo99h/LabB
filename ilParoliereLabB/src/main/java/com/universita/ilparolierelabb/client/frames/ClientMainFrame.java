@@ -50,6 +50,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
         buttonAddRoom = new javax.swing.JButton();
         buttonLeaveRoom = new javax.swing.JButton();
         buttonEnterRoom = new javax.swing.JButton();
+        btnReady = new javax.swing.JButton();
         panelContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -84,6 +85,13 @@ public class ClientMainFrame extends javax.swing.JFrame {
             }
         });
 
+        btnReady.setText("Ready");
+        btnReady.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReadyActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -93,7 +101,9 @@ public class ClientMainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUtentiConnessi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 538, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 451, Short.MAX_VALUE)
+                .addComponent(btnReady, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonEnterRoom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonLeaveRoom)
@@ -112,7 +122,8 @@ public class ClientMainFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(buttonAddRoom)
                         .addComponent(buttonLeaveRoom)
-                        .addComponent(buttonEnterRoom)))
+                        .addComponent(buttonEnterRoom)
+                        .addComponent(btnReady)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -147,8 +158,8 @@ public class ClientMainFrame extends javax.swing.JFrame {
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
-        ClientManager.DisconnectFromServer(ClientManager.currentuser);
-        ClientManager.leaveRoom(ClientManager.currentuser);
+        ClientManager.DisconnectFromServer(ClientManager.currentuser.getUsername());
+        ClientManager.leaveRoom(ClientManager.currentuser.getUsername());
     }//GEN-LAST:event_formWindowClosing
 
     private void buttonAddRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddRoomActionPerformed
@@ -161,7 +172,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
     private void buttonLeaveRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLeaveRoomActionPerformed
         // TODO add your handling code here:
         if(!Utility.ShowQuestionPopUp(Settings.clientName, "Confirm operation?")) return;
-        ClientManager.leaveRoom(ClientManager.currentuser);
+        ClientManager.leaveRoom(ClientManager.currentuser.getUsername());
         ClientManager.getGameRooms();
         this.showLobby();
         this.game.setCurrentRoomID(-1);
@@ -174,6 +185,10 @@ public class ClientMainFrame extends javax.swing.JFrame {
         if(id == -1 )return;
         this.enterRoom(id);
     }//GEN-LAST:event_buttonEnterRoomActionPerformed
+
+    private void btnReadyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadyActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnReadyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -211,6 +226,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnReady;
     private javax.swing.JButton buttonAddRoom;
     private javax.swing.JButton buttonEnterRoom;
     private javax.swing.JButton buttonLeaveRoom;
@@ -252,7 +268,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
 
     private void enterRoom(int roomId) 
     {
-        if(!ClientManager.enterRoom(roomId, ClientManager.currentuser))
+        if(!ClientManager.enterRoom(roomId, ClientManager.currentuser.getUsername()))
         {
             Utility.ShowErrorPopUp(Settings.clientName,"This room is full!");
             return;

@@ -125,7 +125,7 @@ public class ClientAddRoom extends JDialog  {
         Room r = new Room();
         _roomId = ClientManager.getLastRoomID()+1;
         r.setId(_roomId);
-        r.setAdmin(ClientManager.currentuser);
+        r.setAdmin(ClientManager.currentuser.getUsername());
         r.setRoomName(textRoomName.getText());
         r.setPlayersNeeded(Integer.parseInt(jComboBoxPlayers.getSelectedItem().toString()));
         ClientManager.addRoom(r);

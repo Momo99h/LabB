@@ -119,6 +119,10 @@ public class GameUsrControl extends javax.swing.JPanel {
     {
         return this._currentRoomID;
     }
+    public void setCurrentRoomID(int id)
+    {
+        this._currentRoomID = id;
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

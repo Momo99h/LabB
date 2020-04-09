@@ -164,6 +164,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
         ClientManager.leaveRoom(ClientManager.currentuser);
         ClientManager.getGameRooms();
         this.showLobby();
+        this.game.setCurrentRoomID(-1);
         this.refreshRooms();
     }//GEN-LAST:event_buttonLeaveRoomActionPerformed
 
@@ -251,7 +252,11 @@ public class ClientMainFrame extends javax.swing.JFrame {
 
     private void enterRoom(int roomId) 
     {
-        ClientManager.enterRoom(roomId, ClientManager.currentuser);
+        if(!ClientManager.enterRoom(roomId, ClientManager.currentuser))
+        {
+            Utility.ShowErrorPopUp(Settings.clientName,"This room is full!");
+            return;
+        }
         ClientManager.getGameRooms();
         game.setRoom(roomId);
         this.showGame();

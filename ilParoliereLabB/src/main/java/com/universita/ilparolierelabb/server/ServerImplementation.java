@@ -207,11 +207,14 @@ public class ServerImplementation extends Observable implements ServerInterface
     }
 
     @Override
-    public void enterRoom(int roomId,String usr) throws RemoteException 
+    public boolean enterRoom(int roomId,String usr) throws RemoteException 
     {
+        Room r = ServerManager.gameRooms.getRoom(roomId);
+        if(r.getPlayersIn() >= r.getPlayersNeeded()) return false;
         ServerManager.addLogData(usr+" entered room: "+roomId);
-        ServerManager.gameRooms.getRoom(roomId).addPlayer(usr);
+        r.addPlayer(usr);
         ServerManager.gameRooms.setDataChanged(true);
+        return true;
     }
 
     @Override

@@ -69,9 +69,9 @@ public class ClientManager
     {
         ClientImplementation.addRoom(r);
     }
-    public static void enterRoom(int roomID,String usr) 
+    public static boolean enterRoom(int roomID,String usr) 
     {
-        ClientImplementation.enterRoom(roomID,usr);
+        return ClientImplementation.enterRoom(roomID,usr);
     }
     public static void leaveRoom(String usr) 
     {

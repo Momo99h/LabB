@@ -26,6 +26,6 @@ public interface ServerInterface extends Remote
     public GameRooms getGameRooms()throws RemoteException;
     public int getLastRoomID()throws RemoteException;
     public void addRoom(Room r)throws RemoteException;
-    public void enterRoom(int roomId,String usr)throws RemoteException;
+    public boolean enterRoom(int roomId,String usr)throws RemoteException;
     public void leaveRoom(String usr)throws RemoteException;
 }

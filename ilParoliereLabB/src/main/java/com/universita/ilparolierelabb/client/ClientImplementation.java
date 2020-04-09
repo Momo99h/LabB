@@ -190,17 +190,17 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
-    public static void enterRoom(int roomID, String usr)
+    public static boolean enterRoom(int roomID, String usr)
     {
         try
         {
-            _server.enterRoom(roomID,usr);
+            return _server.enterRoom(roomID,usr);
         }
         catch(Exception e)
         {
             Utility.ShowErrorPopUp(Settings.clientName, e.toString());
             System.exit(1);
-            
+            return false; 
         }
     }
     public static void leaveRoom(String usr) 

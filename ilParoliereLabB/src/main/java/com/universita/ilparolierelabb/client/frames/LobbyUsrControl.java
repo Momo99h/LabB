@@ -28,6 +28,7 @@ public class LobbyUsrControl extends javax.swing.JPanel {
         jTableRooms.setColumnSelectionAllowed(false);
         jTableRooms.setRowSelectionAllowed(true);
         jTableRooms.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        panelListContainer.setVisible(false);
     }
     public void addRoom(String id,String name,String date,String players)
     {
@@ -134,13 +135,20 @@ public class LobbyUsrControl extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selected = jTableRooms.getSelectedRow();
         int id = 0;
-        if(selected == -1) return;
+        if(selected == -1)
+        {
+            panelListContainer.setVisible(false);
+            this.validate();
+            this.repaint();
+            return;
+        }
         id = Integer.parseInt((String) jTableRooms.getValueAt(selected, 0));
         Room r = ClientManager.gameRooms.getRoom(id);
         String[] players = r.getListPlayerNamesIn();
         _listModel.clear();
         _listModel.addElement("Players inside room:");
         for(int i = 0; i < players.length;i++) _listModel.addElement(players[i]);
+        
     }//GEN-LAST:event_jTableRoomsMouseClicked
 
 

@@ -22,6 +22,7 @@ public class Room implements Serializable
     private String _roomName;
     private int _playersNeeded;
     private int _playersIn = 0;
+    private int _logSize = 0;
     private ArrayList<String> _users = new ArrayList<>();
     private SimpleDateFormat _sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     public Room()
@@ -40,6 +41,7 @@ public class Room implements Serializable
     public String getAdmin(){return this._adminUsername;}
     public int getPlayersNeeded(){return this._playersNeeded;}
     public int getPlayersIn(){return this._playersIn;}
+    public int getLogSize(){return this._logSize;}
     public String getCreationDate(){return this._sdf.format(_date);}
     public String getRoomName(){return this._roomName;}
     public Boolean isPlayerIn(String player){return this._users.contains(player);}

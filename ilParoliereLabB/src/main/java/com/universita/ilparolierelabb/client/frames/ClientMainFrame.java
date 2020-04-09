@@ -244,13 +244,15 @@ public class ClientMainFrame extends javax.swing.JFrame {
             this.lobby.addRoom
             (_tempRoom.getId()+"",_tempRoom.getRoomName(), _tempRoom.getCreationDate(), _tempRoom.getPlayersIn()+"/"+_tempRoom.getPlayersNeeded());
         }
+        int id = game.getCurrentRoomID();
+        if(id == -1) return;
+        game.setRoom(id);
     }
 
     private void enterRoom(int roomId) 
     {
         ClientManager.enterRoom(roomId, ClientManager.currentuser);
         ClientManager.getGameRooms();
-        
         game.setRoom(roomId);
         this.showGame();
        

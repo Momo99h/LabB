@@ -218,7 +218,7 @@ public class ServerImplementation extends Observable implements ServerInterface
     public void leaveRoom(String usr) throws RemoteException 
     {
         Room r = ServerManager.gameRooms.getRoomWherePlayer(usr);
-        if(ServerManager.gameRooms.removePlayerFromRoom(usr)) ServerManager.addLogData(usr+" left room: "+r.getId());
+        ServerManager.gameRooms.removePlayerFromRoom(usr);
         if(r == null) return;
         if(r.getPlayersIn() == 0)
         {

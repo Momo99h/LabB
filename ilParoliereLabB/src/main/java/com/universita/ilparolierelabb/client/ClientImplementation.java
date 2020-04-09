@@ -211,6 +211,7 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         }
         catch(Exception e)
         {
+            e.printStackTrace();
             Utility.ShowErrorPopUp(Settings.clientName, e.toString());
             System.exit(1);
             

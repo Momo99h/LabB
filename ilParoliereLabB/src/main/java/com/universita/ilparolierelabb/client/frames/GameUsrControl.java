@@ -10,6 +10,8 @@ import com.universita.ilparolierelabb.server.Room;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.DefaultListModel;
+import javax.swing.ListSelectionModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -18,8 +20,9 @@ import javax.swing.DefaultListModel;
 public class GameUsrControl extends javax.swing.JPanel {
 
     private Room _room;
-    private DefaultListModel _listModel = new DefaultListModel();
-    private static SimpleDateFormat _sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+    private int _currentRoomID = -1;
+    private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Player","Total score","Status"},0);
+    
     /**
      * Creates new form GameUsrControl
      */
@@ -37,81 +40,101 @@ public class GameUsrControl extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel3 = new javax.swing.JPanel();
-        lblRoomName = new javax.swing.JLabel();
-        jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        tablePlayers = new javax.swing.JTable();
+        jPanel1 = new javax.swing.JPanel();
+        lblRoomName = new javax.swing.JLabel();
+        lblWaitingPlayers = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 204, 204));
 
+        tablePlayers.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3"
+            }
+        ));
+        jScrollPane1.setViewportView(tablePlayers);
+
         lblRoomName.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        lblRoomName.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblRoomName.setText("Room: Lobby");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        lblWaitingPlayers.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
+        lblWaitingPlayers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblWaitingPlayers.setText("Waiting for N players");
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lblWaitingPlayers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(lblRoomName, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblRoomName, javax.swing.GroupLayout.DEFAULT_SIZE, 513, Short.MAX_VALUE)
-                .addGap(392, 392, 392))
+                .addComponent(lblRoomName)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblWaitingPlayers)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(lblRoomName, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        jPanel4.setLayout(new java.awt.BorderLayout());
-
-        jList1.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
-        jList1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        jScrollPane1.setViewportView(jList1);
-
-        jPanel4.add(jScrollPane1, java.awt.BorderLayout.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 935, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 422, Short.MAX_VALUE)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 345, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     public void setRoom(int roomID) 
     {
-        _room = ClientManager.gameRooms.getRoom(roomID);
-        this.lblRoomName.setText(_room.getRoomName());
-        addLog(_room.getAdmin()+" has created this room.");
+        this._currentRoomID = roomID;
+        this._room = ClientManager.gameRooms.getRoom(roomID);
+        this.lblRoomName.setText(this._room.getRoomName());
+        String waiting = "Waiting for %s player%s...";
+        int missing = this._room.getPlayersNeeded()-this._room.getPlayersIn();
+        waiting = (missing > 1) ? String.format(waiting,missing,"s") :String.format(waiting,missing,""); 
+        this.lblWaitingPlayers.setText(waiting);
+        _tableModel.setRowCount(0);
+        String [] players = this._room.getListPlayerNamesIn();
+        for(int i = 0; i < players.length; i++)
+        {
+            _tableModel.addRow(new String[]{players[i],"0","Not ready"});
+        }
+    }
+    public int getCurrentRoomID()
+    {
+        return this._currentRoomID;
     }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JList<String> jList1;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel lblRoomName;
+    private javax.swing.JLabel lblWaitingPlayers;
+    private javax.swing.JTable tablePlayers;
     // End of variables declaration//GEN-END:variables
 
     private void initFunctions() 
     {
-        jList1.setModel(_listModel);
-    }
-    private void addLog(String logdata)
-    {
-        String s = _sdf.format(new Date())+"    -   "+logdata;
-        _listModel.add(0, s);
+        tablePlayers.setModel(_tableModel);
+        tablePlayers.setDefaultEditor(Object.class, null);
+        tablePlayers.setColumnSelectionAllowed(false);
+        tablePlayers.setRowSelectionAllowed(true);
+        tablePlayers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     }
 }

@@ -106,8 +106,8 @@ public class GameUsrControl extends javax.swing.JPanel {
         this.lblRoomName.setText(this._room.getRoomName());
         this.refreshHeaderMessage();
         this.refreshTable();
-        
     }
+    
     private void refreshHeaderMessage()
     {
         String waiting = "";

@@ -5,7 +5,6 @@
  */
 package com.universita.ilparolierelabb.client;
 
-import com.universita.ilparolierelabb.client.frames.User;
 import com.universita.ilparolierelabb.client.frames.*;
 import com.universita.ilparolierelabb.server.GameRooms;
 import com.universita.ilparolierelabb.server.Room;
@@ -70,11 +69,11 @@ public class ClientManager
     {
         ClientImplementation.addRoom(r);
     }
-    public static boolean enterRoom(int roomID,String usr) 
+    public static boolean enterRoom(int roomID,User usr) 
     {
         return ClientImplementation.enterRoom(roomID,usr);
     }
-    public static void leaveRoom(String usr) 
+    public static void leaveRoom(User usr) 
     {
         ClientImplementation.leaveRoom(usr);
     }

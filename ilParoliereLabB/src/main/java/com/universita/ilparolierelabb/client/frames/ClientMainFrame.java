@@ -50,7 +50,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
         buttonAddRoom = new javax.swing.JButton();
         buttonLeaveRoom = new javax.swing.JButton();
         buttonEnterRoom = new javax.swing.JButton();
-        btnReady = new javax.swing.JButton();
+        buttonReady = new javax.swing.JButton();
         panelContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,10 +85,10 @@ public class ClientMainFrame extends javax.swing.JFrame {
             }
         });
 
-        btnReady.setText("Ready");
-        btnReady.addActionListener(new java.awt.event.ActionListener() {
+        buttonReady.setText("Ready");
+        buttonReady.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnReadyActionPerformed(evt);
+                buttonReadyActionPerformed(evt);
             }
         });
 
@@ -102,7 +102,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUtentiConnessi)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 451, Short.MAX_VALUE)
-                .addComponent(btnReady, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(buttonReady, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonEnterRoom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -123,7 +123,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
                         .addComponent(buttonAddRoom)
                         .addComponent(buttonLeaveRoom)
                         .addComponent(buttonEnterRoom)
-                        .addComponent(btnReady)))
+                        .addComponent(buttonReady)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -159,7 +159,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // TODO add your handling code here:
         ClientManager.DisconnectFromServer(ClientManager.currentuser.getUsername());
-        ClientManager.leaveRoom(ClientManager.currentuser.getUsername());
+        ClientManager.leaveRoom(ClientManager.currentuser);
     }//GEN-LAST:event_formWindowClosing
 
     private void buttonAddRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonAddRoomActionPerformed
@@ -172,7 +172,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
     private void buttonLeaveRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLeaveRoomActionPerformed
         // TODO add your handling code here:
         if(!Utility.ShowQuestionPopUp(Settings.clientName, "Confirm operation?")) return;
-        ClientManager.leaveRoom(ClientManager.currentuser.getUsername());
+        ClientManager.leaveRoom(ClientManager.currentuser);
         ClientManager.getGameRooms();
         this.showLobby();
         this.game.setCurrentRoomID(-1);
@@ -186,9 +186,9 @@ public class ClientMainFrame extends javax.swing.JFrame {
         this.enterRoom(id);
     }//GEN-LAST:event_buttonEnterRoomActionPerformed
 
-    private void btnReadyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReadyActionPerformed
+    private void buttonReadyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReadyActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnReadyActionPerformed
+    }//GEN-LAST:event_buttonReadyActionPerformed
 
     /**
      * @param args the command line arguments
@@ -226,10 +226,10 @@ public class ClientMainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnReady;
     private javax.swing.JButton buttonAddRoom;
     private javax.swing.JButton buttonEnterRoom;
     private javax.swing.JButton buttonLeaveRoom;
+    private javax.swing.JButton buttonReady;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblUtentiConnessi;
@@ -268,7 +268,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
 
     private void enterRoom(int roomId) 
     {
-        if(!ClientManager.enterRoom(roomId, ClientManager.currentuser.getUsername()))
+        if(!ClientManager.enterRoom(roomId, ClientManager.currentuser))
         {
             Utility.ShowErrorPopUp(Settings.clientName,"This room is full!");
             return;
@@ -280,6 +280,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
     }
     private void showGame()
     {
+        this.buttonReady.setVisible(true);
         this.buttonAddRoom.setVisible(false);
         this.buttonLeaveRoom.setVisible(true);
         this.buttonEnterRoom.setVisible(false);
@@ -290,6 +291,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
     }
     private void showLobby()
     {
+        this.buttonReady.setVisible(false);
         this.buttonAddRoom.setVisible(true);
         this.buttonLeaveRoom.setVisible(false);
         this.buttonEnterRoom.setVisible(true);

@@ -52,7 +52,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="lblUtentiConnessi" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="451" max="32767" attributes="0"/>
-                  <Component id="btnReady" min="-2" pref="81" max="-2" attributes="0"/>
+                  <Component id="buttonReady" min="-2" pref="81" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="buttonEnterRoom" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -76,7 +76,7 @@
                           <Component id="buttonAddRoom" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="buttonLeaveRoom" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="buttonEnterRoom" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="btnReady" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="buttonReady" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
@@ -119,12 +119,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonEnterRoomActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnReady">
+        <Component class="javax.swing.JButton" name="buttonReady">
           <Properties>
             <Property name="text" type="java.lang.String" value="Ready"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnReadyActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonReadyActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

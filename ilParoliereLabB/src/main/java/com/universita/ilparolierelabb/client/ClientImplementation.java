@@ -190,7 +190,7 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
-    public static boolean enterRoom(int roomID, String usr)
+    public static boolean enterRoom(int roomID, User usr)
     {
         try
         {
@@ -203,7 +203,7 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return false; 
         }
     }
-    public static void leaveRoom(String usr) 
+    public static void leaveRoom(User usr) 
     {
        try
         {

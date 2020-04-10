@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.client.User;
 import java.io.Serializable;
 import java.util.ArrayList;
 
@@ -71,7 +72,7 @@ public class GameRooms implements Serializable
     {
         return this._lastID;
     }
-    public boolean isPlayerInAnyRoom(String player)
+    public boolean isPlayerInAnyRoom(User player)
     {
         for(int i = 0; i < _rooms.size(); i++)
         {
@@ -79,7 +80,7 @@ public class GameRooms implements Serializable
         }
         return false;
     }
-    public Room getRoomWherePlayer(String player)
+    public Room getRoomWherePlayer(User player)
     {
         Room r = null;
         for(int i = 0; i < _rooms.size(); i++)
@@ -89,7 +90,7 @@ public class GameRooms implements Serializable
         }
         return null;
     }
-    public boolean removePlayerFromRoom(String player)
+    public boolean removePlayerFromRoom(User player)
     {
         Room r = null;
         for(int i = 0; i < _rooms.size(); i++)

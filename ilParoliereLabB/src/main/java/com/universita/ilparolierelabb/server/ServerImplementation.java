@@ -6,6 +6,7 @@
 package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.client.RegisterData;
+import com.universita.ilparolierelabb.client.User;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
 import java.rmi.RemoteException;
@@ -207,22 +208,22 @@ public class ServerImplementation extends Observable implements ServerInterface
     }
 
     @Override
-    public boolean enterRoom(int roomId,String usr) throws RemoteException 
+    public boolean enterRoom(int roomId,User usr) throws RemoteException 
     {
         Room r = ServerManager.gameRooms.getRoom(roomId);
         if(r.getPlayersIn() >= r.getPlayersNeeded()) return false;
-        ServerManager.addLogData(usr+" entered room: "+roomId);
+        ServerManager.addLogData(usr.getUsername()+" entered room: "+roomId);
         r.addPlayer(usr);
         ServerManager.gameRooms.setDataChanged(true);
-        ServerDBInterface.clientEnterRoom(roomId,usr);
+        ServerDBInterface.clientEnterRoom(roomId,usr.getUsername());
         return true;
     }
 
     @Override
-    public void leaveRoom(String usr) throws RemoteException 
+    public void leaveRoom(User usr) throws RemoteException 
     {
         Room r = ServerManager.gameRooms.getRoomWherePlayer(usr);
-        if(ServerManager.gameRooms.removePlayerFromRoom(usr))ServerDBInterface.clientLeaveRoom(usr);
+        if(ServerManager.gameRooms.removePlayerFromRoom(usr))ServerDBInterface.clientLeaveRoom(usr.getUsername());
         if(r == null) return;
         if(r.getPlayersIn() == 0)
         {

@@ -11,6 +11,7 @@ import com.universita.ilparolierelabb.client.RegistrationResult;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.UserStatus;
+import java.util.Random;
 
 /**
  *
@@ -180,6 +181,7 @@ public class ClientLogin extends javax.swing.JFrame {
         {
             ClientManager.currentuser.setUsername(usr);
             ClientManager.currentuser.setStatus(UserStatus.Online);
+            ClientManager.currentuser.setTotalPoints(new Random().nextInt());
             ClientManager.Run();
             this.dispose();
             return;

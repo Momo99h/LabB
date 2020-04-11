@@ -8,7 +8,6 @@ package com.universita.ilparolierelabb.server;
 import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.Utility;
-import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -41,17 +40,15 @@ public class ServerThread extends Thread implements ActionListener
                 break;
             case Email: doEmailstuff();     
                 break;
+            case Room:  doRoomstuff();
+                break;
         }
     }
 
     private void doIdlestuff() 
     {
         ServerImplementation.notifyClientsCount(ServerManager.ObserversOnline());
-        if(ServerManager.gameRooms.isDataChanged())
-        {
-            ServerManager.gameRooms.confirmDataChanged();
-            ServerImplementation.notifyClientsRoomsData(ServerManager.gameRooms);
-        }
+        
        _serverStep = ServerFSMachine.Email;
     }
 
@@ -89,6 +86,16 @@ public class ServerThread extends Thread implements ActionListener
                     ServerImplementation.registerUserWaiting.remove(d);
                 }
             }
+        }
+        _serverStep = ServerFSMachine.Room;
+    }
+
+    private void doRoomstuff() 
+    {
+        if(ServerManager.gameRooms.isDataChanged())
+        {
+            ServerManager.gameRooms.confirmDataChanged();
+            ServerImplementation.notifyClientsRoomsData(ServerManager.gameRooms);
         }
         _serverStep = ServerFSMachine.Idle;
     }

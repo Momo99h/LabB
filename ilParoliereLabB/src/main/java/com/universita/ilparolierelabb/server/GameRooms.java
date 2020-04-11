@@ -5,7 +5,6 @@
  */
 package com.universita.ilparolierelabb.server;
 
-import com.universita.ilparolierelabb.client.User;
 import java.io.Serializable;
 import java.util.ArrayList;
 

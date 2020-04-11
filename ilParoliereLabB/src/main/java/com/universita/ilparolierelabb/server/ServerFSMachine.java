@@ -12,5 +12,6 @@ package com.universita.ilparolierelabb.server;
 public enum ServerFSMachine 
 {
     Idle,
-    Email
+    Email,
+    Room
 }

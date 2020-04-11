@@ -7,6 +7,7 @@ package com.universita.ilparolierelabb.client.frames;
 
 import com.universita.ilparolierelabb.client.ClientManager;
 import com.universita.ilparolierelabb.server.Room;
+import com.universita.ilparolierelabb.server.User;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.DefaultListModel;
@@ -126,10 +127,13 @@ public class GameUsrControl extends javax.swing.JPanel {
     private void refreshTable()
     {
         _tableModel.setRowCount(0);
-        String [] players = this._room.getListPlayerNamesIn();
+        User [] players = this._room.getListPlayerIn();
         for(int i = 0; i < players.length; i++)
         {
-            _tableModel.addRow(new String[]{players[i],"0","Not ready"});
+            
+            _tableModel.addRow(new String[]{players[i].getUsername(),
+                players[i].getTotalPoints()+"",
+                players[i].getStatus().getName()});
         }
     }
     public int getCurrentRoomID()

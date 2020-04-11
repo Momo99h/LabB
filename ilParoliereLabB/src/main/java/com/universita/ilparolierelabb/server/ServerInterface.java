@@ -6,7 +6,6 @@
 package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.client.RegisterData;
-import com.universita.ilparolierelabb.client.User;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

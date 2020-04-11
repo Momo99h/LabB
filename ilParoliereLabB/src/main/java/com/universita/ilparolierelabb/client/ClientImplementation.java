@@ -16,6 +16,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import com.universita.ilparolierelabb.server.ServerInterface;
+import com.universita.ilparolierelabb.server.User;
 import java.rmi.Naming;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -223,7 +224,7 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     {
         try
         {
-            ClientMainFrame.Par_lblUtentiConnessi.setText(String.valueOf(count));
+            ClientMainFrame.Par_lblUtentiConnessi.setText(count+"");
         }
         catch(Exception e)
         {

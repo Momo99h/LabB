@@ -7,6 +7,7 @@ package com.universita.ilparolierelabb.client.frames;
 
 import com.universita.ilparolierelabb.client.ClientManager;
 import com.universita.ilparolierelabb.server.Room;
+import com.universita.ilparolierelabb.server.User;
 import javax.swing.DefaultListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -137,10 +138,10 @@ public class LobbyUsrControl extends javax.swing.JPanel {
         if(selected == -1)return;
         id = Integer.parseInt((String) jTableRooms.getValueAt(selected, 0));
         Room r = ClientManager.gameRooms.getRoom(id);
-        String[] players = r.getListPlayerNamesIn();
+        User[] players = r.getListPlayerIn();
         _listModel.clear();
         _listModel.addElement("Players inside room:");
-        for(int i = 0; i < players.length;i++) _listModel.addElement(players[i]);
+        for(int i = 0; i < players.length;i++) _listModel.addElement(players[i].getUsername());
         
     }//GEN-LAST:event_jTableRoomsMouseClicked
 

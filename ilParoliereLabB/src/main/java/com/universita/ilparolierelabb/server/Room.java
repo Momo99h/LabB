@@ -5,7 +5,7 @@
  */
 package com.universita.ilparolierelabb.server;
 
-import com.universita.ilparolierelabb.client.User;
+import com.universita.ilparolierelabb.common.UserStatus;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -34,8 +34,16 @@ public class Room implements Serializable
     public void setAdmin(String value){this._adminUsername = value;}
     public void setPlayersNeeded(int value){this._playersNeeded = value;}
     public void setRoomName(String value){this._roomName = value;}
-    public void addPlayer(User player){this._users.add(player); this._playersIn++;}
-    public void removePlayer(User player){this._users.remove(player);this._playersIn--;}
+    public void addPlayer(User player)
+    {
+        this._users.add(player); 
+        this._playersIn++;
+    }
+    public void removePlayer(User player)
+    {
+        this._users.remove(player);
+        this._playersIn--;
+    }
     
     public int getId(){return this._id;}
     public String getAdmin(){return this._adminUsername;}
@@ -43,13 +51,20 @@ public class Room implements Serializable
     public int getPlayersIn(){return this._playersIn;}
     public String getCreationDate(){return this._sdf.format(_date);}
     public String getRoomName(){return this._roomName;}
-    public Boolean isPlayerIn(User player){return this._users.contains(player);}
-    public String[] getListPlayerNamesIn()
+    public Boolean isPlayerIn(User player)
     {
-        String[] s = new String[this._users.size()];
         for(int i = 0; i < this._users.size();i++)
         {
-            s[i] = this._users.get(i).getUsername();
+            if(_users.get(i).getUsername().equals(player.getUsername())) return true;
+        }
+        return false;
+    }
+    public User[] getListPlayerIn()
+    {
+        User[] s = new User[this._users.size()];
+        for(int i = 0; i < this._users.size();i++)
+        {
+            s[i] = this._users.get(i);
         }
         return s;
     }

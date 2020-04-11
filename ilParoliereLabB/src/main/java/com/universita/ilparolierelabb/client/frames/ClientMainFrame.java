@@ -50,7 +50,6 @@ public class ClientMainFrame extends javax.swing.JFrame {
         buttonAddRoom = new javax.swing.JButton();
         buttonLeaveRoom = new javax.swing.JButton();
         buttonEnterRoom = new javax.swing.JButton();
-        buttonReady = new javax.swing.JButton();
         panelContainer = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,13 +84,6 @@ public class ClientMainFrame extends javax.swing.JFrame {
             }
         });
 
-        buttonReady.setText("Ready");
-        buttonReady.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonReadyActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -101,9 +93,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUtentiConnessi)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 451, Short.MAX_VALUE)
-                .addComponent(buttonReady, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 538, Short.MAX_VALUE)
                 .addComponent(buttonEnterRoom)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(buttonLeaveRoom)
@@ -122,8 +112,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(buttonAddRoom)
                         .addComponent(buttonLeaveRoom)
-                        .addComponent(buttonEnterRoom)
-                        .addComponent(buttonReady)))
+                        .addComponent(buttonEnterRoom)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -186,10 +175,6 @@ public class ClientMainFrame extends javax.swing.JFrame {
         this.enterRoom(id);
     }//GEN-LAST:event_buttonEnterRoomActionPerformed
 
-    private void buttonReadyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReadyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buttonReadyActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -229,7 +214,6 @@ public class ClientMainFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonAddRoom;
     private javax.swing.JButton buttonEnterRoom;
     private javax.swing.JButton buttonLeaveRoom;
-    private javax.swing.JButton buttonReady;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel lblUtentiConnessi;
@@ -280,7 +264,6 @@ public class ClientMainFrame extends javax.swing.JFrame {
     }
     private void showGame()
     {
-        this.buttonReady.setVisible(true);
         this.buttonAddRoom.setVisible(false);
         this.buttonLeaveRoom.setVisible(true);
         this.buttonEnterRoom.setVisible(false);
@@ -291,7 +274,6 @@ public class ClientMainFrame extends javax.swing.JFrame {
     }
     private void showLobby()
     {
-        this.buttonReady.setVisible(false);
         this.buttonAddRoom.setVisible(true);
         this.buttonLeaveRoom.setVisible(false);
         this.buttonEnterRoom.setVisible(true);

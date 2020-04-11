@@ -24,4 +24,17 @@ public enum UserStatus
     {
         return value;
     }
+    public String getName()
+    {
+        String s = "";
+        switch(value)
+        {
+            case 0: s = "Offline"; break;
+            case 1: s = "Online"; break;
+            case 2: s = "InRoom"; break;
+            case 3: s = "InGame"; break;
+            case 4: s = "Ready"; break;
+        }
+        return s;
+    }
 }

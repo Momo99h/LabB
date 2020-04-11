@@ -8,6 +8,7 @@ package com.universita.ilparolierelabb.server;
 import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
+import com.universita.ilparolierelabb.common.UserStatus;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
@@ -79,7 +80,6 @@ public class ServerImplementation extends Observable implements ServerInterface
         }
         
     }
-
     @Override
     public void removeObserver(RemoteObserver o) throws RemoteException 
     {
@@ -102,14 +102,12 @@ public class ServerImplementation extends Observable implements ServerInterface
         }
         
     }
-
     @Override
     public void clientRegister(RegisterData d) throws RemoteException 
     {
         registerUserWaiting.add(d);
         ServerManager.addLogData("New user opened registration: (Username) "+d.getUsername());
     }
-
     @Override
     public Boolean registerWaitingEmailConfirmation(String usr) throws RemoteException 
     {
@@ -127,8 +125,6 @@ public class ServerImplementation extends Observable implements ServerInterface
     {
         return ServerDBInterface.clientIsLogged(usr);
     }
-    
-
     @Override
     public Boolean activateAccount(String code) throws RemoteException 
     {

@@ -5,7 +5,6 @@
  */
 package com.universita.ilparolierelabb.client;
 
-import com.universita.ilparolierelabb.client.frames.ClientLogin;
 import com.universita.ilparolierelabb.client.frames.ClientMainFrame;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
@@ -17,7 +16,6 @@ import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import com.universita.ilparolierelabb.server.ServerInterface;
 import com.universita.ilparolierelabb.server.User;
-import java.rmi.Naming;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
@@ -237,4 +235,5 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         ClientManager.gameRooms = rooms;
         ClientManager.refreshRooms();
     }
+
 }

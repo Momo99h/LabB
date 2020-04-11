@@ -22,7 +22,7 @@ public class GameUsrControl extends javax.swing.JPanel {
 
     private Room _room;
     private int _currentRoomID = -1;
-    private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Player","Total score","Status"},0);
+    private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Player","Total score"},0);
     
     /**
      * Creates new form GameUsrControl
@@ -54,7 +54,7 @@ public class GameUsrControl extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3"
+                "Title 1", "Title 2"
             }
         ));
         jScrollPane1.setViewportView(tablePlayers);
@@ -120,7 +120,7 @@ public class GameUsrControl extends javax.swing.JPanel {
         }
         else
         {
-            waiting  = "Waiting players to be ready..";
+            waiting  = "Room complete, the game is starting in 30 seconds..";
         }    
         this.lblWaitingPlayers.setText(waiting);
     }
@@ -132,8 +132,7 @@ public class GameUsrControl extends javax.swing.JPanel {
         {
             
             _tableModel.addRow(new String[]{players[i].getUsername(),
-                players[i].getTotalPoints()+"",
-                players[i].getStatus().getName()});
+                players[i].getTotalPoints()+""});
         }
     }
     public int getCurrentRoomID()

@@ -178,10 +178,9 @@ public class ClientLogin extends javax.swing.JFrame {
             return;
         }
         if(ClientManager.getLogin(usr, Utility.StringMD5Hash(psw)))
-        {
+        {            
             ClientManager.currentuser.setUsername(usr);
-            ClientManager.currentuser.setStatus(UserStatus.Online);
-            ClientManager.currentuser.setTotalPoints(new Random().nextInt());
+            ClientManager.currentuser.setTotalPoints(5870);
             ClientManager.Run();
             this.dispose();
             return;

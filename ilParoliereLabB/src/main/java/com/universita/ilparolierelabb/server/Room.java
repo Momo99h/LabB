@@ -41,10 +41,27 @@ public class Room implements Serializable
     }
     public void removePlayer(User player)
     {
-        this._users.remove(player);
+        for(int i = 0; i < this._users.size(); i++)
+        {
+            if(player.getUsername().equals(this._users.get(i).getUsername()))
+            {
+               this._users.remove(i); 
+               break;
+            }
+        }
         this._playersIn--;
     }
-    
+    public void changePlayerStatus(User player,UserStatus status)
+    {
+        for(int i = 0; i < this._users.size(); i++)
+        {
+            if(player.getUsername().equals(this._users.get(i).getUsername()))
+            {
+               this._users.get(i).setStatus(status);
+               break;
+            }
+        }
+    }
     public int getId(){return this._id;}
     public String getAdmin(){return this._adminUsername;}
     public int getPlayersNeeded(){return this._playersNeeded;}

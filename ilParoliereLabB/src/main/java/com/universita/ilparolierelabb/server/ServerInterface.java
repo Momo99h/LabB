@@ -6,6 +6,7 @@
 package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.client.RegisterData;
+import com.universita.ilparolierelabb.common.UserStatus;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -28,4 +29,5 @@ public interface ServerInterface extends Remote
     public void addRoom(Room r)throws RemoteException;
     public boolean enterRoom(int roomId,User usr)throws RemoteException;
     public void leaveRoom(User usr)throws RemoteException;
+    public void changePlayerStatus(User usr,UserStatus status) throws RemoteException;
 }

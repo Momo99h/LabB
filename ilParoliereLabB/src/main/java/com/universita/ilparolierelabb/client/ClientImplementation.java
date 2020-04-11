@@ -8,6 +8,7 @@ package com.universita.ilparolierelabb.client;
 import com.universita.ilparolierelabb.client.frames.ClientMainFrame;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
+import com.universita.ilparolierelabb.common.UserStatus;
 import com.universita.ilparolierelabb.server.GameRooms;
 import com.universita.ilparolierelabb.server.RemoteObserver;
 import com.universita.ilparolierelabb.server.Room;
@@ -207,6 +208,20 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
        try
         {
             _server.leaveRoom(usr);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            
+        }
+    }
+    public static void changePlayerStatus(User usr,UserStatus status)
+    {
+       try
+        {
+            _server.changePlayerStatus(usr, status);
         }
         catch(Exception e)
         {

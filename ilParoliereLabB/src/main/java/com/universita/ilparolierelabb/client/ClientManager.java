@@ -7,6 +7,7 @@ package com.universita.ilparolierelabb.client;
 
 import com.universita.ilparolierelabb.server.User;
 import com.universita.ilparolierelabb.client.frames.*;
+import com.universita.ilparolierelabb.common.UserStatus;
 import com.universita.ilparolierelabb.server.GameRooms;
 import com.universita.ilparolierelabb.server.Room;
 
@@ -77,6 +78,10 @@ public class ClientManager
     public static void leaveRoom(User usr) 
     {
         ClientImplementation.leaveRoom(usr);
+    }
+    public static void changePlayerStatus(User usr,UserStatus status) 
+    {
+        ClientImplementation.changePlayerStatus(usr,status);
     }
     public static void refreshRooms() 
     {

@@ -24,7 +24,7 @@ public class ServerThread extends Thread implements ActionListener
     public static void Run()
     {
         ServerThread t = new ServerThread();
-        new Timer(1000, (ActionListener) t).start();
+        new Timer(300, (ActionListener) t).start();
     }
     public void actionPerformed(ActionEvent e) 
     {
@@ -36,7 +36,6 @@ public class ServerThread extends Thread implements ActionListener
         switch(_serverStep)
         {
             case Idle: doIdlestuff();
-                
                 break;
             case Email: doEmailstuff();     
                 break;

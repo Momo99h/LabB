@@ -5,13 +5,15 @@
  */
 package com.universita.ilparolierelabb.common;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Momo
  */
-public enum UserStatus 
+public enum UserStatus implements Serializable
 {
-    Offline(0), Online(1), InRoom(2), InGame(3),Ready(4);
+    Offline(0), Online(1), InRoom(2), InGame(3),Ready(4),NotReady(5);
     
     private final int value;
 
@@ -34,6 +36,7 @@ public enum UserStatus
             case 2: s = "InRoom"; break;
             case 3: s = "InGame"; break;
             case 4: s = "Ready"; break;
+            case 5: s = "Not Ready"; break;
         }
         return s;
     }

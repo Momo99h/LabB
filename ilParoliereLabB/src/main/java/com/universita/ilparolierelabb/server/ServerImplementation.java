@@ -208,6 +208,7 @@ public class ServerImplementation extends Observable implements ServerInterface
         Room r = ServerManager.gameRooms.getRoom(roomId);
         if(r.getPlayersIn() >= r.getPlayersNeeded()) return false;
         ServerManager.addLogData(usr.getUsername()+" entered room: "+roomId);
+        usr.setStatus(UserStatus.NotReady);
         r.addPlayer(usr);
         ServerManager.gameRooms.setDataChanged(true);
         ServerDBInterface.clientEnterRoom(roomId,usr.getUsername());
@@ -229,6 +230,14 @@ public class ServerImplementation extends Observable implements ServerInterface
             ServerManager.gameRooms.removeRoom(r);
             ServerManager.addLogData("Room ID "+r.getId()+" has been removed because no players are inside");
         }
+    }
+
+    @Override
+    public void changePlayerStatus(User usr, UserStatus status) throws RemoteException 
+    {
+        Room r = ServerManager.gameRooms.getRoomWherePlayer(usr);
+        r.changePlayerStatus(usr, status);
+        ServerManager.gameRooms.setDataChanged(true);
     }
 
    

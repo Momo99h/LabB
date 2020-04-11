@@ -22,7 +22,7 @@ public class GameUsrControl extends javax.swing.JPanel {
 
     private Room _room;
     private int _currentRoomID = -1;
-    private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Player","Total score"},0);
+    private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Player","Total score","Status"},0);
     
     /**
      * Creates new form GameUsrControl
@@ -54,7 +54,7 @@ public class GameUsrControl extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Title 1", "Title 2"
+                "Title 1", "Title 2", "Title 3"
             }
         ));
         jScrollPane1.setViewportView(tablePlayers);
@@ -120,7 +120,7 @@ public class GameUsrControl extends javax.swing.JPanel {
         }
         else
         {
-            waiting  = "Room complete, the game is starting in 30 seconds..";
+            waiting  = "Waiting players to be ready...";
         }    
         this.lblWaitingPlayers.setText(waiting);
     }
@@ -130,9 +130,8 @@ public class GameUsrControl extends javax.swing.JPanel {
         User [] players = this._room.getListPlayerIn();
         for(int i = 0; i < players.length; i++)
         {
-            
             _tableModel.addRow(new String[]{players[i].getUsername(),
-                players[i].getTotalPoints()+""});
+                players[i].getTotalPoints()+"",players[i].getStatus().getName()});
         }
     }
     public int getCurrentRoomID()
@@ -143,7 +142,6 @@ public class GameUsrControl extends javax.swing.JPanel {
     {
         this._currentRoomID = id;
     }
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

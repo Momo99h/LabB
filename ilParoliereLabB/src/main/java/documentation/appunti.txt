@@ -4,3 +4,11 @@ Il server si interfaccia con un DBMS e un dizionario di lingua italiana.
 Il client pervede invece la gestione a livello giocatore e richieste a DBMS.
 Il server quando si avvia chiede sempre(??) le credenziali per accedere al server DBMS,nome del DB di appoggio per l'infrastruttura ed IP host.
 All'avvio server ip si collega con il profilo amministratore, se non esiste propone la creazione di un uid e pwd.
+
+- Matrice @Momo 20/04/14
+    Matrix.CreateDices(); 
+Inizializza i dadi.
+    String[][] matgrice =  Matrix.getMatrix();
+Restituisce una matrice 4x4 con i dati, importante che le posizioni dei dadi cambiano.
+
+Boolean b = Matrix.parseWord(String[][] matgrice,String word) : restituisce se la parola è valida nella ricerca della matrice

@@ -5,6 +5,9 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.common.User;
+import com.universita.ilparolierelabb.common.Room;
+import com.universita.ilparolierelabb.common.GameRooms;
 import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
@@ -239,18 +242,21 @@ public class ServerImplementation extends Observable implements ServerInterface
     {
         Room r = ServerManager.gameRooms.getRoomWherePlayer(usr);
         r.changePlayerStatus(usr, status);
+        if(ServerManager.gameRooms.isRoomReadyToPlay(r.getId())) Utility.ConsolePrintLine("Roompronta");
         ServerManager.gameRooms.setDataChanged(true);
     }
     
     
     // @author AndreaGirola
     @Override
-    public boolean emailAlreadyTaken(String email) throws RemoteException {
+    public boolean emailAlreadyTaken(String email) throws RemoteException 
+    {
         return ServerDBInterface.emailAlreadyTaken(email);
     }
     // @author AndreaGirola
     @Override
-    public boolean userAlreadyTaken(String user) throws RemoteException {
+    public boolean userAlreadyTaken(String user) throws RemoteException 
+    {
         return ServerDBInterface.userAlreadyTaken(user);
     }
 

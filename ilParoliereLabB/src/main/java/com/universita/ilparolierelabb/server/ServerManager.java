@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.common.GameRooms;
 import com.universita.ilparolierelabb.server.frames.ServerLogin;
 import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
 import com.universita.ilparolierelabb.server.frames.ServerRegistration;

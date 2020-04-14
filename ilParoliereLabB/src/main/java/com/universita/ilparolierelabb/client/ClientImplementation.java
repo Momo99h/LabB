@@ -9,14 +9,14 @@ import com.universita.ilparolierelabb.client.frames.ClientMainFrame;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.UserStatus;
-import com.universita.ilparolierelabb.server.GameRooms;
+import com.universita.ilparolierelabb.common.GameRooms;
 import com.universita.ilparolierelabb.server.RemoteObserver;
-import com.universita.ilparolierelabb.server.Room;
+import com.universita.ilparolierelabb.common.Room;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import com.universita.ilparolierelabb.server.ServerInterface;
-import com.universita.ilparolierelabb.server.User;
+import com.universita.ilparolierelabb.common.User;
 import java.rmi.server.UnicastRemoteObject;
 
 /**

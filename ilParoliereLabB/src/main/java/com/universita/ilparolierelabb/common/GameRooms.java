@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.universita.ilparolierelabb.server;
+package com.universita.ilparolierelabb.common;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -103,5 +103,16 @@ public class GameRooms implements Serializable
             }
         }
         return false;
+    }
+    public boolean isRoomReadyToPlay(int roomId)
+    {
+        Room r = getRoom(roomId);
+        if (r.getPlayersIn() != r.getPlayersNeeded()) return false;
+        User[] players = r.getListPlayerIn();
+        for(int i = 0; i < players.length;i++)
+        {
+            if(players[i].getStatus() != UserStatus.Ready) return false;
+        }
+        return true;
     }
 }

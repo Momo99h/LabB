@@ -3,9 +3,8 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.universita.ilparolierelabb.server;
+package com.universita.ilparolierelabb.common;
 
-import com.universita.ilparolierelabb.common.UserStatus;
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -24,6 +23,7 @@ public class Room implements Serializable
     private int _playersNeeded;
     private int _playersIn = 0;
     private ArrayList<User> _users = new ArrayList<>();
+    private ArrayList<Game> _games = new ArrayList<>();
     private SimpleDateFormat _sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     public Room()
     {
@@ -61,6 +61,12 @@ public class Room implements Serializable
                break;
             }
         }
+    }
+    public void AddGame(Game g)
+    {
+        int id = this._games.size()+1;
+        g.setID(id);
+        this._games.add(g);
     }
     public int getId(){return this._id;}
     public String getAdmin(){return this._adminUsername;}

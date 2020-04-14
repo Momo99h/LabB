@@ -6,8 +6,8 @@
 package com.universita.ilparolierelabb.client.frames;
 
 import com.universita.ilparolierelabb.client.ClientManager;
-import com.universita.ilparolierelabb.server.Room;
-import com.universita.ilparolierelabb.server.User;
+import com.universita.ilparolierelabb.common.Room;
+import com.universita.ilparolierelabb.common.User;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.DefaultListModel;

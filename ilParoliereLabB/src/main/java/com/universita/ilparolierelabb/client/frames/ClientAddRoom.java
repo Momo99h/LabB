@@ -8,7 +8,7 @@ package com.universita.ilparolierelabb.client.frames;
 import com.universita.ilparolierelabb.client.ClientManager;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.Utility;
-import com.universita.ilparolierelabb.server.Room;
+import com.universita.ilparolierelabb.common.Room;
 import javax.swing.JDialog;
 
 /**

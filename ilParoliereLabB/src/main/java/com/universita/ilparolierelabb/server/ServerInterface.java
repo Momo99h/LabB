@@ -5,6 +5,9 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.common.User;
+import com.universita.ilparolierelabb.common.Room;
+import com.universita.ilparolierelabb.common.GameRooms;
 import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.UserStatus;
 import java.rmi.Remote;

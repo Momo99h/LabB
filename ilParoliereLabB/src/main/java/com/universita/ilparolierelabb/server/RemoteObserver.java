@@ -9,6 +9,7 @@ package com.universita.ilparolierelabb.server;
  *
  * @author Momo
  */
+import com.universita.ilparolierelabb.common.GameRooms;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 

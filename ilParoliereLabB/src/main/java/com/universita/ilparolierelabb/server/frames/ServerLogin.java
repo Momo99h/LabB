@@ -73,6 +73,7 @@ public class ServerLogin extends javax.swing.JFrame {
             }
         });
 
+        jPasswordField1.setText("Admin");
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);

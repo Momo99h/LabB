@@ -231,6 +231,38 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
+   
+    // @author AndreaGirola
+    public static boolean emailAlreadyTaken(String email){
+        try
+        {
+            return _server.emailAlreadyTaken(email);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            return false; 
+            
+        }
+    }
+    
+    // @author AndreaGirola
+    public static boolean userAlreadyTaken(String user){
+        try
+        {
+            return _server.userAlreadyTaken(user);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            return false; 
+            
+        }
+    }
 
     @Override
     public void notifyClientsCount(Object observable, int count) throws RemoteException 

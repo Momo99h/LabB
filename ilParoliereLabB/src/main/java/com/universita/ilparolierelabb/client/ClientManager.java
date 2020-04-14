@@ -93,6 +93,16 @@ public class ClientManager
         clientFrame.setVisible(true);
         ClientImplementation.ClientOnline();
     }
+    
+    // @author AndreaGirola
+    public static boolean emailAlreadyTaken(String email) {
+        return ClientImplementation.emailAlreadyTaken(email);
+    }
+
+    // @author AndreaGirola
+    public static boolean userAlreadyTaken(String usr) {
+        return ClientImplementation.userAlreadyTaken(usr); 
+    }
 
     
     

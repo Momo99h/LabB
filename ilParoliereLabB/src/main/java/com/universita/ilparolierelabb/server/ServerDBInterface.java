@@ -106,10 +106,22 @@ public class ServerDBInterface
         return _db.executeQuery(query);
     }
     
+    // @author AndreaGirola
     public static boolean emailAlreadyTaken(String email){
         //check che l'email non è già stata usata 
-        String query = "SELECT Email FROM Users WHERE Email='%s'";
+        String query = "SELECT COUNT(*) FROM Users WHERE Email='%s'";
         query = String.format(query,email);
-        return _db.executeQuery(query);
+        String[][] val = _db.executeQueryRead(query);
+        return (!val[0][0].equals("0")); 
     }
+    
+    // @author AndreaGirola
+    public static boolean userAlreadyTaken(String nickname){
+        //check che l'email non è già stata usata 
+        String query = "SELECT COUNT(*) FROM Users WHERE Nickname='%s'";
+        query = String.format(query,nickname);
+        String[][] val = _db.executeQueryRead(query);
+        return (!val[0][0].equals("0")); 
+    }
+
 }

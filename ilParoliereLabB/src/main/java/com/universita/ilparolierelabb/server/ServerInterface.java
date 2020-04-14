@@ -30,4 +30,7 @@ public interface ServerInterface extends Remote
     public boolean enterRoom(int roomId,User usr)throws RemoteException;
     public void leaveRoom(User usr)throws RemoteException;
     public void changePlayerStatus(User usr,UserStatus status) throws RemoteException;
+    public boolean emailAlreadyTaken(String email) throws RemoteException;
+    public boolean userAlreadyTaken(String user) throws RemoteException;
+         
 }

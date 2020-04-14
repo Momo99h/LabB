@@ -239,6 +239,18 @@ public class ServerImplementation extends Observable implements ServerInterface
         r.changePlayerStatus(usr, status);
         ServerManager.gameRooms.setDataChanged(true);
     }
+    
+    
+    // @author AndreaGirola
+    @Override
+    public boolean emailAlreadyTaken(String email) throws RemoteException {
+        return ServerDBInterface.emailAlreadyTaken(email);
+    }
+    // @author AndreaGirola
+    @Override
+    public boolean userAlreadyTaken(String user) throws RemoteException {
+        return ServerDBInterface.userAlreadyTaken(user);
+    }
 
    
 }

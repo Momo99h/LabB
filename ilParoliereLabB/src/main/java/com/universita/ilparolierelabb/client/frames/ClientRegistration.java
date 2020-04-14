@@ -214,7 +214,7 @@ public class ClientRegistration extends JDialog {
         String cognome = textCognome.getText();
         String usr = textUsername.getText();
         String email = textEmail.getText();
-        String psw = new String(jPasswordField1.getPassword()); 
+        String psw = new String(jPasswordField1.getPassword()); //provo toString senza new ....... 
         String psw2 = new String(jPasswordField2.getPassword());
         
         if(nome.equals("") || cognome.equals("") || usr.equals("") || email.equals("") ||
@@ -240,6 +240,18 @@ public class ClientRegistration extends JDialog {
             Utility.ShowErrorPopUp(Settings.clientName, "Please enter the same password");
             return;
         }
+        // @author AndreaGirola    
+        if(ClientManager.emailAlreadyTaken(email)){ 
+            Utility.ShowErrorPopUp(Settings.clientName, "Email already existing");
+            return; 
+        }
+        // @author AndreaGirola
+        if(ClientManager.userAlreadyTaken(usr)){
+            Utility.ShowErrorPopUp(Settings.clientName, "User already existing");
+            return; 
+        }
+        
+        
         
         RegisterData d = new RegisterData();
         d.setName(nome);
@@ -256,7 +268,8 @@ public class ClientRegistration extends JDialog {
         }
         
     }//GEN-LAST:event_btnSubmitActionPerformed
-
+    
+    // @author AndreaGirola
     private void jCheckBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCheckBox1ActionPerformed
         if(jCheckBox1.isSelected()){ 
            jPasswordField1.setEchoChar((char) 0);

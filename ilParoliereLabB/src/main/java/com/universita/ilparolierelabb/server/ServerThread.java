@@ -24,7 +24,7 @@ public class ServerThread extends Thread implements ActionListener
     public static void Run()
     {
         ServerThread t = new ServerThread();
-        new Timer(300, (ActionListener) t).start();
+        new Timer(500, (ActionListener) t).start();
     }
     public void actionPerformed(ActionEvent e) 
     {
@@ -33,7 +33,11 @@ public class ServerThread extends Thread implements ActionListener
     @Override
     public void run()
     {
-        switch(_serverStep)
+        doIdlestuff();
+        doEmailstuff();
+        doRoomstuff();
+        
+        /*switch(_serverStep)
         {
             case Idle: doIdlestuff();
                 break;
@@ -41,16 +45,16 @@ public class ServerThread extends Thread implements ActionListener
                 break;
             case Room:  doRoomstuff();
                 break;
-        }
+        }*/
     }
 
-    private void doIdlestuff() 
+    private synchronized void doIdlestuff() 
     {
         //ServerImplementation.notifyClientsCount(ServerManager.ObserversOnline());
        _serverStep = ServerFSMachine.Email;
     }
 
-    private void doEmailstuff() 
+    private synchronized void doEmailstuff() 
     {
         for(RegisterData d : ServerImplementation.registerUserWaiting)
         {
@@ -88,7 +92,7 @@ public class ServerThread extends Thread implements ActionListener
         _serverStep = ServerFSMachine.Room;
     }
 
-    private void doRoomstuff() 
+    private synchronized void doRoomstuff() 
     {
         if(ServerManager.gameRooms.isDataChanged())
         {

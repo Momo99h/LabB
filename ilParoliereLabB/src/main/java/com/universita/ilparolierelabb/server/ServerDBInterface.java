@@ -26,8 +26,8 @@ public class ServerDBInterface
     public static boolean HasAdmin() 
     {
         String query = "Select Count(*) from Admins";
-        String[][] return_val = _db.executeQueryRead(query);
-        return !return_val[0][0].equals("0");
+        ResultTable return_val = _db.executeQueryRead(query);
+        return !return_val.get(0, 0).equals("0");
     }
     
     public static boolean RegisterAdmin(String usr,String psw) 
@@ -50,15 +50,15 @@ public class ServerDBInterface
     {
         String query = "Select Count(*) from Admins Where Username='%s' AND Password='%s'";
         query = String.format(query,usr,psw);
-        String[][] return_val = _db.executeQueryRead(query);
-        return !return_val[0][0].equals("0");
+        ResultTable return_val = _db.executeQueryRead(query);
+        return !return_val.get(0, 0).equals("0");
     }
     public static boolean ClientLogin(String usr,String psw)
     {
         String query = "Select Count(*) from Users Where Nickname='%s' AND Password='%s'";
         query = String.format(query,usr,psw);
-        String[][] return_val = _db.executeQueryRead(query);
-        Boolean b = !return_val[0][0].equals("0");
+        ResultTable return_val = _db.executeQueryRead(query);
+        Boolean b = !return_val.get(0, 0).equals("0");
         query = "Update UsersState set OnlineStatus = '%s' where Nickname = '%s'";
         query = String.format(query,UserStatus.Online.getValue(),usr);
         return b && _db.executeQuery(query);
@@ -73,16 +73,16 @@ public class ServerDBInterface
     {
         String query = "Select Count(*) from UsersState Where NOT OnlineStatus='%s'";
         query = String.format(query,0);
-        String[][] return_val = _db.executeQueryRead(query);
-        return Integer.parseInt(return_val[0][0]);
+        ResultTable return_val = _db.executeQueryRead(query);
+        return Integer.parseInt(return_val.get(0, 0));
     }
 
     public static boolean clientIsLogged(String usr) 
     {
         String query = "Select Count(*) from UsersState Where NOT OnlineStatus='%s' AND Nickname ='%s'";
         query = String.format(query,0,usr);
-        String[][] return_val = _db.executeQueryRead(query);
-        return !return_val[0][0].equals("0");
+        ResultTable return_val = _db.executeQueryRead(query);
+        return !return_val.get(0, 0).equals("0");
     }
 
     public static void resetUsersState()
@@ -111,8 +111,8 @@ public class ServerDBInterface
         //check che l'email non è già stata usata 
         String query = "SELECT COUNT(*) FROM Users WHERE Email='%s'";
         query = String.format(query,email);
-        String[][] val = _db.executeQueryRead(query);
-        return (!val[0][0].equals("0")); 
+        ResultTable val = _db.executeQueryRead(query);
+        return (!val.get(0, 0).equals("0")); 
     }
     
     // @author AndreaGirola
@@ -120,8 +120,8 @@ public class ServerDBInterface
         //check che l'email non è già stata usata 
         String query = "SELECT COUNT(*) FROM Users WHERE Nickname='%s'";
         query = String.format(query,nickname);
-        String[][] val = _db.executeQueryRead(query);
-        return (!val[0][0].equals("0")); 
+        ResultTable val = _db.executeQueryRead(query);
+        return (!val.get(0, 0).equals("0")); 
     }
 
 }

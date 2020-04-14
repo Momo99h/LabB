@@ -101,9 +101,10 @@ public class PostgreSQLEngine extends sqlEngine
     }
 
     @Override
-    public String[][] executeQueryRead(String query) 
+    public ResultTable executeQueryRead(String query) 
     {
-        String[][] Valori;
+        ResultTable table;
+        String[] tmp;
         try
         {
            con = DriverManager.getConnection(_DbConnectionString);
@@ -118,16 +119,22 @@ public class PostgreSQLEngine extends sqlEngine
            rs2.last();
            numRows = rs2.getRow();
            numCols = rs2.getMetaData().getColumnCount();
-           // System.out.println(numRows + " " + numCols);
            rs2.first();
-           Valori = new String[numRows][numCols];
+           table = new ResultTable(numRows,numCols);
+           tmp = new String[numCols];
            rs = ps.executeQuery();
+           /*Nomi colonne*/
+           for(int i = 0; i < numCols;i++)
+           {
+               table.setColumnNames(rs.getMetaData().getColumnName(i+1));
+           }
            int i = 0;
            while(rs.next())
            {
                for (int j=0; j < numCols; j++)
                {
-                   Valori[i][j] = String.valueOf(rs.getObject(j+1));
+                   tmp[j] = String.valueOf(rs.getObject(j+1));
+                   table.addRow(tmp);
                }
               i++;
            }
@@ -144,7 +151,7 @@ public class PostgreSQLEngine extends sqlEngine
             try { con.close(); } catch (Exception e) { /* ignored */ }
            
         }
-        return Valori;
+        return table;
     }
     
     

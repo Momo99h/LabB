@@ -5,19 +5,19 @@
  */
 package com.universita.ilparolierelabb.server;
 
-import java.lang.*;
 
 /**
  *
  * @author andreagirola
  */
-public class Dice implements DiceInterface {
+public class Dice
+{
 
     
     private final int _min = 0; 
     private final int _max = 5; 
     private int _id = 0; 
-    private String[] _faces;
+    private final String[] _faces;
     
     
     //constructor

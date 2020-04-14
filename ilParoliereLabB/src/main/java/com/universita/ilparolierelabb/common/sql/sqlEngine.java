@@ -15,5 +15,5 @@ abstract class sqlEngine
     protected abstract String getConnectionString();
     protected abstract Boolean checkConnection();
     protected abstract Boolean executeQuery(String query);
-    protected abstract String[][] executeQueryRead(String query);
+    protected abstract ResultTable executeQueryRead(String query);
 }

@@ -9,7 +9,7 @@ package com.universita.ilparolierelabb.server;
  *
  * @author Momo
  */
-public class DiceFactory 
+public class MatrixFactory 
 {
     
     private static String[][] _letterMatrix = {{"B", "A", "O", "O", "Qu", "M"}, 
@@ -28,7 +28,6 @@ public class DiceFactory
                                         {"N", "O", "L", "G", "U", "E"},
                                         {"D", "C", "M", "P", "A", "E"},
                                         {"E", "R", "I", "N", "S", "H"}};
-    //getter letterMatrix
     public static String[][] getLetterMatrix(){ 
         return _letterMatrix; 
     }

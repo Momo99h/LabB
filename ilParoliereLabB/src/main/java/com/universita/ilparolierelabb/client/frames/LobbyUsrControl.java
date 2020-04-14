@@ -137,7 +137,7 @@ public class LobbyUsrControl extends javax.swing.JPanel {
         int id = 0;
         if(selected == -1)return;
         id = Integer.parseInt((String) jTableRooms.getValueAt(selected, 0));
-        Room r = ClientManager.gameRooms.getRoom(id);
+        Room r = ClientManager.rooms.getRoom(id);
         User[] players = r.getListPlayerIn();
         _listModel.clear();
         _listModel.addElement("Players inside room:");

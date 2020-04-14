@@ -8,9 +8,6 @@ package com.universita.ilparolierelabb.client.frames;
 import com.universita.ilparolierelabb.client.ClientManager;
 import com.universita.ilparolierelabb.common.Room;
 import com.universita.ilparolierelabb.common.User;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.swing.DefaultListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -103,7 +100,7 @@ public class GameUsrControl extends javax.swing.JPanel {
     public void setRoom(int roomID) 
     {
         this._currentRoomID = roomID;
-        this._room = ClientManager.gameRooms.getRoom(roomID);
+        this._room = ClientManager.rooms.getRoom(roomID);
         this.lblRoomName.setText(this._room.getRoomName());
         this.refreshHeaderMessage();
         this.refreshTable();
@@ -158,5 +155,12 @@ public class GameUsrControl extends javax.swing.JPanel {
         tablePlayers.setColumnSelectionAllowed(false);
         tablePlayers.setRowSelectionAllowed(true);
         tablePlayers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    }
+
+    void refreshInitTimer(int timerCount) 
+    {
+        String waiting = "The game is starting in %s seconds...";
+        waiting = String.format(waiting, timerCount);
+        this.lblWaitingPlayers.setText(waiting);
     }
 }

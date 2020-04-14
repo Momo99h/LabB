@@ -8,7 +8,7 @@ package com.universita.ilparolierelabb.client;
 import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.client.frames.*;
 import com.universita.ilparolierelabb.common.UserStatus;
-import com.universita.ilparolierelabb.common.GameRooms;
+import com.universita.ilparolierelabb.common.Rooms;
 import com.universita.ilparolierelabb.common.Room;
 
 /**
@@ -19,7 +19,7 @@ public class ClientManager
 {
     public static User currentuser = new User();
     
-    public static GameRooms gameRooms = new GameRooms();
+    public static Rooms rooms = new Rooms();
     
     private static ClientMainFrame clientFrame;
     
@@ -61,7 +61,7 @@ public class ClientManager
     }
     public static void getGameRooms()
     {
-        ClientManager.gameRooms = ClientImplementation.getGameRooms();
+        ClientManager.rooms = ClientImplementation.getGameRooms();
     }
     public static int getLastRoomID()
     {
@@ -102,6 +102,11 @@ public class ClientManager
     // @author AndreaGirola
     public static boolean userAlreadyTaken(String usr) {
         return ClientImplementation.userAlreadyTaken(usr); 
+    }
+
+    public static void refreshGame(int roomId, int timerCount) 
+    {
+        clientFrame.refreshGame(roomId,timerCount);
     }
 
     

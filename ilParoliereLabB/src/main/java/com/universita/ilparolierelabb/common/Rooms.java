@@ -12,12 +12,12 @@ import java.util.ArrayList;
  *
  * @author Momo
  */
-public class GameRooms implements Serializable
+public class Rooms implements Serializable
 {
     private ArrayList<Room> _rooms = new ArrayList<>();
     private boolean _dataChanged = false;
     private int _lastID = 0;
-    public GameRooms(){}
+    public Rooms(){}
     
     public ArrayList<Room> getAllRoomsData()
     {

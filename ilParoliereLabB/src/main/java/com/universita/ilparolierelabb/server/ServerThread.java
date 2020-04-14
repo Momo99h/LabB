@@ -6,6 +6,7 @@
 package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.client.RegisterData;
+import com.universita.ilparolierelabb.common.Game;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.Utility;
 import java.awt.event.ActionEvent;
@@ -36,7 +37,7 @@ public class ServerThread extends Thread implements ActionListener
         doIdlestuff();
         doEmailstuff();
         doRoomstuff();
-        
+        doGamestuff();
         /*switch(_serverStep)
         {
             case Idle: doIdlestuff();
@@ -99,11 +100,25 @@ public class ServerThread extends Thread implements ActionListener
 
     private synchronized void doRoomstuff() 
     {
-        if(ServerManager.gameRooms.isDataChanged())
+        if(ServerManager.rooms.isDataChanged())
         {
-            ServerManager.gameRooms.confirmDataChanged();
-            ServerImplementation.notifyClientsRoomsData(ServerManager.gameRooms);
+            ServerManager.rooms.confirmDataChanged();
+            ServerImplementation.notifyClientsRoomsData(ServerManager.rooms);
         }
         _serverStep = ServerFSMachine.Idle;
+    }
+
+    private synchronized void doGamestuff() 
+    {
+        Game[] game = ServerManager.games.getGamesArray();
+        for(int i = 0; i < game.length; i++)
+        {
+            if(game[i].getPhase() == Game.Phase.InitCountDown)
+            {
+                game[i].decrementInitTimer();
+                ServerImplementation.notifyGameInitTimer(game[i].getRoomID(),game[i].getInitTimer());
+                Utility.ConsolePrintLine("Game init timer = "+game[i].getInitTimer());
+            }
+        }
     }
 }

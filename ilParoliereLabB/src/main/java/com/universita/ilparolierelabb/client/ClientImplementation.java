@@ -9,7 +9,7 @@ import com.universita.ilparolierelabb.client.frames.ClientMainFrame;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.UserStatus;
-import com.universita.ilparolierelabb.common.GameRooms;
+import com.universita.ilparolierelabb.common.Rooms;
 import com.universita.ilparolierelabb.server.RemoteObserver;
 import com.universita.ilparolierelabb.common.Room;
 import java.rmi.RemoteException;
@@ -151,7 +151,7 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return false;
         }
     }
-    public static GameRooms getGameRooms() 
+    public static Rooms getGameRooms() 
     {
         try
         {
@@ -277,10 +277,16 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         }
     }
     @Override
-    public void notifyClientsRoomsData(Object observable, GameRooms rooms) throws RemoteException 
+    public void notifyClientsRoomsData(Object observable, Rooms rooms) throws RemoteException 
     {
-        ClientManager.gameRooms = rooms;
+        ClientManager.rooms = rooms;
         ClientManager.refreshRooms();
+    }
+
+    @Override
+    public void notifyGameInitTimer(Object observable, int roomId, int timerCount) throws RemoteException 
+    {
+        ClientManager.refreshGame(roomId,timerCount);
     }
 
 }

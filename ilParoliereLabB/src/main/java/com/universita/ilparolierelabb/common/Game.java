@@ -17,14 +17,29 @@ public class Game implements Serializable
     {
         Idle,Ready,InitCountDown
     }
-    private int _gameid;
+    private int _roomid;
+    private int _gameid = 1;
     private int _initTimer = 30;
     private int _gameTimer = 180;
     private Phase _phase = Phase.Idle;
-    public Game(){}
+    public Game(int roomId){this._roomid = roomId;}
     
     public void setID(int value){this._gameid = value;}
     public void decrementInitTimer() {this._initTimer--;}
+    public int getInitTimer()
+    {
+        return this._initTimer;
+    }
+    public Phase getPhase()
+    {
+        return this._phase;
+    }
+    public void setPhase(Phase value)
+    {
+       this._phase = value;
+    }
+   
     public int getID(){return this._gameid;}
+    public int getRoomID(){return this._roomid;}
     
 }

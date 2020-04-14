@@ -7,7 +7,7 @@ package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.Room;
-import com.universita.ilparolierelabb.common.GameRooms;
+import com.universita.ilparolierelabb.common.Rooms;
 import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.UserStatus;
 import java.rmi.Remote;
@@ -27,7 +27,7 @@ public interface ServerInterface extends Remote
     public void removeObserver(RemoteObserver o) throws RemoteException;
     public void disconnectClient(String usr) throws RemoteException;
     public Boolean clientIsLogged(String usr) throws RemoteException;
-    public GameRooms getGameRooms()throws RemoteException;
+    public Rooms getGameRooms()throws RemoteException;
     public int getLastRoomID()throws RemoteException;
     public void addRoom(Room r)throws RemoteException;
     public boolean enterRoom(int roomId,User usr)throws RemoteException;

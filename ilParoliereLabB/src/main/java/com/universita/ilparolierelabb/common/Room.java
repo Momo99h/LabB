@@ -22,8 +22,8 @@ public class Room implements Serializable
     private String _roomName;
     private int _playersNeeded;
     private int _playersIn = 0;
+    
     private ArrayList<User> _users = new ArrayList<>();
-    private ArrayList<Game> _games = new ArrayList<>();
     private SimpleDateFormat _sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     public Room()
     {
@@ -61,12 +61,6 @@ public class Room implements Serializable
                break;
             }
         }
-    }
-    public void AddGame(Game g)
-    {
-        int id = this._games.size()+1;
-        g.setID(id);
-        this._games.add(g);
     }
     public int getId(){return this._id;}
     public String getAdmin(){return this._adminUsername;}

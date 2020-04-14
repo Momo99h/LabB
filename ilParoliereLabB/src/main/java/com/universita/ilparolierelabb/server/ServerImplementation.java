@@ -7,7 +7,7 @@ package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.Room;
-import com.universita.ilparolierelabb.common.GameRooms;
+import com.universita.ilparolierelabb.common.Rooms;
 import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
@@ -165,13 +165,27 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
-    public static void notifyClientsRoomsData(GameRooms gameRooms) 
+    public static void notifyClientsRoomsData(Rooms gameRooms) 
     {
         for(WrappedObserver d : WrappedObserver)
         {
             try 
             {
                 d.getOb().notifyClientsRoomsData(rmiService, gameRooms);
+            } 
+            catch (RemoteException ex) 
+            {
+                ex.printStackTrace();
+            }
+        }
+    }
+    public static void notifyGameInitTimer(int roomId,int timerCount)
+    {
+        for(WrappedObserver d : WrappedObserver)
+        {
+            try 
+            {
+                d.getOb().notifyGameInitTimer(rmiService, roomId, timerCount);
             } 
             catch (RemoteException ex) 
             {
@@ -188,34 +202,34 @@ public class ServerImplementation extends Observable implements ServerInterface
     }
 
     @Override
-    public GameRooms getGameRooms() throws RemoteException
+    public Rooms getGameRooms() throws RemoteException
     {
         ServerManager.addLogData("New request of rooms");
-        return ServerManager.gameRooms;
+        return ServerManager.rooms;
     }
 
     @Override
     public int getLastRoomID() throws RemoteException 
     {
-        return ServerManager.gameRooms.getLastID();
+        return ServerManager.rooms.getLastID();
     }
 
     @Override
     public void addRoom(Room r) throws RemoteException 
     {
         ServerManager.addLogData(r.getAdmin()+" added new room: "+r.getId()+" - "+r.getRoomName());
-        ServerManager.gameRooms.addRoom(r);
+        ServerManager.rooms.addRoom(r);
     }
 
     @Override
     public boolean enterRoom(int roomId,User usr) throws RemoteException 
     {
-        Room r = ServerManager.gameRooms.getRoom(roomId);
+        Room r = ServerManager.rooms.getRoom(roomId);
         if(r.getPlayersIn() >= r.getPlayersNeeded()) return false;
         ServerManager.addLogData(usr.getUsername()+" entered room: "+roomId);
         usr.setStatus(UserStatus.NotReady);
         r.addPlayer(usr);
-        ServerManager.gameRooms.setDataChanged(true);
+        ServerManager.rooms.setDataChanged(true);
         ServerDBInterface.clientEnterRoom(roomId,usr.getUsername());
         return true;
     }
@@ -223,8 +237,8 @@ public class ServerImplementation extends Observable implements ServerInterface
     @Override
     public void leaveRoom(User usr) throws RemoteException 
     {
-        Room r = ServerManager.gameRooms.getRoomWherePlayer(usr);
-        if(ServerManager.gameRooms.removePlayerFromRoom(usr))
+        Room r = ServerManager.rooms.getRoomWherePlayer(usr);
+        if(ServerManager.rooms.removePlayerFromRoom(usr))
         {
             ServerDBInterface.clientLeaveRoom(usr.getUsername());
             ServerManager.addLogData(usr.getUsername()+" left room: "+r.getId());
@@ -232,7 +246,7 @@ public class ServerImplementation extends Observable implements ServerInterface
         if(r == null) return;
         if(r.getPlayersIn() == 0)
         {
-            ServerManager.gameRooms.removeRoom(r);
+            ServerManager.rooms.removeRoom(r);
             ServerManager.addLogData("Room ID "+r.getId()+" has been removed because no players are inside");
         }
     }
@@ -240,10 +254,10 @@ public class ServerImplementation extends Observable implements ServerInterface
     @Override
     public void changePlayerStatus(User usr, UserStatus status) throws RemoteException 
     {
-        Room r = ServerManager.gameRooms.getRoomWherePlayer(usr);
+        Room r = ServerManager.rooms.getRoomWherePlayer(usr);
         r.changePlayerStatus(usr, status);
-        if(ServerManager.gameRooms.isRoomReadyToPlay(r.getId())) Utility.ConsolePrintLine("Roompronta");
-        ServerManager.gameRooms.setDataChanged(true);
+        if(ServerManager.rooms.isRoomReadyToPlay(r.getId())) ServerManager.createGame(r.getId());
+        ServerManager.rooms.setDataChanged(true);
     }
     
     

@@ -5,7 +5,8 @@
  */
 package com.universita.ilparolierelabb.server;
 
-import com.universita.ilparolierelabb.common.GameRooms;
+import com.universita.ilparolierelabb.common.Games;
+import com.universita.ilparolierelabb.common.Rooms;
 import com.universita.ilparolierelabb.server.frames.ServerLogin;
 import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
 import com.universita.ilparolierelabb.server.frames.ServerRegistration;
@@ -21,7 +22,8 @@ import java.util.Date;
 public class ServerManager
 {
     private static SimpleDateFormat _sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
-    public static GameRooms gameRooms = new GameRooms();
+    public static Rooms rooms = new Rooms();
+    public static Games games = new Games();
     public static Boolean _ClientCountChanged = false;
     
     public static void Launch()
@@ -57,6 +59,12 @@ public class ServerManager
         if(ServerMainFrame.Console_Log_Model.getSize() == 50)ServerMainFrame.Console_Log_Model.clear();
         String s = _sdf.format(new Date())+"    -   "+logdata;
         ServerMainFrame.Console_Log_Model.add(0, s);
+    }
+
+    public static void createGame(int id) 
+    {
+        games.createGame(id);
+        addLogData("Created new game for room (ID): "+id);
     }
     
 }

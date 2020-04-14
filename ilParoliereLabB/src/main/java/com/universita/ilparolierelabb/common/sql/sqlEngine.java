@@ -11,11 +11,9 @@ package com.universita.ilparolierelabb.common.sql;
  */
 abstract class sqlEngine 
 {
-    
     protected abstract void setConnectionString(SQLConnectionParameters param);
     protected abstract String getConnectionString();
     protected abstract Boolean checkConnection();
     protected abstract Boolean executeQuery(String query);
     protected abstract String[][] executeQueryRead(String query);
-    
 }

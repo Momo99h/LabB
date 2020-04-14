@@ -168,7 +168,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
 
         int roomId = ClientAddRoom.addRoom();
         if(roomId == -1) return;
-        enterRoom(roomId);
+        this.enterRoom(roomId);
     }//GEN-LAST:event_buttonAddRoomActionPerformed
 
     private void buttonLeaveRoomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonLeaveRoomActionPerformed
@@ -263,6 +263,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
     }
     public void refreshRooms()
     {
+        /** Lobby*/
         this.lobby.removeAllRooms();
         for(int i = 0; i < ClientManager.gameRooms.getRoomsCount();i++)
         {
@@ -270,6 +271,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
             this.lobby.addRoom
             (_tempRoom.getId()+"",_tempRoom.getRoomName(), _tempRoom.getCreationDate(), _tempRoom.getPlayersIn()+"/"+_tempRoom.getPlayersNeeded());
         }
+        /** Game*/
         int id = game.getCurrentRoomID();
         if(id == -1) return;
         game.setRoom(id);

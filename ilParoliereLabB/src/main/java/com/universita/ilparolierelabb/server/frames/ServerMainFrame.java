@@ -18,20 +18,6 @@ import javax.swing.Timer;
 public class ServerMainFrame extends javax.swing.JFrame {
 
     public static DefaultListModel Console_Log_Model = new DefaultListModel();
-    private static Timer _tmrRefresh;
-    private int tempInt = 0;
-    private int increment = 1;
-    private ActionListener _funRefresh = new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent ae) 
-        {
-            tempInt = progressBarRunning.getValue();
-            if(tempInt == progressBarRunning.getMaximum()) increment = -1;
-            else if(tempInt == progressBarRunning.getMinimum()) increment = +1;
-            progressBarRunning.setValue(tempInt+increment);
-            progressBarRunning.repaint();
-        }
-    };
     public ServerMainFrame() 
     {
         initComponents();
@@ -51,7 +37,6 @@ public class ServerMainFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         listLog = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
-        progressBarRunning = new javax.swing.JProgressBar();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -68,12 +53,8 @@ public class ServerMainFrame extends javax.swing.JFrame {
             .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 890, Short.MAX_VALUE)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(progressBarRunning, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                .addComponent(jLabel1)
+                .addContainerGap(813, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -82,9 +63,7 @@ public class ServerMainFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(progressBarRunning, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(40, 40, 40))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -148,16 +127,11 @@ public class ServerMainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JList<String> listLog;
-    private javax.swing.JProgressBar progressBarRunning;
     // End of variables declaration//GEN-END:variables
 
     private void initFunctions() 
     {
        this.setExtendedState(Frame.MAXIMIZED_BOTH);
        listLog.setModel(Console_Log_Model);
-       this.progressBarRunning.setMaximum(20);
-       this.progressBarRunning.setMinimum(0);
-       _tmrRefresh = new Timer(500,_funRefresh);
-       _tmrRefresh.start();
     }
 }

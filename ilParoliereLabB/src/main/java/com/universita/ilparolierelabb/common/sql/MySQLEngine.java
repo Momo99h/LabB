@@ -21,7 +21,6 @@ public class MySQLEngine extends sqlEngine
     private String _DbConnectionString = "jdbc:mysql://%s:3306/%s";
     private String _usr;
     private String _psw;
-    private String _ps2w;
     private Connection con = null;
     private PreparedStatement ps = null;
     private ResultSet rs = null;

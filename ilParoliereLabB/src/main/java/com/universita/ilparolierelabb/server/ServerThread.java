@@ -50,7 +50,12 @@ public class ServerThread extends Thread implements ActionListener
 
     private synchronized void doIdlestuff() 
     {
-        //ServerImplementation.notifyClientsCount(ServerManager.ObserversOnline());
+        if(ServerManager._ClientCountChanged)
+        {
+            ServerManager._ClientCountChanged = false;
+            ServerImplementation.notifyClientsCount(ServerManager.ObserversOnline());
+        }
+        //
        _serverStep = ServerFSMachine.Email;
     }
 

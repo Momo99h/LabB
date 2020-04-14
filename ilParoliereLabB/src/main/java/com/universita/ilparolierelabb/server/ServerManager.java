@@ -21,6 +21,7 @@ public class ServerManager
 {
     private static SimpleDateFormat _sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     public static GameRooms gameRooms = new GameRooms();
+    public static Boolean _ClientCountChanged = false;
     
     public static void Launch()
     {

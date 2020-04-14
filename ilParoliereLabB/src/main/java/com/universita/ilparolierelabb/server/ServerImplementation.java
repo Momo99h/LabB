@@ -25,8 +25,8 @@ public class ServerImplementation extends Observable implements ServerInterface
     private static Registry rmiRegistry;
     private static ServerInterface rmiService;
     private static ServerImplementation server;
-    public static ArrayList<WrappedObserver> WrappedObserver;
-    public  static ArrayList<RegisterData> registerUserWaiting;
+    public static ArrayList<WrappedObserver> WrappedObserver; // Lista di tutti i client disponibili.
+    public static ArrayList<RegisterData> registerUserWaiting;
 
     private ServerImplementation() throws RemoteException 
     {
@@ -72,6 +72,7 @@ public class ServerImplementation extends Observable implements ServerInterface
         {
             WrappedObserver.add(mo);
             addObserver(mo);
+            ServerManager._ClientCountChanged = true;
             ServerManager.addLogData("New client opened: (ID) "+mo.getObId());
         }
         catch(Exception e)
@@ -92,6 +93,7 @@ public class ServerImplementation extends Observable implements ServerInterface
                     deleteObserver(w);
                     ServerManager.addLogData("New client disconnected: (ID) "+w.getObId());
                     WrappedObserver.remove(w);
+                    ServerManager._ClientCountChanged = true;
                     break;
                 }
                 catch(Exception e)

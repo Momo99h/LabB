@@ -4,11 +4,7 @@
  * and open the template in the editor.
  */
 package com.universita.ilparolierelabb.common.frames;
-
-import com.universita.ilparolierelabb.client.ClientImplementation;
 import com.universita.ilparolierelabb.client.ClientManager;
-import com.universita.ilparolierelabb.common.sql.MySQLEngine;
-import com.universita.ilparolierelabb.common.sql.SQLConnectionParameters;
 import com.universita.ilparolierelabb.server.ServerManager;
 
 /**

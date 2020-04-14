@@ -7,10 +7,10 @@ package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.UserStatus;
-import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.sql.*;
 
 /**
+ * ServerDBInterface Tutte le richiesta a database vengono eseguite qui.
  *
  * @author Momo
  */
@@ -18,24 +18,44 @@ public class ServerDBInterface
 {
     private static MySQLEngine _db = new MySQLEngine();
     
+    /***
+     * setDBReference Imposta il motore di connessione al database.
+     * 
+     * @param db Motore di connessione già configurato.
+     */
     public static void setDBReference(MySQLEngine db)
     {
         _db = db;
     }
-
+    /***
+     * HasAdmin controlla nel database se esistono amministratori per il server.
+     * 
+     * @return ritorna true se esistono amministratori.
+     */
     public static boolean HasAdmin() 
     {
         String query = "Select Count(*) from Admins";
         ResultTable return_val = _db.executeQueryRead(query);
         return !return_val.get(0, 0).equals("0");
     }
-    
+    /***
+     * RegisterAdmin Inserisce un amministratore nel database.
+     * 
+     * @param usr Username dell'amministratore
+     * @param psw Password dell'amministratore
+     * @return true se l'istruzione è andata a buon fine.
+     */
     public static boolean RegisterAdmin(String usr,String psw) 
     {
         String query = "Insert into Admins(Username,Password) Values ('%s','%s')";
         query = String.format(query,usr,psw);
         return _db.executeQuery(query);
     }
+    /***
+     * RegisterAccount Inserisce un account utente nel database.
+     * @param d Oggetto di tipo RegisterData che rappresenta i dati di registrazione dell'account.
+     * @return true se l'istruzione è andata a buon fine.
+     */
     public static boolean RegisterAccount(RegisterData d) 
     {
         String query = "Insert into Users(Nome,Cognome,Nickname,Email,Password) Values ('%s','%s','%s','%s','%s')";
@@ -45,7 +65,12 @@ public class ServerDBInterface
         query = String.format(query,d.getUsername(),UserStatus.Offline.getValue(),0);
         return b && _db.executeQuery(query);
     }
-    
+    /***
+     * LoginAdmin Esegue una query per la verifica dei dati di login di un amministratore
+     * @param usr Username dell'amministratore
+     * @param psw Password dell'amministratore
+     * @return true se il login è riuscito.
+     */
     public static boolean LoginAdmin(String usr,String psw) 
     {
         String query = "Select Count(*) from Admins Where Username='%s' AND Password='%s'";
@@ -53,6 +78,12 @@ public class ServerDBInterface
         ResultTable return_val = _db.executeQueryRead(query);
         return !return_val.get(0, 0).equals("0");
     }
+    /***
+     * ClientLogin Esegue una query per la verifica dei dati di login di un utente
+     * @param usr Username dell'utente
+     * @param psw Password dell'utente
+     * @return true se il login è riuscito.
+     */
     public static boolean ClientLogin(String usr,String psw)
     {
         String query = "Select Count(*) from Users Where Nickname='%s' AND Password='%s'";

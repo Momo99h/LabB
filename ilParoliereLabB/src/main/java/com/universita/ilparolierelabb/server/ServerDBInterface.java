@@ -105,4 +105,11 @@ public class ServerDBInterface
         query = String.format(query,UserStatus.Online.getValue(),0,usr);
         return _db.executeQuery(query);
     }
+    
+    public static boolean emailAlreadyTaken(String email){
+        //check che l'email non è già stata usata 
+        String query = "SELECT Email FROM Users WHERE Email='%s'";
+        query = String.format(query,email);
+        return _db.executeQuery(query);
+    }
 }

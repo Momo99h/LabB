@@ -66,7 +66,7 @@ public class ServerDBInterface
         return b && _db.executeQuery(query);
     }
     /***
-     * LoginAdmin Esegue una query per la verifica dei dati di login di un amministratore
+     * LoginAdmin Esegue una query per la verifica dei dati di login di un amministratore.
      * @param usr Username dell'amministratore
      * @param psw Password dell'amministratore
      * @return true se il login è riuscito.
@@ -79,7 +79,7 @@ public class ServerDBInterface
         return !return_val.get(0, 0).equals("0");
     }
     /***
-     * ClientLogin Esegue una query per la verifica dei dati di login di un utente
+     * ClientLogin Esegue una query per la verifica dei dati di login di un utente.
      * @param usr Username dell'utente
      * @param psw Password dell'utente
      * @return true se il login è riuscito.
@@ -94,12 +94,21 @@ public class ServerDBInterface
         query = String.format(query,UserStatus.Online.getValue(),usr);
         return b && _db.executeQuery(query);
     }
+    /***
+     * ClientDisconnect Aggiorna lo stato offline dell'utente a livello database.
+     * @param usr Username dell'utente
+     * @return true se l'istruzione è andata a buon fine.
+     */
     public static boolean ClientDisconnect(String usr)
     {
         String query = "Update UsersState set OnlineStatus = '%s' where Nickname = '%s'";
         query = String.format(query,UserStatus.Offline.getValue(),usr);
         return _db.executeQuery(query);
     }
+    /***
+     * OnlineClientsCount Conta il numero di utenti online.
+     * @return il numero intero di utenti online.
+     */
     public static int OnlineClientsCount()
     {
         String query = "Select Count(*) from UsersState Where NOT OnlineStatus='%s'";
@@ -107,7 +116,11 @@ public class ServerDBInterface
         ResultTable return_val = _db.executeQueryRead(query);
         return Integer.parseInt(return_val.get(0, 0));
     }
-
+    /***
+     * clientIsLogged Controlla se un utente è già all'interno del gioco.
+     * @param usr Username dell'utente
+     * @return true se l'utente ha già effettuato il login
+     */
     public static boolean clientIsLogged(String usr) 
     {
         String query = "Select Count(*) from UsersState Where NOT OnlineStatus='%s' AND Nickname ='%s'";
@@ -115,40 +128,57 @@ public class ServerDBInterface
         ResultTable return_val = _db.executeQueryRead(query);
         return !return_val.get(0, 0).equals("0");
     }
-
+    /***
+     * resetUsersState Ripristina alle condizioni iniziali lo stato di tutti gli utenti.
+     */
     public static void resetUsersState()
     {
         String query = "Update UsersState set OnlineStatus='%s'";
         query = String.format(query,0);
         _db.executeQuery(query);
     }            
-
+    /***
+     * clientEnterRoom Aggiorna lo stato di un utente in una stanza a livello database
+     * @param roomId Id della stanza in cui l'utente è entrato.
+     * @param usr Username dell'utente.
+     * @return true se l'istruzione è andata a buon fine.
+     */
     public static boolean clientEnterRoom(int roomId, String usr) 
     {
         String query = "Update UsersState set OnlineStatus = '%s',IdRoom = '%s' where Nickname = '%s'";
         query = String.format(query,UserStatus.InRoom.getValue(),roomId,usr);
         return _db.executeQuery(query);
     }
-
+    /***
+     * clientLeaveRoom Aggiorna lo stato di un utente nella lobby a livello database.
+     * @param usr Username dell'utente.
+     * @return true se l'istruzione è andata a buon fine.
+     */
     public static boolean clientLeaveRoom(String usr) 
     {
         String query = "Update UsersState set OnlineStatus = '%s',IdRoom = '%s' where Nickname = '%s'";
         query = String.format(query,UserStatus.Online.getValue(),0,usr);
         return _db.executeQuery(query);
     }
-    
-    // @author AndreaGirola
-    public static boolean emailAlreadyTaken(String email){
-        //check che l'email non è già stata usata 
+    /***
+     * emailAlreadyTaken controlla se l'email è già presente a livello database.
+     * @param email Email da controllare.
+     * @return true se l'email è gia presente nel database.
+     */
+    public static boolean emailAlreadyTaken(String email)
+    {
         String query = "SELECT COUNT(*) FROM Users WHERE Email='%s'";
         query = String.format(query,email);
         ResultTable val = _db.executeQueryRead(query);
         return (!val.get(0, 0).equals("0")); 
     }
-    
-    // @author AndreaGirola
-    public static boolean userAlreadyTaken(String nickname){
-        //check che l'email non è già stata usata 
+    /**
+     * userAlreadyTaken controlla se l'username è già presente a livello database.
+     * @param nickname Username da controllare.
+     * @return true se l'username è gia presente nel database.
+     */
+    public static boolean userAlreadyTaken(String nickname)
+    {
         String query = "SELECT COUNT(*) FROM Users WHERE Nickname='%s'";
         query = String.format(query,nickname);
         ResultTable val = _db.executeQueryRead(query);

@@ -52,6 +52,7 @@ public class ServerManager
         serverFrame.setVisible(true);
         addLogData("Server ready - Waiting connections..");
         ServerDBInterface.resetUsersState();
+        MatrixFactory.createDices();
         ServerThread.Run();
     }  
     public static void addLogData(String logdata)

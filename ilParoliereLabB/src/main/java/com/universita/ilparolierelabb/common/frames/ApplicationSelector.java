@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.common.frames;
 import com.universita.ilparolierelabb.client.ClientManager;
+import com.universita.ilparolierelabb.server.MatrixFactory;
 import com.universita.ilparolierelabb.server.ServerManager;
 
 /**
@@ -118,6 +119,7 @@ public class ApplicationSelector extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new ApplicationSelector().setVisible(true);
+                
             }
         });
     }

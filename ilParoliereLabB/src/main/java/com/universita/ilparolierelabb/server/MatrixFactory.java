@@ -5,12 +5,19 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.common.Utility;
+import java.util.ArrayList;
+
 /**
  *
  * @author Momo
  */
 public class MatrixFactory 
 {
+    
+    private static Dice[] _dices = new Dice[16];
+    private static String[][] gameMatrix = new String[4][4]; 
+    private static ArrayList<Integer> list = new ArrayList<Integer>();
     
     private static String[][] _letterMatrix = {{"B", "A", "O", "O", "Qu", "M"}, 
                                         {"U", "T", "E", "S", "L", "P"},
@@ -28,18 +35,34 @@ public class MatrixFactory
                                         {"N", "O", "L", "G", "U", "E"},
                                         {"D", "C", "M", "P", "A", "E"},
                                         {"E", "R", "I", "N", "S", "H"}};
+    
     public static String[][] getLetterMatrix(){ 
         return _letterMatrix; 
     }
     
-    public static Dice[] CreateDices()
+    public static void createDices()
     {
-        Dice[] d = new Dice[16];
         for(int i = 0; i < 16; i++)
         {
-            d[i] = new Dice(i,_letterMatrix[i]);
+            _dices[i] = new Dice(i,_letterMatrix[i]);
         }
-        return d;
+    }
+    
+    public static void getMatrix()
+    {
+        
+        for(int i=0; i<16; i++){
+            list.add(i); 
+        }
+   
+        for(int i=0; i<4; i++){
+            for(int j=0; j<4; j++){
+                int indice = Utility.getRandomInt(0, list.size()-1);
+                gameMatrix[i][j] = _dices[list.get(indice)].getRandomFace(); 
+                list.remove(indice);
+            }
+        }
+       
     }
     
     

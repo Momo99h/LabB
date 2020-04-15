@@ -113,8 +113,12 @@ public class ServerThread extends Thread implements ActionListener
                     gameArray[i].setPhase(Game.Phase.InitCountDown);
                     break;
                 case InitCountDown:
-                    if(gameArray[i].getInitTimer() <= 0) gameArray[i].setPhase(Game.Phase.GameCountDown);
+                    if(gameArray[i].getInitTimer() <= 0) 
+                        gameArray[i].setPhase(Game.Phase.GameCountDown);
+                    
                     gameArray[i].decrementInitTimer();
+
+                    
                     ServerImplementation.notifyGameInitTimer(gameArray[i].getRoomID(),gameArray[i].getInitTimer());
                     break;
                 case GameCountDown:

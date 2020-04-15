@@ -20,12 +20,14 @@ import javax.swing.Timer;
 public class ServerThread extends Thread implements ActionListener
 {
     private ServerFSMachine _serverStep = ServerFSMachine.Idle;
+    private Game[] gameArray;
+    private Game.Phase gamePhase;
     private int tempInt = 0;
     private String tempString = "";
     public static void Run()
     {
         ServerThread t = new ServerThread();
-        new Timer(500, (ActionListener) t).start();
+        new Timer(1000, (ActionListener) t).start();
     }
     public void actionPerformed(ActionEvent e) 
     {
@@ -38,15 +40,6 @@ public class ServerThread extends Thread implements ActionListener
         doEmailstuff();
         doRoomstuff();
         doGamestuff();
-        /*switch(_serverStep)
-        {
-            case Idle: doIdlestuff();
-                break;
-            case Email: doEmailstuff();     
-                break;
-            case Room:  doRoomstuff();
-                break;
-        }*/
     }
 
     private synchronized void doIdlestuff() 
@@ -110,14 +103,23 @@ public class ServerThread extends Thread implements ActionListener
 
     private synchronized void doGamestuff() 
     {
-        Game[] game = ServerManager.games.getGamesArray();
-        for(int i = 0; i < game.length; i++)
+        gameArray = ServerManager.games.getGamesArray();
+        for(int i = 0; i < gameArray.length; i++)
         {
-            if(game[i].getPhase() == Game.Phase.InitCountDown)
+            gamePhase = gameArray[i].getPhase();
+            switch(gamePhase)
             {
-                game[i].decrementInitTimer();
-                ServerImplementation.notifyGameInitTimer(game[i].getRoomID(),game[i].getInitTimer());
-                Utility.ConsolePrintLine("Game init timer = "+game[i].getInitTimer());
+                case Ready:
+                    gameArray[i].setPhase(Game.Phase.InitCountDown);
+                    break;
+                case InitCountDown:
+                    if(gameArray[i].getInitTimer() <= 0) gameArray[i].setPhase(Game.Phase.GameCountDown);
+                    gameArray[i].decrementInitTimer();
+                    ServerImplementation.notifyGameInitTimer(gameArray[i].getRoomID(),gameArray[i].getInitTimer());
+                    break;
+                case GameCountDown:
+                    
+                    break;
             }
         }
     }

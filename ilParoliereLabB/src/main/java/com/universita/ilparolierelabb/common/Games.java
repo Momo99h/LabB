@@ -19,7 +19,7 @@ public class Games implements Serializable
     public void createGame(int roomId)
     {
         Game g = new Game(roomId);
-        g.setPhase(Game.Phase.InitCountDown);
+        g.setPhase(Game.Phase.Ready);
         this._games.add(g);
     }
     public Game[] getGamesArray()

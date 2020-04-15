@@ -15,7 +15,7 @@ public class Game implements Serializable
 {
     public static enum Phase
     {
-        Idle,Ready,InitCountDown
+        Idle,Ready,InitCountDown,GameCountDown
     }
     private int _roomid;
     private int _gameid = 1;
@@ -26,9 +26,14 @@ public class Game implements Serializable
     
     public void setID(int value){this._gameid = value;}
     public void decrementInitTimer() {this._initTimer--;}
+    public void decrementGameTimer() {this._gameTimer--;}
     public int getInitTimer()
     {
         return this._initTimer;
+    }
+     public int getGameTimer()
+    {
+        return this._gameTimer;
     }
     public Phase getPhase()
     {

@@ -21,13 +21,26 @@ public class Matrix {
         this._passedMatrix = m; 
     }
     
+    public boolean isNodeVisited(Node node, ArrayList<Node> nodeList){
+        return (nodeList.contains(node)); 
+    }
     
-    /* gli viene passata la parola da cercare e il metodo ritorna le posizioni
-    *  della prima lettera della parola nella matrice 
-    */
-    public static boolean getStartingPosition(String[][] m, String w){
+    //intro condition per controllare se la parola può esistere nella matrice 
+    public boolean isFirstLetterPresent(String[][] matrix, String w){
+        boolean is = false;
+        for(int i=0; i<4; i++){
+            for(int j=0; j<4; j++){
+                if(matrix[i][j].equals(w.charAt(0))){
+                    is = true; 
+                }   
+            }
+        } 
+        return is; 
+    }
+    
+    public static ArrayList<Node> getStartingPosition(String[][] m, String w){
         
-        boolean present = false;
+        ArrayList<Node> nodes = new ArrayList<Node>();
         
         //creo ed inizializzo arraylist che contiene la parola
         ArrayList<String> letters = new ArrayList<>();
@@ -40,14 +53,14 @@ public class Matrix {
         for(int i=0; i<4; i++){
             for(int j=0; j<4; j++){
                 if(m[i][j].equals(letters.get(0))){
-                    present = true;
-                }
-            }
-        }
-        return present;  
+                    nodes.add(new Node(i,j));
+                }   
+            }   
+        }   return nodes;
     }
-    
-    public ArrayList<Node> getNeighbors(String[][] m,Node node, String nextLetter){
+   
+   
+    public ArrayList<Node> getNeighbors(String[][] m, Node node, String nextLetter){
         
         ArrayList<Node> neighbors = new ArrayList<Node>(); 
         
@@ -88,27 +101,22 @@ public class Matrix {
                 
     }
     
-    public boolean isNodeVisited(Node node, ArrayList<Node> nodeList){
-        return (nodeList.contains(node)); 
-    }
     
-    public boolean isFirstLetterPresent(String[][] m, String w){
-        return false; 
-    }
     
-    public boolean isWordPresent(ArrayList<String> letters){
+    public boolean isWordPresent(String[][] matrix, ArrayList<String> letters){
         
-        int founded = 0; 
-        
-        while(founded != letters.size()){  
-            for(int i=0; i<letters.size(); i++){
-                
-                //controllo con getNeighbors se ci sono vicini che corrispondono alla lettere successiva 
-                
-                
-            }
+        boolean present = false;
+        String word = letters.toString();
+        System.out.print("First letter present? > ");
+        //present = getStartingPosition(matrix, word);
+        System.out.println(present ? "SI":"NO");
+        if(!present){
+            System.out.println("Parola non esiste nella matrice");
+        } else {
+            System.out.println("Lettere vicine: "); 
+            ArrayList<Node> n = new ArrayList<Node>(); 
+            //n = getNeighbors(String[][] m, Node node, String nextLetter);
         }
-        
         return true; 
     }
     
@@ -118,11 +126,10 @@ public class Matrix {
                                     {"P", "R", "M", "R"},
                                     {"D", "O", "L", "A"},
                                     {"E", "S", "I", "C"},};
+        String w = "DOSE";
+        boolean firstLetter = false; 
         
         System.out.println("Matrice:");
-        //Matrix matrix = new Matrix(m);
-        
-        //System.out.print();
         
         for(int i=0; i<4; i++){
             for(int j=0; j<4; j++){
@@ -130,35 +137,15 @@ public class Matrix {
             }
             System.out.println();
         }
+       
         
-        boolean v = false;
+        System.out.println("Controllo se la prima lettera è presente"); 
+
         
-        System.out.println("Cerco prima lettera della parola DOSE");
-        String parola = "DOSE";
-        v = (Matrix.getStartingPosition(m,parola));
-        System.out.println(v);
         
-        //Matrix.getNeighbors();
+        System.out.println("Visualizzo i suoi vicini");
         
-        System.out.println("Cerco prima lettera della parola ESIC");
-        parola = "ESIC";
-        v = (Matrix.getStartingPosition(m,parola));
-        System.out.println(v);
-        
-        System.out.println("Cerco prima lettera della parola TRACI");
-        parola = "TRACI";
-        v = (Matrix.getStartingPosition(m,parola));
-        System.out.println(v);
-        
-        System.out.println("Cerco prima lettera della parola ZORRO");
-        parola = "ZORRO";
-        v = (Matrix.getStartingPosition(m,parola));
-        System.out.println(v);
-        
-         System.out.println("Cerco prima lettera della parola KILO");
-        parola = "KILO";
-        v = (Matrix.getStartingPosition(m,parola));
-        System.out.println(v);
+        // TO DO 
         
         
         

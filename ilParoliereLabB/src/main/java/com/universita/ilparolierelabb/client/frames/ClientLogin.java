@@ -203,7 +203,7 @@ public class ClientLogin extends javax.swing.JFrame {
         {            
             ClientManager.currentuser.setUsername(usr);
             ClientManager.currentuser.setTotalPoints(4);
-            ClientManager.Run();
+            ClientManager.Run(true);
             this.dispose();
             return;
         }

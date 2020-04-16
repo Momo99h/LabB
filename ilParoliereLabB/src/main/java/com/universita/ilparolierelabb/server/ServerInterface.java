@@ -31,10 +31,11 @@ public interface ServerInterface extends Remote
     public LobbyData getLobbyRooms()throws RemoteException;
     public int getLastRoomID()throws RemoteException;
     public void addRoom(Room r)throws RemoteException;
-    public boolean enterRoom(int roomId,User usr)throws RemoteException;
-    public void leaveRoom(User usr)throws RemoteException;
+    public boolean enterRoom(RemoteObserver o,int roomId,User usr)throws RemoteException;
+    public void leaveRoom(RemoteObserver o,User usr)throws RemoteException;
     public void changePlayerStatus(User usr,UserStatus status) throws RemoteException;
     public boolean emailAlreadyTaken(String email) throws RemoteException;
     public boolean userAlreadyTaken(String user) throws RemoteException;
+    public int getOnlineCount() throws RemoteException;
     public Room getRoomById(int id) throws RemoteException;
 }

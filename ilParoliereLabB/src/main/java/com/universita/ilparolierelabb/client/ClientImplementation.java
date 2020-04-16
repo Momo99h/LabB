@@ -196,7 +196,7 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     {
         try
         {
-            return _server.enterRoom(roomID,usr);
+            return _server.enterRoom(_client,roomID,usr);
         }
         catch(Exception e)
         {
@@ -209,7 +209,7 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     {
        try
         {
-            _server.leaveRoom(usr);
+            _server.leaveRoom(_client,usr);
         }
         catch(Exception e)
         {
@@ -233,7 +233,20 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
-   
+    public static int getOnlineCount()
+    {
+       try
+        {
+            return _server.getOnlineCount();
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            return 0;
+        }
+    }
     // @author AndreaGirola
     public static boolean emailAlreadyTaken(String email){
         try

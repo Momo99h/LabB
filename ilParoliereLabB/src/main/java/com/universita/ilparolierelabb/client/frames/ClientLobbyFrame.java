@@ -26,10 +26,8 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
     public ClientLobbyFrame() 
     {
         initComponents();
-        initFunctions();
         initPar();
-        
-        
+        initFunctions();
     }
 
     /** This method is called from within the constructor to
@@ -199,6 +197,7 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
     {
         this.setLocationRelativeTo(null);
         ClientManager.getLobbyRooms();
+        ClientManager.refreshOnlineCount();
         this.refreshRooms();
     }
     public void refreshRooms()

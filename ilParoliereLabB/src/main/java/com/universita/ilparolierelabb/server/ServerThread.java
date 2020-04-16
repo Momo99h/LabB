@@ -7,7 +7,9 @@ package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.Game;
+import com.universita.ilparolierelabb.common.Room;
 import com.universita.ilparolierelabb.common.Settings;
+import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.Utility;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +28,7 @@ public class ServerThread extends Thread implements ActionListener
     public static void Run()
     {
         ServerThread t = new ServerThread();
-        new Timer(500, (ActionListener) t).start();
+        new Timer(1000, (ActionListener) t).start();
     }
     public void actionPerformed(ActionEvent e) 
     {
@@ -39,14 +41,22 @@ public class ServerThread extends Thread implements ActionListener
         doEmailstuff();
         doRoomstuff();
         doGamestuff();
+        Room r = new Room();
+        r.setId(ServerManager.rooms.getLastID()+1);
+        User s = new User();
+        s.setUsername("34");
+        r.addPlayer(s);
+        ServerManager.rooms.addRoom(r);
+        ServerManager.rooms.setDataChanged(true);
+        
     }
 
     private synchronized void doIdlestuff() 
     {
         if(ServerManager._ClientCountChanged)
         {
-            ServerManager._ClientCountChanged = false;
-            ServerImplementation.notifyClientsCount(ServerManager.ObserversOnline());
+            if(ServerImplementation.notifyClientsCount(ServerManager.ObserversOnline())) 
+                ServerManager._ClientCountChanged = false;
         }
     }
 
@@ -91,8 +101,8 @@ public class ServerThread extends Thread implements ActionListener
     {
         if(ServerManager.rooms.isDataChanged())
         {
-            ServerManager.rooms.confirmDataChanged();
-            ServerImplementation.notifyClientsLobbyData(ServerManager.rooms.createLobbyData());
+            if(ServerImplementation.notifyClientsLobbyData(ServerManager.rooms.createLobbyData()))
+                ServerManager.rooms.confirmDataChanged();
         }
     }
 

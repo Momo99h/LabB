@@ -88,11 +88,12 @@ public class ClientManager
         lobbyFrame.refreshRooms();
         gameFrame.refreshRooms();
     }
-    public static void Run()
+    public static void Run(Boolean connect)
     {
         lobbyFrame = new ClientLobbyFrame();
         gameFrame = new ClientGameFrame();
         lobbyFrame.setVisible(true);
+        if(!connect) return;
         ClientImplementation.ClientOnline();
     }
     
@@ -118,6 +119,10 @@ public class ClientManager
     public static Room getRoomById(int roomId)
     {
         return ClientImplementation.getRoomById(roomId); 
+    }
+    public static void refreshOnlineCount()
+    {
+        ClientLobbyFrame.Par_lblUtentiConnessi.setText(ClientImplementation.getOnlineCount()+"");
     }
 
     

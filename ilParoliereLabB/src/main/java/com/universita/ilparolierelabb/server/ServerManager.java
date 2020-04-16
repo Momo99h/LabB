@@ -45,7 +45,7 @@ public class ServerManager
     }
     public static int ObserversOnline()
     {
-        return ServerImplementation.WrappedObserver.size();
+        return ServerImplementation.LobbyClients.size();
     }
     public static void Run()
     {

@@ -121,6 +121,8 @@ public class ClientGameFrame extends javax.swing.JFrame {
         if(!Utility.ShowQuestionPopUp(Settings.clientName, "Confirm operation?")) return;
         ClientManager.leaveRoom(ClientManager.currentuser);
         ClientManager.getLobbyRooms();
+        this.dispose();
+        ClientManager.Run(false);
     }//GEN-LAST:event_buttonLeaveRoomActionPerformed
 
     private void buttonReadyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReadyActionPerformed

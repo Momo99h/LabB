@@ -7,7 +7,6 @@ package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.Room;
-import com.universita.ilparolierelabb.common.Rooms;
 import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.LobbyData;
 import com.universita.ilparolierelabb.common.Utility;
@@ -29,13 +28,15 @@ public class ServerImplementation extends Observable implements ServerInterface
     private static Registry rmiRegistry;
     private static ServerInterface rmiService;
     private static ServerImplementation server;
-    public static ArrayList<ClientObserver> WrappedObserver; // Lista di tutti i client disponibili.
+    public static ArrayList<ClientObserver> LobbyClients;
+    public static ArrayList<ClientObserver> GameClients;
     public static ArrayList<RegisterData> registerUserWaiting;
 
     private ServerImplementation() throws RemoteException 
     {
         super();
-        WrappedObserver= new ArrayList<>();
+        LobbyClients = new ArrayList<>();
+        GameClients = new ArrayList<>();
         registerUserWaiting = new ArrayList<>();
     }
     
@@ -74,7 +75,7 @@ public class ServerImplementation extends Observable implements ServerInterface
         ClientObserver mo = new ClientObserver(o);
         try
         {
-            WrappedObserver.add(mo);
+            LobbyClients.add(mo);
             addObserver(mo);
             ServerManager._ClientCountChanged = true;
             ServerManager.addLogData("New client opened: (ID) "+mo.getObId());
@@ -89,16 +90,16 @@ public class ServerImplementation extends Observable implements ServerInterface
     public void removeObserver(RemoteObserver o) throws RemoteException 
     {
         ClientObserver w;
-        for(int i = 0; i < WrappedObserver.size(); i++)
+        for(int i = 0; i < LobbyClients.size(); i++)
         {
-            w = WrappedObserver.get(i);
+            w = LobbyClients.get(i);
             if(w.getOb().equals(o))
             {
                 try
                 {
                     deleteObserver(w);
                     ServerManager.addLogData("New client disconnected: (ID) "+w.getObId());
-                    WrappedObserver.remove(w);
+                    LobbyClients.remove(w);
                     ServerManager._ClientCountChanged = true;
                     break;
                 }
@@ -153,12 +154,13 @@ public class ServerImplementation extends Observable implements ServerInterface
         }
         return false;
     }
-    public static void notifyClientsCount(int count)
+    public static synchronized boolean notifyClientsCount(int count)
     {
         ClientObserver w;
-        for(int i = 0; i < WrappedObserver.size(); i++)
+        boolean success = true;
+        for(int i = 0; i < LobbyClients.size(); i++)
         {
-            w = WrappedObserver.get(i);
+            w = LobbyClients.get(i);
             try 
             {
                 w.getOb().notifyClientsCount(rmiService, count);
@@ -166,15 +168,18 @@ public class ServerImplementation extends Observable implements ServerInterface
             catch (RemoteException ex) 
             {
                 ex.printStackTrace();
+                success = false;
             }
         }
+        return success;
     }
-    public static void notifyClientsLobbyData(LobbyData data) 
+    public static synchronized boolean notifyClientsLobbyData(LobbyData data) 
     {
         ClientObserver w;
-        for(int i = 0; i < WrappedObserver.size(); i++)
+        Boolean success = true;
+        for(int i = 0; i < LobbyClients.size(); i++)
         {
-            w = WrappedObserver.get(i);
+            w = LobbyClients.get(i);
             try 
             {
                 w.getOb().notifyClientsLobbyData(rmiService, data);
@@ -182,15 +187,17 @@ public class ServerImplementation extends Observable implements ServerInterface
             catch (RemoteException ex) 
             {
                 ex.printStackTrace();
+                success = false;
             }
         }
+        return success;
     }
-    public static void notifyGameInitTimer(int roomId,int timerCount)
+    public static synchronized void notifyGameInitTimer(int roomId,int timerCount)
     {
         ClientObserver w;
-        for(int i = 0; i < WrappedObserver.size(); i++)
+        for(int i = 0; i < LobbyClients.size(); i++)
         {
-            w = WrappedObserver.get(i);
+            w = LobbyClients.get(i);
             try 
             {
                 w.getOb().notifyGameInitTimer(rmiService, roomId,timerCount);
@@ -201,12 +208,12 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
-    public static void notifyGameMatrix(int roomId,String[][] matrix)
+    public static synchronized void notifyGameMatrix(int roomId,String[][] matrix)
     {
         ClientObserver w;
-        for(int i = 0; i < WrappedObserver.size(); i++)
+        for(int i = 0; i < LobbyClients.size(); i++)
         {
-            w = WrappedObserver.get(i);
+            w = LobbyClients.get(i);
             try 
             {
                 w.getOb().notifyGameMatrix(rmiService, roomId, matrix);
@@ -244,35 +251,40 @@ public class ServerImplementation extends Observable implements ServerInterface
     {
         ServerManager.addLogData(r.getAdmin()+" added new room: "+r.getId()+" - "+r.getRoomName());
         ServerManager.rooms.addRoom(r);
+         ServerManager.rooms.setDataChanged(true);
     }
 
     @Override
-    public boolean enterRoom(int roomId,User usr) throws RemoteException 
+    public boolean enterRoom(RemoteObserver o,int roomId,User usr) throws RemoteException 
     {
         Room r = ServerManager.rooms.getRoom(roomId);
         if(r.getPlayersIn() >= r.getPlayersNeeded()) return false;
         ServerManager.addLogData(usr.getUsername()+" entered room: "+roomId);
         usr.setStatus(UserStatus.NotReady);
         r.addPlayer(usr);
-        ServerManager.rooms.setDataChanged(true);
         ServerDBInterface.clientEnterRoom(roomId,usr.getUsername());
+        ServerManager.rooms.setDataChanged(true);
+        removeObserver(o);
         return true;
     }
 
     @Override
-    public void leaveRoom(User usr) throws RemoteException 
+    public void leaveRoom(RemoteObserver o,User usr) throws RemoteException 
     {
         Room r = ServerManager.rooms.getRoomWherePlayer(usr);
         if(ServerManager.rooms.removePlayerFromRoom(usr))
         {
             ServerDBInterface.clientLeaveRoom(usr.getUsername());
             ServerManager.addLogData(usr.getUsername()+" left room: "+r.getId());
+            ServerManager.rooms.setDataChanged(true);
+            addObserver(o);
         }
         if(r == null) return;
         if(r.getPlayersIn() == 0)
         {
             ServerManager.rooms.removeRoom(r);
             ServerManager.addLogData("Room ID "+r.getId()+" has been removed because no players are inside");
+            ServerManager.rooms.setDataChanged(true);
         }
     }
 
@@ -306,6 +318,12 @@ public class ServerImplementation extends Observable implements ServerInterface
     public Room getRoomById(int id) throws RemoteException 
     {
         return ServerManager.rooms.getRoom(id);
+    }
+
+    @Override
+    public int getOnlineCount() throws RemoteException 
+    {
+        return ServerManager.ObserversOnline();
     }
 
    

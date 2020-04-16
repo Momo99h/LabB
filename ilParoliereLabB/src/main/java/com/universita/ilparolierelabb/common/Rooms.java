@@ -26,7 +26,6 @@ public class Rooms implements Serializable
     public void setAllRoomsData(ArrayList<Room> rooms)
     {
         this._rooms = rooms;
-        this._dataChanged = true;
     }
     public int getRoomsCount()
     {
@@ -48,12 +47,10 @@ public class Rooms implements Serializable
     {
         this._rooms.add(r);
         if(r.getId() > _lastID) _lastID = r.getId();
-        this._dataChanged = true;
     }
     public void removeRoom(Room r)
     {
         this._rooms.remove(r);
-        this._dataChanged = true;
     }
     public void setDataChanged(Boolean value)
     {
@@ -98,7 +95,6 @@ public class Rooms implements Serializable
             if(r.isPlayerIn(player)) 
             {
                 r.removePlayer(player);
-                _dataChanged = true;
                 return true;
             }
         }
@@ -127,7 +123,7 @@ public class Rooms implements Serializable
             User[] usr = r.getListPlayerIn();
             for(int j = 0; j < usr.length; j++)
             {
-                s += usr[i].getUsername()+";";
+                s += usr[j].getUsername()+";";
             }
             d.addUsersData(s);
         }

@@ -9,10 +9,7 @@ import com.universita.ilparolierelabb.common.*;
 import com.universita.ilparolierelabb.common.SettingsResult;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.sql.*;
-import java.awt.Dialog;
-import java.awt.Window;
 import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 
 /**
  *

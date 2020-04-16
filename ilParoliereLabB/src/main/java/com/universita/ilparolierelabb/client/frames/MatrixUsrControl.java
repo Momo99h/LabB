@@ -219,4 +219,25 @@ public class MatrixUsrControl extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     // End of variables declaration//GEN-END:variables
+
+    void setMatrix(String[][] matrix) 
+    {
+        jLabel1.setText(matrix[0][0]);
+        jLabel2.setText(matrix[0][1]);
+        jLabel3.setText(matrix[0][2]);
+        jLabel4.setText(matrix[0][3]);
+        jLabel5.setText(matrix[1][0]);
+        jLabel6.setText(matrix[1][1]);
+        jLabel7.setText(matrix[1][2]);
+        jLabel8.setText(matrix[1][3]);
+        jLabel9.setText(matrix[2][0]);
+        jLabel10.setText(matrix[2][1]);
+        jLabel11.setText(matrix[2][2]);
+        jLabel12.setText(matrix[2][3]);
+        jLabel13.setText(matrix[3][0]);
+        jLabel14.setText(matrix[3][1]);
+        jLabel15.setText(matrix[3][2]);
+        jLabel16.setText(matrix[3][3]);
+
+    }
 }

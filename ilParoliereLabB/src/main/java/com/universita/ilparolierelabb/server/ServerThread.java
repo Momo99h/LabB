@@ -116,10 +116,12 @@ public class ServerThread extends Thread implements ActionListener
                     gameArray[i].decrementInitTimer();
                     ServerImplementation.notifyGameInitTimer(gameArray[i].getRoomID(),gameArray[i].getInitTimer());
                     if(gameArray[i].getInitTimer() == 0)
-                        gameArray[i].setPhase(Game.Phase.GameCountDown);
+                        gameArray[i].setPhase(Game.Phase.CreateMatrix);
                     break;
-                case GameCountDown:
-                    
+                case CreateMatrix:
+                    gameArray[i].setMatrix(MatrixFactory.getMatrix());
+                    ServerImplementation.notifyGameMatrix(gameArray[i].getRoomID(),gameArray[i].getMatrix());
+                    gameArray[i].setPhase(Game.Phase.GameCountDown);
                     break;
             }
         }

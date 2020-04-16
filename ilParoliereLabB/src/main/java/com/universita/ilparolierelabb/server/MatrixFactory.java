@@ -48,7 +48,7 @@ public class MatrixFactory
         }
     }
     
-    public static void getMatrix()
+    public static String[][] getMatrix()
     {
         
         for(int i=0; i<16; i++){
@@ -62,6 +62,7 @@ public class MatrixFactory
                 list.remove(indice);
             }
         }
+        return gameMatrix;
        
     }
     

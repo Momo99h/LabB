@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class GameUsrControl extends javax.swing.JPanel {
 
     private Room _room;
+    private String[][] _gameMatrix;
     private int _currentRoomID = -1;
     private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Player","Total score","Status"},0);
     
@@ -189,5 +190,11 @@ public class GameUsrControl extends javax.swing.JPanel {
         this.lblWaitingPlayers.setText(waiting);
         if(!matrixUsrControl.isVisible())matrixUsrControl.setVisible(true);
         matrixUsrControl.shuffleAnim();
+    }
+
+    void setMatrix(String[][] matrix) 
+    {
+        this._gameMatrix = matrix;
+        matrixUsrControl.setMatrix(matrix);
     }
 }

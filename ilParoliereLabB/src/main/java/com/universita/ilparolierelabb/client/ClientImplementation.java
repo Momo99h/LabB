@@ -289,4 +289,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         ClientManager.refreshGame(roomId,timerCount);
     }
 
+    @Override
+    public void notifyGameMatrix(Object observable, int roomId, String[][] matrix) throws RemoteException 
+    {
+        ClientManager.setGameMatrix(roomId,matrix);
+    }
+
 }

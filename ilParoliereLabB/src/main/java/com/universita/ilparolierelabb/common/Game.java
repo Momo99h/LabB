@@ -15,13 +15,14 @@ public class Game implements Serializable
 {
     public static enum Phase
     {
-        Idle,Ready,InitCountDown,GameCountDown
+        Idle,Ready,InitCountDown,CreateMatrix,GameCountDown
     }
     private int _roomid;
     private int _gameid = 1;
     private int _initTimer = 30;
     private int _gameTimer = 180;
     private Phase _phase = Phase.Idle;
+    private String[][] _matrix;
     public Game(int roomId){this._roomid = roomId;}
     
     public void setID(int value){this._gameid = value;}
@@ -43,6 +44,15 @@ public class Game implements Serializable
     {
        this._phase = value;
     }
+    public String[][] getMatrix()
+    {
+        return this._matrix;
+    }
+    public void setMatrix(String[][] value)
+    {
+       this._matrix = value;
+    }
+   
    
     public int getID(){return this._gameid;}
     public int getRoomID(){return this._roomid;}

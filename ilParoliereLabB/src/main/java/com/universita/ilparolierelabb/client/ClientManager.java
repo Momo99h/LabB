@@ -109,6 +109,11 @@ public class ClientManager
         clientFrame.refreshGame(roomId,timerCount);
     }
 
+    static void setGameMatrix(int roomId, String[][] matrix) 
+    {
+         clientFrame.setGameMatrix(roomId,matrix);
+    }
+
     
     
 }

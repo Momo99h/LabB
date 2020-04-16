@@ -318,4 +318,10 @@ public class ClientMainFrame extends javax.swing.JFrame {
         game.refreshInitTimer(timerCount);
     }
 
+    public void setGameMatrix(int roomId, String[][] matrix) 
+    {
+        if(game.getCurrentRoomID() != roomId) return;
+        game.setMatrix(matrix);
+    }
+
 }

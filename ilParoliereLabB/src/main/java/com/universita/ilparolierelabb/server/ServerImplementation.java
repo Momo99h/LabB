@@ -193,6 +193,20 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
+    public static void notifyGameMatrix(int roomId,String[][] matrix)
+    {
+        for(WrappedObserver d : WrappedObserver)
+        {
+            try 
+            {
+                d.getOb().notifyGameMatrix(rmiService, roomId, matrix);
+            } 
+            catch (RemoteException ex) 
+            {
+                ex.printStackTrace();
+            }
+        }
+    }
     @Override
     public void disconnectClient(String usr) throws RemoteException 
     {

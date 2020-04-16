@@ -28,7 +28,7 @@ public class ServerImplementation extends Observable implements ServerInterface
     private static Registry rmiRegistry;
     private static ServerInterface rmiService;
     private static ServerImplementation server;
-    public static ArrayList<WrappedObserver> WrappedObserver; // Lista di tutti i client disponibili.
+    public static ArrayList<ClientObserver> WrappedObserver; // Lista di tutti i client disponibili.
     public static ArrayList<RegisterData> registerUserWaiting;
 
     private ServerImplementation() throws RemoteException 
@@ -70,7 +70,7 @@ public class ServerImplementation extends Observable implements ServerInterface
 
     @Override
     public void addObserver(RemoteObserver o) throws RemoteException {
-        WrappedObserver mo = new WrappedObserver(o);
+        ClientObserver mo = new ClientObserver(o);
         try
         {
             WrappedObserver.add(mo);
@@ -87,8 +87,10 @@ public class ServerImplementation extends Observable implements ServerInterface
     @Override
     public void removeObserver(RemoteObserver o) throws RemoteException 
     {
-        for(WrappedObserver w : WrappedObserver)
+        ClientObserver w;
+        for(int i = 0; i < WrappedObserver.size(); i++)
         {
+            w = WrappedObserver.get(i);
             if(w.getOb().equals(o))
             {
                 try
@@ -104,8 +106,7 @@ public class ServerImplementation extends Observable implements ServerInterface
                     ServerManager.addLogData("Cannot delete client: (ID) "+w.getObId()+" Reason: "+e.toString());
                 }
             }
-        }
-        
+        }        
     }
     @Override
     public void clientRegister(RegisterData d) throws RemoteException 
@@ -153,11 +154,13 @@ public class ServerImplementation extends Observable implements ServerInterface
     }
     public static void notifyClientsCount(int count)
     {
-        for(WrappedObserver d : WrappedObserver)
+        ClientObserver w;
+        for(int i = 0; i < WrappedObserver.size(); i++)
         {
+            w = WrappedObserver.get(i);
             try 
             {
-                d.getOb().notifyClientsCount(rmiService, count);
+                w.getOb().notifyClientsCount(rmiService, count);
             } 
             catch (RemoteException ex) 
             {
@@ -167,11 +170,13 @@ public class ServerImplementation extends Observable implements ServerInterface
     }
     public static void notifyClientsRoomsData(Rooms gameRooms) 
     {
-        for(WrappedObserver d : WrappedObserver)
+        ClientObserver w;
+        for(int i = 0; i < WrappedObserver.size(); i++)
         {
+            w = WrappedObserver.get(i);
             try 
             {
-                d.getOb().notifyClientsRoomsData(rmiService, gameRooms);
+                w.getOb().notifyClientsRoomsData(rmiService, gameRooms);
             } 
             catch (RemoteException ex) 
             {
@@ -181,11 +186,13 @@ public class ServerImplementation extends Observable implements ServerInterface
     }
     public static void notifyGameInitTimer(int roomId,int timerCount)
     {
-        for(WrappedObserver d : WrappedObserver)
+        ClientObserver w;
+        for(int i = 0; i < WrappedObserver.size(); i++)
         {
+            w = WrappedObserver.get(i);
             try 
             {
-                d.getOb().notifyGameInitTimer(rmiService, roomId, timerCount);
+                w.getOb().notifyGameInitTimer(rmiService, roomId,timerCount);
             } 
             catch (RemoteException ex) 
             {
@@ -195,11 +202,13 @@ public class ServerImplementation extends Observable implements ServerInterface
     }
     public static void notifyGameMatrix(int roomId,String[][] matrix)
     {
-        for(WrappedObserver d : WrappedObserver)
+        ClientObserver w;
+        for(int i = 0; i < WrappedObserver.size(); i++)
         {
+            w = WrappedObserver.get(i);
             try 
             {
-                d.getOb().notifyGameMatrix(rmiService, roomId, matrix);
+                w.getOb().notifyGameMatrix(rmiService, roomId, matrix);
             } 
             catch (RemoteException ex) 
             {
@@ -270,7 +279,10 @@ public class ServerImplementation extends Observable implements ServerInterface
     {
         Room r = ServerManager.rooms.getRoomWherePlayer(usr);
         r.changePlayerStatus(usr, status);
-        if(ServerManager.rooms.isRoomReadyToPlay(r.getId())) ServerManager.createGame(r.getId());
+        if(ServerManager.rooms.isRoomReadyToPlay(r.getId()) && !ServerManager.games.hasRoomGame(r.getId())) 
+        {
+            ServerManager.createGame(r.getId());
+        }
         ServerManager.rooms.setDataChanged(true);
     }
     

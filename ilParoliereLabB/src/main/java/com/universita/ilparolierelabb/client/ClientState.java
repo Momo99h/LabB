@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.universita.ilparolierelabb.server;
+package com.universita.ilparolierelabb.client;
 
 /**
  *
  * @author Momo
  */
-public enum ServerFSMachine 
-{
-    Idle,
-    Email,
-    Room
+public enum ClientState {
+    Lobby,Room,Game
 }

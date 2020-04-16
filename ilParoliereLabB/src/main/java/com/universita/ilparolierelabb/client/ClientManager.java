@@ -104,9 +104,9 @@ public class ClientManager
         return ClientImplementation.userAlreadyTaken(usr); 
     }
 
-    public static void refreshGame(int roomId, int timerCount) 
+    public static void refreshGameInitTimer(int roomId, int timerCount) 
     {
-        clientFrame.refreshGame(roomId,timerCount);
+        clientFrame.refreshGameInitTimer(roomId,timerCount);
     }
 
     static void setGameMatrix(int roomId, String[][] matrix) 

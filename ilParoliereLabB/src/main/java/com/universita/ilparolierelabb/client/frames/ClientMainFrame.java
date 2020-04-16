@@ -312,7 +312,7 @@ public class ClientMainFrame extends javax.swing.JFrame {
         this.panelContainer.repaint();
     }
 
-    public void refreshGame(int roomId, int timerCount) 
+    public void refreshGameInitTimer(int roomId, int timerCount) 
     {
         if(game.getCurrentRoomID() != roomId) return;
         game.refreshInitTimer(timerCount);

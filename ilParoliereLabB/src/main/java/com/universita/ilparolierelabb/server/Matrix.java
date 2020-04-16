@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import static java.lang.String.valueOf;
 import java.util.ArrayList;
 
 /**
@@ -26,26 +27,29 @@ public class Matrix {
     }
     
     //intro condition per controllare se la parola può esistere nella matrice 
-    public boolean isFirstLetterPresent(String[][] matrix, String w){
+    public static boolean isFirstLetterPresent(String[][] matrix, String w){
         boolean is = false;
+        String first = String.valueOf(w.charAt(0));
+        
         for(int i=0; i<4; i++){
             for(int j=0; j<4; j++){
-                if(matrix[i][j].equals(w.charAt(0))){
-                    is = true; 
-                }   
+               if(first.equals(matrix[i][j])){
+                   is = true; 
+               }
             }
         } 
         return is; 
     }
     
+    //torna un ArrayList di nodi percè i nodi iniziali possono essere più di uno
     public static ArrayList<Node> getStartingPosition(String[][] m, String w){
         
         ArrayList<Node> nodes = new ArrayList<Node>();
+        w = w.toUpperCase();
         
         //creo ed inizializzo arraylist che contiene la parola
         ArrayList<String> letters = new ArrayList<>();
         for(int i=0; i<w.length(); i++){
-            //letters.add(String.valueOf(w.toLowerCase().charAt(i))); 
             letters.add(String.valueOf(w.charAt(i)));
         }
         
@@ -59,8 +63,8 @@ public class Matrix {
         }   return nodes;
     }
    
-   
-    public ArrayList<Node> getNeighbors(String[][] m, Node node, String nextLetter){
+    //cerca la lettera successiva e torna in un arraylist di nodi che la contengono
+    public static ArrayList<Node> getNeighbors(String[][] m, Node node, String nextLetter){
         
         ArrayList<Node> neighbors = new ArrayList<Node>(); 
         
@@ -102,7 +106,7 @@ public class Matrix {
     }
     
     
-    
+    /*
     public boolean isWordPresent(String[][] matrix, ArrayList<String> letters){
         
         boolean present = false;
@@ -118,7 +122,7 @@ public class Matrix {
             //n = getNeighbors(String[][] m, Node node, String nextLetter);
         }
         return true; 
-    }
+    }*/
     
     public static void main(String[] args){
         
@@ -126,8 +130,8 @@ public class Matrix {
                                     {"P", "R", "M", "R"},
                                     {"D", "O", "L", "A"},
                                     {"E", "S", "I", "C"},};
-        String w = "DOSE";
-        boolean firstLetter = false; 
+        final String w = "DOSE"; 
+        final String w2 = "ARO";
         
         System.out.println("Matrice:");
         
@@ -139,15 +143,24 @@ public class Matrix {
         }
        
         
-        System.out.println("Controllo se la prima lettera è presente"); 
-
-        
-        
-        System.out.println("Visualizzo i suoi vicini");
-        
-        // TO DO 
-        
-        
+        System.out.println("Controllo prima lettera della parola " + w + " "); 
+        boolean b = Matrix.isFirstLetterPresent(m,w);
+        System.out.println(b ? "Lettera PRESENTE" : "Lettera NON PRESENTE");
+        if(b){
+            //trovo posizione di partenza 
+            System.out.println("Visualizzo nodo di partenza ");
+            ArrayList<Node> node = new ArrayList<Node>(Matrix.getStartingPosition(m,w));
+            for(Node n : node){
+                System.out.println(n.x + " " + n.y + " ");
+            }
+            
+            //ritorno i suoi vicini cge corrispondono
+            System.out.println("Trovo nodi successivi");
+            ArrayList<Node> vicini = new ArrayList<Node>(Matrix.getNeighbors(m, node.get(0), "O"));
+            for(Node n : vicini){
+                System.out.println(n.x + " " + n.y + " ");
+            }
+        }
         
     }
 }

@@ -5,6 +5,8 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author andreagirola
@@ -16,5 +18,9 @@ public class Node {
     public Node(int x, int y){
         this.x = x; 
         this.y = y; 
+    }
+
+    Node(ArrayList<Node> startingPosition) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

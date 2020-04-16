@@ -5,7 +5,7 @@
  */
 package com.universita.ilparolierelabb.client;
 
-import com.universita.ilparolierelabb.client.frames.ClientMainFrame;
+import com.universita.ilparolierelabb.client.frames.ClientLobbyFrame;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.UserStatus;
@@ -269,7 +269,7 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     {
         try
         {
-            ClientMainFrame.Par_lblUtentiConnessi.setText(count+"");
+            ClientLobbyFrame.Par_lblUtentiConnessi.setText(count+"");
         }
         catch(Exception e)
         {

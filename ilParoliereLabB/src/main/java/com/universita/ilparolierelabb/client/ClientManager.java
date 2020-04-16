@@ -21,7 +21,8 @@ public class ClientManager
     
     public static Rooms rooms = new Rooms();
     
-    private static ClientMainFrame clientFrame;
+    public static ClientLobbyFrame lobbyFrame;
+    public static ClientGameFrame gameFrame;
     
     public static void Launch()
     {
@@ -85,12 +86,14 @@ public class ClientManager
     }
     public static void refreshRooms() 
     {
-        clientFrame.refreshRooms();
+        lobbyFrame.refreshRooms();
+        gameFrame.refreshRooms();
     }
     public static void Run()
     {
-        clientFrame = new ClientMainFrame();
-        clientFrame.setVisible(true);
+        lobbyFrame = new ClientLobbyFrame();
+        gameFrame = new ClientGameFrame();
+        lobbyFrame.setVisible(true);
         ClientImplementation.ClientOnline();
     }
     
@@ -106,12 +109,12 @@ public class ClientManager
 
     public static void refreshGameInitTimer(int roomId, int timerCount) 
     {
-        clientFrame.refreshGameInitTimer(roomId,timerCount);
+        //clientFrame.refreshGameInitTimer(roomId,timerCount);
     }
 
     static void setGameMatrix(int roomId, String[][] matrix) 
     {
-         clientFrame.setGameMatrix(roomId,matrix);
+         //clientFrame.setGameMatrix(roomId,matrix);
     }
 
     

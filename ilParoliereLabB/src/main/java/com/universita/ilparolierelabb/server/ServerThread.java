@@ -19,7 +19,6 @@ import javax.swing.Timer;
  */
 public class ServerThread extends Thread implements ActionListener
 {
-    private ServerFSMachine _serverStep = ServerFSMachine.Idle;
     private Game[] gameArray;
     private Game.Phase gamePhase;
     private int tempInt = 0;
@@ -49,8 +48,6 @@ public class ServerThread extends Thread implements ActionListener
             ServerManager._ClientCountChanged = false;
             ServerImplementation.notifyClientsCount(ServerManager.ObserversOnline());
         }
-        //
-       _serverStep = ServerFSMachine.Email;
     }
 
     private synchronized void doEmailstuff() 
@@ -88,7 +85,6 @@ public class ServerThread extends Thread implements ActionListener
                 }
             }
         }
-        _serverStep = ServerFSMachine.Room;
     }
 
     private synchronized void doRoomstuff() 
@@ -98,7 +94,6 @@ public class ServerThread extends Thread implements ActionListener
             ServerManager.rooms.confirmDataChanged();
             ServerImplementation.notifyClientsRoomsData(ServerManager.rooms);
         }
-        _serverStep = ServerFSMachine.Idle;
     }
 
     private synchronized void doGamestuff() 

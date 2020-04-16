@@ -35,5 +35,13 @@ public class Games implements Serializable
     {
         return this._games.size();
     }
+    public boolean hasRoomGame(int roomId)
+    {
+        for(int i = 0; i < gamesCount();i++)
+        {
+            if(this._games.get(i).getRoomID() == roomId) return true;
+        }
+        return false;
+    }
     
 }

@@ -14,13 +14,13 @@ import java.util.Observer;
  *
  * @author Momo
  */
-public class WrappedObserver implements Observer, Serializable {
+public class ClientObserver implements Observer, Serializable {
 
         private static final long serialVersionUID = 1L;
 
         private RemoteObserver ro = null;
 
-        public WrappedObserver(RemoteObserver ro) {
+        public ClientObserver(RemoteObserver ro) {
             this.ro = ro;
         }
 

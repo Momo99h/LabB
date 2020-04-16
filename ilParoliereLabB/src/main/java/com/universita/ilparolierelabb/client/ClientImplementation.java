@@ -6,6 +6,7 @@
 package com.universita.ilparolierelabb.client;
 
 import com.universita.ilparolierelabb.client.frames.ClientLobbyFrame;
+import com.universita.ilparolierelabb.common.LobbyData;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.UserStatus;
@@ -28,6 +29,7 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     public static ServerInterface _server = null;
     public static ClientImplementation _client;
 
+    
     
     private ClientImplementation() throws RemoteException 
     {
@@ -151,11 +153,11 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return false;
         }
     }
-    public static Rooms getGameRooms() 
+    public static LobbyData getLobbyRooms() 
     {
         try
         {
-            return _server.getGameRooms();
+            return _server.getLobbyRooms();
         }
         catch(Exception e)
         {
@@ -247,7 +249,21 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
-    
+    public static Room getRoomById(int roomId) 
+    {
+        try
+        {
+            return _server.getRoomById(roomId);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            return null; 
+            
+        }
+    }
     // @author AndreaGirola
     public static boolean userAlreadyTaken(String user){
         try
@@ -277,9 +293,9 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         }
     }
     @Override
-    public void notifyClientsRoomsData(Object observable, Rooms rooms) throws RemoteException 
+    public void notifyClientsLobbyData(Object observable, LobbyData data) throws RemoteException 
     {
-        ClientManager.rooms = rooms;
+        ClientManager.lobby = data;
         ClientManager.refreshRooms();
     }
 

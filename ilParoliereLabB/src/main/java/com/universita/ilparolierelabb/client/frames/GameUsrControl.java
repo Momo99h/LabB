@@ -124,7 +124,7 @@ public class GameUsrControl extends javax.swing.JPanel {
     public void setRoom(int roomID) 
     {
         this._currentRoomID = roomID;
-        this._room = ClientManager.rooms.getRoom(roomID);
+        this._room = ClientManager.getRoomById(roomID);
         this.lblRoomName.setText(this._room.getRoomName());
         this.refreshHeaderMessage();
         this.refreshTable();

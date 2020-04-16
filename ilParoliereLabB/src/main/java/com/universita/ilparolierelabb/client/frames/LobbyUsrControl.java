@@ -133,7 +133,7 @@ public class LobbyUsrControl extends javax.swing.JPanel {
 
     private void jTableRoomsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRoomsMouseClicked
         // TODO add your handling code here:
-        int selected = jTableRooms.getSelectedRow();
+       /* int selected = jTableRooms.getSelectedRow();
         int id = 0;
         if(selected == -1)return;
         id = Integer.parseInt((String) jTableRooms.getValueAt(selected, 0));
@@ -141,7 +141,7 @@ public class LobbyUsrControl extends javax.swing.JPanel {
         User[] players = r.getListPlayerIn();
         _listModel.clear();
         _listModel.addElement("Players inside room:");
-        for(int i = 0; i < players.length;i++) _listModel.addElement(players[i].getUsername());
+        for(int i = 0; i < players.length;i++) _listModel.addElement(players[i].getUsername());*/
         
     }//GEN-LAST:event_jTableRoomsMouseClicked
 

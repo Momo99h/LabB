@@ -120,7 +120,7 @@ public class ClientGameFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         if(!Utility.ShowQuestionPopUp(Settings.clientName, "Confirm operation?")) return;
         ClientManager.leaveRoom(ClientManager.currentuser);
-        ClientManager.getGameRooms();
+        ClientManager.getLobbyRooms();
     }//GEN-LAST:event_buttonLeaveRoomActionPerformed
 
     private void buttonReadyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReadyActionPerformed
@@ -181,7 +181,6 @@ public class ClientGameFrame extends javax.swing.JFrame {
     private void initFunctions()
     {
         this.setLocationRelativeTo(null);
-        ClientManager.getGameRooms();
         this.refreshRooms();
     }
     public void enterRoom(int roomId)

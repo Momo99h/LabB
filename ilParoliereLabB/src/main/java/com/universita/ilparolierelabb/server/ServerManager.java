@@ -6,6 +6,7 @@
 package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.common.Games;
+import com.universita.ilparolierelabb.common.LobbyData;
 import com.universita.ilparolierelabb.common.Rooms;
 import com.universita.ilparolierelabb.server.frames.ServerLogin;
 import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
@@ -25,6 +26,7 @@ public class ServerManager
     public static Rooms rooms = new Rooms();
     public static Games games = new Games();
     public static Boolean _ClientCountChanged = false;
+    public static LobbyData lobby = new LobbyData();
     
     public static void Launch()
     {

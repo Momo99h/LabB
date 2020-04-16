@@ -7,6 +7,7 @@ package com.universita.ilparolierelabb.client;
 
 import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.client.frames.*;
+import com.universita.ilparolierelabb.common.LobbyData;
 import com.universita.ilparolierelabb.common.UserStatus;
 import com.universita.ilparolierelabb.common.Rooms;
 import com.universita.ilparolierelabb.common.Room;
@@ -18,11 +19,9 @@ import com.universita.ilparolierelabb.common.Room;
 public class ClientManager 
 {
     public static User currentuser = new User();
-    
-    public static Rooms rooms = new Rooms();
-    
     public static ClientLobbyFrame lobbyFrame;
     public static ClientGameFrame gameFrame;
+    public static LobbyData lobby;
     
     public static void Launch()
     {
@@ -60,9 +59,9 @@ public class ClientManager
     {
         return ClientImplementation.clientIsLogged(usr);
     }
-    public static void getGameRooms()
+    public static void getLobbyRooms()
     {
-        ClientManager.rooms = ClientImplementation.getGameRooms();
+        ClientManager.lobby = ClientImplementation.getLobbyRooms();
     }
     public static int getLastRoomID()
     {
@@ -112,9 +111,13 @@ public class ClientManager
         //clientFrame.refreshGameInitTimer(roomId,timerCount);
     }
 
-    static void setGameMatrix(int roomId, String[][] matrix) 
+    public static void setGameMatrix(int roomId, String[][] matrix) 
     {
          //clientFrame.setGameMatrix(roomId,matrix);
+    }
+    public static Room getRoomById(int roomId)
+    {
+        return ClientImplementation.getRoomById(roomId); 
     }
 
     

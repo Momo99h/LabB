@@ -92,7 +92,7 @@ public class ServerThread extends Thread implements ActionListener
         if(ServerManager.rooms.isDataChanged())
         {
             ServerManager.rooms.confirmDataChanged();
-            ServerImplementation.notifyClientsRoomsData(ServerManager.rooms);
+            ServerImplementation.notifyClientsLobbyData(ServerManager.rooms.createLobbyData());
         }
     }
 

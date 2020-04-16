@@ -9,6 +9,7 @@ import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.Room;
 import com.universita.ilparolierelabb.common.Rooms;
 import com.universita.ilparolierelabb.client.RegisterData;
+import com.universita.ilparolierelabb.common.LobbyData;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.UserStatus;
@@ -168,7 +169,7 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
-    public static void notifyClientsRoomsData(Rooms gameRooms) 
+    public static void notifyClientsLobbyData(LobbyData data) 
     {
         ClientObserver w;
         for(int i = 0; i < WrappedObserver.size(); i++)
@@ -176,7 +177,7 @@ public class ServerImplementation extends Observable implements ServerInterface
             w = WrappedObserver.get(i);
             try 
             {
-                w.getOb().notifyClientsRoomsData(rmiService, gameRooms);
+                w.getOb().notifyClientsLobbyData(rmiService, data);
             } 
             catch (RemoteException ex) 
             {
@@ -225,10 +226,11 @@ public class ServerImplementation extends Observable implements ServerInterface
     }
 
     @Override
-    public Rooms getGameRooms() throws RemoteException
+    public LobbyData getLobbyRooms() throws RemoteException
     {
-        ServerManager.addLogData("New request of rooms");
-        return ServerManager.rooms;
+        ServerManager.addLogData("New request of lobby rooms");
+        ServerManager.lobby = ServerManager.rooms.createLobbyData();
+        return ServerManager.lobby;
     }
 
     @Override
@@ -298,6 +300,12 @@ public class ServerImplementation extends Observable implements ServerInterface
     public boolean userAlreadyTaken(String user) throws RemoteException 
     {
         return ServerDBInterface.userAlreadyTaken(user);
+    }
+
+    @Override
+    public Room getRoomById(int id) throws RemoteException 
+    {
+        return ServerManager.rooms.getRoom(id);
     }
 
    

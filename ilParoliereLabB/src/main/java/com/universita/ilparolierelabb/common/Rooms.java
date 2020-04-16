@@ -115,4 +115,22 @@ public class Rooms implements Serializable
         }
         return true;
     }
+    public LobbyData createLobbyData()
+    {
+        LobbyData d = new LobbyData();
+        Room r;
+        String s = "";
+        for(int i = 0; i < getRoomsCount(); i++)
+        {
+            r = getRoomObject(i);
+            d.addRoomData(r.getId()+";"+r.getRoomName()+";"+r.getCreationDate()+";"+r.getPlayersIn()+"/"+r.getPlayersNeeded());
+            User[] usr = r.getListPlayerIn();
+            for(int j = 0; j < usr.length; j++)
+            {
+                s += usr[i].getUsername()+";";
+            }
+            d.addUsersData(s);
+        }
+        return d;
+    }
 }

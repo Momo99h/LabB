@@ -9,6 +9,7 @@ import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.Room;
 import com.universita.ilparolierelabb.common.Rooms;
 import com.universita.ilparolierelabb.client.RegisterData;
+import com.universita.ilparolierelabb.common.LobbyData;
 import com.universita.ilparolierelabb.common.UserStatus;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
@@ -27,7 +28,7 @@ public interface ServerInterface extends Remote
     public void removeObserver(RemoteObserver o) throws RemoteException;
     public void disconnectClient(String usr) throws RemoteException;
     public Boolean clientIsLogged(String usr) throws RemoteException;
-    public Rooms getGameRooms()throws RemoteException;
+    public LobbyData getLobbyRooms()throws RemoteException;
     public int getLastRoomID()throws RemoteException;
     public void addRoom(Room r)throws RemoteException;
     public boolean enterRoom(int roomId,User usr)throws RemoteException;
@@ -35,5 +36,5 @@ public interface ServerInterface extends Remote
     public void changePlayerStatus(User usr,UserStatus status) throws RemoteException;
     public boolean emailAlreadyTaken(String email) throws RemoteException;
     public boolean userAlreadyTaken(String user) throws RemoteException;
-         
+    public Room getRoomById(int id) throws RemoteException;
 }

@@ -198,17 +198,19 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
     private void initFunctions()
     {
         this.setLocationRelativeTo(null);
-        ClientManager.getGameRooms();
+        ClientManager.getLobbyRooms();
         this.refreshRooms();
     }
     public void refreshRooms()
     {
         this.lobbyUsrControl.removeAllRooms();
-        for(int i = 0; i < ClientManager.rooms.getRoomsCount();i++)
+        String[] data;
+        String[] rooms = ClientManager.lobby.getRoomData();
+        for(int i = 0; i < rooms.length;i++)
         {
-            this._tempRoom = ClientManager.rooms.getRoomObject(i);
+            data = rooms[i].split(";");
             this.lobbyUsrControl.addRoom
-            (_tempRoom.getId()+"",_tempRoom.getRoomName(), _tempRoom.getCreationDate(), _tempRoom.getPlayersIn()+"/"+_tempRoom.getPlayersNeeded());
+            (data[0],data[1],data[2],data[3]);
         }
     }
 
@@ -219,7 +221,6 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
             Utility.ShowErrorPopUp(Settings.clientName,"This room is full!");
             return;
         }
-        ClientManager.getGameRooms();
         gameFrame.enterRoom(roomId);
         gameFrame.setVisible(true);
         this.dispose();

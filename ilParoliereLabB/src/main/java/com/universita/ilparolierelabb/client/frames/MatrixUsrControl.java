@@ -5,12 +5,15 @@
  */
 package com.universita.ilparolierelabb.client.frames;
 
+import com.universita.ilparolierelabb.common.Utility;
+
 /**
  *
  * @author Momo
  */
 public class MatrixUsrControl extends javax.swing.JPanel {
 
+    private String letters;
     /**
      * Creates new form MatrixUsrControl
      */
@@ -47,59 +50,65 @@ public class MatrixUsrControl extends javax.swing.JPanel {
         setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("LETTER");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("A");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel5.setText("LETTER");
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("E");
 
         jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setText("LETTER");
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("I");
 
         jLabel13.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel13.setText("LETTER");
+        jLabel13.setText("P");
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel14.setText("LETTER");
+        jLabel14.setText("G");
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel10.setText("LETTER");
+        jLabel10.setText("S");
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("LETTER");
+        jLabel6.setText("F");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("LETTER");
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("B");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel3.setText("LETTER");
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("C");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setText("LETTER");
+        jLabel7.setText("G");
 
         jLabel11.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel11.setText("LETTER");
+        jLabel11.setText("V");
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel15.setText("LETTER");
+        jLabel15.setText("S");
 
         jLabel16.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel16.setText("LETTER");
+        jLabel16.setText("V");
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel12.setText("LETTER");
+        jLabel12.setText("N");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel8.setText("LETTER");
+        jLabel8.setText("H");
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("LETTER");
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("D");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel13)
@@ -133,7 +142,7 @@ public class MatrixUsrControl extends javax.swing.JPanel {
                         .addComponent(jLabel3)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel4)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -166,6 +175,32 @@ public class MatrixUsrControl extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public void shuffleAnim()
+    {
+        letters = Utility.randomLetter(16);
+        jLabel1.setText(String.valueOf(letters.charAt(0)));
+        jLabel2.setText(String.valueOf(letters.charAt(1)));
+        jLabel3.setText(String.valueOf(letters.charAt(2)));
+        jLabel4.setText(String.valueOf(letters.charAt(3)));
+        jLabel5.setText(String.valueOf(letters.charAt(4)));
+        jLabel6.setText(String.valueOf(letters.charAt(5)));
+        jLabel7.setText(String.valueOf(letters.charAt(6)));
+        jLabel8.setText(String.valueOf(letters.charAt(7)));
+        jLabel9.setText(String.valueOf(letters.charAt(8)));
+        jLabel10.setText(String.valueOf(letters.charAt(9)));
+        jLabel11.setText(String.valueOf(letters.charAt(10)));
+        jLabel12.setText(String.valueOf(letters.charAt(11)));
+        jLabel13.setText(String.valueOf(letters.charAt(12)));
+        jLabel14.setText(String.valueOf(letters.charAt(13)));
+        jLabel15.setText(String.valueOf(letters.charAt(14)));
+        jLabel16.setText(String.valueOf(letters.charAt(15)));
+    }
+    
+    
+    
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

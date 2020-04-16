@@ -27,6 +27,7 @@ public class GameUsrControl extends javax.swing.JPanel {
     public GameUsrControl() {
         initComponents();
         initFunctions();
+        matrixUsrControl.setVisible(false);
     }
 
     /**
@@ -88,16 +89,16 @@ public class GameUsrControl extends javax.swing.JPanel {
         panelContainerLayout.setHorizontalGroup(
             panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelContainerLayout.createSequentialGroup()
-                .addGap(342, 342, 342)
+                .addGap(402, 402, 402)
                 .addComponent(matrixUsrControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelContainerLayout.setVerticalGroup(
             panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelContainerLayout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(19, 19, 19)
                 .addComponent(matrixUsrControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(173, Short.MAX_VALUE))
+                .addContainerGap(165, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -186,5 +187,7 @@ public class GameUsrControl extends javax.swing.JPanel {
         String waiting = "The game is starting in %s seconds...";
         waiting = String.format(waiting, timerCount);
         this.lblWaitingPlayers.setText(waiting);
+        if(!matrixUsrControl.isVisible())matrixUsrControl.setVisible(true);
+        matrixUsrControl.shuffleAnim();
     }
 }

@@ -27,7 +27,7 @@ public class ServerThread extends Thread implements ActionListener
     public static void Run()
     {
         ServerThread t = new ServerThread();
-        new Timer(1000, (ActionListener) t).start();
+        new Timer(500, (ActionListener) t).start();
     }
     public void actionPerformed(ActionEvent e) 
     {
@@ -113,13 +113,10 @@ public class ServerThread extends Thread implements ActionListener
                     gameArray[i].setPhase(Game.Phase.InitCountDown);
                     break;
                 case InitCountDown:
-                    if(gameArray[i].getInitTimer() <= 0) 
-                        gameArray[i].setPhase(Game.Phase.GameCountDown);
-                    
                     gameArray[i].decrementInitTimer();
-
-                    
                     ServerImplementation.notifyGameInitTimer(gameArray[i].getRoomID(),gameArray[i].getInitTimer());
+                    if(gameArray[i].getInitTimer() == 0)
+                        gameArray[i].setPhase(Game.Phase.GameCountDown);
                     break;
                 case GameCountDown:
                     

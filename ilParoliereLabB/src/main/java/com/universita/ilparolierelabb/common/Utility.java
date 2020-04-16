@@ -77,6 +77,15 @@ public class Utility
             sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
         return sb.toString();
     }
+    public static String randomLetter(int length)
+    {
+        String AB = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";    
+        Random rnd = new Random();
+        StringBuilder sb = new StringBuilder(length);
+        for( int i = 0; i < length; i++ ) 
+            sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
+        return sb.toString();
+    }
     public static Boolean sendEmail()
     {
         return true;

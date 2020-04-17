@@ -42,78 +42,79 @@ public class NodeMatrix {
         return nodes;
     }
     
-    public static ArrayList<Node> getStartingPoints(Node[][] nodeMatrix , String s){ //ritorna arrayList di di Nodi di partenza (tenendo ripetizioni possibili)
+    public static ArrayList<MatrixPosition> getLetterPosition(Node[][] nodeMatrix , String letter){ //ritorna arrayList di di Nodi di partenza (tenendo ripetizioni possibili)
         
-        ArrayList<Node> startingPoints = new ArrayList<Node>(); 
-        
+        ArrayList<MatrixPosition> letterPositions = new ArrayList<>(); 
+        MatrixPosition pos;
         //scorro matrice di nodi 
         for(int i=0; i<4; i++){
             for(int j=0; j<4; j++){
-                if(s.equals(nodeMatrix[i][j].s)){
-                    startingPoints.add(new Node(nodeMatrix[i][j].s,i,j,true));
+                if(letter.equals(nodeMatrix[i][j].getValue())){
+                    
+                    pos = new MatrixPosition();
+                    pos = nodeMatrix[i][j].getMatrixPosition();
+                    letterPositions.add(pos);
                 }
             }
         }
         
-        return startingPoints; 
-    }
-    
-    //ritorna i nodi corrispondendi alla prossima lettera da trovare 
-    public static ArrayList<Node> getNeighbors(Node[][] nodeMatrix, Node startingNode, String nextLetter){
-        
-        ArrayList<Node> neighbors = new ArrayList<Node>(); 
-        
-        if(nextLetter.equals(nodeMatrix[startingNode.x+1][startingNode.y].s)){
-            //neighbors.add(new Node(nextLetter, ))
-        }
-        
-        return neighbors; 
+        return letterPositions; 
     }
     
     public static void main (String[] args){
     
-        final String[][] m = {{"G", "A", "U", "T"}, 
-                              {"P", "R", "M", "R"},
-                              {"D", "O", "L", "A"},
-                              {"E", "S", "I", "C"}};
-        Node[][] nodeMatrix;
-        
-        ArrayList<String> word = new ArrayList<String>(); //parola da confrontare,  dovrà diventare un arraylist di parole da confrontare 
-        word = (NodeMatrix.stringToArrayList("ARO"));
-        
-        //System.out.println("Inizializzo matrix");
-        nodeMatrix = NodeMatrix.createNodeMatrix(m);
-        
-        //System.out.println("Stampo matrix");
-        for(int i=0; i<4; i++){
-            for(int j=0; j<4; j++){
-            System.out.println("Node: " + nodeMatrix[i][j].s + 
-                               " Coordinate: " + nodeMatrix[i][j].x + "," + nodeMatrix[i][j].y + 
-                               " Visited: " + nodeMatrix[i][j].v);
-            }
-        }
-        
-        for(int i=0; i<4; i++){
-            for(int j=0; j<4; j++){
-            System.out.println("Node: " + nodeMatrix[i][j].s);
-            }
-        }
-        
-        
-        /*
-        System.out.println("Lista nodi di partenza: "); 
-        ArrayList<Node> startings = new ArrayList<Node>();
-        startings = NodeMatrix.getStartingPoints(matrixNodes , word);
-        for(Node n : startings){
-            System.out.println("Node: " + n.s + 
-                               " Coordinate: " + n.x + "," + n.y + 
-                               " Visited: " + n.v);
-        }*/
         
        
         
-    }
-    
-    
-    
+        final String[][] m = {{"G", "A", "U", "O"}, 
+                              {"P", "R", "U", "R"},
+                              {"O", "Z", "Z", "A"},
+                              {"E", "S", "O", "C"}};
+        
+        Node[][] nodeMatrix = createNodeMatrix(m);
+        
+        ArrayList<Letter> letters= new ArrayList<>();
+        String p = "GAROZZO";
+        String[] paroladimerda = new String[p.length()];
+        for(int i = 0; i < p.length();i++)
+        {
+            paroladimerda[i] = String.valueOf(p.charAt(i));
+        }
+        
+        for(String s : paroladimerda)
+        {
+            Letter l = new Letter(s);
+            l.setPositions( getLetterPosition(nodeMatrix, s));
+            letters.add(l);
+            l.print();
+            System.out.println();
+        }
+        for(int i=0; i<letters.size(); i++){
+            System.out.println(letters.get(i).getLetter());
+        }
+        
+        /*
+            LetterA.setPositions(getLetterPosition(nodeMatrix, "A"));
+            
+        */
+        /*
+        
+        ArrayList<ArrayList<MatrixPosition>>
+        A
+        A = 0,1 / 2,3
+        R = 1,1 / 1,3
+        O = 0,3 / 3,2
+        quando salgo resetto le visite del livello inferiore
+        */
+        /*
+        [][A][][]
+        [][][][]
+        [][][][A]
+        [][][][]
+*/      
+        /*
+        0,0 0,1 0,2 -> 0,0 XXX 0,2
+        1,0 1,1 1,2 -> 1,0 1,1 1,2
+                    -> 2,0 2,1 2,2 */
+    } 
 }

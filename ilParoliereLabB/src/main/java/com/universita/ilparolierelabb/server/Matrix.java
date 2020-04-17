@@ -21,10 +21,8 @@ public class Matrix {
     public Matrix(String[][] m){
         this._passedMatrix = m; 
     }
+  
     
-    public boolean isNodeVisited(Node node, ArrayList<Node> nodeList){
-        return (nodeList.contains(node)); 
-    }
     
     //intro condition per controllare se la parola può esistere nella matrice 
     public static boolean isFirstLetterPresent(String[][] matrix, String w){
@@ -57,73 +55,54 @@ public class Matrix {
         for(int i=0; i<4; i++){
             for(int j=0; j<4; j++){
                 if(m[i][j].equals(letters.get(0))){
-                    nodes.add(new Node(i,j));
+                 //   nodes.add(new Node(i,j,true));
                 }   
             }   
         }   return nodes;
     }
-   
+    /*
     //cerca la lettera successiva e torna in un arraylist di nodi che la contengono
     public static ArrayList<Node> getNeighbors(String[][] m, Node node, String nextLetter){
         
         ArrayList<Node> neighbors = new ArrayList<Node>(); 
         
         if(m[node.x+1][node.y].equals(nextLetter)) { //sopra
-            neighbors.add( new Node(node.x+1, node.y)); 
+            neighbors.add( new Node(node.x+1, node.y, true)); 
         } else 
     
         if(m[node.x+1][node.y+1].equals(nextLetter)){ //sopra destra 
-            neighbors.add( new Node(node.x+1, node.y+1));
+            neighbors.add( new Node(node.x+1, node.y+1, true));
         } else 
         
         if(m[node.x][node.y+1].equals(nextLetter)){ //destra  
-            neighbors.add( new Node(node.x, node.y+1));
+            neighbors.add( new Node(node.x, node.y+1, true ));
         } else 
 
         if(m[node.x-1][node.y+1].equals(nextLetter)){ //sotto destra 
-            neighbors.add( new Node(node.x-1, node.y+1));
+            neighbors.add( new Node(node.x-1, node.y+1, true));
         } else 
 
         if(m[node.x-1][node.y].equals(nextLetter)){ //sotto 
-            neighbors.add( new Node(node.x-1, node.y));
+            neighbors.add( new Node(node.x-1, node.y, true));
         } else 
             
         if(m[node.x-1][node.y-1].equals(nextLetter)){ //sotto sinistra 
-            neighbors.add( new Node(node.x-1, node.y-1));
+            neighbors.add( new Node(node.x-1, node.y-1, true));
         } else 
             
         if(m[node.x][node.y-1].equals(nextLetter)){ //sinistra 
-            neighbors.add( new Node(node.x, node.y-1));
+            neighbors.add( new Node(node.x, node.y-1, true));
         } else 
             
         if(m[node.x+1][node.y-1].equals(nextLetter)){ //sopra sinistra 
-            neighbors.add( new Node(node.x+1, node.y-1));
+            neighbors.add( new Node(node.x+1, node.y-1, true));
         } 
         
          
         return neighbors; 
                 
-    }
-    
-    
-    /*
-    public boolean isWordPresent(String[][] matrix, ArrayList<String> letters){
-        
-        boolean present = false;
-        String word = letters.toString();
-        System.out.print("First letter present? > ");
-        //present = getStartingPosition(matrix, word);
-        System.out.println(present ? "SI":"NO");
-        if(!present){
-            System.out.println("Parola non esiste nella matrice");
-        } else {
-            System.out.println("Lettere vicine: "); 
-            ArrayList<Node> n = new ArrayList<Node>(); 
-            //n = getNeighbors(String[][] m, Node node, String nextLetter);
-        }
-        return true; 
     }*/
-    
+    /*
     public static void main(String[] args){
         
         final String[][] m = {{"G", "A", "U", "T"}, 
@@ -132,6 +111,7 @@ public class Matrix {
                                     {"E", "S", "I", "C"},};
         final String w = "DOSE"; 
         final String w2 = "ARO";
+        //Node currentNode = new Node(0,0,false);
         
         System.out.println("Matrice:");
         
@@ -152,17 +132,21 @@ public class Matrix {
             ArrayList<Node> node = new ArrayList<Node>(Matrix.getStartingPosition(m,w));
             for(Node n : node){
                 System.out.println(n.x + " " + n.y + " ");
+                
             }
             
-            //ritorno i suoi vicini cge corrispondono
+            //ritorno i suoi vicini che corrispondono
             System.out.println("Trovo nodi successivi");
             ArrayList<Node> vicini = new ArrayList<Node>(Matrix.getNeighbors(m, node.get(0), "O"));
             for(Node n : vicini){
                 System.out.println(n.x + " " + n.y + " ");
             }
+            
+            //Mi sposto su un nodo vicino valido 
+            
         }
         
-    }
+    }*/
 }
 
         

@@ -14,6 +14,11 @@ import java.util.ArrayList;
 public class NodeMatrix {
     
     public static Node _currentPosition; 
+    public static Node[][] _nodeMatrix;
+    
+    public NodeMatrix(){ 
+        //to do 
+    }   
     
     public static ArrayList<String> stringToArrayList(String s){        //trasforma Stringa in arraylist di stringhe dividendo ogni lettera 
         
@@ -25,16 +30,16 @@ public class NodeMatrix {
         return word; 
     }
     
-    public static ArrayList<Node> createNodeMatrix(String[][] matrix){
+    public static Node[][] createNodeMatrix(String[][] matrix){
         
-        ArrayList<Node> temp = new ArrayList<Node>();
+        Node[][] nodes = new Node[4][4];
         
         for(int i=0; i<4; i++){
             for(int j=0; j<4; j++){
-                temp.add(new Node(matrix[i][j], i, j, false));
+                nodes[i][j] = new Node(matrix[i][j],i,j,false);
             }
         }
-        return temp;
+        return nodes;
     }
     
     public static ArrayList<Node> getStartingPoints(ArrayList<Node> n , ArrayList<String> s){
@@ -55,7 +60,7 @@ public class NodeMatrix {
         
         ArrayList<Node> neighbors = new ArrayList<Node>(); 
         
-        if()
+        //if()
         
         return neighbors; 
     }
@@ -83,21 +88,31 @@ public class NodeMatrix {
                               {"P", "R", "M", "R"},
                               {"D", "O", "L", "A"},
                               {"E", "S", "I", "C"}};
+        Node[][] nodeMatrix;
         
         ArrayList<String> word = new ArrayList<String>(); //parola da confrontare,  dovrà diventare un arraylist di parole da confrontare 
         word = (NodeMatrix.stringToArrayList("ARO"));
         
         //System.out.println("Inizializzo matrix");
-        ArrayList<Node> matrixNodes = new ArrayList<Node>(); 
-        matrixNodes = NodeMatrix.createNodeMatrix(m);
+        nodeMatrix = NodeMatrix.createNodeMatrix(m);
         
         //System.out.println("Stampo matrix");
-        for(Node n : matrixNodes){
-            System.out.println("Node: " + n.s + 
-                               " Coordinate: " + n.x + "," + n.y + 
-                               " Visited: " + n.v);
+        for(int i=0; i<4; i++){
+            for(int j=0; j<4; j++){
+            System.out.println("Node: " + nodeMatrix[i][j].s + 
+                               " Coordinate: " + nodeMatrix[i][j].x + "," + nodeMatrix[i][j].y + 
+                               " Visited: " + nodeMatrix[i][j].v);
+            }
         }
         
+        for(int i=0; i<4; i++){
+            for(int j=0; j<4; j++){
+            System.out.println("Node: " + nodeMatrix[i][j].s);
+            }
+        }
+        
+        
+        /*
         System.out.println("Lista nodi di partenza: "); 
         ArrayList<Node> startings = new ArrayList<Node>();
         startings = NodeMatrix.getStartingPoints(matrixNodes , word);
@@ -105,7 +120,7 @@ public class NodeMatrix {
             System.out.println("Node: " + n.s + 
                                " Coordinate: " + n.x + "," + n.y + 
                                " Visited: " + n.v);
-        }
+        }*/
         
        
         

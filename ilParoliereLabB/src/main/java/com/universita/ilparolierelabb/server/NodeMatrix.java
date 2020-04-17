@@ -20,7 +20,7 @@ public class NodeMatrix {
         //to do 
     }   
     
-    public static ArrayList<String> stringToArrayList(String s){        //trasforma Stringa in arraylist di stringhe dividendo ogni lettera 
+    public static ArrayList<String> stringToArrayList(String s){                    //trasforma Stringa in arraylist di stringhe dividendo ogni lettera 
         
         ArrayList<String> word = new ArrayList<String>(); 
         
@@ -30,7 +30,7 @@ public class NodeMatrix {
         return word; 
     }
     
-    public static Node[][] createNodeMatrix(String[][] matrix){
+    public static Node[][] createNodeMatrix(String[][] matrix){                     //crea matrice di nodi passandogli una matrice di string
         
         Node[][] nodes = new Node[4][4];
         
@@ -42,45 +42,33 @@ public class NodeMatrix {
         return nodes;
     }
     
-    public static ArrayList<Node> getStartingPoints(ArrayList<Node> n , ArrayList<String> s){
+    public static ArrayList<Node> getStartingPoints(Node[][] nodeMatrix , String s){ //ritorna arrayList di di Nodi di partenza (tenendo ripetizioni possibili)
         
         ArrayList<Node> startingPoints = new ArrayList<Node>(); 
         
         //scorro matrice di nodi 
-        for(Node node : n){
-            if(s.get(0).equals(node.s)){ 
-                startingPoints.add(node);
+        for(int i=0; i<4; i++){
+            for(int j=0; j<4; j++){
+                if(s.equals(nodeMatrix[i][j].s)){
+                    startingPoints.add(new Node(nodeMatrix[i][j].s,i,j,true));
+                }
             }
         }
         
         return startingPoints; 
     }
     
-    public static ArrayList<Node> getNeighbors(ArrayList<Node> nodeMatrix, Node startingNode, String nextLetter){
+    //ritorna i nodi corrispondendi alla prossima lettera da trovare 
+    public static ArrayList<Node> getNeighbors(Node[][] nodeMatrix, Node startingNode, String nextLetter){
         
         ArrayList<Node> neighbors = new ArrayList<Node>(); 
         
-        //if()
+        if(nextLetter.equals(nodeMatrix[startingNode.x+1][startingNode.y].s)){
+            //neighbors.add(new Node(nextLetter, ))
+        }
         
         return neighbors; 
     }
-    
-    /*public static void showMatrix(ArrayList<Node> _matrixNodes){
-        int count=0; 
-        if(_matrixNodes != null){
-            for(Node n: _matrixNodes){
-                System.out.println(n + " ");
-                count++; 
-                if(count == 4){ System.out.println("");}
-            }
-        }
-    }*/
-    
-    
-    
-    
-    
-    
     
     public static void main (String[] args){
     

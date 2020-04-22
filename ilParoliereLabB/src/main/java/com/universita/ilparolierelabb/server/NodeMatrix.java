@@ -20,12 +20,11 @@ public class NodeMatrix {
         //to do 
     }   
     
-    public static ArrayList<String> stringToArrayList(String s){                    //trasforma Stringa in arraylist di stringhe dividendo ogni lettera 
+    public static String[] stringToArrayString(String p){                    //trasforma Stringa in arraylist di stringhe dividendo ogni lettera 
         
-        ArrayList<String> word = new ArrayList<String>(); 
-        
-        for(int i=0; i<s.length(); i++){
-            word.add(String.valueOf(s.charAt(i)));      //Controllare caso di valore "Qu" 
+        String[] word = new String[p.length()];
+        for(int i = 0; i < p.length();i++){
+            word[i] = String.valueOf(p.charAt(i));
         }
         return word; 
     }
@@ -46,23 +45,76 @@ public class NodeMatrix {
         
         ArrayList<MatrixPosition> letterPositions = new ArrayList<>(); 
         MatrixPosition pos;
+        Boolean exist = false;
         //scorro matrice di nodi 
         for(int i=0; i<4; i++){
             for(int j=0; j<4; j++){
-                if(letter.equals(nodeMatrix[i][j].getValue())){
-                    
+                if(letter.equals(nodeMatrix[i][j].getValue()))
+                {
                     pos = new MatrixPosition();
                     pos = nodeMatrix[i][j].getMatrixPosition();
                     letterPositions.add(pos);
+                    exist = true;
                 }
             }
         }
-        
-        return letterPositions; 
+        return (exist) ? letterPositions : null; 
     }
-    public void analizzaParola(String[][] matrice,String parola)
+    public static Boolean analizzaPercoso(Letter currentLetter,Letter nextLetter)
     {
+        System.out.println("Analizzo percorso: "+currentLetter.getLetter()+"->"+nextLetter.getLetter());
         
+        ArrayList<MatrixPosition> currLetterPositions = currentLetter.getLetterPositions();
+        ArrayList<MatrixPosition> nextLetterPositions = nextLetter.getLetterPositions();
+        if(currLetterPositions == null || nextLetterPositions == null) return false;
+    
+        MatrixPosition currLetterPosition;
+        MatrixPosition nextLetterPosition;
+        
+        for(int i = 0; i < currLetterPositions.size();i++)
+        {
+            currLetterPosition = currLetterPositions.get(i);
+            
+            for(int j = 0; j < nextLetterPositions.size(); j++)
+            {
+                nextLetterPosition = nextLetterPositions.get(j);
+                if(nodeMatrix[currLetterPosition.getX()][currLetterPosition.getY()].hasNeighbor(nextLetterPosition)) return true;
+            }
+        }
+        
+        return false;
+    }
+    public static Node[][] nodeMatrix;
+    public static int analizzaParola(String[][] matrice,String parola)
+    {
+        //1) Matrice in matrice di nodi, perche la classe nodi ha metodi implementati come
+        //Visitato,Vicino,Posizione e cosi via.
+        nodeMatrix = createNodeMatrix(matrice); 
+        //2) Costruisco array di stringhe rappresentati i caratteri
+        String[] word = stringToArrayString(parola);
+        //3) Controllo se ha senso fare l'algoritmo
+        if(getLetterPosition(nodeMatrix,word[0]) == null) return 0;        
+        //4) Rappresentare le lettere nella matrice con le loro posizioni
+        ArrayList<Letter> letters = new ArrayList<>();
+        for(String s : word) 
+        {
+            Letter l = new Letter(s);
+            l.setPositions(getLetterPosition(nodeMatrix, s)); //Cerca le posizioni e le imposta su letter
+            letters.add(l);
+            System.out.print(l.getLetter()+" "); l.print();
+            System.out.println();
+        }
+        //5) Ricerca
+        for(int i = 0; i < letters.size() - 1; i++)
+        {
+            //Cosa vuol dire analisi.
+            //Se io sono A devo controllare B è vicino di A.
+            //Se SI, Continuo in quella direzione.
+            //Consideriamo GAROZZO
+            if(!analizzaPercoso(letters.get(i),letters.get(i+1))) return 0;
+        }
+        
+        return 10;
     }
     public static void main (String[] args){
     
@@ -70,14 +122,14 @@ public class NodeMatrix {
         
        
         //Client dice al server di verificare una parola su un matrice di lettere(Stringhe)
-        final String[][] m = {{"G", "A", "U", "O"}, 
-                              {"P", "R", "U", "R"},
-                              {"O", "Z", "Z", "A"},
-                              {"E", "S", "O", "C"}}; //Sicuro.
+        final String[][] m = {{"G", "A", "U", "F"}, 
+                              {"P", "R", "U", "A"},
+                              {"F", "Z", "Z", "R"},
+                              {"E", "S", "F", "O"}}; //Sicuro.
         
-        Node[][] nodeMatrix = createNodeMatrix(m); //Sicuro.
+        System.out.println(analizzaParola(m,"ARA"));
        
-        ArrayList<Letter> letters= new ArrayList<>();
+        /*ArrayList<Letter> letters= new ArrayList<>();
         
         String p = "GAROZZO";
         String[] parola = new String[p.length()]; //trasformo la parola in array normale di string 

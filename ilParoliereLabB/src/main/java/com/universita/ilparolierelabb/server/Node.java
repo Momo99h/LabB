@@ -24,18 +24,42 @@ public class Node {
         this.y = y; 
         this.visited= visited;
     }
-    
-    public static enum Position{
-        Top, TopRight, Right, BottomRight, Bottom, BottomLeft, Left, TopLeft
+
+    public boolean hasNeighbor(MatrixPosition nextLetterPosition) 
+    {
+        MatrixPosition posVicino;
+        Direction dir = Direction.Top;
+        for(int i = 0; i <= 7; i++)
+        {
+            dir.setValue(i);
+            posVicino = this.getNeighborPosition(dir);
+            if(posVicino.getX() == nextLetterPosition.getX() && posVicino.getY() == nextLetterPosition.getY())
+            {
+                return true;
+            }
+        }
+        return false;
     }
-    /**
-     
-       [A][][][]
-     * [][][][]1,0 1,1 1,2
-     * [][][A][]2,0 2,1 2,2
-     * [][][][]3,0 3,1 3,2
-     
-     */
+    
+    public static enum Direction
+    {
+        Top(0),TopRight(1),Right(2),BottomRight(3),Bottom(4),BottomLeft(5),Left(6),TopLeft(7);
+        
+        private int value;
+
+        Direction(int value) 
+        {
+            this.value = value;
+        }
+        public int getValue() 
+        {
+            return value;
+        }
+        public void setValue(int val)
+        {
+            this.value = val;
+        }
+    }
     public String getValue(){
         return this.value; 
     }
@@ -63,48 +87,47 @@ public class Node {
         this.visited = b; 
     }
     
-    public MatrixPosition getNeighborPosition(Position position){
+    public MatrixPosition getNeighborPosition(Direction position){
         
         MatrixPosition matrixPosition = new MatrixPosition(); 
-        
-        switch(position){
+        switch(position.getValue()){
             
-            case Top :
+            case 0:
                 matrixPosition.setX(this.x-1);
                 matrixPosition.setY(this.y); 
                 break; 
                 
-            case TopRight :
+            case 1 :
                 matrixPosition.setX(this.x-1);
                 matrixPosition.setY(this.y+1);
                 break;
                 
-            case Right :
+            case 2 :
                 matrixPosition.setX(this.x);
                 matrixPosition.setY(this.y+1);
                 break;
                 
-            case BottomRight :
+            case 3 :
                 matrixPosition.setX(this.x+1);
                 matrixPosition.setY(this.y+1);
                 break;
                 
-            case Bottom :
+            case 4 :
                 matrixPosition.setX(this.x+1);
                 matrixPosition.setY(this.y);
                 break;
                 
-            case BottomLeft :
+            case 5 :
                 matrixPosition.setX(this.x+1);
                 matrixPosition.setY(this.y-1);
                 break;
             
-            case Left :
+            case 6 :
                 matrixPosition.setX(this.x);
                 matrixPosition.setY(this.y-1);
                 break;
                 
-            case TopLeft :
+            case 7 :
                 matrixPosition.setX(this.x-1);
                 matrixPosition.setY(this.y-1);
                 break;

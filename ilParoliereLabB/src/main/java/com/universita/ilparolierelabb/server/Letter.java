@@ -16,8 +16,17 @@ public class Letter
     private String value;
     private ArrayList<MatrixPosition> posinmatrix = new ArrayList<>();
     public Letter(String v){ this.value = v;}
-    public String getLetter(){
+    public String getLetter()
+    {
         return this.value;
+    }
+    public int positionCount()
+    {
+        return this.posinmatrix.size();
+    }
+    public ArrayList<MatrixPosition> getLetterPositions()
+    {
+        return this.posinmatrix;
     }
     public void setPositions(ArrayList<MatrixPosition> p){
         this.posinmatrix = p;
@@ -25,12 +34,18 @@ public class Letter
     /* DA ELIMINAREE**/
     public void print()
     {
-        for(MatrixPosition p : posinmatrix)
+        try
         {
-            String s = "X-> %s Y -> %S";
-            s = String.format(s,p.getX(),p.getY());
-            System.out.print(" "+s);
-        }    
+            for(MatrixPosition p : posinmatrix)
+            {
+                String s = "X-> %s Y -> %S";
+                s = String.format(s,p.getX(),p.getY());
+                System.out.print(" "+s);
+            } 
+        }
+        catch(Exception e)
+        {}
+           
     }
     
 }

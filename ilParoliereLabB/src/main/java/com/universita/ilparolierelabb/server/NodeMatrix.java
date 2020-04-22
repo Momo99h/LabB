@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.common.Utility;
 import java.util.ArrayList;
 
 /**
@@ -62,7 +63,7 @@ public class NodeMatrix {
     }
     public static Boolean analizzaPercoso(Letter currentLetter,Letter nextLetter)
     {
-        System.out.println("Analizzo percorso: "+currentLetter.getLetter()+"->"+nextLetter.getLetter());
+        Utility.ConsolePrintLine("Analizzo percorso: "+currentLetter.getLetter()+"->"+nextLetter.getLetter());
         
         ArrayList<MatrixPosition> currLetterPositions = currentLetter.getLetterPositions();
         ArrayList<MatrixPosition> nextLetterPositions = nextLetter.getLetterPositions();
@@ -78,7 +79,26 @@ public class NodeMatrix {
             for(int j = 0; j < nextLetterPositions.size(); j++)
             {
                 nextLetterPosition = nextLetterPositions.get(j);
-                if(nodeMatrix[currLetterPosition.getX()][currLetterPosition.getY()].hasNeighbor(nextLetterPosition)) return true;
+                if(nodeMatrix[currLetterPosition.getX()][currLetterPosition.getY()].hasNeighbor(nextLetterPosition)
+                        && !nodeMatrix[nextLetterPosition.getX()][nextLetterPosition.getY()].getVisit()) 
+                {
+                    nodeMatrix[nextLetterPosition.getX()][nextLetterPosition.getY()].setVisit(true);
+                    nodeMatrix[currLetterPosition.getX()][currLetterPosition.getY()].setVisit(true);
+                    String msg = "Trovato percorso %s->%s ([%s,%s],[%s,%s])";
+                    msg = String.format(msg, currentLetter.getLetter(),nextLetter.getLetter(),
+                            currLetterPosition.getX(),currLetterPosition.getY(),nextLetterPosition.getX(),nextLetterPosition.getY());
+                    Utility.ConsolePrintLine(msg);
+                    return true;
+                }
+                else
+                {
+                    String msg = "Percorso fallito %s->%s ([%s,%s],[%s,%s])";
+                    msg = String.format(msg, currentLetter.getLetter(),nextLetter.getLetter(),
+                            currLetterPosition.getX(),currLetterPosition.getY(),nextLetterPosition.getX(),nextLetterPosition.getY());
+                    Utility.ConsolePrintLine(msg);
+                    return false;
+                }
+                    
             }
         }
         
@@ -113,8 +133,50 @@ public class NodeMatrix {
             //Consideriamo GAROZZO
             if(!analizzaPercoso(letters.get(i),letters.get(i+1))) return 0;
         }
-        
+        //L'algoritmo sopra non funziona.. provo a riscriverlo..
+        //5) Ricerca
+        /*MatrixPosition startPosition;
+        startPosition = letters.get(0).getLetterPositions().get(0);
+        for(int i = 0; i < letters.size() - 1; i++)
+        {
+            analizzaPercorso2(startPosition,letters.get(i+1));
+        }*/
         return 10;
+    }
+    public static Boolean analizzaPercoso2(MatrixPosition startPosition,Letter nextLetter)
+    {
+        Utility.ConsolePrintLine("Analizzo percorso: "+nodeMatrix[startPosition.getX()][startPosition.getY()].getValue()+"->"+nextLetter.getLetter());
+        
+        ArrayList<MatrixPosition> nextLetterPositions = nextLetter.getLetterPositions();
+        if(nextLetterPositions == null) return false;
+        MatrixPosition nextLetterPosition;
+        
+            for(int j = 0; j < nextLetterPositions.size(); j++)
+            {
+                nextLetterPosition = nextLetterPositions.get(j);
+                if(nodeMatrix[startPosition.getX()][startPosition.getY()].hasNeighbor(nextLetterPosition)
+                        && !nodeMatrix[nextLetterPosition.getX()][nextLetterPosition.getY()].getVisit()) 
+                {
+                    nodeMatrix[nextLetterPosition.getX()][nextLetterPosition.getY()].setVisit(true);
+                    nodeMatrix[startPosition.getX()][startPosition.getY()].setVisit(true);
+                    String msg = "Trovato percorso %s->%s ([%s,%s],[%s,%s])";
+                    msg = String.format(msg, nodeMatrix[startPosition.getX()][startPosition.getY()].getValue(),nextLetter.getLetter(),
+                            startPosition.getX(),startPosition.getY(),nextLetterPosition.getX(),nextLetterPosition.getY());
+                    Utility.ConsolePrintLine(msg);
+                    return true;
+                }
+                else
+                {
+                    String msg = "Percorso fallito %s->%s ([%s,%s],[%s,%s])";
+                    msg = String.format(msg, nodeMatrix[startPosition.getX()][startPosition.getY()].getValue(),nextLetter.getLetter(),
+                            startPosition.getX(),startPosition.getY(),nextLetterPosition.getX(),nextLetterPosition.getY());
+                    Utility.ConsolePrintLine(msg);
+                    return false;
+                }
+                    
+            }
+        
+        return false;
     }
     public static void main (String[] args){
     
@@ -122,12 +184,12 @@ public class NodeMatrix {
         
        
         //Client dice al server di verificare una parola su un matrice di lettere(Stringhe)
-        final String[][] m = {{"G", "A", "U", "F"}, 
-                              {"P", "R", "U", "A"},
-                              {"F", "Z", "Z", "R"},
-                              {"E", "S", "F", "O"}}; //Sicuro.
+        final String[][] m = {{"P", "A", "X", "C"}, 
+                              {"L", "R", "X", "L"},
+                              {"Z", "Z", "X", "U"},
+                              {"Z", "O", "O", "P"}}; //Sicuro.
         
-        System.out.println(analizzaParola(m,"ARA"));
+        System.out.println(analizzaParola(m,"PLU"));
        
         /*ArrayList<Letter> letters= new ArrayList<>();
         

@@ -60,61 +60,57 @@ public class NodeMatrix {
         
         return letterPositions; 
     }
-    
+    public void analizzaParola(String[][] matrice,String parola)
+    {
+        
+    }
     public static void main (String[] args){
     
+      
         
        
-        
+        //Client dice al server di verificare una parola su un matrice di lettere(Stringhe)
         final String[][] m = {{"G", "A", "U", "O"}, 
                               {"P", "R", "U", "R"},
                               {"O", "Z", "Z", "A"},
-                              {"E", "S", "O", "C"}};
+                              {"E", "S", "O", "C"}}; //Sicuro.
         
-        Node[][] nodeMatrix = createNodeMatrix(m);
-        
+        Node[][] nodeMatrix = createNodeMatrix(m); //Sicuro.
+       
         ArrayList<Letter> letters= new ArrayList<>();
+        
         String p = "GAROZZO";
-        String[] paroladimerda = new String[p.length()];
-        for(int i = 0; i < p.length();i++)
-        {
-            paroladimerda[i] = String.valueOf(p.charAt(i));
+        String[] parola = new String[p.length()]; //trasformo la parola in array normale di string 
+        for(int i = 0; i < p.length();i++){
+            parola[i] = String.valueOf(p.charAt(i));
         }
         
-        for(String s : paroladimerda)
-        {
+        for(String s : parola) {
             Letter l = new Letter(s);
             l.setPositions( getLetterPosition(nodeMatrix, s));
             letters.add(l);
             l.print();
             System.out.println();
         }
-        for(int i=0; i<letters.size(); i++){
-            System.out.println(letters.get(i).getLetter());
+        
+        for(int i=0; i<letters.size(); i++){    //stampa le lettere della parola 
+            System.out.print(letters.get(i).getLetter() + " ");
         }
+        System.out.println();
+        
+        //NEW 
+        //Mi setto sulla posizione iniziale 
+        MatrixPosition myMatrixPosition = new MatrixPosition(); 
+        //myMatrixPosition.setX(letters.getLetter());
+        //myMatrixPosition.setY(y);
+        
         
         /*
-            LetterA.setPositions(getLetterPosition(nodeMatrix, "A"));
-            
+        Per cercarlo devi estrapolare la posizione da letter
+        E con questa posizione posizionarmi in matrix position del nodo
         */
-        /*
         
-        ArrayList<ArrayList<MatrixPosition>>
-        A
-        A = 0,1 / 2,3
-        R = 1,1 / 1,3
-        O = 0,3 / 3,2
-        quando salgo resetto le visite del livello inferiore
-        */
-        /*
-        [][A][][]
-        [][][][]
-        [][][][A]
-        [][][][]
-*/      
-        /*
-        0,0 0,1 0,2 -> 0,0 XXX 0,2
-        1,0 1,1 1,2 -> 1,0 1,1 1,2
-                    -> 2,0 2,1 2,2 */
+        
+        
     } 
 }

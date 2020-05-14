@@ -60,7 +60,7 @@ public class ServerThread extends Thread implements ActionListener
             if(!d.getEmailStatus())
             {
                 String code = Utility.randomAlphaNumeric(10);
-                if(Utility.sendEmail())
+                if(Utility.sendEmail(d.getEmail(),code))
                 {
                     d.setVerificationCode(code);
                     d.setEmailStatus(true);

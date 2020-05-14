@@ -92,6 +92,11 @@ public class ClientLogin extends javax.swing.JFrame {
         lblLost.setForeground(new java.awt.Color(0, 153, 255));
         lblLost.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblLost.setText("Lost credentials");
+        lblLost.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblLostMouseClicked(evt);
+            }
+        });
 
         jPasswordField1.setText("Pippo");
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
@@ -232,6 +237,26 @@ public class ClientLogin extends javax.swing.JFrame {
            jPasswordField1.setEchoChar('*');
         }
     }//GEN-LAST:event_jCheckBox1ActionPerformed
+
+    private void lblLostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblLostMouseClicked
+        // TODO add your handling code here:
+        
+        //Chiedo mail
+        String msg = "Inserisci la mail del tuo account:";
+        String emailUser = Utility.ShowInfoInput(Settings.clientName, msg);
+        if(!emailUser.contains("@")) 
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, "Please enter a valid email.");
+            return;
+        }
+        if(!ClientManager.emailAlreadyTaken(emailUser))
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, "Email does not exist.");
+            return;
+        }
+        
+        
+    }//GEN-LAST:event_lblLostMouseClicked
 
     private void CheckEmailCode()
     {

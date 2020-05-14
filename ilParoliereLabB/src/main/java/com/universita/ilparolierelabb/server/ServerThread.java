@@ -41,13 +41,6 @@ public class ServerThread extends Thread implements ActionListener
         doEmailstuff();
         doRoomstuff();
         doGamestuff();
-        Room r = new Room();
-        r.setId(ServerManager.rooms.getLastID()+1);
-        User s = new User();
-        s.setUsername("34");
-        r.addPlayer(s);
-        ServerManager.rooms.addRoom(r);
-        ServerManager.rooms.setDataChanged(true);
         
     }
 

@@ -35,8 +35,8 @@ public class ServerImplementation extends Observable implements ServerInterface
     private ServerImplementation() throws RemoteException 
     {
         super();
-        LobbyClients = new ArrayList<>();
-        GameClients = new ArrayList<>();
+        LobbyClients = new ArrayList<>(); // Gli utenti in lobby devono essere qui
+        GameClients = new ArrayList<>(); // Gli utenti in room invece qui.
         registerUserWaiting = new ArrayList<>();
     }
     

@@ -55,7 +55,7 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     {
         try
         {
-            _server.addObserver(_client);
+            _server.addClientObserver(_client);
         }
         catch(Exception e)
         {

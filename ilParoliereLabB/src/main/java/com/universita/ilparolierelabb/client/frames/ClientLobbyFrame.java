@@ -11,6 +11,7 @@ import static com.universita.ilparolierelabb.client.ClientManager.gameFrame;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Room;
+import com.universita.ilparolierelabb.common.UserStatus;
 import javax.swing.JLabel;
 
 /**
@@ -140,6 +141,9 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         int id = lobbyUsrControl.getselectedRoomID();
         if(id == -1 )return;
         this.enterRoom(id);
+        
+        
+        
     }//GEN-LAST:event_buttonEnterRoomActionPerformed
 
     /**

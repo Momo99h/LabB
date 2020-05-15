@@ -26,5 +26,6 @@ public class User implements Serializable
     public void setUsername(String   val){this._username = val;}
     public void setStatus(UserStatus val){this._status = val;}
     public void setTotalPoints(int val){this._totalPoints = val;}
+
     
 }

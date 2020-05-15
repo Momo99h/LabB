@@ -71,7 +71,7 @@ public class ServerImplementation extends Observable implements ServerInterface
     }
 
     @Override
-    public void addObserver(RemoteObserver o) throws RemoteException {
+    public void addClientObserver(RemoteObserver o) throws RemoteException {
         ClientObserver mo = new ClientObserver(o);
         try
         {
@@ -264,7 +264,12 @@ public class ServerImplementation extends Observable implements ServerInterface
         r.addPlayer(usr);
         ServerDBInterface.clientEnterRoom(roomId,usr.getUsername());
         ServerManager.rooms.setDataChanged(true);
-        removeObserver(o);
+        
+        this.removeObserver(o);
+        
+        ClientObserver mo = new ClientObserver(o);
+        GameClients.add(mo);
+        
         return true;
     }
 
@@ -277,7 +282,7 @@ public class ServerImplementation extends Observable implements ServerInterface
             ServerDBInterface.clientLeaveRoom(usr.getUsername());
             ServerManager.addLogData(usr.getUsername()+" left room: "+r.getId());
             ServerManager.rooms.setDataChanged(true);
-            addObserver(o);
+            addClientObserver(o);
         }
         if(r == null) return;
         if(r.getPlayersIn() == 0)

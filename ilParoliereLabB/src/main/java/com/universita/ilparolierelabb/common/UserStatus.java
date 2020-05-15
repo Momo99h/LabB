@@ -26,7 +26,7 @@ public enum UserStatus implements Serializable
     {
         return value;
     }
-    public String getName()
+    public String getName()    
     {
         String s = "";
         switch(value)

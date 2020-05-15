@@ -60,12 +60,19 @@ public class ServerThread extends Thread implements ActionListener
             if(!d.getEmailStatus())
             {
                 String code = Utility.randomAlphaNumeric(10);
-                if(Utility.sendEmail(d.getEmail(),code))
+                if(Utility.sendEmail(d.getEmail(),Utility.emailBody(d.getUsername(),code)))
                 {
                     d.setVerificationCode(code);
                     d.setEmailStatus(true);
                     tempString = "Email sent to %s (%s) with verification code: %s";
                     tempString = String.format(tempString, d.getEmail(),d.getUsername(),code);
+                    ServerManager.addLogData(tempString);
+                    ServerImplementation.registerUserWaiting.remove(d);
+                }
+                else
+                {
+                    String tempString = "Email failed to sent to %s";
+                    tempString = String.format(tempString, d.getEmail());
                     ServerManager.addLogData(tempString);
                 }
             }

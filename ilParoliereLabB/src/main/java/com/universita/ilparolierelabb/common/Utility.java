@@ -100,39 +100,48 @@ public class Utility
             sb.append( AB.charAt( rnd.nextInt(AB.length()) ) );
         return sb.toString();
     }
-    public static Boolean sendEmail()
+    public static Boolean sendEmail(String to,String body)
     {
-        return true;
+        String username= "";
+        String password= "";
+        String host = "smtp.office365.com";
+	String from = username;
+        String subject = Settings.serverName;
+	Properties props = System.getProperties();
+        props.put("mail.smtp.host",host);
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.smtp.port",587);
+        
+        try
+        {
+            Session session = Session.getInstance(props);
+            Message msg = new MimeMessage(session);
+            msg.setFrom(new InternetAddress(from));
+            msg.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to, false));
+            msg.setSubject(subject);
+            msg.setText(body);
+
+            Transport.send(msg,username,password);
+            return true;
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return false;
+        }  
+        
     }
+    public static String emailBody(String usr,String code)
+    {
+        String msg = "Ciao %s, benvenuto su il Parioliere-LabB!";
+        msg+="\nQuesto è il codice di verifica per completare la registrazione: %s";
+        
+        msg = String.format(msg, usr,code);
+        
+        return msg;
+    }
+    
     public static int getRandomInt(int min,int max){
         return (int) (Math.random() * ((max - min) + 1)) + min; 
-    }
-
-    
-    public static void sendEmail(String usr, String pwd, String to, String subject, String body) throws SendFailedException, MessagingException{
-		
-        String password=pwd;
-        String username=usr;
-	    	       
-	String host = "smtp.office365.com";
-	String from=username;
-	   
-	Properties props = System.getProperties();
-	    props.put("mail.smtp.host",host);
-	    props.put("mail.smtp.starttls.enable", "true");
-	    props.put("mail.smtp.port",587);
-	    
-	    Session session = Session.getInstance(props);
-	    
-	    Message msg = new MimeMessage(session);
-	    msg.setFrom(new InternetAddress(from));
-	    msg.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to, false));
-	    msg.setSubject(subject);
-	    msg.setText(body);
-	    
-	    Transport.send(msg,username,password);
-	    System.out.println("\nMail was sent successfully.");   
-	}
-                    
-    
+    }     
 }

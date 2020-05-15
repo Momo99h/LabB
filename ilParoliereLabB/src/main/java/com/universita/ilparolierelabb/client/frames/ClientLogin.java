@@ -254,13 +254,8 @@ public class ClientLogin extends javax.swing.JFrame {
             Utility.ShowErrorPopUp(Settings.clientName, "Email does not exist.");
             return;
         }
-        if(ClientManager.emailAlreadyTaken(emailUser))
-        {
-            String newPassword = Utility.randomAlphaNumeric(10);
-            String PasswordCript = Utility.StringMD5Hash(newPassword);
-            Utility.sendEmail(username, password, emailUser, newPassword);
-            
-        }
+        
+        //Chiedere al server di inviare ques
         
         
     }//GEN-LAST:event_lblLostMouseClicked

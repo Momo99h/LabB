@@ -10,6 +10,20 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Random;
 import javax.swing.JOptionPane;
 
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.SendFailedException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
+import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+
 /**
  *
  * @author Momo
@@ -94,10 +108,31 @@ public class Utility
         return (int) (Math.random() * ((max - min) + 1)) + min; 
     }
 
-    public static boolean sendEmail(String email, String message) 
-    {
-        return true;
-    }
-            
+    
+    public static void sendEmail(String usr, String pwd, String to, String subject, String body) throws SendFailedException, MessagingException{
+		
+        String password=pwd;
+        String username=usr;
+	    	       
+	String host = "smtp.office365.com";
+	String from=username;
+	   
+	Properties props = System.getProperties();
+	    props.put("mail.smtp.host",host);
+	    props.put("mail.smtp.starttls.enable", "true");
+	    props.put("mail.smtp.port",587);
+	    
+	    Session session = Session.getInstance(props);
+	    
+	    Message msg = new MimeMessage(session);
+	    msg.setFrom(new InternetAddress(from));
+	    msg.setRecipients(Message.RecipientType.TO,InternetAddress.parse(to, false));
+	    msg.setSubject(subject);
+	    msg.setText(body);
+	    
+	    Transport.send(msg,username,password);
+	    System.out.println("\nMail was sent successfully.");   
+	}
+                    
     
 }

@@ -133,8 +133,10 @@ public class Utility
     }
     public static String emailBody(String usr,String code)
     {
-        String msg = "Ciao %s, benvenuto su il Parioliere-LabB!";
+        String msg = "Ciao %s, benvenuto su Il Paroliere-LabB!";
         msg+="\nQuesto è il codice di verifica per completare la registrazione: %s";
+        msg+="\Inseriscilo entro 10 minuti per completare la tua registrazione!";
+        msg+="\Buon divertimento!";
         
         msg = String.format(msg, usr,code);
         

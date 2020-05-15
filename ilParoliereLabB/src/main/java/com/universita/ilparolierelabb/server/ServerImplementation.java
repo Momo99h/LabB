@@ -87,7 +87,7 @@ public class ServerImplementation extends Observable implements ServerInterface
         
     }
     @Override
-    public void removeObserver(RemoteObserver o) throws RemoteException 
+    public void removeClientObserver(RemoteObserver o) throws RemoteException 
     {
         ClientObserver w;
         for(int i = 0; i < LobbyClients.size(); i++)
@@ -211,9 +211,9 @@ public class ServerImplementation extends Observable implements ServerInterface
     public static synchronized void notifyGameMatrix(int roomId,String[][] matrix)
     {
         ClientObserver w;
-        for(int i = 0; i < LobbyClients.size(); i++)
+        for(int i = 0; i < GameClients.size(); i++)
         {
-            w = LobbyClients.get(i);
+            w = GameClients.get(i);
             try 
             {
                 w.getOb().notifyGameMatrix(rmiService, roomId, matrix);
@@ -264,13 +264,45 @@ public class ServerImplementation extends Observable implements ServerInterface
         r.addPlayer(usr);
         ServerDBInterface.clientEnterRoom(roomId,usr.getUsername());
         ServerManager.rooms.setDataChanged(true);
+        addGameObserver(o);
         
-        this.removeObserver(o);
+        return true;
+    }
+    
+    public void addGameObserver(RemoteObserver o) throws RemoteException{
+        
+        this.removeClientObserver(o);
         
         ClientObserver mo = new ClientObserver(o);
         GameClients.add(mo);
+        String s = "Client observer %s entered in room";
+        s = String.format(s, mo.getObId());
+        ServerManager.addLogData(s);
+  
+    }
+    
+    public void removeGameObserver(RemoteObserver o) throws RemoteException{
         
-        return true;
+        ClientObserver w; 
+        for(int i=0; i<GameClients.size(); i++){
+            
+            w = GameClients.get(i);
+            if(w.getOb().equals(o)){
+                try
+                {
+                    deleteObserver(w);
+                    ServerManager.addLogData("New client left room: (ID) "+w.getObId());
+                    GameClients.remove(w);
+                    break;
+                }
+                catch(Exception e)
+                {
+                    ServerManager.addLogData("Cannot delete client: (ID) "+w.getObId()+" Reason: "+e.toString());
+                }
+            }
+           
+        }
+        
     }
 
     @Override
@@ -282,6 +314,7 @@ public class ServerImplementation extends Observable implements ServerInterface
             ServerDBInterface.clientLeaveRoom(usr.getUsername());
             ServerManager.addLogData(usr.getUsername()+" left room: "+r.getId());
             ServerManager.rooms.setDataChanged(true);
+            removeGameObserver(o);
             addClientObserver(o);
         }
         if(r == null) return;

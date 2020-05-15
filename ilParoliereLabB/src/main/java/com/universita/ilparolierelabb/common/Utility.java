@@ -135,8 +135,8 @@ public class Utility
     {
         String msg = "Ciao %s, benvenuto su Il Paroliere-LabB!";
         msg+="\nQuesto è il codice di verifica per completare la registrazione: %s";
-        msg+="\Inseriscilo entro 10 minuti per completare la tua registrazione!";
-        msg+="\Buon divertimento!";
+        msg+="\nInseriscilo entro 10 minuti per completare la tua registrazione!";
+        msg+="\nBuon divertimento!";
         
         msg = String.format(msg, usr,code);
         

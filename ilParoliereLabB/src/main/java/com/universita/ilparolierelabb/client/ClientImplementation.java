@@ -106,7 +106,7 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         try
         {
             _server.disconnectClient(usr);
-            _server.removeObserver(_client);
+            _server.removeClientObserver(_client);
         }
         catch(Exception e)
         {

@@ -1,28 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.universita.ilparolierelabb.common;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Random;
-import javax.swing.JOptionPane;
 
 import java.util.Properties;
 
 import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.SendFailedException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.swing.JOptionPane;
-import javax.swing.JPasswordField;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 
 /**
  *
@@ -143,7 +133,8 @@ public class Utility
         return msg;
     }
     
-    public static int getRandomInt(int min,int max){
+    public static int getRandomInt(int min,int max)
+    {
         return (int) (Math.random() * ((max - min) + 1)) + min; 
     }     
 }

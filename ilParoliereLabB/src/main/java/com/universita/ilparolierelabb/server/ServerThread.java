@@ -7,9 +7,7 @@ package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.Game;
-import com.universita.ilparolierelabb.common.Room;
 import com.universita.ilparolierelabb.common.Settings;
-import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.Utility;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

@@ -178,7 +178,7 @@ public class MatrixUsrControl extends javax.swing.JPanel {
     
     public void shuffleAnim()
     {
-        letters = Utility.randomLetter(16);
+        letters = Utility.randomAlpha(16);
         jLabel1.setText(String.valueOf(letters.charAt(0)));
         jLabel2.setText(String.valueOf(letters.charAt(1)));
         jLabel3.setText(String.valueOf(letters.charAt(2)));

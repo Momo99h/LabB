@@ -315,50 +315,78 @@ public class ServerImplementation extends Observable implements ServerInterface
         ServerManager.lobby = ServerManager.rooms.createLobbyData();
         return ServerManager.lobby;
     }
-
+    /**
+     * getLastRoomID (RMI) Richiesta dell'ultimo ID delle stanze create
+     * @return Ultimo id di stanza creata
+     * @throws RemoteException 
+     */
     @Override
     public int getLastRoomID() throws RemoteException 
     {
         return ServerManager.rooms.getLastID();
     }
-
+    /**
+     * addRoom (RMI) Aggiunge una stanza alla lista di stanze
+     * @param r Ogetto stanza
+     * @throws RemoteException 
+     */
     @Override
     public void addRoom(Room r) throws RemoteException 
     {
         ServerManager.addLogData(r.getAdmin()+" added new room: "+r.getId()+" - "+r.getRoomName());
         ServerManager.rooms.addRoom(r);
-         ServerManager.rooms.setDataChanged(true);
+        ServerManager.rooms.setDataChanged(true);
     }
-
+    /***
+     * enterRoom (RMI) Aggiunge un utente alla stanza di gioco
+     * @param o Observer client
+     * @param roomId Id della stanza
+     * @param usr Ogetto utente
+     * @return true se l'operazione è andata a buon fine
+     * @throws RemoteException 
+     */
     @Override
     public boolean enterRoom(RemoteObserver o,int roomId,User usr) throws RemoteException 
     {
-        Room r = ServerManager.rooms.getRoom(roomId);
-        if(r.getPlayersIn() >= r.getPlayersNeeded()) return false;
-        ServerManager.addLogData(usr.getUsername()+" entered room: "+roomId);
-        usr.setStatus(UserStatus.NotReady);
-        r.addPlayer(usr);
-        ServerDBInterface.clientEnterRoom(roomId,usr.getUsername());
-        ServerManager.rooms.setDataChanged(true);
-        addGameObserver(o);
-        
-        return true;
+        try
+        {
+            Room r = ServerManager.rooms.getRoom(roomId);
+            if(r.getPlayersIn() >= r.getPlayersNeeded()) return false;
+            ServerManager.addLogData(usr.getUsername()+" entered room: "+roomId);
+            usr.setStatus(UserStatus.NotReady);
+            r.addPlayer(usr);
+            ServerDBInterface.clientEnterRoom(roomId,usr.getUsername());
+            ServerManager.rooms.setDataChanged(true);
+            addGameObserver(o);
+            return true;
+        }
+        catch (Exception e)
+        {
+            e.printStackTrace();
+            return false;   
+        }
     }
-    
-    public void addGameObserver(RemoteObserver o) throws RemoteException{
-        
+    /***
+     * addGameObserver (RMI) Aggiunge un Observer client alla lista di observer nelle room
+     * @param o Ogetto Observer client
+     * @throws RemoteException 
+     */
+    public void addGameObserver(RemoteObserver o) throws RemoteException
+    {
         this.removeClientObserver(o);
-        
         ClientObserver mo = new ClientObserver(o);
         GameClients.add(mo);
         String s = "Client observer %s entered in room";
         s = String.format(s, mo.getObId());
         ServerManager.addLogData(s);
-  
     }
-    
-    public void removeGameObserver(RemoteObserver o) throws RemoteException{
-        
+    /***
+     * removeGameObserver (RMI) Rimuove un Observer client alla lista di observer nelle room
+     * @param o Ogetto Observer client
+     * @throws RemoteException 
+     */
+    public void removeGameObserver(RemoteObserver o) throws RemoteException
+    {
         ClientObserver w; 
         for(int i=0; i<GameClients.size(); i++){
             
@@ -376,11 +404,15 @@ public class ServerImplementation extends Observable implements ServerInterface
                     ServerManager.addLogData("Cannot delete client: (ID) "+w.getObId()+" Reason: "+e.toString());
                 }
             }
-           
         }
-        
     }
-
+    /**
+     * leaveRoom (RMI) Rimuove un utente dalla stanza in cui si trova
+     * Se la stanza conteneva solo quell'utente viene eliminata
+     * @param o Ogetto Observer client
+     * @param usr Ogetto utente
+     * @throws RemoteException 
+     */
     @Override
     public void leaveRoom(RemoteObserver o,User usr) throws RemoteException 
     {
@@ -401,7 +433,13 @@ public class ServerImplementation extends Observable implements ServerInterface
             ServerManager.rooms.setDataChanged(true);
         }
     }
-
+    /**
+     * changePlayerStatus (RMI) Cambia lo stato dell'utente
+     * Se la stanza contiene tutti gli utenti pronti al gioco viene creato l'oggetto che rappresenta il game
+     * @param usr Ogetto utente
+     * @param status Ogetto stato
+     * @throws RemoteException 
+     */
     @Override
     public void changePlayerStatus(User usr, UserStatus status) throws RemoteException 
     {
@@ -414,26 +452,44 @@ public class ServerImplementation extends Observable implements ServerInterface
         ServerManager.rooms.setDataChanged(true);
     }
     
-    
-    // @author AndreaGirola
+    /**
+     * emailAlreadyTaken (RMI) Controlla se l'email esiste già
+     * @param email Email da controllare
+     * @return true se l'email esiste
+     * @throws RemoteException 
+     */
     @Override
     public boolean emailAlreadyTaken(String email) throws RemoteException 
     {
         return ServerDBInterface.emailAlreadyTaken(email);
     }
-    // @author AndreaGirola
+    /**
+     * userAlreadyTaken (RMI) Controlla se l'username esiste già
+     * @param user Username da controllare
+     * @return true se lo username esiste
+     * @throws RemoteException 
+     */
     @Override
     public boolean userAlreadyTaken(String user) throws RemoteException 
     {
         return ServerDBInterface.userAlreadyTaken(user);
     }
-
+    /***
+     * getRoomById (RMI) Ritorna l'oggetto Stanza rappresentato da un ID
+     * @param id Id stanza
+     * @return ogetto Stanza
+     * @throws RemoteException 
+     */
     @Override
     public Room getRoomById(int id) throws RemoteException 
     {
         return ServerManager.rooms.getRoom(id);
     }
-
+    /**
+     * getOnlineCount (RMI) Ritorna il numero di utenti connessi
+     * @return Numero di utenti connessi
+     * @throws RemoteException 
+     */
     @Override
     public int getOnlineCount() throws RemoteException 
     {

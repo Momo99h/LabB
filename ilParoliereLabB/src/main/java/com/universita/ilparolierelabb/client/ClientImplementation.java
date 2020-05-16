@@ -31,6 +31,8 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     public static ClientImplementation _client;
 
     
+
+    
     
     private ClientImplementation() throws RemoteException 
     {
@@ -277,7 +279,25 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null; 
             
         }
+       
     }
+    
+    public static boolean recoverPassword(String email) 
+    {
+        try
+        {
+            return _server.recoverPassword(email);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            return false; 
+            
+        }
+    }
+    
     // @author AndreaGirola
     public static boolean userAlreadyTaken(String user){
         try

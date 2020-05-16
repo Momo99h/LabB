@@ -92,8 +92,8 @@ public class Utility
     }
     public static Boolean sendEmail(String to,String body)
     {
-        String username= "";
-        String password= "";
+        String username= "sspagnolo1@studenti.uninsubria.it";
+        String password= "Jyk11dhrx3!!";
         String host = "smtp.office365.com";
 	String from = username;
         String subject = Settings.serverName;
@@ -121,7 +121,7 @@ public class Utility
         }  
         
     }
-    public static String emailBody(String usr,String code)
+    public static String welcomeEmailBody(String usr,String code)
     {
         String msg = "Ciao %s, benvenuto su Il Paroliere-LabB!";
         msg+="\nQuesto è il codice di verifica per completare la registrazione: %s";
@@ -136,5 +136,14 @@ public class Utility
     public static int getRandomInt(int min,int max)
     {
         return (int) (Math.random() * ((max - min) + 1)) + min; 
-    }     
+    }  
+    
+    public static String changePasswordEmailBody(String usr,String code)
+    {
+        String msg = "Ciao %s, benvenuto su Il Paroliere-LabB!";
+        msg+="\nLa tua nuova password è :  %s";
+        msg = String.format(msg, usr,code);
+        
+        return msg;
+    }
 }

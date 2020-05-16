@@ -496,5 +496,18 @@ public class ServerImplementation extends Observable implements ServerInterface
         return ServerManager.ObserversOnline();
     }
 
+    @Override
+    public boolean recoverPassword(String email) throws RemoteException 
+    {
+        String newPassword = Utility.randomAlphaNumeric(10);
+        String passCrypto = Utility.StringMD5Hash(newPassword);
+        String bodyMail = Utility.changePasswordEmailBody("", newPassword);
+        
+        boolean b = Utility.sendEmail(email, bodyMail);
+        return b;
+        
+    }
+      
+    
    
 }

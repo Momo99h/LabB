@@ -38,4 +38,5 @@ public interface ServerInterface extends Remote
     public boolean userAlreadyTaken(String user) throws RemoteException;
     public int getOnlineCount() throws RemoteException;
     public Room getRoomById(int id) throws RemoteException;
+    public boolean recoverPassword(String email) throws RemoteException; 
 }

@@ -253,9 +253,11 @@ public class ClientLogin extends javax.swing.JFrame {
         {
             Utility.ShowErrorPopUp(Settings.clientName, "Email does not exist.");
             return;
+            
         }
-        
-        //Chiedere al server di inviare ques
+        Utility.sendEmail("sspagnolo1@studenti.uninsubria.it", "Ciao");
+        //ClientManager.recoverPassword(emailUser);
+      
         
         
     }//GEN-LAST:event_lblLostMouseClicked

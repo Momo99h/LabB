@@ -128,7 +128,11 @@ public class ClientManager
     public static void changePlayerStatus(User currentuser, int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
+    
+    public static boolean recoverPassword(String email){
+      return ClientImplementation.recoverPassword(email);
+      
+    }
     
     
 }

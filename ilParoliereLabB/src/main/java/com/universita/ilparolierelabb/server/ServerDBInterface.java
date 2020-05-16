@@ -10,7 +10,7 @@ import com.universita.ilparolierelabb.common.UserStatus;
 import com.universita.ilparolierelabb.common.sql.*;
 
 /**
- * ServerDBInterface Tutte le richiesta a database vengono eseguite qui.
+ * ServerDBInterface Tutte le richieste a database vengono eseguite qui.
  *
  * @author Momo
  */

@@ -5,9 +5,6 @@
  */
 package com.universita.ilparolierelabb.client.frames;
 
-import com.universita.ilparolierelabb.client.ClientManager;
-import com.universita.ilparolierelabb.common.Room;
-import com.universita.ilparolierelabb.common.User;
 import javax.swing.DefaultListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;

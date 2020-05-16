@@ -10,7 +10,6 @@ import com.universita.ilparolierelabb.common.LobbyData;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.UserStatus;
-import com.universita.ilparolierelabb.common.Rooms;
 import com.universita.ilparolierelabb.server.RemoteObserver;
 import com.universita.ilparolierelabb.common.Room;
 import java.rmi.RemoteException;
@@ -23,9 +22,11 @@ import java.rmi.server.UnicastRemoteObject;
 /**
  *
  * @author Momo
+ * 
  */
 public class ClientImplementation extends UnicastRemoteObject implements RemoteObserver
 {
+    
     public static ServerInterface _server = null;
     public static ClientImplementation _client;
 

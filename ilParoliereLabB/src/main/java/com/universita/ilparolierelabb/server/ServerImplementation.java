@@ -19,8 +19,12 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
 import java.util.Observable;
 
+
 /**
- *
+ * ServerImplementation
+ * 
+ * Classe di implementazione dell'interfaccia di collocquio RMI.
+ * 
  * @author Momo
  */
 public class ServerImplementation extends Observable implements ServerInterface
@@ -28,24 +32,28 @@ public class ServerImplementation extends Observable implements ServerInterface
     private static Registry rmiRegistry;
     private static ServerInterface rmiService;
     private static ServerImplementation server;
-    public static ArrayList<ClientObserver> LobbyClients;
-    public static ArrayList<ClientObserver> GameClients;
-    public static ArrayList<RegisterData> registerUserWaiting;
+    public static ArrayList<ClientObserver> LobbyClients; //Osservatori client nella lobby
+    public static ArrayList<ClientObserver> GameClients; //Osservatori client nelle room di gioco
+    public static ArrayList<RegisterData> registerUserWaiting; // Lista di utenti in attesa della mail di conferma
 
     private ServerImplementation() throws RemoteException 
     {
         super();
-        LobbyClients = new ArrayList<>(); // Gli utenti in lobby devono essere qui
-        GameClients = new ArrayList<>(); // Gli utenti in room invece qui.
+        LobbyClients = new ArrayList<>();
+        GameClients = new ArrayList<>(); 
         registerUserWaiting = new ArrayList<>();
     }
-    
-    public static void Init()
+    /***
+     * Init Inizializza il registro di connessione al server 
+     * 
+     * @param portNumber numero di porta per la connessione
+     */
+    public static void Init(int portNumber)
     {
         try 
         {
             
-            rmiRegistry = LocateRegistry.createRegistry(9999);
+            rmiRegistry = LocateRegistry.createRegistry(portNumber);
             server = new ServerImplementation();
             rmiService = (ServerInterface) UnicastRemoteObject
                     .exportObject(server, 9999);
@@ -60,6 +68,13 @@ public class ServerImplementation extends Observable implements ServerInterface
         }
     }
     
+    /***
+     * clientLogin (RMI) Controlla se i dati inseriti sono valide credenziali
+     * @param usr Username dell'utente
+     * @param psw Password dell'utente
+     * @return true se il login è stato effettuato con successo
+     * @throws RemoteException 
+     */
     @Override
     public Boolean clientLogin(String usr, String psw) throws RemoteException
     {
@@ -69,7 +84,11 @@ public class ServerImplementation extends Observable implements ServerInterface
         ServerManager.addLogData(msg);
         return b;
     }
-
+    /***
+     * addClientObserver (RMI) Aggiunge un client alla lista di utenti in lobby 
+     * @param o Interfaccia del client  (suo identificativo)
+     * @throws RemoteException 
+     */
     @Override
     public void addClientObserver(RemoteObserver o) throws RemoteException {
         ClientObserver mo = new ClientObserver(o);
@@ -84,8 +103,12 @@ public class ServerImplementation extends Observable implements ServerInterface
         {
             ServerManager.addLogData("Cannot add client: (ID) "+mo.getObId()+" Reason: "+e.toString());
         }
-        
     }
+    /***
+     * removeClientObserver (RMI) Rimuove un client alla lista di utenti in lobby 
+     * @param o Interfaccia del client  (suo identificativo)
+     * @throws RemoteException 
+     */
     @Override
     public void removeClientObserver(RemoteObserver o) throws RemoteException 
     {
@@ -110,6 +133,11 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }        
     }
+    /***
+     * clientRegister (RMI) Aggiunge un utente in fase di registrazione alla lista
+     * @param d Dati di registrazione dell'utente
+     * @throws RemoteException 
+     */
     @Override
     public void clientRegister(RegisterData d) throws RemoteException 
     {
@@ -117,6 +145,12 @@ public class ServerImplementation extends Observable implements ServerInterface
         ServerManager.addLogData("New user opened registration: (Username) "+d.getUsername());
     }
     @Override
+    
+    /***
+     * registerWaitingEmailConfirmation (RMI) Controlla se un utente che sta effettutando il login deve confermare i dati
+     * @param usr Username dell'utente
+     * @throws RemoteException 
+     */
     public Boolean registerWaitingEmailConfirmation(String usr) throws RemoteException 
     {
         for(RegisterData d : registerUserWaiting)
@@ -128,11 +162,23 @@ public class ServerImplementation extends Observable implements ServerInterface
         }
         return false;
     }
+    /***
+     * clientIsLogged (RMI) Controlla se un utente è già all'interno del gioco
+     * @param usr Username utente
+     * @return true se l'utente è all'interno del gioco
+     * @throws RemoteException 
+     */
      @Override
     public Boolean clientIsLogged(String usr) throws RemoteException 
     {
         return ServerDBInterface.clientIsLogged(usr);
     }
+    /***
+     * activateAccount (RMI) Attiva l'account utente che corrisponde al codice fornito
+     * @param code Codice di attivazione
+     * @return true se l'account è stato attivato
+     * @throws RemoteException 
+     */
     @Override
     public Boolean activateAccount(String code) throws RemoteException 
     {
@@ -154,6 +200,11 @@ public class ServerImplementation extends Observable implements ServerInterface
         }
         return false;
     }
+    /***
+     * notifyClientsCount (RMI) Notifica gli osservatori client del numero di utenti connessi
+     * @param count Numero utenti connessi
+     * @return true se l'operazione è stata eseguita con successo
+     */
     public static synchronized boolean notifyClientsCount(int count)
     {
         ClientObserver w;
@@ -173,6 +224,12 @@ public class ServerImplementation extends Observable implements ServerInterface
         }
         return success;
     }
+    /***
+     * notifyClientsLobbyData (RMI) Notifica gli osservatori client dei dati di intestazione delle stanze di gioco
+     * Esempio: Id,Nome,Giocatori e data di creazione
+     * @param data Dati da essere notificati
+     * @return true se l'operazione è stata eseguita con successo
+     */
     public static synchronized boolean notifyClientsLobbyData(LobbyData data) 
     {
         ClientObserver w;
@@ -192,6 +249,11 @@ public class ServerImplementation extends Observable implements ServerInterface
         }
         return success;
     }
+    /***
+     * notifyGameInitTimer (RMI) Notifica gli osservatori client in una stanza il timer iniziale del gioco
+     * @param roomId Identificativo della stanza
+     * @param timerCount Valore del contatore
+     */
     public static synchronized void notifyGameInitTimer(int roomId,int timerCount)
     {
         ClientObserver w;
@@ -208,6 +270,11 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
+    /***
+     * notifyGameMatrix (RMI) Notifica gli osservatori client in una stanza la matrice di gioco
+     * @param roomId Identificativo della stanza
+     * @param matrix Matrice di gioco
+     */
     public static synchronized void notifyGameMatrix(int roomId,String[][] matrix)
     {
         ClientObserver w;
@@ -224,6 +291,11 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
+    /**
+     * disconnectClient (RMI) Disconnette un utente dal gioco
+     * @param usr Username utente
+     * @throws RemoteException 
+     */
     @Override
     public void disconnectClient(String usr) throws RemoteException 
     {
@@ -231,7 +303,11 @@ public class ServerImplementation extends Observable implements ServerInterface
         if(ServerDBInterface.ClientDisconnect(usr))
         ServerManager.addLogData("New user disconnected: (Username) "+usr);
     }
-
+    /**
+     * LobbyData (RMI) Richiesta di aggiornamento dei dati di intestazione delle stanze di gioco
+     * @return I dati di intestazione delle stanze di gioco
+     * @throws RemoteException 
+     */
     @Override
     public LobbyData getLobbyRooms() throws RemoteException
     {

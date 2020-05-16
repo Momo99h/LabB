@@ -49,7 +49,7 @@ public class ServerManager
     }
     public static void Run()
     {
-        ServerImplementation.Init();        
+        ServerImplementation.Init(9999);        
         ServerMainFrame serverFrame = new ServerMainFrame();
         serverFrame.setVisible(true);
         addLogData("Server ready - Waiting connections..");

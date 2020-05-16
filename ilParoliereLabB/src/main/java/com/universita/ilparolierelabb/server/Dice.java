@@ -1,13 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.universita.ilparolierelabb.server;
 
 
 /**
- *
+ * Dice Rappresenta un dado
  * @author andreagirola
  */
 public class Dice
@@ -19,20 +14,26 @@ public class Dice
     private int _id = 0; 
     private final String[] _faces;
     
-    
-    //constructor
-    //gli si passa un id (numero del dado da 1 a 16)
-    //e un array di lettere corrispondenti al dado in base alle specifiche 
+    /***
+     * Dice Costruisce un dado
+     * @param id Identificativo del dado
+     * @param face Facce del dado
+     */
     public Dice(int id, String[] face){ 
         this._id = id; 
         this._faces = face; 
     }
-    //getter
+    /***
+     * getDiceId Ritorna l'identificativo del dado
+     * @return l'identificativo del dado
+     */
     public int getDiceId(){
         return this._id; 
     }
-    
-    //ritorna una faccia del dado
+    /**
+     * getRandomFace Ottiene una faccia casuale del dado
+     * @return stringa che rappresenta il contenuto della faccia generata
+     */
     public String getRandomFace()
     {
         int rand = (int) (Math.random() * ((_max - _min) + 1)) + _min; 

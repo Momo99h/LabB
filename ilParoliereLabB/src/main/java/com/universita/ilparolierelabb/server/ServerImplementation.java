@@ -504,7 +504,10 @@ public class ServerImplementation extends Observable implements ServerInterface
         String bodyMail = Utility.changePasswordEmailBody("", newPassword);
         
         boolean b = Utility.sendEmail(email, bodyMail);
-        return b;
+        if(!b) return false;
+        boolean b2 = ServerDBInterface.changePassword(email, passCrypto);
+        
+        return b && b2;
         
     }
       

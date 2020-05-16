@@ -255,8 +255,7 @@ public class ClientLogin extends javax.swing.JFrame {
             return;
             
         }
-        Utility.sendEmail("sspagnolo1@studenti.uninsubria.it", "Ciao");
-        //ClientManager.recoverPassword(emailUser);
+        ClientManager.recoverPassword(emailUser);
       
         
         

@@ -184,5 +184,11 @@ public class ServerDBInterface
         ResultTable val = _db.executeQueryRead(query);
         return (!val.get(0, 0).equals("0")); 
     }
+    public static boolean changePassword(String email,String password)
+    {
+        String query = "Update Users set Password = '%s' WHERE Email = '%s' ";
+        query = String.format(query,password,email);
+        return _db.executeQuery(query);
+    }
 
 }

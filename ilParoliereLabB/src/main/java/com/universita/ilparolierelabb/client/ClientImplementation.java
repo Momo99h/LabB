@@ -330,24 +330,25 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     public void notifyClientsLobbyData(Object observable, LobbyData data) throws RemoteException 
     {
         ClientManager.lobby = data;
-        ClientManager.refreshRooms();
+        ClientManager.refreshLobbyRooms();
     }
 
     @Override
-    public void notifyGameInitTimer(Object observable, int roomId, int timerCount) throws RemoteException 
+    public void notifyGameInitTimer(Object observable, int timerCount) throws RemoteException 
     {
-        ClientManager.refreshGameInitTimer(roomId,timerCount);
+        ClientManager.refreshGameInitTimer(timerCount);
     }
 
     @Override
-    public void notifyGameMatrix(Object observable, int roomId, String[][] matrix) throws RemoteException 
+    public void notifyGameMatrix(Object observable, String[][] matrix) throws RemoteException 
     {
-        ClientManager.setGameMatrix(roomId,matrix);
+        ClientManager.setGameMatrix(matrix);
     }
 
     @Override
-    public void notifyGameRoomData(Object observable, Room room) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void notifyGameRoomData(Object observable, Room room) throws RemoteException 
+    {
+        ClientManager.refreshGameRoom();
     }
 
 }

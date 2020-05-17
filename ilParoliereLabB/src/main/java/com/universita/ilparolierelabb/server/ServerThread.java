@@ -97,8 +97,8 @@ public class ServerThread extends Thread implements ActionListener
         
         if(ServerManager.rooms.isDataChanged())
         {
-            //ServerImplementation.notifyGameRoomData();
-            if(ServerImplementation.notifyClientsLobbyData(ServerManager.rooms.createLobbyData()))
+            //;
+            if(ServerImplementation.notifyClientsLobbyData(ServerManager.rooms.createLobbyData()) && ServerImplementation.notifyGameRoomData())
                 ServerManager.rooms.confirmDataChanged();
             
         }

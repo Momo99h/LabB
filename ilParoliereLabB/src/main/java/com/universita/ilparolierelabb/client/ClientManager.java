@@ -83,9 +83,13 @@ public class ClientManager
     {
         ClientImplementation.changePlayerStatus(usr,status);
     }
-    public static void refreshRooms() 
+    public static void refreshLobbyRooms() 
     {
         lobbyFrame.refreshRooms();
+        
+    }
+    public static void refreshGameRoom()
+    {
         gameFrame.refreshRooms();
     }
     public static void Run(Boolean connect)
@@ -107,14 +111,16 @@ public class ClientManager
         return ClientImplementation.userAlreadyTaken(usr); 
     }
 
-    public static void refreshGameInitTimer(int roomId, int timerCount) 
+    public static void refreshGameInitTimer(int timerCount) 
     {
         //clientFrame.refreshGameInitTimer(roomId,timerCount);
+        gameFrame.refreshGameInitTimer(timerCount);
     }
 
-    public static void setGameMatrix(int roomId, String[][] matrix) 
+    public static void setGameMatrix(String[][] matrix) 
     {
          //clientFrame.setGameMatrix(roomId,matrix);
+        gameFrame.setGameMatrix(matrix);
     }
     public static Room getRoomById(int roomId)
     {

@@ -203,15 +203,14 @@ public class ClientGameFrame extends javax.swing.JFrame {
         this.buttonReady.setVisible(false);
     }
     
-    public void refreshGameInitTimer(int roomId, int timerCount) 
+    public void refreshGameInitTimer(int timerCount) 
     {
-        if(gameUsrControl.getCurrentRoomID() != roomId) return;
+        //if(gameUsrControl.getCurrentRoomID() != roomId) return;
         gameUsrControl.refreshInitTimer(timerCount);
     }
 
-    public void setGameMatrix(int roomId, String[][] matrix) 
+    public void setGameMatrix(String[][] matrix) 
     {
-        if(gameUsrControl.getCurrentRoomID() != roomId) return;
         gameUsrControl.setMatrix(matrix);
     }
 

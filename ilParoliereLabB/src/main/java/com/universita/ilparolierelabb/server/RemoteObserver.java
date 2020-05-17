@@ -15,7 +15,7 @@ public interface RemoteObserver extends Remote
 {
     public void notifyClientsCount(Object observable, int count)throws RemoteException;
     public void notifyClientsLobbyData(Object observable, LobbyData data)throws RemoteException;
-    public void notifyGameInitTimer(Object observable,int roomId,int timerCount) throws RemoteException;
-    public void notifyGameMatrix(Object observable,int roomId,String[][] matrix) throws RemoteException;
+    public void notifyGameInitTimer(Object observable,int timerCount) throws RemoteException;
+    public void notifyGameMatrix(Object observable,String[][] matrix) throws RemoteException;
     public void notifyGameRoomData(Object observable,Room room) throws RemoteException;
 }

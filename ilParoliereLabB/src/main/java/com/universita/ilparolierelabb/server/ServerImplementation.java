@@ -256,17 +256,20 @@ public class ServerImplementation extends Observable implements ServerInterface
      */
     public static synchronized void notifyGameInitTimer(int roomId,int timerCount)
     {
-        ClientObserver w;
-        for(int i = 0; i < LobbyClients.size(); i++)
+        ClientRoom g;
+        for(int i=0; i<ServerImplementation.GameClients.size();i++)
         {
-            w = LobbyClients.get(i);
-            try 
+            g = ServerImplementation.GameClients.get(i);
+            if(g.getRoomId() == roomId) 
             {
-                w.getOb().notifyGameInitTimer(rmiService, roomId,timerCount);
-            } 
-            catch (RemoteException ex) 
-            {
-                ex.printStackTrace();
+                try 
+                {
+                    g.getClient().getOb().notifyGameInitTimer(rmiService, timerCount);
+                } 
+                catch (RemoteException ex) 
+                {
+                    ex.printStackTrace();
+                }
             }
         }
     }
@@ -277,19 +280,22 @@ public class ServerImplementation extends Observable implements ServerInterface
      */
     public static synchronized void notifyGameMatrix(int roomId,String[][] matrix)
     {
-        /*ClientObserver w;
-        for(int i = 0; i < GameClients.size(); i++)
+        ClientRoom g;
+        for(int i=0; i<ServerImplementation.GameClients.size();i++)
         {
-            w = GameClients.get(i);
-            try 
+            g = ServerImplementation.GameClients.get(i);
+            if(g.getRoomId() == roomId) 
             {
-                w.getOb().notifyGameMatrix(rmiService, roomId, matrix);
-            } 
-            catch (RemoteException ex) 
-            {
-                ex.printStackTrace();
+                try 
+                {
+                    g.getClient().getOb().notifyGameMatrix(rmiService, matrix);
+                } 
+                catch (RemoteException ex) 
+                {
+                    ex.printStackTrace();
+                }
             }
-        }*/
+        }
     }
     public static synchronized boolean notifyGameRoomData()
     {

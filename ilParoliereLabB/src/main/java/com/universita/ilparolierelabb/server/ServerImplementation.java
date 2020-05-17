@@ -33,7 +33,7 @@ public class ServerImplementation extends Observable implements ServerInterface
     private static ServerInterface rmiService;
     private static ServerImplementation server;
     public static ArrayList<ClientObserver> LobbyClients; //Osservatori client nella lobby
-    public static ArrayList<ClientObserver> GameClients; //Osservatori client nelle room di gioco
+    public static ArrayList<ClientRoom> GameClients; //Osservatori client nelle room di gioco
     public static ArrayList<RegisterData> registerUserWaiting; // Lista di utenti in attesa della mail di conferma
 
     private ServerImplementation() throws RemoteException 
@@ -277,7 +277,7 @@ public class ServerImplementation extends Observable implements ServerInterface
      */
     public static synchronized void notifyGameMatrix(int roomId,String[][] matrix)
     {
-        ClientObserver w;
+        /*ClientObserver w;
         for(int i = 0; i < GameClients.size(); i++)
         {
             w = GameClients.get(i);
@@ -289,7 +289,28 @@ public class ServerImplementation extends Observable implements ServerInterface
             {
                 ex.printStackTrace();
             }
+        }*/
+    }
+    public static synchronized boolean notifyGameRoomData()
+    {
+        ClientRoom g;
+        Room r;
+        Boolean success = true;
+        for(int i=0; i<ServerImplementation.GameClients.size();i++)
+        {
+            g = ServerImplementation.GameClients.get(i);
+            r = ServerManager.rooms.getRoom(g.getRoomId());
+            try 
+            {
+                g.getClient().getOb().notifyGameRoomData(rmiService, r);
+            } 
+            catch (RemoteException ex) 
+            {
+                success = false;
+                ex.printStackTrace();
+            }
         }
+        return success;
     }
     /**
      * disconnectClient (RMI) Disconnette un utente dal gioco
@@ -357,7 +378,7 @@ public class ServerImplementation extends Observable implements ServerInterface
             r.addPlayer(usr);
             ServerDBInterface.clientEnterRoom(roomId,usr.getUsername());
             ServerManager.rooms.setDataChanged(true);
-            addGameObserver(o);
+            addGameObserver(o,roomId);
             return true;
         }
         catch (Exception e)
@@ -367,36 +388,38 @@ public class ServerImplementation extends Observable implements ServerInterface
         }
     }
     /***
-     * addGameObserver (RMI) Aggiunge un Observer client alla lista di observer nelle room
+     * addGameObserver Aggiunge un Observer client alla lista di observer nelle room
      * @param o Ogetto Observer client
      * @throws RemoteException 
      */
-    public void addGameObserver(RemoteObserver o) throws RemoteException
+    public void addGameObserver(RemoteObserver o,int roomId) throws RemoteException
     {
         this.removeClientObserver(o);
         ClientObserver mo = new ClientObserver(o);
-        GameClients.add(mo);
+        ClientRoom go = new ClientRoom(roomId,mo);
+        GameClients.add(go);
         String s = "Client observer %s entered in room";
         s = String.format(s, mo.getObId());
         ServerManager.addLogData(s);
     }
     /***
-     * removeGameObserver (RMI) Rimuove un Observer client alla lista di observer nelle room
+     * removeGameObserver Rimuove un Observer client alla lista di observer nelle room
      * @param o Ogetto Observer client
      * @throws RemoteException 
      */
     public void removeGameObserver(RemoteObserver o) throws RemoteException
     {
         ClientObserver w; 
+        ClientRoom g;
         for(int i=0; i<GameClients.size(); i++){
-            
-            w = GameClients.get(i);
+            g = GameClients.get(i);
+            w = g.getClient();
             if(w.getOb().equals(o)){
                 try
                 {
                     deleteObserver(w);
                     ServerManager.addLogData("New client left room: (ID) "+w.getObId());
-                    GameClients.remove(w);
+                    GameClients.remove(g);
                     break;
                 }
                 catch(Exception e)

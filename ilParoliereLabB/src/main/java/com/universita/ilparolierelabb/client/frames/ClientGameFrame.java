@@ -126,7 +126,7 @@ public class ClientGameFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_buttonLeaveRoomActionPerformed
 
     private void buttonReadyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonReadyActionPerformed
-        // TODO add your handling code here:
+
         UserStatus status = (_playerReady) ? UserStatus.NotReady : UserStatus.Ready;
         _playerReady = !_playerReady;
         String btn = buttonReady.getText();

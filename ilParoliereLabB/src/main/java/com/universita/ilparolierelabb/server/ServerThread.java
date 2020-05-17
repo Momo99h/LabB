@@ -1,12 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.Game;
+import com.universita.ilparolierelabb.common.Room;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.Utility;
 import java.awt.event.ActionEvent;
@@ -97,10 +94,13 @@ public class ServerThread extends Thread implements ActionListener
 
     private synchronized void doRoomstuff() 
     {
+        
         if(ServerManager.rooms.isDataChanged())
         {
+            //ServerImplementation.notifyGameRoomData();
             if(ServerImplementation.notifyClientsLobbyData(ServerManager.rooms.createLobbyData()))
                 ServerManager.rooms.confirmDataChanged();
+            
         }
     }
 

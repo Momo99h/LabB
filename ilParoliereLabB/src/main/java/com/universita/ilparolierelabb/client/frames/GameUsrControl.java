@@ -191,6 +191,12 @@ public class GameUsrControl extends javax.swing.JPanel {
         if(!matrixUsrControl.isVisible())matrixUsrControl.setVisible(true);
         matrixUsrControl.shuffleAnim();
     }
+    void refreshGameTimer(int timerCount) 
+    {
+        String waiting = "Game running: %s seconds remaining..";
+        waiting = String.format(waiting, timerCount);
+        this.lblWaitingPlayers.setText(waiting);
+    }
 
     void setMatrix(String[][] matrix) 
     {

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.universita.ilparolierelabb.client;
 
 import com.universita.ilparolierelabb.client.frames.ClientLobbyFrame;
@@ -354,7 +349,13 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     @Override
     public void notifyGameTimer(Object observable, int timerCount) throws RemoteException 
     {
-       System.out.println(timerCount);
+       ClientManager.refreshGameTimer(timerCount);
+    }
+
+    @Override
+    public void notifyClientsGameStarted(Object observable) throws RemoteException 
+    {
+        ClientManager.startGame();
     }
 
 }

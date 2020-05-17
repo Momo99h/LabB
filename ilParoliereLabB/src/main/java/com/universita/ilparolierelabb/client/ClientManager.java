@@ -130,15 +130,22 @@ public class ClientManager
     {
         ClientLobbyFrame.Par_lblUtentiConnessi.setText(ClientImplementation.getOnlineCount()+"");
     }
-
-    public static void changePlayerStatus(User currentuser, int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    
+    public static void refreshGameTimer(int timerCount)
+    {
+        gameFrame.refreshGameTimer(timerCount);
     }
     
-    public static boolean recoverPassword(String email){
+    public static boolean recoverPassword(String email)
+    {
       return ClientImplementation.recoverPassword(email);
       
     }
+    public static void startGame()
+    {
+        gameFrame.startGame();
+    }
+    
     
     
 }

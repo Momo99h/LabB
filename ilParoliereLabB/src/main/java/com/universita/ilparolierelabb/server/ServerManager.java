@@ -51,7 +51,7 @@ public class ServerManager
      */
     public static int ObserversOnline()
     {
-        return ServerImplementation.LobbyClients.size();
+        return ServerImplementation.LobbyClients.size()+ServerImplementation.GameClients.size();
     }
     /***
      * Run Avvia la connessione RMI del server e inizializza

@@ -213,5 +213,9 @@ public class ClientGameFrame extends javax.swing.JFrame {
     {
         gameUsrControl.setMatrix(matrix);
     }
+    public void refreshGameTimer(int timerCount)
+    {
+        gameUsrControl.refreshGameTimer(timerCount);
+    }
 
 }

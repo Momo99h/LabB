@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.common.User;
@@ -338,6 +333,26 @@ public class ServerImplementation extends Observable implements ServerInterface
         }
         return success;
     }
+    public static synchronized void notifyGameRoomStarted(int roomId)
+    {
+        ClientRoom g;
+        for(int i=0; i<ServerImplementation.GameClients.size();i++)
+        {
+            g = ServerImplementation.GameClients.get(i);
+            if(g.getRoomId() == roomId) 
+            {
+                try 
+                {
+                    g.getClient().getOb().notifyClientsGameStarted(rmiService);
+                } 
+                catch (RemoteException ex) 
+                {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+    
     /**
      * disconnectClient (RMI) Disconnette un utente dal gioco
      * @param usr Username utente
@@ -497,6 +512,7 @@ public class ServerImplementation extends Observable implements ServerInterface
         if(ServerManager.rooms.isRoomReadyToPlay(r.getId()) && !ServerManager.games.hasRoomGame(r.getId())) 
         {
             ServerManager.createGame(r.getId());
+            notifyGameRoomStarted(r.getId());
         }
         ServerManager.rooms.setDataChanged(true);
     }
@@ -551,13 +567,10 @@ public class ServerImplementation extends Observable implements ServerInterface
         String newPassword = Utility.randomAlphaNumeric(10);
         String passCrypto = Utility.StringMD5Hash(newPassword);
         String bodyMail = Utility.changePasswordEmailBody("", newPassword);
-        
         boolean b = Utility.sendEmail(email, bodyMail);
         if(!b) return false;
         boolean b2 = ServerDBInterface.changePassword(email, passCrypto);
-        
         return b && b2;
-        
     }
       
     

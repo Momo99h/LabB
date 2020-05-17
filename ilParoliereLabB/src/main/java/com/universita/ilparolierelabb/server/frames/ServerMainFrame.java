@@ -131,7 +131,7 @@ public class ServerMainFrame extends javax.swing.JFrame {
 
     private void initFunctions() 
     {
-       this.setExtendedState(Frame.MAXIMIZED_BOTH);
+       //this.setExtendedState(Frame.MAXIMIZED_BOTH);
        listLog.setModel(Console_Log_Model);
     }
 }

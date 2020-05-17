@@ -36,7 +36,6 @@ public class ServerThread extends Thread implements ActionListener
         doEmailstuff();
         doRoomstuff();
         doGamestuff();
-        
     }
 
     private synchronized void doIdlestuff() 
@@ -125,6 +124,12 @@ public class ServerThread extends Thread implements ActionListener
                     gameArray[i].setMatrix(MatrixFactory.getMatrix());
                     ServerImplementation.notifyGameMatrix(gameArray[i].getRoomID(),gameArray[i].getMatrix());
                     gameArray[i].setPhase(Game.Phase.GameCountDown);
+                    break;
+                case GameCountDown:
+                    gameArray[i].decrementGameTimer();
+                    ServerImplementation.notifyGameTimer(gameArray[i].getRoomID(),gameArray[i].getGameTimer());
+                    if(gameArray[i].getGameTimer() == 0)
+                        gameArray[i].setPhase(Game.Phase.Finished);
                     break;
             }
         }

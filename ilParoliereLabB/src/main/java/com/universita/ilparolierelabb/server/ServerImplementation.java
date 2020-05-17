@@ -36,6 +36,8 @@ public class ServerImplementation extends Observable implements ServerInterface
     public static ArrayList<ClientRoom> GameClients; //Osservatori client nelle room di gioco
     public static ArrayList<RegisterData> registerUserWaiting; // Lista di utenti in attesa della mail di conferma
 
+    
+
     private ServerImplementation() throws RemoteException 
     {
         super();
@@ -265,6 +267,24 @@ public class ServerImplementation extends Observable implements ServerInterface
                 try 
                 {
                     g.getClient().getOb().notifyGameInitTimer(rmiService, timerCount);
+                } 
+                catch (RemoteException ex) 
+                {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+    public static synchronized void notifyGameTimer(int roomId, int timerCount) {
+        ClientRoom g;
+        for(int i=0; i<ServerImplementation.GameClients.size();i++)
+        {
+            g = ServerImplementation.GameClients.get(i);
+            if(g.getRoomId() == roomId) 
+            {
+                try 
+                {
+                    g.getClient().getOb().notifyGameTimer(rmiService, timerCount);
                 } 
                 catch (RemoteException ex) 
                 {

@@ -351,4 +351,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         ClientManager.refreshGameRoom();
     }
 
+    @Override
+    public void notifyGameTimer(Object observable, int timerCount) throws RemoteException 
+    {
+       System.out.println(timerCount);
+    }
+
 }

@@ -54,7 +54,7 @@ public class MatrixFactory
         for(int i=0; i<16; i++){
             list.add(i); 
         }
-   
+        
         for(int i=0; i<4; i++){
             for(int j=0; j<4; j++){
                 int indice = Utility.getRandomInt(0, list.size()-1);

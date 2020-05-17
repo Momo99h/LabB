@@ -15,7 +15,7 @@ public class Game implements Serializable
 {
     public static enum Phase
     {
-        Idle,Ready,InitCountDown,CreateMatrix,GameCountDown
+        Idle,Ready,InitCountDown,CreateMatrix,GameCountDown,Finished
     }
     private int _roomid;
     private int _gameid = 1;
@@ -23,6 +23,7 @@ public class Game implements Serializable
     private int _gameTimer = 180;
     private Phase _phase = Phase.Idle;
     private String[][] _matrix;
+    
     public Game(int roomId){this._roomid = roomId;}
     
     public void setID(int value){this._gameid = value;}

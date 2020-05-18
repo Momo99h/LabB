@@ -45,6 +45,8 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         lblUtentiConnessi = new javax.swing.JLabel();
         buttonAddRoom = new javax.swing.JButton();
         buttonEnterRoom = new javax.swing.JButton();
+        label1 = new java.awt.Label();
+        label2 = new java.awt.Label();
         panelContainer = new javax.swing.JPanel();
         lobbyUsrControl = new com.universita.ilparolierelabb.client.frames.LobbyUsrControl();
 
@@ -73,6 +75,8 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
             }
         });
 
+        label1.setText("Username:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -82,6 +86,10 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(lblUtentiConnessi)
+                .addGap(29, 29, 29)
+                .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(buttonEnterRoom)
                 .addGap(18, 18, 18)
@@ -94,13 +102,20 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1)
-                        .addComponent(lblUtentiConnessi))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(buttonAddRoom)
-                        .addComponent(buttonEnterRoom)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(buttonEnterRoom))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1)
+                                .addComponent(lblUtentiConnessi))
+                            .addComponent(label2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
+
+        label1.getAccessibleContext().setAccessibleName("Username");
 
         panelContainer.setLayout(new java.awt.BorderLayout());
         panelContainer.add(lobbyUsrControl, java.awt.BorderLayout.CENTER);
@@ -115,7 +130,7 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(panelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -187,6 +202,8 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonEnterRoom;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private java.awt.Label label1;
+    private java.awt.Label label2;
     private javax.swing.JLabel lblUtentiConnessi;
     private com.universita.ilparolierelabb.client.frames.LobbyUsrControl lobbyUsrControl;
     private javax.swing.JPanel panelContainer;
@@ -196,10 +213,15 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
     {
         Par_lblUtentiConnessi = lblUtentiConnessi;
     }
+    
+    private void displayUsername(){
+        label2.setText(ClientManager.currentuser.getUsername());
+    }
 
     private void initFunctions()
     {
         this.setLocationRelativeTo(null);
+        displayUsername();              //username name bottom left 
         ClientManager.getLobbyRooms();
         ClientManager.refreshOnlineCount();
         this.refreshRooms();

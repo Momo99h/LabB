@@ -514,6 +514,7 @@ public class ServerImplementation extends Observable implements ServerInterface
         if(r.getPlayersIn() == 0)
         {
             ServerManager.rooms.removeRoom(r);
+            ServerManager.games.deleteGame(r.getId());
             ServerManager.addLogData("Room ID "+r.getId()+" has been removed because no players are inside");
             ServerManager.rooms.setDataChanged(true);
         }

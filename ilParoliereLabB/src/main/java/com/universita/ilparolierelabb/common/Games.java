@@ -43,5 +43,17 @@ public class Games implements Serializable
         }
         return false;
     }
+    public void deleteAllGames()
+    {
+        _games.clear();
+    }
+    public void deleteGame(int roomId)
+    {
+        for(int i = 0; i < gamesCount();i++)
+        {
+            if(this._games.get(i).getRoomID() == roomId)
+                _games.remove(i);
+        }
+    }
     
 }

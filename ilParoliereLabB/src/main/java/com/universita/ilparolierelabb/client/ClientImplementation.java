@@ -308,6 +308,21 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
+    
+    public static int checkWord(String word, int roomId)
+    {
+        try
+        {
+            return _server.checkWord(word, roomId);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            Utility.ShowErrorPopUp(Settings.clientName, e.toString());
+            System.exit(1);
+            return -1; 
+        }
+    }
 
     @Override
     public void notifyClientsCount(Object observable, int count) throws RemoteException 

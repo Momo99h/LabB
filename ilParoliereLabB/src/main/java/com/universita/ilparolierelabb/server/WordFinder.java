@@ -24,7 +24,7 @@ package com.universita.ilparolierelabb.server;
 		}
 	}
 
-	public boolean searchWord(char[][] matrix, String word) {
+	public boolean searchWord(String[][] matrix, String word) {
 		int N = matrix.length;
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -36,14 +36,18 @@ package com.universita.ilparolierelabb.server;
 		return false;
 	}
 
-	public boolean search(char[][] matrix, String word, int row, int col,
+	public boolean search(String[][] matrix, String word, int row, int col,
 			int index, int N) {
 
 		// check if current cell not already used or character in it is not not
-
+                /*
 		if (solution[row][col] != 0 || word.charAt(index) != matrix[row][col]) {
 			return false;
-		}
+		} */
+                
+                if (solution[row][col] != 0 || matrix[row][col].equals(word.charAt(index))) {
+                    return false;
+                }
 
 		if (index == word.length() - 1) {
 			// word is found, return true
@@ -98,22 +102,17 @@ package com.universita.ilparolierelabb.server;
 		return false;
 	}
         
-        public boolean wordIsPresent(String word, char[][] matrix){
+        public boolean wordIsPresent(String word, String[][] matrix){
             
             WordFinder w = new WordFinder(matrix.length);
-		if (w.searchWord(matrix, word)) {
-			//w.print();
-                        return true;
-		} else {
-			//System.out.println("NO PATH FOUND");
-                        return false;
-                }
+            return w.searchWord(matrix, word); 
+            
         }
         
         
         //inserire parola già presente nel dizionario!! 
         
-        public int pointsFromWord(String word, char[][] matrix){
+        public int pointsFromWord(String word, String[][] matrix){
             int value = 0;
             int wl = 0;
             
@@ -136,7 +135,8 @@ package com.universita.ilparolierelabb.server;
             
             return value;
         }
-                
+        
+/*        
 	public void print() {
 		for (int i = 0; i < solution.length; i++) {
 			for (int j = 0; j < solution.length; j++) {
@@ -144,16 +144,17 @@ package com.universita.ilparolierelabb.server;
 			}
 			System.out.println();
 		}
-	}
+	} 
+*/
 
 	public static void main(String[] args) {
             
-		char[][] matrix = { 
-                                    { 't', 'z', 'x', 'c', 'd' },
-                                    { 'a', 'h', 'n', 'z', 'x' }, 
-                                    { 'h', 'w', 'o', 'i', 'o' },
-                                    { 'o', 'r', 'n', 'r', 'n' }, 
-                                    { 'a', 'b', 'r', 'i', 'n' }};
+		String[][] matrix = { 
+                                    { "T", "Z", "X", "C"},
+                                    { "A", "H", "N", "Z"}, 
+                                    { "H", "W", "O", "I"},
+                                    { "O", "R", "N", "R"}, 
+                                    { "A", "B", "R", "I"}};
                                     //prova
 	}
         

@@ -3,6 +3,7 @@ package com.universita.ilparolierelabb.server;
 import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.Room;
 import com.universita.ilparolierelabb.client.RegisterData;
+import com.universita.ilparolierelabb.common.Game;
 import com.universita.ilparolierelabb.common.LobbyData;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
@@ -571,6 +572,26 @@ public class ServerImplementation extends Observable implements ServerInterface
         if(!b) return false;
         boolean b2 = ServerDBInterface.changePassword(email, passCrypto);
         return b && b2;
+    }
+
+    @Override
+    public int checkWord(String word, int roomId) throws RemoteException 
+    {
+        Game[] games = ServerManager.games.getGamesArray();
+        Game game = null; 
+        
+        for(int i=0; i<games.length; i++){
+            if(games[i].getRoomID() == roomId){
+               game = games[i];
+               break;
+            }
+        }
+        //estrapolo matrice e cerco parola 
+        String[][] matrix = game.getMatrix();
+        //Check parola in dizionario 
+        
+        //int score = ......(matrix,word);
+        return Utility.getRandomInt(0, 7);
     }
       
     

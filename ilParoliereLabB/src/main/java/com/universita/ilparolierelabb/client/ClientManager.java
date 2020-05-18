@@ -146,6 +146,10 @@ public class ClientManager
         gameFrame.startGame();
     }
     
+     public static int checkWord(String word, int roomId){
+         return ClientImplementation.checkWord(word, roomId);
+     }
+    
     
     
 }

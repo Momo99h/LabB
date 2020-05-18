@@ -7,7 +7,11 @@ package com.universita.ilparolierelabb.client.frames;
 
 import com.universita.ilparolierelabb.client.ClientManager;
 import com.universita.ilparolierelabb.common.Room;
+import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.User;
+import com.universita.ilparolierelabb.common.Utility;
+import static com.universita.ilparolierelabb.server.frames.ServerMainFrame.Console_Log_Model;
+import javax.swing.DefaultListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
@@ -21,6 +25,7 @@ public class GameUsrControl extends javax.swing.JPanel {
     private String[][] _gameMatrix;
     private int _currentRoomID = -1;
     private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Player","Total score","Status"},0);
+    public static DefaultListModel Word_List_Model = new DefaultListModel();
     
     /**
      * Creates new form GameUsrControl
@@ -29,6 +34,7 @@ public class GameUsrControl extends javax.swing.JPanel {
         initComponents();
         initFunctions();
         matrixUsrControl.setVisible(false);
+        listParole.setModel(Word_List_Model);
     }
 
     /**
@@ -47,12 +53,12 @@ public class GameUsrControl extends javax.swing.JPanel {
         lblWaitingPlayers = new javax.swing.JLabel();
         panelContainer = new javax.swing.JPanel();
         matrixUsrControl = new com.universita.ilparolierelabb.client.frames.MatrixUsrControl();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
         Words = new java.awt.Label();
         label1 = new java.awt.Label();
-        jTextField1 = new javax.swing.JTextField();
-        button1 = new java.awt.Button();
+        txbParolaInserita = new javax.swing.JTextField();
+        btnCheckParoa = new java.awt.Button();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        listParole = new javax.swing.JList<>();
 
         setBackground(new java.awt.Color(255, 204, 204));
 
@@ -91,28 +97,26 @@ public class GameUsrControl extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jScrollPane2.setViewportView(jTextArea1);
-
         Words.setText("Words founded");
 
         label1.setText("Write here:");
 
-        jTextField1.setName(""); // NOI18N
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txbParolaInserita.setName(""); // NOI18N
+        txbParolaInserita.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txbParolaInseritaActionPerformed(evt);
             }
         });
 
-        button1.setActionCommand("wordsCheckButton");
-        button1.setLabel("Check!");
-        button1.addActionListener(new java.awt.event.ActionListener() {
+        btnCheckParoa.setActionCommand("wordsCheckButton");
+        btnCheckParoa.setLabel("Check!");
+        btnCheckParoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button1ActionPerformed(evt);
+                btnCheckParoaActionPerformed(evt);
             }
         });
+
+        jScrollPane3.setViewportView(listParole);
 
         javax.swing.GroupLayout panelContainerLayout = new javax.swing.GroupLayout(panelContainer);
         panelContainer.setLayout(panelContainerLayout);
@@ -121,8 +125,9 @@ public class GameUsrControl extends javax.swing.JPanel {
             .addGroup(panelContainerLayout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(Words, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Words, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
                 .addGroup(panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelContainerLayout.createSequentialGroup()
                         .addGap(171, 171, 171)
@@ -132,31 +137,30 @@ public class GameUsrControl extends javax.swing.JPanel {
                         .addComponent(matrixUsrControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelContainerLayout.createSequentialGroup()
                         .addGap(85, 85, 85)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txbParolaInserita, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelContainerLayout.createSequentialGroup()
                         .addGap(174, 174, 174)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnCheckParoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelContainerLayout.setVerticalGroup(
             panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelContainerLayout.createSequentialGroup()
-                .addGroup(panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(15, 15, 15)
+                .addGroup(panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(panelContainerLayout.createSequentialGroup()
-                        .addGap(19, 19, 19)
                         .addComponent(matrixUsrControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(27, 27, 27)
                         .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txbParolaInserita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnCheckParoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelContainerLayout.createSequentialGroup()
-                        .addGap(15, 15, 15)
                         .addComponent(Words, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(18, Short.MAX_VALUE))
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(48, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -178,24 +182,26 @@ public class GameUsrControl extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txbParolaInseritaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txbParolaInseritaActionPerformed
         
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txbParolaInseritaActionPerformed
 
-    private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
+    private void btnCheckParoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckParoaActionPerformed
         
         
-        String word = jTextField1.getText();
-        if(word.length()<=3){
-               jTextArea1.append("Parola non valida! \n");
-        } else {
-               jTextArea1.append(word + "\n");
+        String word = txbParolaInserita.getText();
+        if(word.length() <= 3)
+        {
+            Utility.ShowInfoPopUp(Settings.clientName, "Word that are shorter than 4 characters cannot be added");
+            return;
         }
-        jTextField1.setText("");
+        int score = ClientManager.checkWord(word, _currentRoomID);
+        Word_List_Model.add(0, word+" - "+score);
+        txbParolaInserita.setText("");
         
         // TODO add your handling code here:
-    }//GEN-LAST:event_button1ActionPerformed
+    }//GEN-LAST:event_btnCheckParoaActionPerformed
 
     public void setRoom(int roomID) 
     {
@@ -242,18 +248,18 @@ public class GameUsrControl extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Label Words;
-    private java.awt.Button button1;
+    private java.awt.Button btnCheckParoa;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JScrollPane jScrollPane3;
     private java.awt.Label label1;
     private javax.swing.JLabel lblRoomName;
     private javax.swing.JLabel lblWaitingPlayers;
+    private javax.swing.JList<String> listParole;
     private com.universita.ilparolierelabb.client.frames.MatrixUsrControl matrixUsrControl;
     private javax.swing.JPanel panelContainer;
     private javax.swing.JTable tablePlayers;
+    private javax.swing.JTextField txbParolaInserita;
     // End of variables declaration//GEN-END:variables
 
     private void initFunctions() 
@@ -263,6 +269,8 @@ public class GameUsrControl extends javax.swing.JPanel {
         tablePlayers.setColumnSelectionAllowed(false);
         tablePlayers.setRowSelectionAllowed(true);
         tablePlayers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+        
+        setVisibilityWordCheck(false);
     }
 
     void refreshInitTimer(int timerCount) 
@@ -278,11 +286,22 @@ public class GameUsrControl extends javax.swing.JPanel {
         String waiting = "Game running: %s seconds remaining..";
         waiting = String.format(waiting, timerCount);
         this.lblWaitingPlayers.setText(waiting);
+        
+        setVisibilityWordCheck(true);
     }
 
     void setMatrix(String[][] matrix) 
     {
         this._gameMatrix = matrix;
         matrixUsrControl.setMatrix(matrix);
+    }
+    
+    void setVisibilityWordCheck(boolean visible){
+        listParole.setVisible(visible);
+        Words.setVisible(visible);
+        label1.setVisible(visible);
+        btnCheckParoa.setVisible(visible);
+        txbParolaInserita.setVisible(visible);
+        jScrollPane3.setVisible(visible);
     }
 }

@@ -60,6 +60,11 @@ public class ClientLogin extends javax.swing.JFrame {
         textUsername.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         textUsername.setText("Pippo");
         textUsername.setToolTipText("Insert your username");
+        textUsername.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textUsernameActionPerformed(evt);
+            }
+        });
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
         jLabel3.setText("Password:");
@@ -260,6 +265,10 @@ public class ClientLogin extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_lblLostMouseClicked
+
+    private void textUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textUsernameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textUsernameActionPerformed
 
     private void CheckEmailCode()
     {

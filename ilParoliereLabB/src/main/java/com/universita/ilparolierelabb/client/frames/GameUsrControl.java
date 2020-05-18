@@ -194,10 +194,15 @@ public class GameUsrControl extends javax.swing.JPanel {
         if(word.length() <= 3)
         {
             Utility.ShowInfoPopUp(Settings.clientName, "Word that are shorter than 4 characters cannot be added");
+            txbParolaInserita.setText("");
             return;
         }
-        int score = ClientManager.checkWord(word, _currentRoomID);
-        Word_List_Model.add(0, word+" - "+score);
+        int score = ClientManager.checkWord(word.toUpperCase(), _currentRoomID);
+        if(score>0){
+            Word_List_Model.add(0, word+" - "+score);
+        } else {
+             Word_List_Model.add(0, "PUPPAAA");
+        }
         txbParolaInserita.setText("");
         
         // TODO add your handling code here:

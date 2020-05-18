@@ -62,12 +62,11 @@ public class ServerThread extends Thread implements ActionListener
                     tempString = "Email sent to %s (%s) with verification code: %s";
                     tempString = String.format(tempString, d.getEmail(),d.getUsername(),code);
                     ServerManager.addLogData(tempString);
-                    ServerImplementation.registerUserWaiting.remove(d);
                 }
                 else
                 {
-                    String tempString = "Email failed to sent to %s";
-                    tempString = String.format(tempString, d.getEmail());
+                    String tempString = "Email failed to sent to %s with code %s";
+                    tempString = String.format(tempString, d.getEmail(),code);
                     ServerManager.addLogData(tempString);
                 }
             }
@@ -144,6 +143,13 @@ public class ServerThread extends Thread implements ActionListener
                     }
                     break;
                 case Finished:
+                    ServerImplementation.notifyGameRoomFinished(gameArray[i].getRoomID());
+                    gameArray[i].resetPlayersReady();
+                    ServerManager.games.setDataChanged();
+                    gameArray[i].setPhase(Game.Phase.Conclude);
+                    break;
+                case Conclude:
+                    //Invio a db
                     if(gameArray[i].getBestGameScore() >= 50)
                     {
                         
@@ -152,11 +158,8 @@ public class ServerThread extends Thread implements ActionListener
                     {
                         String msg = "Timed out!  Press ready to start next phase!";
                         ServerImplementation.notifyHeaderGameMessage(gameArray[i].getRoomID(),msg);
-                        ServerImplementation.notifyGameRoomFinished(gameArray[i].getRoomID());
-                        gameArray[i].resetPlayersReady();
-                        ServerManager.games.setDataChanged();
                     }
-                    gameArray[i].setPhase(Game.Phase.Conclude);
+                    ServerManager.games.deleteGame(gameArray[i].getRoomID());
                     break;
             }
         }

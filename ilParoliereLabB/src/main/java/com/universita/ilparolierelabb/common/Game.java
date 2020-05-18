@@ -28,7 +28,11 @@ public class Game implements Serializable
     private Phase _phase = Phase.Idle;
     private String[][] _matrix;
     
-    public Game(int roomId){this._roomid = roomId;}
+    public Game(int roomId,int gameId)
+    {
+        this._roomid = roomId;
+        this._gameid = gameId;
+    }
     
     public void setID(int value){this._gameid = value;}
     public void decrementInitTimer() {this._initTimer--;}

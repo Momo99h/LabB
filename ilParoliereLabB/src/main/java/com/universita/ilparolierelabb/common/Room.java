@@ -22,6 +22,7 @@ public class Room implements Serializable
     private String _roomName;
     private int _playersNeeded;
     private int _playersIn = 0;
+    private int _lastGameId = 0;
     
     private ArrayList<User> _users = new ArrayList<>();
     private SimpleDateFormat _sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
@@ -68,6 +69,11 @@ public class Room implements Serializable
     public int getPlayersIn(){return this._playersIn;}
     public String getCreationDate(){return this._sdf.format(_date);}
     public String getRoomName(){return this._roomName;}
+    public int nextGameId()
+    {
+        this._lastGameId++;
+        return this._lastGameId;
+    }
     public Boolean isPlayerIn(User player)
     {
         for(int i = 0; i < this._users.size();i++)

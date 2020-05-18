@@ -16,9 +16,9 @@ public class Games implements Serializable
 {
     private ArrayList<Game> _games = new ArrayList<>();
     private Boolean _dataChanged = false;
-    public void createGame(int roomId)
+    public void createGame(int roomId,int gameId)
     {
-        Game g = new Game(roomId);
+        Game g = new Game(roomId,gameId);
         g.setPhase(Game.Phase.Ready);
         this._games.add(g);
     }

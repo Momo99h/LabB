@@ -80,10 +80,13 @@ public class ServerManager
      * createGame Crea un gioco identificato dall'ID della stanza
      * @param id Identificativo della stanza
      */
-    public static void createGame(int id) 
+    public static void createGame(int roomId) 
     {
-        games.createGame(id);
-        addLogData("Created new game for room (ID): "+id);
+        int gId = ServerManager.rooms.getRoom(roomId).nextGameId();
+        games.createGame(roomId,gId);
+        String s = "Created new game for room (ID) %s with ID: %s";
+        s = String.format(s, roomId,gId);
+        addLogData(s);
     }
     
 }

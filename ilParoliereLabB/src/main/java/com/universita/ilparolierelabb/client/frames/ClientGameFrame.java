@@ -234,7 +234,10 @@ public class ClientGameFrame extends javax.swing.JFrame {
     public void stopGame() 
     {
         this.buttonReady.setVisible(true);
+        this._playerReady = false;
+        this.buttonReady.setText("Ready");
         gameUsrControl.setMatrixvisibility(false);
+        gameUsrControl.resetWordSearch();
     }
 
 }

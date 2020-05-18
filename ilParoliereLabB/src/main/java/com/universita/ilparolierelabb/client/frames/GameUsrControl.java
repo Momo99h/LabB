@@ -334,4 +334,11 @@ public class GameUsrControl extends javax.swing.JPanel {
     {
         matrixUsrControl.setVisible(state);
     }
+
+    public void resetWordSearch() 
+    {
+        Word_List_Model.clear();
+        _wordAlreadyUsed.clear();
+        txbParolaInserita.setText("");
+    }
 }

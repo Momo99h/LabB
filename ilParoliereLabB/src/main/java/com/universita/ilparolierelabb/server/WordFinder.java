@@ -139,7 +139,7 @@ package com.universita.ilparolierelabb.server;
             return value;
         }
         
-/*        
+       
 	public void print() {
 		for (int i = 0; i < solution.length; i++) {
 			for (int j = 0; j < solution.length; j++) {
@@ -150,7 +150,8 @@ package com.universita.ilparolierelabb.server;
 	} 
 
 
-	public static void main(String[] args) {
+	public static void main(String[] args) 
+        {
             
 		String[][] matrix = { 
                                     { "T", "Z", "X", "C"},
@@ -158,7 +159,7 @@ package com.universita.ilparolierelabb.server;
                                     { "H", "W", "O", "I"},
                                     { "O", "R", "N", "R"}, 
                                     { "A", "B", "R", "I"}};
-                                    //prova
+                WordFinder f = new WordFinder(4);
+                System.out.println(f.searchWord(matrix, "TZL"));
 	}
-*/
 }

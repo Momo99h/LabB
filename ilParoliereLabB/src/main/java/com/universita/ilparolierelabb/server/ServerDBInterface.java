@@ -63,7 +63,10 @@ public class ServerDBInterface
         Boolean b = _db.executeQuery(query);
         query =  "Insert into UsersState(Nickname,OnlineStatus,IdRoom) Values ('%s','%s','%s')";
         query = String.format(query,d.getUsername(),UserStatus.Offline.getValue(),0);
-        return b && _db.executeQuery(query);
+        Boolean b2 = _db.executeQuery(query);
+        query =  "Insert into UsersScore(Nickname,TotalPoints) Values ('%s','%s')";
+        query = String.format(query,d.getUsername(),0);
+        return b && b2 && _db.executeQuery(query);
     }
     /***
      * LoginAdmin Esegue una query per la verifica dei dati di login di un amministratore.

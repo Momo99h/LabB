@@ -11,6 +11,7 @@ import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.Utility;
 import static com.universita.ilparolierelabb.server.frames.ServerMainFrame.Console_Log_Model;
+import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -22,6 +23,7 @@ import javax.swing.table.DefaultTableModel;
 public class GameUsrControl extends javax.swing.JPanel {
 
     private Room _room;
+    private ArrayList<String> _wordAlreadyUsed = new ArrayList<>();
     private String[][] _gameMatrix;
     private int _currentRoomID = -1;
     private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Player","Total score","Status"},0);
@@ -197,13 +199,14 @@ public class GameUsrControl extends javax.swing.JPanel {
             txbParolaInserita.setText("");
             return;
         }
-        if(Word_List_Model.contains(word))
+        if(wordAlreadyUsed(word))
         {
             Utility.ShowInfoPopUp(Settings.clientName, "Word already used!");
             txbParolaInserita.setText("");
             return;
         }
         int score = ClientManager.checkWord(word.toUpperCase(), _currentRoomID);
+        _wordAlreadyUsed.add(word);
         if(score>0){
             Word_List_Model.add(0, word+" - "+score);
         } else {
@@ -213,6 +216,15 @@ public class GameUsrControl extends javax.swing.JPanel {
         
     }//GEN-LAST:event_btnCheckParoaActionPerformed
 
+    private boolean wordAlreadyUsed(String word)
+    {
+        for(int i = 0; i < _wordAlreadyUsed.size(); i++)
+        {
+            if(_wordAlreadyUsed.get(i).equals(word))
+                return true;
+        }
+        return false;
+    }
     public void setRoom(int roomID) 
     {
         this._currentRoomID = roomID;

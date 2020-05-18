@@ -5,6 +5,7 @@ import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.Game;
 import com.universita.ilparolierelabb.common.Room;
 import com.universita.ilparolierelabb.common.Settings;
+import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.Utility;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -124,6 +125,9 @@ public class ServerThread extends Thread implements ActionListener
                     gameArray[i].setMatrix(MatrixFactory.getMatrix());
                     ServerImplementation.notifyGameMatrix(gameArray[i].getRoomID(),gameArray[i].getMatrix());
                     ServerImplementation.notifyWordGuessingState(gameArray[i].getRoomID(), true);
+                    User[] usrs = ServerManager.rooms.getListPlayersInRoom(gameArray[i].getRoomID());
+                    for(int j = 0; j < usrs.length;j++)
+                        gameArray[j].addUser(usrs[j]);
                     gameArray[i].setPhase(Game.Phase.GameCountDown);
                     break;
                 case GameCountDown:

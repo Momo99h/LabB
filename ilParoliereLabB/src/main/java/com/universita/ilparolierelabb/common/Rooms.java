@@ -129,4 +129,8 @@ public class Rooms implements Serializable
         }
         return d;
     }
+    public User[] getListPlayersInRoom(int roomId)
+    {
+        return getRoom(roomId).getListPlayerIn();
+    }
 }

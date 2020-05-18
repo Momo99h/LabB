@@ -6,6 +6,7 @@
 package com.universita.ilparolierelabb.common;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,6 +22,7 @@ public class Game implements Serializable
     private int _gameid = 1;
     private int _initTimer = 30;
     private int _gameTimer = 180;
+    private ArrayList<User> _users = new ArrayList<>();
     private Phase _phase = Phase.Idle;
     private String[][] _matrix;
     
@@ -52,6 +54,10 @@ public class Game implements Serializable
     public void setMatrix(String[][] value)
     {
        this._matrix = value;
+    }
+    public void addUser(User usr)
+    {
+       this._users.add(usr);
     }
    
    

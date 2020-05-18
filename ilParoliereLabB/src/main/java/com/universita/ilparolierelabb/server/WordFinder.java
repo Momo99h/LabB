@@ -102,7 +102,7 @@ package com.universita.ilparolierelabb.server;
 		return false;
 	}
         
-        public boolean wordIsPresent(String word, String[][] matrix){
+        public static boolean wordIsPresent(String word, String[][] matrix){
             
             WordFinder w = new WordFinder(matrix.length);
             return w.searchWord(matrix, word); 
@@ -112,27 +112,30 @@ package com.universita.ilparolierelabb.server;
         
         //inserire parola già presente nel dizionario!! 
         
-        public int pointsFromWord(String word, String[][] matrix){
+        public static int pointsFromWord(String word, String[][] matrix){
             int value = 0;
             int wl = 0;
             
             if(wordIsPresent(word, matrix)){
                 wl = word.length();
+                
+                if(wl== 3 || wl==4){
+                value = 1;
+                } else if(wl==5){
+                value = 2; 
+                } else if(wl==6){
+                value = 3; 
+                } else if(wl==7){
+                value = 5;
+                } else if(wl>=8){
+                value = 11;
+                } 
+            } else {
+                value = -1;
             }
             
             //assegno punteggio in base alla lunghezza 
-            if(wl>= 3 || wl<=4){
-                value = 1;
-            } else if(wl==5){
-                value = 2; 
-            } else if(wl==6){
-                value = 3; 
-            } else if(wl==7){
-                value = 5;
-            } else if(wl>=8){
-                value = 11;
-            }
-            
+
             return value;
         }
         
@@ -145,7 +148,7 @@ package com.universita.ilparolierelabb.server;
 			System.out.println();
 		}
 	} 
-*/
+
 
 	public static void main(String[] args) {
             
@@ -157,5 +160,5 @@ package com.universita.ilparolierelabb.server;
                                     { "A", "B", "R", "I"}};
                                     //prova
 	}
-        
+*/
 }

@@ -201,11 +201,10 @@ public class GameUsrControl extends javax.swing.JPanel {
         if(score>0){
             Word_List_Model.add(0, word+" - "+score);
         } else {
-             Word_List_Model.add(0, "PUPPAAA");
+            Word_List_Model.add(0, "PUPPAAA");
         }
         txbParolaInserita.setText("");
         
-        // TODO add your handling code here:
     }//GEN-LAST:event_btnCheckParoaActionPerformed
 
     public void setRoom(int roomID) 

@@ -373,4 +373,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         ClientManager.startGame();
     }
 
+    @Override
+    public void notifyWordGuessingState(Object observable, boolean state) throws RemoteException 
+    {
+        ClientManager.WordGuessingState(state);
+    }
+
 }

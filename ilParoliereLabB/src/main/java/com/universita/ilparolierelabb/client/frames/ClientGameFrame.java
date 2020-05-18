@@ -217,5 +217,9 @@ public class ClientGameFrame extends javax.swing.JFrame {
     {
         gameUsrControl.refreshGameTimer(timerCount);
     }
+    public void setVisibilityWordCheck(boolean state)
+    {
+        gameUsrControl.setVisibilityWordCheck(state);
+    }
 
 }

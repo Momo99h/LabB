@@ -123,13 +123,17 @@ public class ServerThread extends Thread implements ActionListener
                 case CreateMatrix:
                     gameArray[i].setMatrix(MatrixFactory.getMatrix());
                     ServerImplementation.notifyGameMatrix(gameArray[i].getRoomID(),gameArray[i].getMatrix());
+                    ServerImplementation.notifyWordGuessingState(gameArray[i].getRoomID(), true);
                     gameArray[i].setPhase(Game.Phase.GameCountDown);
                     break;
                 case GameCountDown:
                     gameArray[i].decrementGameTimer();
                     ServerImplementation.notifyGameTimer(gameArray[i].getRoomID(),gameArray[i].getGameTimer());
                     if(gameArray[i].getGameTimer() == 0)
+                    {
+                        ServerImplementation.notifyWordGuessingState(gameArray[i].getRoomID(), false);
                         gameArray[i].setPhase(Game.Phase.Finished);
+                    }
                     break;
             }
         }

@@ -146,9 +146,14 @@ public class ClientManager
         gameFrame.startGame();
     }
     
-     public static int checkWord(String word, int roomId){
+    public static int checkWord(String word, int roomId)
+    {
          return ClientImplementation.checkWord(word, roomId);
-     }
+    }
+    public static void WordGuessingState(boolean state)
+    {
+        gameFrame.setVisibilityWordCheck(state);
+    }
     
     
     

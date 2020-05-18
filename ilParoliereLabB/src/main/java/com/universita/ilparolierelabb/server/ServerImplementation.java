@@ -271,6 +271,26 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
+    public static synchronized void notifyWordGuessingState(int roomId,boolean state)
+    {
+        ClientRoom g;
+        for(int i=0; i<ServerImplementation.GameClients.size();i++)
+        {
+            g = ServerImplementation.GameClients.get(i);
+            if(g.getRoomId() == roomId) 
+            {
+                try 
+                {
+                    g.getClient().getOb().notifyWordGuessingState(rmiService, state);
+                } 
+                catch (RemoteException ex) 
+                {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
+    
     public static synchronized void notifyGameTimer(int roomId, int timerCount) {
         ClientRoom g;
         for(int i=0; i<ServerImplementation.GameClients.size();i++)

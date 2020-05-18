@@ -193,7 +193,13 @@ public class GameUsrControl extends javax.swing.JPanel {
         String word = txbParolaInserita.getText();
         if(word.length() <= 3)
         {
-            Utility.ShowInfoPopUp(Settings.clientName, "Word that are shorter than 4 characters cannot be added");
+            Utility.ShowInfoPopUp(Settings.clientName, "Word that are shorter than 4 characters cannot be added!");
+            txbParolaInserita.setText("");
+            return;
+        }
+        if(Word_List_Model.contains(word))
+        {
+            Utility.ShowInfoPopUp(Settings.clientName, "Word already used!");
             txbParolaInserita.setText("");
             return;
         }
@@ -291,7 +297,7 @@ public class GameUsrControl extends javax.swing.JPanel {
         waiting = String.format(waiting, timerCount);
         this.lblWaitingPlayers.setText(waiting);
         
-        setVisibilityWordCheck(true);
+        //setVisibilityWordCheck(true);
     }
 
     void setMatrix(String[][] matrix) 
@@ -300,7 +306,7 @@ public class GameUsrControl extends javax.swing.JPanel {
         matrixUsrControl.setMatrix(matrix);
     }
     
-    void setVisibilityWordCheck(boolean visible){
+    public void setVisibilityWordCheck(boolean visible){
         listParole.setVisible(visible);
         Words.setVisible(visible);
         label1.setVisible(visible);

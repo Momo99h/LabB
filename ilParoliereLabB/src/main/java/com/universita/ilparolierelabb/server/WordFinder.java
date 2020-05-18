@@ -98,9 +98,45 @@ package com.universita.ilparolierelabb.server;
 		return false;
 	}
         
+        public boolean wordIsPresent(String word, char[][] matrix){
+            
+            WordFinder w = new WordFinder(matrix.length);
+		if (w.searchWord(matrix, word)) {
+			//w.print();
+                        return true;
+		} else {
+			//System.out.println("NO PATH FOUND");
+                        return false;
+                }
+        }
         
         
+        //inserire parola già presente nel dizionario!! 
         
+        public int pointsFromWord(String word, char[][] matrix){
+            int value = 0;
+            int wl = 0;
+            
+            if(wordIsPresent(word, matrix)){
+                wl = word.length();
+            }
+            
+            //assegno punteggio in base alla lunghezza 
+            if(wl>= 3 || wl<=4){
+                value = 1;
+            } else if(wl==5){
+                value = 2; 
+            } else if(wl==6){
+                value = 3; 
+            } else if(wl==7){
+                value = 5;
+            } else if(wl>=8){
+                value = 11;
+            }
+            
+            return value;
+        }
+                
 	public void print() {
 		for (int i = 0; i < solution.length; i++) {
 			for (int j = 0; j < solution.length; j++) {
@@ -111,15 +147,13 @@ package com.universita.ilparolierelabb.server;
 	}
 
 	public static void main(String[] args) {
-		char[][] matrix = { { 't', 'z', 'x', 'c', 'd' },
-				{ 'a', 'h', 'n', 'z', 'x' }, { 'h', 'w', 'o', 'i', 'o' },
-				{ 'o', 'r', 'n', 'r', 'n' }, { 'a', 'b', 'r', 'i', 'n' } };
-		WordFinder w = new WordFinder(matrix.length);
-		if (w.searchWord(matrix, "horizon")) {
-			w.print();
-		} else {
-			System.out.println("NO PATH FOUND");
-		}
+            
+		char[][] matrix = { 
+                                    { 't', 'z', 'x', 'c', 'd' },
+                                    { 'a', 'h', 'n', 'z', 'x' }, 
+                                    { 'h', 'w', 'o', 'i', 'o' },
+                                    { 'o', 'r', 'n', 'r', 'n' }, 
+                                    { 'a', 'b', 'r', 'i', 'n' }};
 
 	}
         

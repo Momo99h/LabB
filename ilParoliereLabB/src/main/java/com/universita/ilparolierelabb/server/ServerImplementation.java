@@ -590,8 +590,11 @@ public class ServerImplementation extends Observable implements ServerInterface
         String[][] matrix = game.getMatrix();
         //Check parola in dizionario 
         
-        //int score = ......(matrix,word);
-        return Utility.getRandomInt(0, 7);
+        int score = 0;
+        score = WordFinder.pointsFromWord(word, matrix);
+        //return Utility.getRandomInt(0, 7);
+        return score;
+        
     }
       
     

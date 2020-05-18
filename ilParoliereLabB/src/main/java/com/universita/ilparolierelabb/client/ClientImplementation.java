@@ -309,11 +309,11 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         }
     }
     
-    public static int checkWord(String word, int roomId)
+    public static int checkWord(String word, int roomId,String username)
     {
         try
         {
-            return _server.checkWord(word, roomId);
+            return _server.checkWord(word, roomId, username);
         }
         catch(Exception e)
         {
@@ -377,6 +377,24 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     public void notifyWordGuessingState(Object observable, boolean state) throws RemoteException 
     {
         ClientManager.WordGuessingState(state);
+    }
+
+    @Override
+    public void notifyRefreshTable(Object observable) throws RemoteException 
+    {
+        ClientManager.RefreshGameTable();
+    }
+
+    @Override
+    public void notifyHeaderGameMessage(Object observable, String Message) throws RemoteException 
+    {
+         ClientManager.setGameHeaderMessage(Message);
+    }
+
+    @Override
+    public void notifyClientsGameFinished(Object observable) throws RemoteException 
+    {
+        ClientManager.stopGame();
     }
 
 }

@@ -23,7 +23,7 @@ public class User implements Serializable
     public String getUsername(){return this._username;}
     public UserStatus getStatus(){return this._status;}
     public int getTotalPoints(){return this._totalPoints;}
-    public int getGameTotalPoints(){return this._gametotalPoints;}
+    public int getGamePoints(){return this._gametotalPoints;}
     
     public void setUsername(String   val){this._username = val;}
     public void setStatus(UserStatus val){this._status = val;}

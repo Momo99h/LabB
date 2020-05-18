@@ -221,5 +221,20 @@ public class ClientGameFrame extends javax.swing.JFrame {
     {
         gameUsrControl.setVisibilityWordCheck(state);
     }
+    public void refreshTable()
+    {
+        gameUsrControl.refreshTable();
+    }
+
+    public void setGameHeaderMessage(String msg) 
+    {
+       gameUsrControl.setHeaderMessage(msg);
+    }
+
+    public void stopGame() 
+    {
+        this.buttonReady.setVisible(true);
+        gameUsrControl.setMatrixvisibility(false);
+    }
 
 }

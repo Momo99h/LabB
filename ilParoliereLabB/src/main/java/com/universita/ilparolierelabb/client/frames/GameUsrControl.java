@@ -205,7 +205,7 @@ public class GameUsrControl extends javax.swing.JPanel {
             txbParolaInserita.setText("");
             return;
         }
-        int score = ClientManager.checkWord(word.toUpperCase(), _currentRoomID);
+        int score = ClientManager.checkWord(word.toUpperCase(), _currentRoomID,ClientManager.currentuser.getUsername());
         _wordAlreadyUsed.add(word);
         if(score>0){
             Word_List_Model.add(0, word+" - "+score);
@@ -249,14 +249,14 @@ public class GameUsrControl extends javax.swing.JPanel {
         }    
         this.lblWaitingPlayers.setText(waiting);
     }
-    private void refreshTable()
+    public void refreshTable()
     {
         _tableModel.setRowCount(0);
         User [] players = this._room.getListPlayerIn();
         for(int i = 0; i < players.length; i++)
         {
             _tableModel.addRow(new String[]{players[i].getUsername(),
-                players[i].getTotalPoints()+"",players[i].getStatus().getName()});
+                players[i].getGamePoints()+"",players[i].getStatus().getName()});
         }
     }
     public int getCurrentRoomID()
@@ -311,6 +311,10 @@ public class GameUsrControl extends javax.swing.JPanel {
         
         //setVisibilityWordCheck(true);
     }
+    void setHeaderMessage(String msg)
+    {
+         this.lblWaitingPlayers.setText(msg);
+    }
 
     void setMatrix(String[][] matrix) 
     {
@@ -325,5 +329,9 @@ public class GameUsrControl extends javax.swing.JPanel {
         btnCheckParoa.setVisible(visible);
         txbParolaInserita.setVisible(visible);
         jScrollPane3.setVisible(visible);
+    }
+    public void setMatrixvisibility(Boolean state)
+    {
+        matrixUsrControl.setVisible(state);
     }
 }

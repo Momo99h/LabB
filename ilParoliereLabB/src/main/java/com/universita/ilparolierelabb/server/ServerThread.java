@@ -98,9 +98,13 @@ public class ServerThread extends Thread implements ActionListener
         if(ServerManager.rooms.isDataChanged())
         {
             //;
-            if(ServerImplementation.notifyClientsLobbyData(ServerManager.rooms.createLobbyData()) && ServerImplementation.notifyGameRoomData())
+            if(ServerImplementation.notifyClientsLobbyData(ServerManager.rooms.createLobbyData())) //&& ServerImplementation.notifyGameRoomData())
                 ServerManager.rooms.confirmDataChanged();
-            
+        }
+        if(ServerManager.games.getDataChanged())
+        {
+            if(ServerImplementation.notifyGameRoomData())
+                ServerManager.games.confirmDataChanged();
         }
     }
 
@@ -122,12 +126,12 @@ public class ServerThread extends Thread implements ActionListener
                         gameArray[i].setPhase(Game.Phase.CreateMatrix);
                     break;
                 case CreateMatrix:
-                    gameArray[i].setMatrix(MatrixFactory.getMatrix());
+                    gameArray[i].setMatrix(MatrixFactory.getRandomMatrix());
                     ServerImplementation.notifyGameMatrix(gameArray[i].getRoomID(),gameArray[i].getMatrix());
                     ServerImplementation.notifyWordGuessingState(gameArray[i].getRoomID(), true);
                     User[] usrs = ServerManager.rooms.getListPlayersInRoom(gameArray[i].getRoomID());
                     for(int j = 0; j < usrs.length;j++)
-                        gameArray[j].addUser(usrs[j]);
+                        gameArray[i].addUser(usrs[j]);
                     gameArray[i].setPhase(Game.Phase.GameCountDown);
                     break;
                 case GameCountDown:
@@ -138,6 +142,21 @@ public class ServerThread extends Thread implements ActionListener
                         ServerImplementation.notifyWordGuessingState(gameArray[i].getRoomID(), false);
                         gameArray[i].setPhase(Game.Phase.Finished);
                     }
+                    break;
+                case Finished:
+                    if(gameArray[i].getBestGameScore() >= 50)
+                    {
+                        
+                    }
+                    else
+                    {
+                        String msg = "Timed out!  Press ready to start next phase!";
+                        ServerImplementation.notifyHeaderGameMessage(gameArray[i].getRoomID(),msg);
+                        ServerImplementation.notifyGameRoomFinished(gameArray[i].getRoomID());
+                        gameArray[i].resetPlayersReady();
+                        ServerManager.games.setDataChanged();
+                    }
+                    gameArray[i].setPhase(Game.Phase.Conclude);
                     break;
             }
         }

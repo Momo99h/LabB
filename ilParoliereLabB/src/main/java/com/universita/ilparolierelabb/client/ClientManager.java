@@ -145,14 +145,26 @@ public class ClientManager
     {
         gameFrame.startGame();
     }
-    
-    public static int checkWord(String word, int roomId)
+    public static void stopGame()
     {
-         return ClientImplementation.checkWord(word, roomId);
+        gameFrame.stopGame();
+    }
+    
+    public static int checkWord(String word, int roomId,String username)
+    {
+         return ClientImplementation.checkWord(word, roomId,username);
     }
     public static void WordGuessingState(boolean state)
     {
         gameFrame.setVisibilityWordCheck(state);
+    }
+    public static void RefreshGameTable()
+    {
+        gameFrame.refreshRooms();
+    }
+    public static void setGameHeaderMessage(String msg)
+    {
+        gameFrame.setGameHeaderMessage(msg);
     }
     
     

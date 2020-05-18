@@ -14,14 +14,16 @@ import java.util.ArrayList;
  */
 public class Game implements Serializable
 {
+
+   
     public static enum Phase
     {
-        Idle,Ready,InitCountDown,CreateMatrix,GameCountDown,Finished
+        Idle,Ready,InitCountDown,CreateMatrix,GameCountDown,Finished,Conclude
     }
     private int _roomid;
     private int _gameid = 1;
-    private int _initTimer = 30;
-    private int _gameTimer = 180;
+    private int _initTimer = 10;
+    private int _gameTimer = 10;
     private ArrayList<User> _users = new ArrayList<>();
     private Phase _phase = Phase.Idle;
     private String[][] _matrix;
@@ -59,8 +61,35 @@ public class Game implements Serializable
     {
        this._users.add(usr);
     }
-   
-   
+    public void addScoreToPlayer(String username,int score)
+    {
+        for(int i = 0; i < this._users.size();i++)
+        {
+            if(this._users.get(i).getUsername().equals(username))
+            {
+                this._users.get(i).setGameTotalPoints(score + this._users.get(i).getGamePoints());
+                return;
+            }
+        }
+    }
+    public int getBestGameScore()
+    {
+        int max = 0;
+        User usr;
+        for(int i = 0; i < this._users.size();i++)
+        {
+            usr = this._users.get(i);
+            if(usr.getGamePoints() > max) max = usr.getGamePoints();
+        }
+        return max;
+    }
+     public void resetPlayersReady() 
+    {
+        for(int i = 0; i < this._users.size();i++)
+        {
+            this._users.get(i).setStatus(UserStatus.NotReady); 
+        }
+    }
     public int getID(){return this._gameid;}
     public int getRoomID(){return this._roomid;}
     

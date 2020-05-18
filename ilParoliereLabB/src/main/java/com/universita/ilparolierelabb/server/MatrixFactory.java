@@ -48,7 +48,7 @@ public class MatrixFactory
         }
     }
     
-    public static String[][] getMatrix()
+    public static String[][] getRandomMatrix()
     {
         
         for(int i=0; i<16; i++){

@@ -7,7 +7,6 @@ package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.Room;
-import com.universita.ilparolierelabb.common.Rooms;
 import com.universita.ilparolierelabb.client.RegisterData;
 import com.universita.ilparolierelabb.common.LobbyData;
 import com.universita.ilparolierelabb.common.UserStatus;
@@ -38,9 +37,7 @@ public interface ServerInterface extends Remote
     public boolean userAlreadyTaken(String user) throws RemoteException;
     public int getOnlineCount() throws RemoteException;
     public Room getRoomById(int id) throws RemoteException;
-    public boolean recoverPassword(String email) throws RemoteException; 
-    
-    //metodo per controllare parola e tirotnra int=punti
-    public int checkWord(String word, int roomId) throws RemoteException;
+    public boolean recoverPassword(String email) throws RemoteException;
+    public int checkWord(String word, int roomId,String username) throws RemoteException;
 
 }

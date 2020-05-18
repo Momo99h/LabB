@@ -271,6 +271,25 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
+    public static synchronized void notifyHeaderGameMessage(int roomId,String Message)
+    {
+        ClientRoom g;
+        for(int i=0; i<ServerImplementation.GameClients.size();i++)
+        {
+            g = ServerImplementation.GameClients.get(i);
+            if(g.getRoomId() == roomId) 
+            {
+                try 
+                {
+                    g.getClient().getOb().notifyHeaderGameMessage(rmiService, Message);
+                } 
+                catch (RemoteException ex) 
+                {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
     public static synchronized void notifyWordGuessingState(int roomId,boolean state)
     {
         ClientRoom g;
@@ -373,6 +392,25 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
+    public static synchronized void notifyGameRoomFinished(int roomId)
+    {
+        ClientRoom g;
+        for(int i=0; i<ServerImplementation.GameClients.size();i++)
+        {
+            g = ServerImplementation.GameClients.get(i);
+            if(g.getRoomId() == roomId) 
+            {
+                try 
+                {
+                    g.getClient().getOb().notifyClientsGameFinished(rmiService);
+                } 
+                catch (RemoteException ex) 
+                {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
     
     /**
      * disconnectClient (RMI) Disconnette un utente dal gioco
@@ -440,6 +478,7 @@ public class ServerImplementation extends Observable implements ServerInterface
             r.addPlayer(usr);
             ServerDBInterface.clientEnterRoom(roomId,usr.getUsername());
             ServerManager.rooms.setDataChanged(true);
+            ServerManager.games.setDataChanged();
             addGameObserver(o,roomId);
             return true;
         }
@@ -507,6 +546,7 @@ public class ServerImplementation extends Observable implements ServerInterface
             ServerDBInterface.clientLeaveRoom(usr.getUsername());
             ServerManager.addLogData(usr.getUsername()+" left room: "+r.getId());
             ServerManager.rooms.setDataChanged(true);
+            ServerManager.games.setDataChanged();
             removeGameObserver(o);
             addClientObserver(o);
         }
@@ -517,6 +557,7 @@ public class ServerImplementation extends Observable implements ServerInterface
             ServerManager.games.deleteGame(r.getId());
             ServerManager.addLogData("Room ID "+r.getId()+" has been removed because no players are inside");
             ServerManager.rooms.setDataChanged(true);
+            ServerManager.games.setDataChanged();
         }
     }
     /**
@@ -537,6 +578,7 @@ public class ServerImplementation extends Observable implements ServerInterface
             notifyGameRoomStarted(r.getId());
         }
         ServerManager.rooms.setDataChanged(true);
+        ServerManager.games.setDataChanged();
     }
     
     /**
@@ -596,7 +638,7 @@ public class ServerImplementation extends Observable implements ServerInterface
     }
 
     @Override
-    public int checkWord(String word, int roomId) throws RemoteException 
+    public int checkWord(String word, int roomId,String username) throws RemoteException 
     {
         Game[] games = ServerManager.games.getGamesArray();
         Game game = null; 
@@ -613,6 +655,12 @@ public class ServerImplementation extends Observable implements ServerInterface
         
         int score = 0;
         score = WordFinder.pointsFromWord(word, matrix);
+        //add points to player and notify room
+        if(score != 0)
+        {
+            ServerManager.games.addScoreToPlayer(roomId, score, username);
+            ServerManager.games.setDataChanged();
+        }
         //return Utility.getRandomInt(0, 7);
         return score;
         

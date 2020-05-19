@@ -194,4 +194,16 @@ public class ServerDBInterface
         return _db.executeQuery(query);
     }
 
+    public static boolean addScoreToPlayer(String username, int score) 
+    {
+        String query = "Select TotalPoints from UsersScore where Nickname = '%s'";
+        query = String.format(query, username);
+        ResultTable val = _db.executeQueryRead(query);
+        int lastScore = Integer.parseInt(val.get(0, 0));
+        int _score = score + lastScore;
+        query = "Update UsersScore set TotalPoints = '%s' where Nickname = '%s'";
+        query = String.format(query, _score,username);
+        return _db.executeQuery(query);
+    }
+
 }

@@ -139,18 +139,4 @@ package com.universita.ilparolierelabb.server;
 			System.out.println();
 		}
 	} 
-
-
-	public static void main(String[] args) 
-        {
-            
-		String[][] matrix = { 
-                                    { "T", "Z", "X", "C"},
-                                    { "A", "H", "N", "Z"}, 
-                                    { "H", "W", "O", "I"},
-                                    { "O", "R", "N", "R"}, 
-                                    { "A", "B", "R", "I"}};
-                WordFinder f = new WordFinder(4);
-                System.out.println(f.searchWord(matrix, "TZL"));
-	}
 }

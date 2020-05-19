@@ -663,7 +663,7 @@ public class ServerImplementation extends Observable implements ServerInterface
         {
             ServerManager.games.addScoreToPlayer(roomId, score, username);
             ServerDBInterface.addScoreToPlayer(username, score);
-            ServerDBInterface.addWordOfPlayer(username, word, score);
+            ServerDBInterface.addWordOfPlayer(username, word, score, roomId, game.getID());
             ServerManager.games.setDataChanged();
         }
         //return Utility.getRandomInt(0, 7);

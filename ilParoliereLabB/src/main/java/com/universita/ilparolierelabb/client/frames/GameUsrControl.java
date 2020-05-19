@@ -58,9 +58,9 @@ public class GameUsrControl extends javax.swing.JPanel {
         Words = new java.awt.Label();
         label1 = new java.awt.Label();
         txbParolaInserita = new javax.swing.JTextField();
-        btnCheckParoa = new java.awt.Button();
         jScrollPane3 = new javax.swing.JScrollPane();
         listParole = new javax.swing.JList<>();
+        btnCheckParoa = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 204, 204));
 
@@ -110,15 +110,14 @@ public class GameUsrControl extends javax.swing.JPanel {
             }
         });
 
-        btnCheckParoa.setActionCommand("wordsCheckButton");
-        btnCheckParoa.setLabel("Check!");
+        jScrollPane3.setViewportView(listParole);
+
+        btnCheckParoa.setText("Check word!");
         btnCheckParoa.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCheckParoaActionPerformed(evt);
             }
         });
-
-        jScrollPane3.setViewportView(listParole);
 
         javax.swing.GroupLayout panelContainerLayout = new javax.swing.GroupLayout(panelContainer);
         panelContainer.setLayout(panelContainerLayout);
@@ -129,7 +128,6 @@ public class GameUsrControl extends javax.swing.JPanel {
                 .addGroup(panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(Words, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, 0)
                 .addGroup(panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelContainerLayout.createSequentialGroup()
                         .addGap(171, 171, 171)
@@ -141,8 +139,8 @@ public class GameUsrControl extends javax.swing.JPanel {
                         .addGap(85, 85, 85)
                         .addComponent(txbParolaInserita, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelContainerLayout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addComponent(btnCheckParoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(156, 156, 156)
+                        .addComponent(btnCheckParoa)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         panelContainerLayout.setVerticalGroup(
@@ -156,8 +154,8 @@ public class GameUsrControl extends javax.swing.JPanel {
                         .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txbParolaInserita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCheckParoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnCheckParoa))
                     .addGroup(panelContainerLayout.createSequentialGroup()
                         .addComponent(Words, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -193,6 +191,7 @@ public class GameUsrControl extends javax.swing.JPanel {
         
         
         String word = txbParolaInserita.getText();
+        word = word.toUpperCase();
         if(word.length() <= 3)
         {
             Utility.ShowInfoPopUp(Settings.clientName, "Word that are shorter than 4 characters cannot be added!");
@@ -266,7 +265,7 @@ public class GameUsrControl extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private java.awt.Label Words;
-    private java.awt.Button btnCheckParoa;
+    private javax.swing.JButton btnCheckParoa;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane3;

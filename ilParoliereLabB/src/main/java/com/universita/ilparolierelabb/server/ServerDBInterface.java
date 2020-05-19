@@ -205,10 +205,10 @@ public class ServerDBInterface
         query = String.format(query, _score,username);
         return _db.executeQuery(query);
     }
-    public static boolean addWordOfPlayer(String username,String word,int score)
+    public static boolean addWordOfPlayer(String username,String word,int score,int roomId,int gameId)
     {
-        String query = "Insert into UsersWords (Nickname,Word,Score) Values ('%s','%s','%s')";
-        query = String.format(query, username,word,score);
+        String query = "Insert into UsersWords (RoomID,GameID,Nickname,Word,Score) Values ('%s','%s','%s','%s','%s')";
+        query = String.format(query, roomId,gameId,username,word,score);
         return _db.executeQuery(query);
     }
 

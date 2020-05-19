@@ -207,11 +207,7 @@ public class GameUsrControl extends javax.swing.JPanel {
         }
         int score = ClientManager.checkWord(word.toUpperCase(), _currentRoomID,ClientManager.currentuser.getUsername());
         _wordAlreadyUsed.add(word);
-        if(score>0){
-            Word_List_Model.add(0, word+" - "+score);
-        } else {
-            Word_List_Model.add(0, "PUPPAAA");
-        }
+        Word_List_Model.add(0, word+" - "+score);
         txbParolaInserita.setText("");
         
     }//GEN-LAST:event_btnCheckParoaActionPerformed

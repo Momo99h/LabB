@@ -22,8 +22,8 @@ public class Game implements Serializable
     }
     private int _roomid;
     private int _gameid = 1;
-    private int _initTimer = 10;
-    private int _gameTimer = 10;
+    private int _initTimer = 2;
+    private int _gameTimer = 180;
     private ArrayList<User> _users = new ArrayList<>();
     private Phase _phase = Phase.Idle;
     private String[][] _matrix;

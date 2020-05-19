@@ -654,6 +654,9 @@ public class ServerImplementation extends Observable implements ServerInterface
         //Check parola in dizionario 
         
         int score = 0;
+        boolean Exist = false;
+        //Exist = searchInDictionary(word);
+        //if(!Exist) return 0;
         score = WordFinder.pointsFromWord(word, matrix);
         //add points to player and notify room
         if(score != 0)

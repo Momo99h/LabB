@@ -40,14 +40,10 @@ package com.universita.ilparolierelabb.server;
 			int index, int N) {
 
 		// check if current cell not already used or character in it is not not
-                /*
-		if (solution[row][col] != 0 || word.charAt(index) != matrix[row][col]) {
+                String s = word.charAt(index)+"";
+		if (solution[row][col] != 0 || !matrix[row][col].equals(s)) {
 			return false;
-		} */
-                
-                if (solution[row][col] != 0 || matrix[row][col].equals(word.charAt(index))) {
-                    return false;
-                }
+		}
 
 		if (index == word.length() - 1) {
 			// word is found, return true
@@ -130,12 +126,7 @@ package com.universita.ilparolierelabb.server;
                 } else if(wl>=8){
                 value = 11;
                 } 
-            } else {
-                value = -1;
             }
-            
-            //assegno punteggio in base alla lunghezza 
-
             return value;
         }
         

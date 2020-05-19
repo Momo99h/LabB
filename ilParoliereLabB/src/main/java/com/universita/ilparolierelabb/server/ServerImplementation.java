@@ -662,6 +662,7 @@ public class ServerImplementation extends Observable implements ServerInterface
         if(score != 0)
         {
             ServerManager.games.addScoreToPlayer(roomId, score, username);
+            ServerDBInterface.addScoreToPlayer(username, score);
             ServerManager.games.setDataChanged();
         }
         //return Utility.getRandomInt(0, 7);

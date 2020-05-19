@@ -6,6 +6,8 @@
 package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.client.RegisterData;
+import com.universita.ilparolierelabb.common.Room;
+import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.UserStatus;
 import com.universita.ilparolierelabb.common.sql.*;
 
@@ -210,6 +212,32 @@ public class ServerDBInterface
         String query = "Insert into UsersWords (RoomID,GameID,Nickname,Word,Score) Values ('%s','%s','%s','%s','%s')";
         query = String.format(query, roomId,gameId,username,word,score);
         return _db.executeQuery(query);
+    }
+    
+    public static boolean addRoom(Room r)
+    {
+        String query = "Insert into Rooms (RoomId,Name,Players,PlayersNicknames) Values ('%s','%s','%s','%s')";
+        User[] user = r.getListPlayerIn();
+        String users = "";
+        for(User s : user)
+            users += s.getUsername() + ";";   
+        query = String.format(query, r.getId(),r.getRoomName(),r.getPlayersNeeded(), users );
+        return _db.executeQuery(query);
+    }
+    
+    public static int getRoomLastId()
+    {
+        String query= "SELECT MAX(RoomId) FROM Rooms";
+        ResultTable val = _db.executeQueryRead(query); 
+        try
+        {
+            return Integer.parseInt(val.get(0,0));
+        }
+        catch(Exception i)
+        {
+            return 0;
+        }
+        
     }
 
 }

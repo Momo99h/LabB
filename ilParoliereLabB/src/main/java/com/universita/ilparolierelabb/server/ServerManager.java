@@ -65,6 +65,7 @@ public class ServerManager
         ServerDBInterface.resetUsersState();
         MatrixFactory.createDices();
         ServerThread.Run();
+        rooms.setLastID(ServerDBInterface.getRoomLastId());
     }  
     /***
      * addLogData Aggiunge un dato nel log del server

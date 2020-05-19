@@ -68,6 +68,10 @@ public class Rooms implements Serializable
     {
         return this._lastID;
     }
+    public void setLastID(int value)
+    {
+        this._lastID = value;
+    }
     public boolean isPlayerInAnyRoom(User player)
     {
         for(int i = 0; i < _rooms.size(); i++)

@@ -23,7 +23,7 @@ public class Room implements Serializable
     private int _playersNeeded;
     private int _playersIn = 0;
     private int _lastGameId = 0;
-    
+    private boolean _dbUpdated = false;
     private ArrayList<User> _users = new ArrayList<>();
     private SimpleDateFormat _sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
     public Room()
@@ -35,6 +35,7 @@ public class Room implements Serializable
     public void setAdmin(String value){this._adminUsername = value;}
     public void setPlayersNeeded(int value){this._playersNeeded = value;}
     public void setRoomName(String value){this._roomName = value;}
+    public boolean getDbUpdateStatus(){return this._dbUpdated;}
     public void addPlayer(User player)
     {
         this._users.add(player); 
@@ -91,4 +92,10 @@ public class Room implements Serializable
         }
         return s;
     }
+    
+    public void setDbUpdateStatus()
+    {
+        this._dbUpdated = true; 
+    }
+    
 }

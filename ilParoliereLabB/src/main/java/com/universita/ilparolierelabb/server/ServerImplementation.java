@@ -576,6 +576,11 @@ public class ServerImplementation extends Observable implements ServerInterface
         {
             ServerManager.createGame(r.getId());
             notifyGameRoomStarted(r.getId());
+            if(!r.getDbUpdateStatus() )
+            {
+                if(ServerDBInterface.addRoom(r))r.setDbUpdateStatus();
+            }
+            
         }
         ServerManager.rooms.setDataChanged(true);
         ServerManager.games.setDataChanged();

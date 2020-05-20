@@ -159,6 +159,7 @@ public class ServerThread extends Thread implements ActionListener
                         String msg = "Timed out!  Press ready to start next phase!";
                         ServerImplementation.notifyHeaderGameMessage(gameArray[i].getRoomID(),msg);
                     }
+                    ServerDBInterface.addGame(gameArray[i]);
                     ServerManager.games.deleteGame(gameArray[i].getRoomID());
                     break;
             }

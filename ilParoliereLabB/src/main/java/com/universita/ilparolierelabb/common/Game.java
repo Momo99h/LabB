@@ -22,9 +22,10 @@ public class Game implements Serializable
     }
     private int _roomid;
     private int _gameid = 1;
-    private int _initTimer = 30;
-    private int _gameTimer = 180;
-    private ArrayList<User> _users = new ArrayList<>();
+    private int _initTimer = 5;
+    private int _gameTimer = 20;
+    private ArrayList<User> _Initialusers = new ArrayList<>();
+    private ArrayList<User> _Endusers = new ArrayList<>();
     private Phase _phase = Phase.Idle;
     private String[][] _matrix;
     
@@ -63,15 +64,16 @@ public class Game implements Serializable
     }
     public void addUser(User usr)
     {
-       this._users.add(usr);
+       this._Initialusers.add(usr);
+       this._Endusers.add(usr);
     }
     public void addScoreToPlayer(String username,int score)
     {
-        for(int i = 0; i < this._users.size();i++)
+        for(int i = 0; i < this._Initialusers.size();i++)
         {
-            if(this._users.get(i).getUsername().equals(username))
+            if(this._Initialusers.get(i).getUsername().equals(username))
             {
-                this._users.get(i).setGameTotalPoints(score + this._users.get(i).getGamePoints());
+                this._Initialusers.get(i).setGameTotalPoints(score + this._Initialusers.get(i).getGamePoints());
                 return;
             }
         }
@@ -80,21 +82,59 @@ public class Game implements Serializable
     {
         int max = 0;
         User usr;
-        for(int i = 0; i < this._users.size();i++)
+        for(int i = 0; i < this._Initialusers.size();i++)
         {
-            usr = this._users.get(i);
+            usr = this._Initialusers.get(i);
             if(usr.getGamePoints() > max) max = usr.getGamePoints();
         }
         return max;
     }
      public void resetPlayersReady() 
     {
-        for(int i = 0; i < this._users.size();i++)
+        for(int i = 0; i < this._Initialusers.size();i++)
         {
-            this._users.get(i).setStatus(UserStatus.NotReady); 
+            this._Initialusers.get(i).setStatus(UserStatus.NotReady); 
         }
     }
     public int getID(){return this._gameid;}
     public int getRoomID(){return this._roomid;}
+    public User[] getListInitialPlayerIn()
+    {
+        User[] s = new User[this._Initialusers.size()];
+        for(int i = 0; i < this._Initialusers.size();i++)
+        {
+            s[i] = this._Initialusers.get(i);
+        }
+        return s;
+    }
+    public User[] getListEndPlayersIn()
+    {
+        User[] s = new User[this._Initialusers.size()];
+        for(int i = 0; i < this._Initialusers.size();i++)
+        {
+            s[i] = this._Initialusers.get(i);
+        }
+        return s;
+    }
+    public String getListInitialPlayersIn(String separator)
+    {
+        User[] user = getListInitialPlayerIn();
+        String users = "";
+        for(User s : user)
+            users += s.getUsername() + separator;
+        return users;
+    }
+    public String getListEndPlayersIn(String separator)
+    {
+        User[] user = getListEndPlayersIn();
+        String users = "";
+        for(User s : user)
+            users += s.getUsername() + separator;
+        return users;
+    }
+    
+    public int getPlayersIn(){
+        return this._Initialusers.size();
+    }
     
 }

@@ -6,6 +6,7 @@
 package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.client.RegisterData;
+import com.universita.ilparolierelabb.common.Game;
 import com.universita.ilparolierelabb.common.Room;
 import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.UserStatus;
@@ -217,10 +218,7 @@ public class ServerDBInterface
     public static boolean addRoom(Room r)
     {
         String query = "Insert into Rooms (RoomId,Name,Players,PlayersNicknames) Values ('%s','%s','%s','%s')";
-        User[] user = r.getListPlayerIn();
-        String users = "";
-        for(User s : user)
-            users += s.getUsername() + ";";   
+        String users = r.getListPlayerIn(";");
         query = String.format(query, r.getId(),r.getRoomName(),r.getPlayersNeeded(), users );
         return _db.executeQuery(query);
     }
@@ -238,6 +236,14 @@ public class ServerDBInterface
             return 0;
         }
         
+    }
+    public static boolean addGame(Game g)
+    {
+        String query = "Insert into Games (RoomID,GameID,Players,PlayersNicknames,PlayersNicknamesEnd,GameFinalScore) Values ('%s','%s','%s','%s','%s')";
+        String users = g.getListInitialPlayersIn(";");
+        String endusers = g.getListEndPlayersIn(";");
+        query = String.format(query, g.getRoomID(),g.getID(),g.getPlayersIn(), users,endusers,g.getBestGameScore() );
+        return _db.executeQuery(query);
     }
 
 }

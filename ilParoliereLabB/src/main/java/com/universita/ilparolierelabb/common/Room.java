@@ -92,7 +92,14 @@ public class Room implements Serializable
         }
         return s;
     }
-    
+    public String getListPlayerIn(String separator)
+    {
+        User[] user = getListPlayerIn();
+        String users = "";
+        for(User s : user)
+            users += s.getUsername() + separator;
+        return users;
+    }
     public void setDbUpdateStatus()
     {
         this._dbUpdated = true; 

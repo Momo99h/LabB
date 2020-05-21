@@ -239,7 +239,7 @@ public class ServerDBInterface
     }
     public static boolean addGame(Game g)
     {
-        String query = "Insert into Games (RoomID,GameID,Players,PlayersNicknames,PlayersNicknamesEnd,GameFinalScore) Values ('%s','%s','%s','%s','%s')";
+        String query = "Insert into Games (RoomID,GameID,Players,PlayersNicknames,PlayersNicknamesEnd,GameFinalScore) Values ('%s','%s','%s','%s','%s','%s')";
         String users = g.getListInitialPlayersIn(";");
         String endusers = g.getListEndPlayersIn(";");
         query = String.format(query, g.getRoomID(),g.getID(),g.getPlayersIn(), users,endusers,g.getBestGameScore() );

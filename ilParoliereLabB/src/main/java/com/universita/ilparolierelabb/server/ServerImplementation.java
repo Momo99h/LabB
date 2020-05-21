@@ -663,12 +663,12 @@ public class ServerImplementation extends Observable implements ServerInterface
         //Exist = searchInDictionary(word);
         //if(!Exist) return 0;
         score = WordFinder.pointsFromWord(word, matrix);
+        ServerDBInterface.addWordOfPlayer(username, word, score, roomId, game.getID());
         //add points to player and notify room
         if(score != 0)
         {
             ServerManager.games.addScoreToPlayer(roomId, score, username);
             ServerDBInterface.addScoreToPlayer(username, score);
-            ServerDBInterface.addWordOfPlayer(username, word, score, roomId, game.getID());
             ServerManager.games.setDataChanged();
         }
         //return Utility.getRandomInt(0, 7);

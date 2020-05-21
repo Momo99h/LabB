@@ -45,4 +45,9 @@ public class LobbyData implements Serializable
         }
         return data;
     }
+    public String getDefinedUsersData(int index)
+    {
+        String[] usr = getUsersData();
+        return usr[index];
+    }
 }

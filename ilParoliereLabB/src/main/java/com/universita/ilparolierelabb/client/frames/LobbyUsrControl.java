@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.client.frames;
 
+import com.universita.ilparolierelabb.client.ClientManager;
 import javax.swing.DefaultListModel;
 import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
@@ -130,15 +131,13 @@ public class LobbyUsrControl extends javax.swing.JPanel {
 
     private void jTableRoomsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableRoomsMouseClicked
         // TODO add your handling code here:
-       /* int selected = jTableRooms.getSelectedRow();
-        int id = 0;
+        int selected = jTableRooms.getSelectedRow();
         if(selected == -1)return;
-        id = Integer.parseInt((String) jTableRooms.getValueAt(selected, 0));
-        Room r = ClientManager.rooms.getRoom(id);
-        User[] players = r.getListPlayerIn();
+        String usrs = ClientManager.lobby.getDefinedUsersData(selected);
+        String[] usrsInside = usrs.split(";");
         _listModel.clear();
         _listModel.addElement("Players inside room:");
-        for(int i = 0; i < players.length;i++) _listModel.addElement(players[i].getUsername());*/
+        for(int i = 0; i < usrsInside.length;i++) _listModel.addElement(usrsInside[i]);
         
     }//GEN-LAST:event_jTableRoomsMouseClicked
 

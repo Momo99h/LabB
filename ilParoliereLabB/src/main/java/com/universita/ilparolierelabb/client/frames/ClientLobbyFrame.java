@@ -49,6 +49,9 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         label2 = new java.awt.Label();
         panelContainer = new javax.swing.JPanel();
         lobbyUsrControl = new com.universita.ilparolierelabb.client.frames.LobbyUsrControl();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        menuItemDisconnect = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -120,6 +123,20 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         panelContainer.setLayout(new java.awt.BorderLayout());
         panelContainer.add(lobbyUsrControl, java.awt.BorderLayout.CENTER);
 
+        jMenu1.setText("Me");
+
+        menuItemDisconnect.setText("Disconnect");
+        menuItemDisconnect.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuItemDisconnectActionPerformed(evt);
+            }
+        });
+        jMenu1.add(menuItemDisconnect);
+
+        jMenuBar1.add(jMenu1);
+
+        setJMenuBar(jMenuBar1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -130,7 +147,7 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(panelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 448, Short.MAX_VALUE)
+                .addComponent(panelContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 427, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -139,7 +156,7 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        // TODO add your handling code here:
+
         ClientManager.leaveRoom(ClientManager.currentuser);
         ClientManager.DisconnectFromServer(ClientManager.currentuser.getUsername());
     }//GEN-LAST:event_formWindowClosing
@@ -156,10 +173,17 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         int id = lobbyUsrControl.getselectedRoomID();
         if(id == -1 )return;
         this.enterRoom(id);
-        
-        
-        
     }//GEN-LAST:event_buttonEnterRoomActionPerformed
+
+    private void menuItemDisconnectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuItemDisconnectActionPerformed
+        
+        if(!Utility.ShowQuestionPopUp(Settings.clientName, "Disconnect from the game?"))
+            return;
+        ClientManager.leaveRoom(ClientManager.currentuser);
+        ClientManager.DisconnectFromServer(ClientManager.currentuser.getUsername());
+        this.dispose();
+        ClientManager.Login();
+    }//GEN-LAST:event_menuItemDisconnectActionPerformed
 
     /**
      * @param args the command line arguments
@@ -201,11 +225,14 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonAddRoom;
     private javax.swing.JButton buttonEnterRoom;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;
     private java.awt.Label label2;
     private javax.swing.JLabel lblUtentiConnessi;
     private com.universita.ilparolierelabb.client.frames.LobbyUsrControl lobbyUsrControl;
+    private javax.swing.JMenuItem menuItemDisconnect;
     private javax.swing.JPanel panelContainer;
     // End of variables declaration//GEN-END:variables
 

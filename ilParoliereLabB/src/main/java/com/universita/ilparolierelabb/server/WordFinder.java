@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.universita.ilparolierelabb.server;
-
 /**
  *
  * @author andreagirola
  */
     
-    public class WordFinder {
+    public class WordFinder 
+    {
 	public int[][] solution;
 	int path = 1;
 
@@ -24,7 +19,8 @@ package com.universita.ilparolierelabb.server;
 		}
 	}
 
-	public boolean searchWord(String[][] matrix, String word) {
+	public boolean searchWord(String[][] matrix, String word) 
+        {
 		int N = matrix.length;
 		for (int i = 0; i < N; i++) {
 			for (int j = 0; j < N; j++) {
@@ -129,14 +125,4 @@ package com.universita.ilparolierelabb.server;
             }
             return value;
         }
-        
-       
-	public void print() {
-		for (int i = 0; i < solution.length; i++) {
-			for (int j = 0; j < solution.length; j++) {
-				System.out.print(" " + solution[i][j]);
-			}
-			System.out.println();
-		}
-	} 
 }

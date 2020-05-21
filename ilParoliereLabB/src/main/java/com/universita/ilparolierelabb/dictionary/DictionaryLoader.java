@@ -8,7 +8,7 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 
-public class Loader {
+public class DictionaryLoader {
 		
 	public Dictionary loadDictionaryFromFile(File file) throws IOException  {
 		Dictionary dictionary=new Dictionary();
@@ -67,8 +67,8 @@ public class Loader {
 	}
 	
 	public static void main(String[] args) {
-		Loader loader=new Loader();
-		String file_dizionario= "dict-it.oxt";
+		DictionaryLoader loader=new DictionaryLoader();
+		String file_dizionario= "C:\\Users\\Momo\\Desktop\\dict-it.oxt";
 		File dizionario=new File(file_dizionario);
 		
 		try {

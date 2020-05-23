@@ -86,5 +86,18 @@ public class Games implements Serializable
     {
         return this._dataChanged;
     }
+
+    public void removePlayerFromGame(User usr) 
+    {
+        Game g = null;
+        for(int i = 0; i < _games.size(); i++)
+        {
+            g = _games.get(i);
+            if(g.isPlayerIn(usr.getUsername())) 
+            {
+                g.removePlayer(usr.getUsername());
+            }
+        }
+    }
     
 }

@@ -546,6 +546,7 @@ public class ServerImplementation extends Observable implements ServerInterface
             ServerDBInterface.clientLeaveRoom(usr.getUsername());
             ServerManager.addLogData(usr.getUsername()+" left room: "+r.getId());
             ServerManager.rooms.setDataChanged(true);
+            ServerManager.games.removePlayerFromGame(usr);
             ServerManager.games.setDataChanged();
             removeGameObserver(o);
             addClientObserver(o);
@@ -659,19 +660,16 @@ public class ServerImplementation extends Observable implements ServerInterface
         //Check parola in dizionario 
         
         int score = 0;
-        boolean Exist = false;
-        //Exist = searchInDictionary(word);
-        //if(!Exist) return 0;
-        score = WordFinder.pointsFromWord(word, matrix);
-        ServerDBInterface.addWordOfPlayer(username, word, score, roomId, game.getID());
-        //add points to player and notify room
+        boolean exist = ServerManager._serverDictionary.exists(word.toLowerCase());
+        
+        if(exist) score = WordFinder.pointsFromWord(word, matrix);
+        ServerDBInterface.addWordOfPlayer(username, word, score, roomId, game.getID(),(exist)? 1 : 0);
         if(score != 0)
         {
             ServerManager.games.addScoreToPlayer(roomId, score, username);
             ServerDBInterface.addScoreToPlayer(username, score);
             ServerManager.games.setDataChanged();
         }
-        //return Utility.getRandomInt(0, 7);
         return score;
         
     }

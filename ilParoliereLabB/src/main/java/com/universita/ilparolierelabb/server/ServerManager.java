@@ -7,6 +7,8 @@ import com.universita.ilparolierelabb.server.frames.ServerLogin;
 import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
 import com.universita.ilparolierelabb.server.frames.ServerRegistration;
 import com.universita.ilparolierelabb.common.SettingsResult;
+import com.universita.ilparolierelabb.dictionary.Dictionary;
+import com.universita.ilparolierelabb.dictionary.DictionaryLoader;
 import com.universita.ilparolierelabb.server.frames.ServerSettings;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -22,7 +24,7 @@ public class ServerManager
     public static Games games = new Games();
     public static Boolean _ClientCountChanged = false;
     public static LobbyData lobby = new LobbyData();
-    
+    public static Dictionary _serverDictionary;
     /***
      * Launch Avvia il server chiedendo i parametri di conessione al Database usato.
      */
@@ -66,6 +68,7 @@ public class ServerManager
         MatrixFactory.createDices();
         ServerThread.Run();
         rooms.setLastID(ServerDBInterface.getRoomLastId());
+        _serverDictionary = DictionaryLoader.loadServerDictionary();
     }  
     /***
      * addLogData Aggiunge un dato nel log del server

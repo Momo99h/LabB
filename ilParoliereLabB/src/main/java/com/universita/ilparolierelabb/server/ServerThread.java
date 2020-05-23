@@ -116,6 +116,9 @@ public class ServerThread extends Thread implements ActionListener
             switch(gamePhase)
             {
                 case Ready:
+                    User[] usrs = ServerManager.rooms.getListPlayersInRoom(gameArray[i].getRoomID());
+                    for(int j = 0; j < usrs.length;j++)
+                        gameArray[i].addUser(usrs[j]);
                     gameArray[i].setPhase(Game.Phase.InitCountDown);
                     break;
                 case InitCountDown:
@@ -128,9 +131,6 @@ public class ServerThread extends Thread implements ActionListener
                     gameArray[i].setMatrix(MatrixFactory.getRandomMatrix());
                     ServerImplementation.notifyGameMatrix(gameArray[i].getRoomID(),gameArray[i].getMatrix());
                     ServerImplementation.notifyWordGuessingState(gameArray[i].getRoomID(), true);
-                    User[] usrs = ServerManager.rooms.getListPlayersInRoom(gameArray[i].getRoomID());
-                    for(int j = 0; j < usrs.length;j++)
-                        gameArray[i].addUser(usrs[j]);
                     gameArray[i].setPhase(Game.Phase.GameCountDown);
                     break;
                 case GameCountDown:

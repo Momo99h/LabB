@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.common.frames;
 import com.universita.ilparolierelabb.client.ClientManager;
+import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.server.MatrixFactory;
 import com.universita.ilparolierelabb.server.ServerManager;
 
@@ -21,6 +22,7 @@ public class ApplicationSelector extends javax.swing.JFrame {
         initComponents();
         this.setLocationRelativeTo(null);
         this.setResizable(false);
+        
     }
 
     /**

@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class Game implements Serializable
 {
 
-   
     public static enum Phase
     {
         Idle,Ready,InitCountDown,CreateMatrix,GameCountDown,Finished,Conclude
@@ -23,7 +22,7 @@ public class Game implements Serializable
     private int _roomid;
     private int _gameid = 1;
     private int _initTimer = 5;
-    private int _gameTimer = 20;
+    private int _gameTimer = 180;
     private ArrayList<User> _Initialusers = new ArrayList<>();
     private ArrayList<User> _Endusers = new ArrayList<>();
     private Phase _phase = Phase.Idle;
@@ -109,10 +108,10 @@ public class Game implements Serializable
     }
     public User[] getListEndPlayersIn()
     {
-        User[] s = new User[this._Initialusers.size()];
-        for(int i = 0; i < this._Initialusers.size();i++)
+        User[] s = new User[this._Endusers.size()];
+        for(int i = 0; i < this._Endusers.size();i++)
         {
-            s[i] = this._Initialusers.get(i);
+            s[i] = this._Endusers.get(i);
         }
         return s;
     }
@@ -133,8 +132,31 @@ public class Game implements Serializable
         return users;
     }
     
-    public int getPlayersIn(){
+    public int getPlayersIn()
+    {
         return this._Initialusers.size();
+    }
+    
+    public boolean isPlayerIn(String username) 
+    {
+       for(int i = 0; i < _Initialusers.size(); i++)
+       {
+           if(_Initialusers.get(i).getUsername().equals(username))
+           {
+               return true;
+           }
+       }
+       return false;
+    }
+    public void removePlayer(String username) 
+    {
+       for(int i = 0; i < _Endusers.size(); i++)
+       {
+           if(_Endusers.get(i).getUsername().equals(username))
+           {
+               _Endusers.remove(i);
+           }
+       }
     }
     
 }

@@ -3,15 +3,19 @@ package com.universita.ilparolierelabb.server;
 import com.universita.ilparolierelabb.common.Games;
 import com.universita.ilparolierelabb.common.LobbyData;
 import com.universita.ilparolierelabb.common.Rooms;
+import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.server.frames.ServerLogin;
 import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
 import com.universita.ilparolierelabb.server.frames.ServerRegistration;
 import com.universita.ilparolierelabb.common.SettingsResult;
+import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.dictionary.Dictionary;
 import com.universita.ilparolierelabb.dictionary.DictionaryLoader;
 import com.universita.ilparolierelabb.server.frames.ServerSettings;
+import java.io.File;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.JFileChooser;
 
 /**
  * ServerManager Gestisce le azioni del modulo Server
@@ -25,6 +29,7 @@ public class ServerManager
     public static Boolean _ClientCountChanged = false;
     public static LobbyData lobby = new LobbyData();
     public static Dictionary _serverDictionary;
+    public static String _DictionaryPath = "C:\\Users\\Momo\\Desktop\\dict-it.oxt";
     /***
      * Launch Avvia il server chiedendo i parametri di conessione al Database usato.
      */
@@ -63,12 +68,33 @@ public class ServerManager
         ServerImplementation.Init(9999);        
         ServerMainFrame serverFrame = new ServerMainFrame();
         serverFrame.setVisible(true);
+        //Check if file exist;
+        File f = new File(_DictionaryPath); 
+        if (!f.exists())
+        {
+            Utility.ShowInfoPopUp(Settings.serverName, "Please select dictionary file to continue.");
+            final JFileChooser fc = new JFileChooser();
+            fc.setToolTipText("Select dictionary file");
+            int returnVal = fc.showOpenDialog(null);
+            if (returnVal == JFileChooser.APPROVE_OPTION) 
+            {
+                File file = fc.getSelectedFile();
+                _DictionaryPath = file.getAbsolutePath();
+            }
+            else
+            {
+                Utility.ShowErrorPopUp(Settings.serverName, "Cannot continue without selecting the dictionary file.");
+                System.exit(0);
+            }
+        }
         addLogData("Server ready - Waiting connections..");
         ServerDBInterface.resetUsersState();
         MatrixFactory.createDices();
         ServerThread.Run();
         rooms.setLastID(ServerDBInterface.getRoomLastId());
-        _serverDictionary = DictionaryLoader.loadServerDictionary();
+        
+        
+        _serverDictionary = DictionaryLoader.loadServerDictionary(_DictionaryPath);
     }  
     /***
      * addLogData Aggiunge un dato nel log del server

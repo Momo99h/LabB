@@ -41,9 +41,9 @@ public class DictionaryLoader
     return dictionary;
 }
     
-    public static Dictionary loadServerDictionary()
+    public static Dictionary loadServerDictionary(String path)
     {
-        String file_dizionario= "C:\\Users\\Momo\\Desktop\\dict-it.oxt";
+        String file_dizionario= path;
         File dizionario = new File(file_dizionario);
         try 
         {

@@ -34,3 +34,12 @@ WHERE NickName= NickName
 GROUP BY NickName) NSessions
 GROUP BY NickName
 ORDER BY GameSession DESC LIMIT 1
+c-
+SELECT DISTINCT ON (RoomId , GameId)RoomId,GameId, MAX(AverageScore) AS AverageScore, NickName
+FROM (
+SELECT AVG(Score):: numeric(6,2) AS AverageScore, GameId , RoomId, NickName 
+      FROM UsersWords 
+      WHERE NickName=NickName
+      GROUP BY GameId, RoomId, NickName) AvgScore
+GROUP BY GameId, NickName, RoomId
+ORDER BY GameId DESC

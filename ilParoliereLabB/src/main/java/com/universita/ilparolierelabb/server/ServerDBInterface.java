@@ -357,4 +357,33 @@ public class ServerDBInterface
         } 
     }
 
+    static String[][] getStatisticPoint1c() {
+        try
+        {
+            String query0 = "SELECT DISTINCT ON (RoomId , GameId)RoomId,GameId, MAX(AverageScore) AS AverageScore, NickName\n" +
+                            "FROM (\n" +
+                            "SELECT AVG(Score):: numeric(6,2) AS AverageScore, GameId , RoomId, NickName \n" +
+                            "      FROM UsersWords \n" +
+                            "      WHERE NickName=NickName\n" +
+                            "      GROUP BY GameId, RoomId, NickName) AvgScore\n" +
+                            "GROUP BY GameId, NickName, RoomId\n" +
+                            "ORDER BY GameId DESC";
+                                        ResultTable val = _db.executeQueryRead(query0);
+            String[][] ret = new String[val.getRowCount()][val.getColumCount()];
+            for(int i = 0; i < val.getRowCount();i++)
+            {
+               for(int z = 0; z < val.getColumCount();z++)
+               {
+                    ret[i][z] = val.get(i, z);
+               }  
+            }
+            return ret;
+            
+        } catch (Exception e) 
+        { 
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

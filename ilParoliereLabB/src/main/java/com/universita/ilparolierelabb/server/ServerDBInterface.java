@@ -271,5 +271,34 @@ public class ServerDBInterface
         
         return stats; 
     }
+    
+    public static String getDictionaryPath()
+    {
+        try
+        {
+            String query0 = "SELECT * FROM Settings";
+            ResultTable val = _db.executeQueryRead(query0);
+            return val.get(0, 0);
+        } 
+        catch(Exception e)
+        {
+            return "";
+        }     
+       
+    }
+    public static Boolean setDictionaryPath(String path)
+    {
+        try
+        {
+            String query0 = "Update Settings Set DictionaryPath = '%s'";
+            String internalPath = path.replace("\\", "\\\\");
+            query0 = String.format(query0, internalPath);
+            return _db.executeQuery(query0);
+        } 
+        catch(Exception e)
+        {
+            return false;
+        } 
+    }
 
 }

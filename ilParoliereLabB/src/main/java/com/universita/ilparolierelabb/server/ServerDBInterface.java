@@ -245,5 +245,31 @@ public class ServerDBInterface
         query = String.format(query, g.getRoomID(),g.getID(),g.getPlayersIn(), users,endusers,g.getBestGameScore() );
         return _db.executeQuery(query);
     }
+    
+    public static String[] getMyStatistics(String user){
+        String[] stats = new String[3];
+        try{
+            String query0 = "SELECT TotalPoints FROM UsersScore WHERE Nickname = '%s'";
+            query0 = String.format(query0, user);
+            ResultTable val = _db.executeQueryRead(query0);
+            stats[0] = val.get(0,0);
+            
+            String query1 = "SELECT COUNT(Word) FROM UsersWords WHERE Nickname = '%s' AND Score <> '0'";
+            query1 = String.format(query1, user);
+            val = _db.executeQueryRead(query1);
+            stats[1] = val.get(0,0);
+            
+            String query2 = "SELECT COUNT(Word) FROM UsersWords WHERE Nickname = '%s'";
+            query2 = String.format(query2, user);
+            val = _db.executeQueryRead(query2);
+            stats[2] = val.get(0,0);
+            
+        } catch (Exception e) { 
+            return null;
+        }
+        
+        
+        return stats; 
+    }
 
 }

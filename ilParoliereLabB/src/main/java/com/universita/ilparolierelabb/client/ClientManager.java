@@ -167,6 +167,9 @@ public class ClientManager
         gameFrame.setGameHeaderMessage(msg);
     }
     
+    public static String[] getMyStatistics(String user){
+        return ClientImplementation.getMyStatistics(user);
+     }
     
     
 }

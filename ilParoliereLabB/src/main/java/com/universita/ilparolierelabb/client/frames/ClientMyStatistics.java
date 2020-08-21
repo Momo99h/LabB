@@ -179,7 +179,12 @@ public class ClientMyStatistics extends JDialog {
     private void loadData() 
     {
         
+        String[] statistics = ClientManager.getMyStatistics(ClientManager.currentuser.getUsername());
         lblNick.setText(ClientManager.currentuser.getUsername());
+        lblTotalP.setText(statistics[0]);
+        lblCorretWordCount.setText(statistics[1]);
+        lblWordCount.setText(statistics[2]);
+        
         
         
         

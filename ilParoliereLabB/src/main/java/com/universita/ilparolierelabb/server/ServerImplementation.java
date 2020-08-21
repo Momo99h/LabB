@@ -673,6 +673,11 @@ public class ServerImplementation extends Observable implements ServerInterface
         return score;
         
     }
+
+    @Override
+    public String[] getMyStatistics(String user) throws RemoteException {
+        return ServerDBInterface.getMyStatistics(user);
+    }
       
     
    

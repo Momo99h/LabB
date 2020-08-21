@@ -25,6 +25,8 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     public static ServerInterface _server = null;
     public static ClientImplementation _client;
 
+   
+
     private ClientImplementation() throws RemoteException 
     {
         super();
@@ -393,7 +395,7 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         ClientManager.stopGame();
     }
     
-    static String[] getMyStatistics(String user) {
+    public static String[] getMyStatistics(String user) {
         try
         {
             return _server.getMyStatistics(user);
@@ -405,6 +407,19 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
        
+    }
+    public static String[][] getStatisticPoint1() 
+    {
+         try
+        {
+            return _server.getStatisticPoint1();
+        }
+        catch(Exception e)
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, e.getMessage());
+            System.exit(1);
+            return null;
+        }
     }
 
 }

@@ -170,6 +170,9 @@ public class ClientManager
     public static String[] getMyStatistics(String user){
         return ClientImplementation.getMyStatistics(user);
      }
-    
+    public static String[][] getStatisticPoint1()
+    {
+        return ClientImplementation.getStatisticPoint1();
+    }
     
 }

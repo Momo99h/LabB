@@ -271,6 +271,34 @@ public class ServerDBInterface
         
         return stats; 
     }
+    public static String[][] getStatisticPoint1(){
+        try
+        {
+            String query0 = "SELECT DISTINCT ON(RoomId, GameId) RoomId, GameId, NickName, MAX(TotalPoints) AS TotalPoints\n" +
+                            "FROM (SELECT SUM(Score) AS TotalPoints, GameId , RoomId, NickName\n" +
+                            "      FROM UsersWords \n" +
+                            "      WHERE NickName=NickName\n" +
+                            "	  GROUP BY GameId, RoomId, NickName\n" +
+                            "      ORDER BY TotalPoints DESC) MaxScore\n" +
+                            "GROUP BY GameId, RoomId, NickName\n" +
+                            "ORDER BY RoomId desc , GameId desc";
+            ResultTable val = _db.executeQueryRead(query0);
+            String[][] ret = new String[val.getRowCount()][val.getColumCount()];
+            for(int i = 0; i < val.getRowCount();i++)
+            {
+               for(int z = 0; z < val.getColumCount();z++)
+               {
+                    ret[i][z] = val.get(i, z);
+               }  
+            }
+            return ret;
+            
+        } catch (Exception e) 
+        { 
+            e.printStackTrace();
+            return null;
+        }
+    }
     
     public static String getDictionaryPath()
     {

@@ -12,14 +12,26 @@ package com.universita.ilparolierelabb.common.sql;
 public class ResultTable 
 {
     private final String[][] _data;
+    private int _rowcount;
+    private int _columncount;
     private int _rowIndex = 0;
     private int _columIndex = 0;
     private final String[] _columnNames;
     
     public ResultTable(int rows,int columns)
     {
+        this._rowcount = rows;
+        this._columncount = columns;
         this._data = new String[rows][columns];
         this._columnNames = new String[columns];
+    }
+    public int getRowCount()
+    {
+        return _rowcount;
+    }
+    public int getColumCount()
+    {
+        return _columncount;
     }
     public void addRow(String[] columns)
     {

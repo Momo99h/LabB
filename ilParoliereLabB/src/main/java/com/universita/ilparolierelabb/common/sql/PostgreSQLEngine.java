@@ -131,11 +131,12 @@ public class PostgreSQLEngine extends sqlEngine
            int i = 0;
            while(rs.next())
            {
+               tmp = new String[numCols];
                for (int j=0; j < numCols; j++)
                {
                    tmp[j] = String.valueOf(rs.getObject(j+1));
-                   table.addRow(tmp);
                }
+               table.addRow(tmp);
               i++;
            }
         }

@@ -40,4 +40,5 @@ public interface ServerInterface extends Remote
     public boolean recoverPassword(String email) throws RemoteException;
     public int checkWord(String word, int roomId,String username) throws RemoteException;
     public String[] getMyStatistics(String user) throws RemoteException; 
+    public String[][] getStatisticPoint1() throws RemoteException; 
 }

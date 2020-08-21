@@ -69,6 +69,7 @@ public class ServerManager
         ServerMainFrame serverFrame = new ServerMainFrame();
         serverFrame.setVisible(true);
         //Check if file exist;
+        _DictionaryPath = ServerDBInterface.getDictionaryPath();
         File f = new File(_DictionaryPath); 
         if (!f.exists())
         {
@@ -80,6 +81,7 @@ public class ServerManager
             {
                 File file = fc.getSelectedFile();
                 _DictionaryPath = file.getAbsolutePath();
+                ServerDBInterface.setDictionaryPath(_DictionaryPath);
             }
             else
             {

@@ -588,4 +588,43 @@ public class ServerDBInterface
         }
     }
 
+    static String[] getStatisticPoint1d() 
+    {
+         try
+        {
+            String query0 = "SELECT Nickname,Count(Duplicati) as Duplicati\n" +
+                            "FROM(\n" +
+                            "	SELECT Nickname \n" +
+                            "	FROM userswords\n" +
+                            "	WHERE Word IN \n" +
+                            "	(\n" +
+                            "		SELECT Word\n" +
+                            "		FROM userswords\n" +
+                            "		group by Word,GameId,RoomId\n" +
+                            "		HAVING COUNT(Word) > 1\n" +
+                            "	)		group by Nickname,Word ) Duplicati\n" +
+                            "	group by Nickname order by Duplicati DESC LIMIT 1";
+            
+            ResultTable val = _db.executeQueryRead(query0);
+            if(val == null)
+            {
+                String[] ret = new String[10];
+                for(int i = 0; i < 10; i++)
+                {
+                    ret[i] = "";
+                }
+                return ret;
+            }
+            String[] ret = new String[2];
+            ret[0] = val.get(0, 0);
+            ret[1] = val.get(0, 1);
+            return ret;
+            
+        } catch (Exception e) 
+        { 
+            e.printStackTrace();
+            return null;
+        } 
+    }
+
 }

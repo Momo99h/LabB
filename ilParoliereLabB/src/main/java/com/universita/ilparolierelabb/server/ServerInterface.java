@@ -46,5 +46,6 @@ public interface ServerInterface extends Remote
     public String[] getStatisticPoint1e() throws RemoteException;
     public String[][] getStatisticPoint2() throws RemoteException;
     public String[][] getStatisticPoint3() throws RemoteException;
+    public String[][] getStatisticPoint4() throws RemoteException;
 
 }

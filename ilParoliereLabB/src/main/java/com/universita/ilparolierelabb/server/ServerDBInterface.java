@@ -511,4 +511,42 @@ public class ServerDBInterface
         }
     }
 
+    static String[][] getStatisticPoint4() 
+    {
+        try
+        {
+            String query0 = "SELECT AVG(GameId)::numeric(6,2) AS AvgGamesRounds, Players\n" +
+                            "FROM(\n" +
+                            "SELECT COUNT(DISTINCT RoomId) AS RoomId, COUNT(DISTINCT GameId) AS GameId, Players\n" +
+                            "FROM Games\n" +
+                            "GROUP BY RoomId, Players) CountRoom\n" +
+                            "WHERE Players='2' OR Players='3' OR Players='4' OR Players='5' OR Players='6'\n" +
+                            "GROUP BY Players";
+            ResultTable val = _db.executeQueryRead(query0);
+            if(val == null)
+            {
+                String[][] ret = new String[1][10];
+                for(int i = 0; i < 10; i++)
+                {
+                    ret[0][i] = "";
+                }
+                return ret;
+            }
+            String[][] ret = new String[val.getRowCount()][val.getColumCount()];
+            for(int i = 0; i < val.getRowCount();i++)
+            {
+               for(int z = 0; z < val.getColumCount();z++)
+               {
+                    ret[i][z] = val.get(i, z);
+               }  
+            }
+            return ret;
+            
+        } catch (Exception e) 
+        { 
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

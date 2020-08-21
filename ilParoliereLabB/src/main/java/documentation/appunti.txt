@@ -12,3 +12,16 @@ Inizializza i dadi.
 Restituisce una matrice 4x4 con i dati, importante che le posizioni dei dadi cambiano.
 
 Boolean b = Matrix.parseWord(String[][] matgrice,String word) : restituisce se la parola è valida nella ricerca della matrice
+
+
+
+1) 
+a- SELECT DISTINCT ON(RoomId, GameId) RoomId, GameId, NickName, MAX(TotalPoints) AS TotalPoints
+FROM (SELECT SUM(Score) AS TotalPoints, GameId , RoomId, NickName
+      FROM UsersWords 
+      WHERE NickName=NickName
+	  GROUP BY GameId, RoomId, NickName
+      ORDER BY TotalPoints DESC) MaxScore
+GROUP BY GameId, RoomId, NickName
+ORDER BY RoomId, GameId DESC
+

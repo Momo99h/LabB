@@ -61,6 +61,7 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -198,6 +199,9 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem6);
 
+        jMenuItem7.setText("2) Correct words guessed");
+        jMenu3.add(jMenuItem7);
+
         jMenu2.add(jMenu3);
 
         jMenuBar1.add(jMenu2);
@@ -283,7 +287,8 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
 
     private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         // TODO add your handling code here:
-        
+                        ClientStatisticPoint1e.Show();
+
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
@@ -336,6 +341,7 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
     private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;
     private java.awt.Label label2;

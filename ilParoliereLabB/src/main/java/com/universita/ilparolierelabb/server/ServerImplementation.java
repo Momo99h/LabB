@@ -662,8 +662,13 @@ public class ServerImplementation extends Observable implements ServerInterface
         int score = 0;
         boolean exist = ServerManager._serverDictionary.exists(word.toLowerCase());
         
-        if(exist) score = WordFinder.pointsFromWord(word, matrix);
-        ServerDBInterface.addWordOfPlayer(username, word, score, roomId, game.getID(),(exist)? 1 : 0);
+        score = WordFinder.pointsFromWord(word, matrix);
+        String explanation = "";
+        if(score == 0 && !exist) explanation = "Parola non derivabile dalla griglia";
+        if(score != 0 && !exist) explanation = "Parola non presente nel dizionario";
+        if(!exist) score = 0;
+        //if(exist && score != 0) explanation = ServerManager._serverDictionary.;
+        ServerDBInterface.addWordOfPlayer(username, word, score, roomId, game.getID(),(exist)? 1 : 0,explanation);
         if(score != 0)
         {
             ServerManager.games.addScoreToPlayer(roomId, score, username);
@@ -695,6 +700,11 @@ public class ServerImplementation extends Observable implements ServerInterface
     public String[][] getStatisticPoint1c() throws RemoteException 
     {
         return ServerDBInterface.getStatisticPoint1c();
+    }
+
+    @Override
+    public String[] getStatisticPoint1e() throws RemoteException {
+        return ServerDBInterface.getStatisticPoint1e();
     }
       
     

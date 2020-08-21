@@ -208,10 +208,10 @@ public class ServerDBInterface
         query = String.format(query, _score,username);
         return _db.executeQuery(query);
     }
-    public static boolean addWordOfPlayer(String username,String word,int score,int roomId,int gameId,int exist)
+    public static boolean addWordOfPlayer(String username,String word,int score,int roomId,int gameId,int exist,String explanation)
     {
-        String query = "Insert into UsersWords (RoomID,GameID,Nickname,Word,InDictionary,Score) Values ('%s','%s','%s','%s','%s','%s')";
-        query = String.format(query, roomId,gameId,username,word,exist,score);
+        String query = "Insert into UsersWords (RoomID,GameID,Nickname,Word,InDictionary,Score,Explanation) Values ('%s','%s','%s','%s','%s','%s','%s')";
+        query = String.format(query, roomId,gameId,username,word,exist,score,explanation);
         return _db.executeQuery(query);
     }
     
@@ -384,6 +384,33 @@ public class ServerDBInterface
             e.printStackTrace();
             return null;
         }
+    }
+
+    static String[] getStatisticPoint1e() 
+    {
+         try
+        {
+            String query0 = "SELECT NickName, MAX(NWords) AS MaxWords \n" +
+                            "FROM(\n" +
+                            "SELECT NickName, COUNT(Word) AS NWords\n" +
+                            "FROM UsersWords\n" +
+                            "WHERE Score= '0' AND Explanation= 'Parola non derivabile dalla griglia' OR \n" +
+                            "                     indictionary = '0'\n" +
+                            "GROUP BY NickName ) CountWords\n" +
+                            "GROUP BY NickName\n" +
+                            "ORDER BY MaxWords DESC LIMIT 1";
+            
+            ResultTable val = _db.executeQueryRead(query0);
+            String[] ret = new String[2];
+            ret[0] = val.get(0, 0);
+            ret[1] = val.get(0, 1);
+            return ret;
+            
+        } catch (Exception e) 
+        { 
+            e.printStackTrace();
+            return null;
+        } 
     }
 
 }

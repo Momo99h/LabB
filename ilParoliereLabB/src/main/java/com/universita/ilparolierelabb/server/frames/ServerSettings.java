@@ -17,8 +17,8 @@ import javax.swing.JDialog;
  */
 public class ServerSettings extends JDialog {
 
-    private MySQLEngine db = new MySQLEngine();
-    private static MySQLEngine parDB = new MySQLEngine();
+    private PostgreSQLEngine db = new PostgreSQLEngine();
+    private static PostgreSQLEngine parDB = new PostgreSQLEngine();
     private SettingsResult connectionResult = SettingsResult.ConnectionFailed;
 
     public ServerSettings(java.awt.Frame parent, boolean modal) 
@@ -185,7 +185,7 @@ public class ServerSettings extends JDialog {
         return form.connectionResult;
     }
 
-     public static MySQLEngine getDbReference()
+     public static PostgreSQLEngine getDbReference()
     {
         return parDB;
     }

@@ -19,14 +19,14 @@ import com.universita.ilparolierelabb.common.sql.*;
  */
 public class ServerDBInterface 
 {
-    private static MySQLEngine _db = new MySQLEngine();
-    
+    //private static MySQLEngine _db = new MySQLEngine();
+    private static PostgreSQLEngine _db = new PostgreSQLEngine();
     /***
      * setDBReference Imposta il motore di connessione al database.
      * 
      * @param db Motore di connessione già configurato.
      */
-    public static void setDBReference(MySQLEngine db)
+    public static void setDBReference(PostgreSQLEngine db)
     {
         _db = db;
     }

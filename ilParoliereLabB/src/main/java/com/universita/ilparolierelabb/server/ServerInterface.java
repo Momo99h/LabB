@@ -39,5 +39,5 @@ public interface ServerInterface extends Remote
     public Room getRoomById(int id) throws RemoteException;
     public boolean recoverPassword(String email) throws RemoteException;
     public int checkWord(String word, int roomId,String username) throws RemoteException;
-
+    
 }

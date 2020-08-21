@@ -49,6 +49,7 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         label1 = new java.awt.Label();
         label2 = new java.awt.Label();
         panelContainer = new javax.swing.JPanel();
+        lobbyUsrControl = new com.universita.ilparolierelabb.client.frames.LobbyUsrControl();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuItemDisconnect = new javax.swing.JMenuItem();
@@ -129,6 +130,7 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         label1.getAccessibleContext().setAccessibleName("Username");
 
         panelContainer.setLayout(new java.awt.BorderLayout());
+        panelContainer.add(lobbyUsrControl, java.awt.BorderLayout.CENTER);
 
         jMenu1.setText("Me");
 
@@ -298,6 +300,7 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
     private java.awt.Label label1;
     private java.awt.Label label2;
     private javax.swing.JLabel lblUtentiConnessi;
+    private com.universita.ilparolierelabb.client.frames.LobbyUsrControl lobbyUsrControl;
     private javax.swing.JMenuItem menuItemDisconnect;
     private javax.swing.JMenuItem mnItemMyStatistic;
     private javax.swing.JPanel panelContainer;

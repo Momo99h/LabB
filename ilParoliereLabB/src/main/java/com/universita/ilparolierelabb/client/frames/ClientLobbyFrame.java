@@ -40,6 +40,7 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuItem1 = new javax.swing.JMenuItem();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblUtentiConnessi = new javax.swing.JLabel();
@@ -53,6 +54,11 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         jMenu1 = new javax.swing.JMenu();
         menuItemDisconnect = new javax.swing.JMenuItem();
         mnItemMyStatistic = new javax.swing.JMenuItem();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+
+        jMenuItem1.setText("jMenuItem1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -122,7 +128,7 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         label1.getAccessibleContext().setAccessibleName("Username");
 
         panelContainer.setLayout(new java.awt.BorderLayout());
-        panelContainer.add(lobbyUsrControl, java.awt.BorderLayout.CENTER);
+        panelContainer.add(lobbyUsrControl, java.awt.BorderLayout.PAGE_START);
 
         jMenu1.setText("Me");
 
@@ -143,6 +149,17 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         jMenu1.add(mnItemMyStatistic);
 
         jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Global");
+
+        jMenu3.setText("Statistics");
+
+        jMenuItem3.setText("1) Best players for rooms");
+        jMenu3.add(jMenuItem3);
+
+        jMenu2.add(jMenu3);
+
+        jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
 
@@ -243,7 +260,11 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
     private javax.swing.JButton buttonEnterRoom;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;
     private java.awt.Label label2;

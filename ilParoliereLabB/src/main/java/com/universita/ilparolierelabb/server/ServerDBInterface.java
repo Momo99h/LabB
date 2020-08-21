@@ -549,4 +549,43 @@ public class ServerDBInterface
         }
     }
 
+    static String[][] getStatisticPoint5() 
+    {
+        try
+        {
+            String query0 = "SELECT MIN(GameId) AS NMinRound, MAX(GameId) AS NMaxRound, Players\n" +
+                            "FROM(\n" +
+                            "SELECT RoomId, COUNT(DISTINCT GameId) AS GameId, Players\n" +
+                            "FROM Games\n" +
+                            "GROUP BY RoomId, Players\n" +
+                            "ORDER BY RoomId) CountRoom\n" +
+                            "WHERE Players='2' OR Players='3' OR Players='4' OR Players='5' OR Players='6'\n" +
+                            "GROUP BY Players";
+            ResultTable val = _db.executeQueryRead(query0);
+            if(val == null)
+            {
+                String[][] ret = new String[1][10];
+                for(int i = 0; i < 10; i++)
+                {
+                    ret[0][i] = "";
+                }
+                return ret;
+            }
+            String[][] ret = new String[val.getRowCount()][val.getColumCount()];
+            for(int i = 0; i < val.getRowCount();i++)
+            {
+               for(int z = 0; z < val.getColumCount();z++)
+               {
+                    ret[i][z] = val.get(i, z);
+               }  
+            }
+            return ret;
+            
+        } catch (Exception e) 
+        { 
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

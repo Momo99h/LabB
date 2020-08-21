@@ -725,6 +725,11 @@ public class ServerImplementation extends Observable implements ServerInterface
     {
         return ServerDBInterface.getStatisticPoint4();
     }
+
+    @Override
+    public String[][] getStatisticPoint5() throws RemoteException {
+        return ServerDBInterface.getStatisticPoint5();
+    }
       
     
    

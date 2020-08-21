@@ -187,5 +187,15 @@ public class ClientManager
     public static String[] getStatisticPoint1e() {
         return ClientImplementation.getStatisticPoint1e();
     }
+
+    public static String[][] getStatisticPoint2() 
+    {
+        return ClientImplementation.getStatisticPoint2();
+    }
+
+    public static String[][] getStatisticPoint3() 
+    {      
+        return ClientImplementation.getStatisticPoint3();
+    }
     
 }

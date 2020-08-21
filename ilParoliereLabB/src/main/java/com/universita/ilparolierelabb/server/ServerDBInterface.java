@@ -345,6 +345,15 @@ public class ServerDBInterface
                             "ORDER BY GameSession DESC LIMIT 1";
             
             ResultTable val = _db.executeQueryRead(query0);
+            if(val == null)
+            {
+                String[] ret = new String[10];
+                for(int i = 0; i < 10; i++)
+                {
+                    ret[i] = "";
+                }
+                return ret;
+            }
             String[] ret = new String[2];
             ret[0] = val.get(0, 0);
             ret[1] = val.get(0, 1);
@@ -369,6 +378,15 @@ public class ServerDBInterface
                             "GROUP BY GameId, NickName, RoomId\n" +
                             "ORDER BY GameId DESC";
                                         ResultTable val = _db.executeQueryRead(query0);
+            if(val == null)
+            {
+                String[][] ret = new String[1][10];
+                for(int i = 0; i < 10; i++)
+                {
+                    ret[0][i] = "";
+                }
+                return ret;
+            }
             String[][] ret = new String[val.getRowCount()][val.getColumCount()];
             for(int i = 0; i < val.getRowCount();i++)
             {
@@ -401,6 +419,15 @@ public class ServerDBInterface
                             "ORDER BY MaxWords DESC LIMIT 1";
             
             ResultTable val = _db.executeQueryRead(query0);
+            if(val == null)
+            {
+                String[] ret = new String[10];
+                for(int i = 0; i < 10; i++)
+                {
+                    ret[i] = "";
+                }
+                return ret;
+            }
             String[] ret = new String[2];
             ret[0] = val.get(0, 0);
             ret[1] = val.get(0, 1);
@@ -411,6 +438,77 @@ public class ServerDBInterface
             e.printStackTrace();
             return null;
         } 
+    }
+
+    static String[][] getStatisticPoint2() 
+    {
+        try
+        {
+            String query0 = "SELECT Word , COUNT(Word) AS Occorrenze\n" +
+                            "FROM UsersWords\n" +
+                            "WHERE Score > 0 \n" +
+                            "GROUP BY Word \n" +
+                            "ORDER BY Word ASC";
+            ResultTable val = _db.executeQueryRead(query0);
+            if(val == null)
+            {
+                String[][] ret = new String[1][10];
+                for(int i = 0; i < 10; i++)
+                {
+                    ret[0][i] = "";
+                }
+                return ret;
+            }
+            String[][] ret = new String[val.getRowCount()][val.getColumCount()];
+            for(int i = 0; i < val.getRowCount();i++)
+            {
+               for(int z = 0; z < val.getColumCount();z++)
+               {
+                    ret[i][z] = val.get(i, z);
+               }  
+            }
+            return ret;
+            
+        } catch (Exception e) 
+        { 
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    static String[][] getStatisticPoint3()
+    {
+        try
+        {
+            String query0 = "SELECT DISTINCT ON (RoomId,GameId) RoomId,GameId, Word, MAX(Score) AS MaxIncrementation \n" +
+                            "FROM UsersWords WHERE Score != 0\n" +
+                            "GROUP BY Word, Score, GameId,RoomId\n" +
+                            "ORDER BY GameId,RoomId, MaxIncrementation DESC";
+            ResultTable val = _db.executeQueryRead(query0);
+            if(val == null)
+            {
+                String[][] ret = new String[1][10];
+                for(int i = 0; i < 10; i++)
+                {
+                    ret[0][i] = "";
+                }
+                return ret;
+            }
+            String[][] ret = new String[val.getRowCount()][val.getColumCount()];
+            for(int i = 0; i < val.getRowCount();i++)
+            {
+               for(int z = 0; z < val.getColumCount();z++)
+               {
+                    ret[i][z] = val.get(i, z);
+               }  
+            }
+            return ret;
+            
+        } catch (Exception e) 
+        { 
+            e.printStackTrace();
+            return null;
+        }
     }
 
 }

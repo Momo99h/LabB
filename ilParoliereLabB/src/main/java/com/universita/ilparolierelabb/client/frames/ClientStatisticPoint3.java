@@ -14,11 +14,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Momo
  */
-public class ClientStatisticPoint2 extends JDialog {
+public class ClientStatisticPoint3 extends JDialog {
 
     
-    private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Word","Occurences"},0);
-    public ClientStatisticPoint2(java.awt.Frame parent, boolean modal) 
+    private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Room ID","Game ID","Word","Max incrementation"},0);
+    public ClientStatisticPoint3(java.awt.Frame parent, boolean modal) 
     {
         super(parent, modal);
         initComponents();
@@ -111,7 +111,7 @@ public class ClientStatisticPoint2 extends JDialog {
     
     public static void Show()
     {
-        ClientStatisticPoint2 form = new ClientStatisticPoint2(new javax.swing.JFrame(), true);
+        ClientStatisticPoint3 form = new ClientStatisticPoint3(new javax.swing.JFrame(), true);
         form.loadData();
         form.setVisible(true);
     }
@@ -132,14 +132,30 @@ public class ClientStatisticPoint2 extends JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClientStatisticPoint2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientStatisticPoint3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClientStatisticPoint2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientStatisticPoint3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClientStatisticPoint2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientStatisticPoint3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClientStatisticPoint2.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientStatisticPoint3.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -166,10 +182,10 @@ public class ClientStatisticPoint2 extends JDialog {
 
     private void loadData() 
     {
-        String[][] x = ClientManager.getStatisticPoint2();
+        String[][] x = ClientManager.getStatisticPoint3();
         for(int i = 0; i < x.length; i++)
         {
-            _tableModel.addRow(new String[]{x[i][0],x[i][1]});
+            _tableModel.addRow(new String[]{x[i][0],x[i][1],x[i][2],x[i][3]});
         }
         jTableRooms.setDefaultEditor(Object.class, null);
         jTableRooms.setColumnSelectionAllowed(false);

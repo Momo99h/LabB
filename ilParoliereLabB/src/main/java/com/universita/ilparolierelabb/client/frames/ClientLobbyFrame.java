@@ -52,6 +52,7 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuItemDisconnect = new javax.swing.JMenuItem();
+        mnItemMyStatistic = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -133,6 +134,14 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         });
         jMenu1.add(menuItemDisconnect);
 
+        mnItemMyStatistic.setText("Statistics");
+        mnItemMyStatistic.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnItemMyStatisticActionPerformed(evt);
+            }
+        });
+        jMenu1.add(mnItemMyStatistic);
+
         jMenuBar1.add(jMenu1);
 
         setJMenuBar(jMenuBar1);
@@ -185,6 +194,14 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         ClientManager.Login();
     }//GEN-LAST:event_menuItemDisconnectActionPerformed
 
+    private void mnItemMyStatisticActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnItemMyStatisticActionPerformed
+        // TODO add your handling code here:
+        
+        //Dialog show my statistic
+        ClientMyStatistics.Show();
+        
+    }//GEN-LAST:event_mnItemMyStatisticActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -233,6 +250,7 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
     private javax.swing.JLabel lblUtentiConnessi;
     private com.universita.ilparolierelabb.client.frames.LobbyUsrControl lobbyUsrControl;
     private javax.swing.JMenuItem menuItemDisconnect;
+    private javax.swing.JMenuItem mnItemMyStatistic;
     private javax.swing.JPanel panelContainer;
     // End of variables declaration//GEN-END:variables
 

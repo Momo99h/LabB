@@ -49,7 +49,6 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         label1 = new java.awt.Label();
         label2 = new java.awt.Label();
         panelContainer = new javax.swing.JPanel();
-        lobbyUsrControl = new com.universita.ilparolierelabb.client.frames.LobbyUsrControl();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         menuItemDisconnect = new javax.swing.JMenuItem();
@@ -57,6 +56,8 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         jMenu2 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
         jMenuItem3 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem4 = new javax.swing.JMenuItem();
 
         jMenuItem1.setText("jMenuItem1");
 
@@ -128,7 +129,6 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         label1.getAccessibleContext().setAccessibleName("Username");
 
         panelContainer.setLayout(new java.awt.BorderLayout());
-        panelContainer.add(lobbyUsrControl, java.awt.BorderLayout.PAGE_START);
 
         jMenu1.setText("Me");
 
@@ -154,13 +154,24 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
 
         jMenu3.setText("Statistics");
 
-        jMenuItem3.setText("1) Best players for rooms");
+        jMenuItem3.setText("1a) Best players for rooms");
         jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
         jMenu3.add(jMenuItem3);
+
+        jMenuItem2.setText("1b) Player with max. game sessions");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
+        jMenu3.add(jMenuItem2);
+
+        jMenuItem4.setText("1c) Avarage players for rooms");
+        jMenu3.add(jMenuItem4);
 
         jMenu2.add(jMenu3);
 
@@ -229,6 +240,12 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         ClientStatisticPoint1.Show();
     }//GEN-LAST:event_jMenuItem3ActionPerformed
 
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+        ClientStatisticPoint1b.Show();
+
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -274,12 +291,13 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPanel jPanel1;
     private java.awt.Label label1;
     private java.awt.Label label2;
     private javax.swing.JLabel lblUtentiConnessi;
-    private com.universita.ilparolierelabb.client.frames.LobbyUsrControl lobbyUsrControl;
     private javax.swing.JMenuItem menuItemDisconnect;
     private javax.swing.JMenuItem mnItemMyStatistic;
     private javax.swing.JPanel panelContainer;

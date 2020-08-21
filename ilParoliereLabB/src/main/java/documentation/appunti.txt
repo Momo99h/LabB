@@ -25,12 +25,12 @@ FROM (SELECT SUM(Score) AS TotalPoints, GameId , RoomId, NickName
 GROUP BY GameId, RoomId, NickName
 ORDER BY RoomId, GameId DESC
 
-b- SELECT NickName, MAX(GameSession) AS GameSession
+b- 
+SELECT NickName, MAX(GameSession) AS GameSession
 FROM (
-SELECT NickName, COUNT(RoomId) AS GameSession 
+SELECT NickName, COUNT(Distinct (RoomId,Gameid)) AS GameSession 
 FROM UsersWords
 WHERE NickName= NickName
 GROUP BY NickName) NSessions
 GROUP BY NickName
 ORDER BY GameSession DESC LIMIT 1
-

@@ -331,4 +331,30 @@ public class ServerDBInterface
         } 
     }
 
+    static String[] getStatisticPoint1b() 
+    {
+        try
+        {
+            String query0 = "SELECT NickName, MAX(GameSession) AS GameSession\n" +
+                            "FROM (\n" +
+                            "SELECT NickName, COUNT(Distinct (RoomId,Gameid)) AS GameSession \n" +
+                            "FROM UsersWords\n" +
+                            "WHERE NickName= NickName\n" +
+                            "GROUP BY NickName) NSessions\n" +
+                            "GROUP BY NickName\n" +
+                            "ORDER BY GameSession DESC LIMIT 1";
+            
+            ResultTable val = _db.executeQueryRead(query0);
+            String[] ret = new String[2];
+            ret[0] = val.get(0, 0);
+            ret[1] = val.get(0, 1);
+            return ret;
+            
+        } catch (Exception e) 
+        { 
+            e.printStackTrace();
+            return null;
+        } 
+    }
+
 }

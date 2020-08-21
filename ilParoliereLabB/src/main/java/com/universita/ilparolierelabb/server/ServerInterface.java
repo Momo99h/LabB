@@ -41,4 +41,6 @@ public interface ServerInterface extends Remote
     public int checkWord(String word, int roomId,String username) throws RemoteException;
     public String[] getMyStatistics(String user) throws RemoteException; 
     public String[][] getStatisticPoint1() throws RemoteException; 
+    public String[] getStatisticPoint1b() throws RemoteException; 
+
 }

@@ -174,5 +174,10 @@ public class ClientManager
     {
         return ClientImplementation.getStatisticPoint1();
     }
+
+    public static String[] getStatisticPoint1b() 
+    {
+        return ClientImplementation.getStatisticPoint1b();
+    }
     
 }

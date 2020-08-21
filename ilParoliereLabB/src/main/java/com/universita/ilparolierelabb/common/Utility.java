@@ -144,8 +144,8 @@ public class Utility
      */
     public static Boolean sendEmail(String to,String body)
     {
-        String username= "";
-        String password= "";
+        String username= "sspagnolo1@studenti.uninsubria.it";
+        String password= "Jyk11dhrx3!";
         String host = "smtp.office365.com";
 	String from = username;
         String subject = Settings.serverName;

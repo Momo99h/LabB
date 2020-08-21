@@ -53,7 +53,7 @@ public class ServerLogin extends javax.swing.JFrame {
         jLabel1.setText("Username:");
 
         textUsername.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        textUsername.setText("Admin");
+        textUsername.setText("admin");
         textUsername.setToolTipText("Insert your username");
 
         jLabel3.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
@@ -73,7 +73,7 @@ public class ServerLogin extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField1.setText("Admin");
+        jPasswordField1.setText("admin");
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);

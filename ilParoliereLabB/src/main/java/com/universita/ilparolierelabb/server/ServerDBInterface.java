@@ -282,6 +282,7 @@ public class ServerDBInterface
         } 
         catch(Exception e)
         {
+            e.printStackTrace();
             return "";
         }     
        
@@ -291,12 +292,13 @@ public class ServerDBInterface
         try
         {
             String query0 = "Update Settings Set DictionaryPath = '%s'";
-            String internalPath = path.replace("\\", "\\\\");
+            String internalPath = path;//.replace("\\", "\\\\");
             query0 = String.format(query0, internalPath);
             return _db.executeQuery(query0);
         } 
         catch(Exception e)
         {
+            e.printStackTrace();
             return false;
         } 
     }

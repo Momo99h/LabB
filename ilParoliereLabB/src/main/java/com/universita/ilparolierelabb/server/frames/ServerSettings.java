@@ -74,16 +74,16 @@ public class ServerSettings extends JDialog {
         });
 
         textUsername.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        textUsername.setText("iZFGEQFcMu");
+        textUsername.setText("postgres");
 
         textDatabase.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        textDatabase.setText("iZFGEQFcMu");
+        textDatabase.setText("LabB");
 
         textPassword.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        textPassword.setText("zktaLtxcpV");
+        textPassword.setText("postgres");
 
         textIP.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        textIP.setText("remotemysql.com");
+        textIP.setText("localhost");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

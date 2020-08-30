@@ -668,6 +668,7 @@ public class ServerImplementation extends Observable implements ServerInterface
         String explanation = "";
         if(score == 0 && !exist) explanation = "Parola non derivabile dalla griglia";
         if(score != 0 && !exist) explanation = "Parola non presente nel dizionario";
+        if(exist && score != 0) explanation = getDefinition(word);
         if(!exist) score = 0;
         //if(exist && score != 0) explanation = ServerManager._serverDictionary.;
         ServerDBInterface.addWordOfPlayer(username, word, score, roomId, game.getID(),(exist)? 1 : 0,explanation);
@@ -753,6 +754,7 @@ public class ServerImplementation extends Observable implements ServerInterface
                 {
                     list += definition.toString()+"\n";
                 }
+                ServerDBInterface.insertWordDefinition(word,list);
                 return list;
             }
             catch(Exception e) 
@@ -761,5 +763,11 @@ public class ServerImplementation extends Observable implements ServerInterface
             } 
         }
         return "Definition not found";         
+    }
+
+    @Override
+    public String[][] getStatisticPoint7() throws RemoteException 
+    {
+        return ServerDBInterface.getStatisticPoint7();
     }
 }

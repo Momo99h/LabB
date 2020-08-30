@@ -216,5 +216,10 @@ public class ClientManager
     {
         return ClientImplementation.getDefinition(word);
     }
+
+    public static String[][] getStatisticPoint7() 
+    {
+        return ClientImplementation.getStatisticPoint7();
+    }
     
 }

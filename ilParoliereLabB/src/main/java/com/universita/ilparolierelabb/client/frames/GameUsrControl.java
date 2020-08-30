@@ -11,9 +11,16 @@ import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.Utility;
 import static com.universita.ilparolierelabb.server.frames.ServerMainFrame.Console_Log_Model;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -28,7 +35,8 @@ public class GameUsrControl extends javax.swing.JPanel {
     private int _currentRoomID = -1;
     private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Player","Total score","Status"},0);
     public static DefaultListModel Word_List_Model = new DefaultListModel();
-    
+    private JPopupMenu popup;
+    private JMenuItem jmi1;
     /**
      * Creates new form GameUsrControl
      */
@@ -37,6 +45,7 @@ public class GameUsrControl extends javax.swing.JPanel {
         initFunctions();
         matrixUsrControl.setVisible(false);
         listParole.setModel(Word_List_Model);
+        
     }
 
     /**
@@ -99,9 +108,14 @@ public class GameUsrControl extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        panelContainer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelContainer.add(matrixUsrControl, new org.netbeans.lib.awtextra.AbsoluteConstraints(375, 15, 164, -1));
+
         Words.setText("Words founded");
+        panelContainer.add(Words, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 39, -1, -1));
 
         label1.setText("Write here:");
+        panelContainer.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(407, 212, -1, -1));
 
         txbParolaInserita.setName(""); // NOI18N
         txbParolaInserita.addActionListener(new java.awt.event.ActionListener() {
@@ -109,8 +123,11 @@ public class GameUsrControl extends javax.swing.JPanel {
                 txbParolaInseritaActionPerformed(evt);
             }
         });
+        panelContainer.add(txbParolaInserita, new org.netbeans.lib.awtextra.AbsoluteConstraints(321, 242, 248, -1));
 
         jScrollPane3.setViewportView(listParole);
+
+        panelContainer.add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 69, 217, 227));
 
         btnCheckParoa.setText("Check word!");
         btnCheckParoa.addActionListener(new java.awt.event.ActionListener() {
@@ -118,50 +135,7 @@ public class GameUsrControl extends javax.swing.JPanel {
                 btnCheckParoaActionPerformed(evt);
             }
         });
-
-        javax.swing.GroupLayout panelContainerLayout = new javax.swing.GroupLayout(panelContainer);
-        panelContainer.setLayout(panelContainerLayout);
-        panelContainerLayout.setHorizontalGroup(
-            panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelContainerLayout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Words, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelContainerLayout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelContainerLayout.createSequentialGroup()
-                        .addGap(139, 139, 139)
-                        .addComponent(matrixUsrControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelContainerLayout.createSequentialGroup()
-                        .addGap(85, 85, 85)
-                        .addComponent(txbParolaInserita, javax.swing.GroupLayout.PREFERRED_SIZE, 248, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(panelContainerLayout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(btnCheckParoa)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        panelContainerLayout.setVerticalGroup(
-            panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelContainerLayout.createSequentialGroup()
-                .addGap(15, 15, 15)
-                .addGroup(panelContainerLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(panelContainerLayout.createSequentialGroup()
-                        .addComponent(matrixUsrControl, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(27, 27, 27)
-                        .addComponent(label1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txbParolaInserita, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnCheckParoa))
-                    .addGroup(panelContainerLayout.createSequentialGroup()
-                        .addComponent(Words, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(48, Short.MAX_VALUE))
-        );
+        panelContainer.add(btnCheckParoa, new org.netbeans.lib.awtextra.AbsoluteConstraints(392, 273, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -288,6 +262,12 @@ public class GameUsrControl extends javax.swing.JPanel {
         tablePlayers.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         
         setVisibilityWordCheck(false);
+        
+        initPopUpMenu();
+        
+        
+        
+        
     }
 
     void refreshInitTimer(int timerCount) 
@@ -335,5 +315,29 @@ public class GameUsrControl extends javax.swing.JPanel {
         Word_List_Model.clear();
         _wordAlreadyUsed.clear();
         txbParolaInserita.setText("");
+    }
+
+    private void initPopUpMenu() 
+    {
+        popup = new JPopupMenu();
+        popup.add(jmi1= new JMenuItem("Get definition"));
+        listParole.addMouseListener(new MouseAdapter() 
+        {
+            public void mouseClicked(MouseEvent me) 
+            {
+                if (SwingUtilities.isRightMouseButton(me) && !listParole.isSelectionEmpty() && listParole.locationToIndex(me.getPoint()) == listParole.getSelectedIndex()) 
+                {
+                    popup.show(listParole, me.getX(), me.getY());
+                }
+            }
+        });
+        jmi1.addActionListener(new ActionListener() 
+        {
+            public void actionPerformed(ActionEvent ae) 
+            {
+                String parola = listParole.getSelectedValue().toString().split("-")[0].trim();
+                Utility.ShowInfoPopUp(Settings.clientName + " - Definition", ClientManager.getDefinition(parola.toUpperCase()));
+            }
+        });
     }
 }

@@ -25,12 +25,6 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     public static ServerInterface _server = null;
     public static ClientImplementation _client;
 
-    
-
-    
-
-    
-
     private ClientImplementation() throws RemoteException 
     {
         super();
@@ -529,6 +523,23 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
+    
+    static String getDefinition(String word) 
+    {
+        try
+        {
+            return _server.getDefinition(word);
+        }
+        catch(Exception e)
+        {
+            Utility.ShowErrorPopUp(Settings.clientName, e.getMessage());
+            System.exit(1);
+            return null;
+        }
+    }
+
+    
+
 
 
 }

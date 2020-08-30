@@ -211,5 +211,10 @@ public class ClientManager
     public static String[] getStatisticPoint1d() {
                 return ClientImplementation.getStatisticPoint1d();
     }
+
+    public static String getDefinition(String word) 
+    {
+        return ClientImplementation.getDefinition(word);
+    }
     
 }

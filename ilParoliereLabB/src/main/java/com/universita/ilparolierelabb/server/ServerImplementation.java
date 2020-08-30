@@ -8,11 +8,13 @@ import com.universita.ilparolierelabb.common.LobbyData;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.UserStatus;
+import com.universita.ilparolierelabb.dictionary.Definition;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Observable;
 
 
@@ -735,7 +737,29 @@ public class ServerImplementation extends Observable implements ServerInterface
     public String[] getStatisticPoint1d() throws RemoteException {
                 return ServerDBInterface.getStatisticPoint1d();
     }
-      
-    
-   
+
+    @Override
+    public String getDefinition(String word) throws RemoteException 
+    {
+        boolean exist = ServerManager._serverDictionary.exists(word.toLowerCase());
+        if(!exist) return "Word not present in dictonary";
+        else 
+        {
+            try
+            {
+                List<Definition> def = ServerManager._serverDictionary.getTerm(word).getDefinitions();
+                String list = "";
+                for(Definition definition : def)
+                {
+                    list += definition.toString()+"\n";
+                }
+                return list;
+            }
+            catch(Exception e) 
+            {
+                
+            } 
+        }
+        return "Definition not found";         
+    }
 }

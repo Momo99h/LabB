@@ -590,7 +590,7 @@ public class ServerDBInterface
 
     static String[] getStatisticPoint1d() 
     {
-         try
+        try
         {
             String query0 = "SELECT Nickname,Count(Duplicati) as Duplicati\n" +
                             "FROM(\n" +
@@ -627,12 +627,12 @@ public class ServerDBInterface
         } 
     }
 
-    static void insertWordDefinition(String word, String definition) 
+    static void insertWordDefinition(String word, String definition,int RoomID) 
     {
         try
         {
-            String query = "Insert into wordsdefinitions values ('%s','%s')";
-            query = String.format(query, word,definition);
+            String query = "Insert into wordsdefinitions values ('%s','%s','%s')";
+            query = String.format(query, word,definition,RoomID);
             _db.executeQuery(query);
         }
         catch(Exception e)
@@ -674,6 +674,36 @@ public class ServerDBInterface
             e.printStackTrace();
             return null;
         }
+    }
+
+    static String[] getStatisticPoint8() 
+    {
+        try
+        {
+            String query0 = "select distinct roomid from wordsdefinitions";
+            
+            ResultTable val = _db.executeQueryRead(query0);
+            if(val == null)
+            {
+                String[] ret = new String[10];
+                for(int i = 0; i < 10; i++)
+                {
+                    ret[i] = "";
+                }
+                return ret;
+            }
+            String[] ret = new String[val.getRowCount()];
+            for(int i = 0; i < val.getRowCount();i++)
+            {
+                ret[i] = val.get(i, 0);
+            }
+            return ret;
+            
+        } catch (Exception e) 
+        { 
+            e.printStackTrace();
+            return null;
+        } 
     }
 
 }

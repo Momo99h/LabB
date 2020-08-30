@@ -336,7 +336,7 @@ public class GameUsrControl extends javax.swing.JPanel {
             public void actionPerformed(ActionEvent ae) 
             {
                 String parola = listParole.getSelectedValue().toString().split("-")[0].trim();
-                Utility.ShowInfoPopUp(Settings.clientName + " - Definition", ClientManager.getDefinition(parola.toUpperCase()));
+                Utility.ShowInfoPopUp(Settings.clientName + " - Definition", ClientManager.getDefinition(parola.toUpperCase(),_currentRoomID));
             }
         });
     }

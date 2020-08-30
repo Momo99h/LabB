@@ -212,14 +212,19 @@ public class ClientManager
                 return ClientImplementation.getStatisticPoint1d();
     }
 
-    public static String getDefinition(String word) 
+    public static String getDefinition(String word,int RoomID) 
     {
-        return ClientImplementation.getDefinition(word);
+        return ClientImplementation.getDefinition(word,RoomID);
     }
 
     public static String[][] getStatisticPoint7() 
     {
         return ClientImplementation.getStatisticPoint7();
+    }
+
+    public static String[] getStatisticPoint8() 
+    {
+        return ClientImplementation.getStatisticPoint8();
     }
     
 }

@@ -14,11 +14,11 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author Momo
  */
-public class ClientStatisticPoint7 extends JDialog {
+public class ClientStatisticPoint8 extends JDialog {
 
     
-    private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Word","Occurences"},0);
-    public ClientStatisticPoint7(java.awt.Frame parent, boolean modal) 
+    private DefaultTableModel _tableModel = new DefaultTableModel(new String[] {"Room ID"},0);
+    public ClientStatisticPoint8(java.awt.Frame parent, boolean modal) 
     {
         super(parent, modal);
         initComponents();
@@ -43,7 +43,7 @@ public class ClientStatisticPoint7 extends JDialog {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 3, 18)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("7) Words definition request count");
+        jLabel2.setText("8) Rooms id with word definition request");
 
         jTableRooms.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jTableRooms.setModel(new javax.swing.table.DefaultTableModel(
@@ -88,8 +88,8 @@ public class ClientStatisticPoint7 extends JDialog {
                 .addComponent(panelTableContainer, javax.swing.GroupLayout.DEFAULT_SIZE, 664, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
-                .addGap(177, 177, 177)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 303, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(147, 147, 147)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 371, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -111,7 +111,7 @@ public class ClientStatisticPoint7 extends JDialog {
     
     public static void Show()
     {
-        ClientStatisticPoint7 form = new ClientStatisticPoint7(new javax.swing.JFrame(), true);
+        ClientStatisticPoint8 form = new ClientStatisticPoint8(new javax.swing.JFrame(), true);
         form.loadData();
         form.setVisible(true);
     }
@@ -132,14 +132,46 @@ public class ClientStatisticPoint7 extends JDialog {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ClientStatisticPoint7.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientStatisticPoint8.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ClientStatisticPoint7.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientStatisticPoint8.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ClientStatisticPoint7.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientStatisticPoint8.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ClientStatisticPoint7.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ClientStatisticPoint8.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -182,10 +214,10 @@ public class ClientStatisticPoint7 extends JDialog {
 
     private void loadData() 
     {
-        String[][] x = ClientManager.getStatisticPoint7();
+        String[] x = ClientManager.getStatisticPoint8();
         for(int i = 0; i < x.length; i++)
         {
-            _tableModel.addRow(new String[]{x[i][0],x[i][1]});
+            _tableModel.addRow(new String[]{x[i]});
         }
         jTableRooms.setDefaultEditor(Object.class, null);
         jTableRooms.setColumnSelectionAllowed(false);

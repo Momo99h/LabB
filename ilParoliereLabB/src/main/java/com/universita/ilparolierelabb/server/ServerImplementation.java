@@ -668,7 +668,7 @@ public class ServerImplementation extends Observable implements ServerInterface
         String explanation = "";
         if(score == 0 && !exist) explanation = "Parola non derivabile dalla griglia";
         if(score != 0 && !exist) explanation = "Parola non presente nel dizionario";
-        if(exist && score != 0) explanation = getDefinition(word);
+        if(exist && score != 0) explanation = getJustDefinition(word);
         if(!exist) score = 0;
         //if(exist && score != 0) explanation = ServerManager._serverDictionary.;
         ServerDBInterface.addWordOfPlayer(username, word, score, roomId, game.getID(),(exist)? 1 : 0,explanation);
@@ -738,9 +738,25 @@ public class ServerImplementation extends Observable implements ServerInterface
     public String[] getStatisticPoint1d() throws RemoteException {
                 return ServerDBInterface.getStatisticPoint1d();
     }
-
+    private String getJustDefinition(String word)
+    {
+        try
+            {
+                List<Definition> def = ServerManager._serverDictionary.getTerm(word.toLowerCase()).getDefinitions();
+                String list = "";
+                for(Definition definition : def)
+                {
+                    list += definition.toString()+"\n";
+                }
+                return list;
+            }
+            catch(Exception e) 
+            {
+                return "Definition not found";     
+            } 
+    }
     @Override
-    public String getDefinition(String word) throws RemoteException 
+    public String getDefinition(String word,int RoomID) throws RemoteException 
     {
         boolean exist = ServerManager._serverDictionary.exists(word.toLowerCase());
         if(!exist) return "Word not present in dictonary";
@@ -754,7 +770,7 @@ public class ServerImplementation extends Observable implements ServerInterface
                 {
                     list += definition.toString()+"\n";
                 }
-                ServerDBInterface.insertWordDefinition(word,list);
+                ServerDBInterface.insertWordDefinition(word,list,RoomID);
                 return list;
             }
             catch(Exception e) 
@@ -769,5 +785,11 @@ public class ServerImplementation extends Observable implements ServerInterface
     public String[][] getStatisticPoint7() throws RemoteException 
     {
         return ServerDBInterface.getStatisticPoint7();
+    }
+
+    @Override
+    public String[] getStatisticPoint8() throws RemoteException 
+    {
+        return ServerDBInterface.getStatisticPoint8();
     }
 }

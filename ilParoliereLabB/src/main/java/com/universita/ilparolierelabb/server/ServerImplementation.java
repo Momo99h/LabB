@@ -747,7 +747,7 @@ public class ServerImplementation extends Observable implements ServerInterface
         {
             try
             {
-                List<Definition> def = ServerManager._serverDictionary.getTerm(word).getDefinitions();
+                List<Definition> def = ServerManager._serverDictionary.getTerm(word.toLowerCase()).getDefinitions();
                 String list = "";
                 for(Definition definition : def)
                 {

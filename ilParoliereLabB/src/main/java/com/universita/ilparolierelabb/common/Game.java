@@ -21,7 +21,7 @@ public class Game implements Serializable
     }
     private int _roomid;
     private int _gameid = 1;
-    private int _initTimer = 5;
+    private int _initTimer = 30;
     private int _gameTimer = 180;
     private ArrayList<User> _Initialusers = new ArrayList<>();
     private ArrayList<User> _Endusers = new ArrayList<>();

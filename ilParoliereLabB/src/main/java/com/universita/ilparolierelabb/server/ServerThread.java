@@ -128,7 +128,9 @@ public class ServerThread extends Thread implements ActionListener
                         gameArray[i].setPhase(Game.Phase.CreateMatrix);
                     break;
                 case CreateMatrix:
-                    gameArray[i].setMatrix(MatrixFactory.getRandomMatrix());
+                    String[][] matrix = MatrixFactory.getRandomMatrix();
+                    ServerManager.updateLetterOccurencies(matrix);
+                    gameArray[i].setMatrix(matrix);
                     ServerImplementation.notifyGameMatrix(gameArray[i].getRoomID(),gameArray[i].getMatrix());
                     ServerImplementation.notifyWordGuessingState(gameArray[i].getRoomID(), true);
                     gameArray[i].setPhase(Game.Phase.GameCountDown);

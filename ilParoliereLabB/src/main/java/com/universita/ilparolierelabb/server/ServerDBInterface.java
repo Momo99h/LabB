@@ -706,4 +706,58 @@ public class ServerDBInterface
         } 
     }
 
+    static void updateLetterOccurencies(String[][] matrix) 
+    {
+       
+       try
+       {
+           for(int i = 0; i < matrix.length; i++)
+           {
+                for(int j = 0; j < matrix[0].length;j++)
+                {
+                    String query = "Update lettersoccurencies set occurrency = occurrency + 1 where letter = '%s'";
+                    query = String.format(query, matrix[i][j]);
+                    _db.executeQuery(query);
+                }
+           }
+       }
+       catch(Exception e)
+       {
+           
+       }
+       
+    }
+
+    static String[][] getStatisticPoint6() 
+    {
+        try
+        {
+            String query0 = "SELECT * FROM public.lettersoccurencies order by letter asc";
+            ResultTable val = _db.executeQueryRead(query0);
+            if(val == null)
+            {
+                String[][] ret = new String[1][10];
+                for(int i = 0; i < 10; i++)
+                {
+                    ret[0][i] = "";
+                }
+                return ret;
+            }
+            String[][] ret = new String[val.getRowCount()][val.getColumCount()];
+            for(int i = 0; i < val.getRowCount();i++)
+            {
+               for(int z = 0; z < val.getColumCount();z++)
+               {
+                    ret[i][z] = val.get(i, z);
+               }  
+            }
+            return ret;
+            
+        } catch (Exception e) 
+        { 
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 }

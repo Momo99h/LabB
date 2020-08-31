@@ -52,5 +52,6 @@ public interface ServerInterface extends Remote
     public String getDefinition(String word,int RoomID) throws RemoteException; 
     public String[][] getStatisticPoint7() throws RemoteException;
     public String[] getStatisticPoint8() throws RemoteException; 
+    public String[][] getStatisticPoint6() throws RemoteException; 
 
 }

@@ -120,5 +120,10 @@ public class ServerManager
         s = String.format(s, roomId,gId);
         addLogData(s);
     }
+
+    static void updateLetterOccurencies(String[][] matrix) 
+    {
+        ServerDBInterface.updateLetterOccurencies(matrix);
+    }
     
 }

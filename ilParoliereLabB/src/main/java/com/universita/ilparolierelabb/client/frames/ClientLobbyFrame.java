@@ -241,7 +241,12 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         });
         jMenu3.add(jMenuItem10);
 
-        jMenuItem12.setText("jMenuItem12");
+        jMenuItem12.setText("6) Letters occurency");
+        jMenuItem12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem12ActionPerformed(evt);
+            }
+        });
         jMenu3.add(jMenuItem12);
 
         jMenuItem13.setText("7) Words definition request count");
@@ -381,6 +386,10 @@ public class ClientLobbyFrame extends javax.swing.JFrame {
         
         ClientStatisticPoint8.Show();
     }//GEN-LAST:event_jMenuItem14ActionPerformed
+
+    private void jMenuItem12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem12ActionPerformed
+        ClientStatisticPoint6.Show();
+    }//GEN-LAST:event_jMenuItem12ActionPerformed
 
     /**
      * @param args the command line arguments

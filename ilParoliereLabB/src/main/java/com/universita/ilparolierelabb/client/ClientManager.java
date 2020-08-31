@@ -226,5 +226,10 @@ public class ClientManager
     {
         return ClientImplementation.getStatisticPoint8();
     }
+
+    public static String[][] getStatisticPoint6() 
+    {
+        return ClientImplementation.getStatisticPoint6();
+    }
     
 }

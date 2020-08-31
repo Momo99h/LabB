@@ -164,6 +164,7 @@ public class ServerLogin extends javax.swing.JFrame {
         
         psw = Utility.StringMD5Hash(psw);
         
+       
         if(!ServerDBInterface.LoginAdmin(usr, psw))
         {
             Utility.ShowErrorPopUp(Settings.serverName, "Login failed");
@@ -171,7 +172,7 @@ public class ServerLogin extends javax.swing.JFrame {
         }
         
         this.dispose();
-        
+        ServerManager.adminUsername = usr;
         ServerManager.Run();
         
         

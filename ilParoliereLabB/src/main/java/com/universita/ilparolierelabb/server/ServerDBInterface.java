@@ -760,4 +760,11 @@ public class ServerDBInterface
         }
     }
 
+    public static boolean changeAdminPassword(String adminUsername, String psw) 
+    {
+        String query = "Update admins set password = '%s' where username = '%s'";
+        query = String.format(query,psw, adminUsername);
+        return _db.executeQuery(query);
+    }
+
 }

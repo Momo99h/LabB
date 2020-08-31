@@ -30,6 +30,7 @@ public class ServerManager
     public static LobbyData lobby = new LobbyData();
     public static Dictionary _serverDictionary;
     public static String _DictionaryPath = "C:\\Users\\Momo\\Desktop\\dict-it.oxt";
+    public static String adminUsername;
     /***
      * Launch Avvia il server chiedendo i parametri di conessione al Database usato.
      */

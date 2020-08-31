@@ -7,6 +7,7 @@ import com.universita.ilparolierelabb.common.Room;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.Utility;
+import com.universita.ilparolierelabb.server.frames.ServerMainFrame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Timer;
@@ -97,8 +98,11 @@ public class ServerThread extends Thread implements ActionListener
         if(ServerManager.rooms.isDataChanged())
         {
             //;
-            if(ServerImplementation.notifyClientsLobbyData(ServerManager.rooms.createLobbyData())) //&& ServerImplementation.notifyGameRoomData())
+            if(ServerImplementation.notifyClientsLobbyData(ServerManager.rooms.createLobbyData()))
+            {
                 ServerManager.rooms.confirmDataChanged();
+                ServerMainFrame.refreshRooms();
+            }
         }
         if(ServerManager.games.getDataChanged())
         {

@@ -153,11 +153,15 @@ public class ServerSettings extends JDialog {
 
     private void buttonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonNextActionPerformed
         // TODO add your handling code here:
-        
-        Settings.connectionParam.setIP(textIP.getText());
-        Settings.connectionParam.setDBName(textDatabase.getText());
-        Settings.connectionParam.setUsername(textUsername.getText());
-        Settings.connectionParam.setPassword(textPassword.getText());
+        String ip = textIP.getText();
+        String usr = textUsername.getText();
+        String db = textDatabase.getText();
+        String psw = textPassword.getText();
+        Settings.connectionParam = new SQLConnectionParameters(); 
+        Settings.connectionParam.setIP(ip);
+        Settings.connectionParam.setDBName(db);
+        Settings.connectionParam.setUsername(usr);
+        Settings.connectionParam.setPassword(psw);
         
         if(!checkConnection(Settings.connectionParam))
         {

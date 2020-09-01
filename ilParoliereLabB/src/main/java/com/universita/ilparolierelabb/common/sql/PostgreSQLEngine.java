@@ -39,6 +39,7 @@ public class PostgreSQLEngine extends sqlEngine
     @Override
     public void setConnectionString(SQLConnectionParameters param) 
     {
+        _DbConnectionString = "jdbc:postgresql://%s/%s?user=%s&password=%s";
         _DbConnectionString = String.format(_DbConnectionString,
                 param.getIP(),param.getDBName(),param.getUsername(),param.getPassword());
     }

@@ -25,10 +25,19 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     public static ServerInterface _server = null;
     public static ClientImplementation _client;
 
+    /**
+     * ClientImplementation Costruttore
+     * @throws RemoteException 
+     */
     private ClientImplementation() throws RemoteException 
     {
         super();
     }
+    /**
+     * initConnection Inizializza connessione verso il server sulla porta 9999
+     * @param ip Indirizzo ip di connessione al server
+     * @return 
+     */
     private static Boolean initConnection(String ip)
     {
         try
@@ -45,6 +54,9 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return false;
         }
     }
+    /***
+     * ClientOnline Comunica al server che il client è andato online
+     */
     public static void ClientOnline()
     {
         try
@@ -57,6 +69,9 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             System.exit(1);
         }
     }
+    /**
+     * Launch Avvia il modulo client
+     */
     public static void Launch()
     {
         if(!initConnection("localhost"))
@@ -69,6 +84,12 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             }
         }
     }
+    /**
+     * getLogin Chiede al server la verifica di login di un utente
+     * @param usr Nome utente
+     * @param psw Password utente
+     * @return true se l'operazione è andata a buon fine
+     */
     public static Boolean getLogin(String usr,String psw)
     {
        Boolean success = false;
@@ -82,6 +103,11 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
        }
        return success;
     }
+    /**
+     * clientRegister Comunica al server i dati di registrazione di un utente
+     * @param d Dati di registrazione
+     * @return true se l'operazione è andata a buon fine
+     */
     public static Boolean clientRegister(RegisterData d)
     {
        try
@@ -95,6 +121,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
            return false;
        }
     }
+    /**
+     * DisconnectFromServer Comunica al server l'avvenuta disconnessione di un utente
+     * @param usr 
+     */
     public static void DisconnectFromServer(String usr)
     {
         try
@@ -108,6 +138,11 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             System.exit(1);
         }
     }
+    /**
+     * registerInWaiting Chiede al server di verificare se l'utente è in attesa di conferma per codice di verifica
+     * @param usr Nome utente
+     * @return true se l'utente deve confermare il codice inviato per mail
+     */
     public static Boolean registerInWaiting(String usr)
     {
         try
@@ -121,6 +156,11 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return false;
         }
     }
+    /**
+     * registerAccount Comunica al server la registrazione di un utente tramite il codice
+     * @param code Codice di registrazione
+     * @return true se la registrazione è avvenuta con successo
+     */
     public static Boolean registerAccount(String code)
     {
         try
@@ -134,6 +174,11 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return false;
         }
     }
+    /***
+     * clientIsLogged Chiede al server se l'utente ha già effettuato l'accesso
+     * @param usr Nome utente
+     * @return true se l'utente ha gia effettuato l'accesso
+     */
     public static boolean clientIsLogged(String usr) 
     {
         try
@@ -147,6 +192,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return false;
         }
     }
+    /**
+     * getLobbyRooms Chiede al server il pacchetto dati della lobby
+     * @return Il pacchetto dati della lobby
+     */
     public static LobbyData getLobbyRooms() 
     {
         try
@@ -160,6 +209,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
+    /**
+     * getLastRoomID Chiede al server l'ultimo ID disponibile delle stanze presenti
+     * @return L'id disponibile
+     */
     public static int getLastRoomID() 
     {
         try
@@ -173,6 +226,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return -1;
         }
     }
+    /**
+     * addRoom Chiede al server di aggiungere una stanza
+     * @param r Oggetto che rappresenza una stanza
+     */
     public static void addRoom(Room r) 
     {
         try
@@ -186,6 +243,12 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
+    /**
+     * enterRoom Chiede al server di fare entrare un utente all'interno di una stanza
+     * @param roomID Identificativo della stanza
+     * @param usr Oggetto che rappresenta l'utente
+     * @return true se l'operazione è andata a buon fine
+     */
     public static boolean enterRoom(int roomID, User usr)
     {
         try
@@ -199,6 +262,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return false; 
         }
     }
+    /**
+     * leaveRoom Chiede al server di togliere un utente dalle stanze
+     * @param usr Oggetto che rapprenta l'utente
+     */
     public static void leaveRoom(User usr) 
     {
        try
@@ -213,6 +280,11 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
+    /**
+     * changePlayerStatus Chiede al server di cambiare lo stato di un utente
+     * @param usr Oggetto che rappresenta l'utente
+     * @param status Enumerazione che rappresenza lo stato
+     */
     public static void changePlayerStatus(User usr,UserStatus status)
     {
        try
@@ -227,6 +299,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
+    /**
+     * getOnlineCount Chiede al server il numero di client online
+     * @return Il numero di client online
+     */
     public static int getOnlineCount()
     {
        try
@@ -241,7 +317,11 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return 0;
         }
     }
-    // @author AndreaGirola
+    /**
+     * emailAlreadyTaken Chiede al server di verificare se una mail è gia presente nel database
+     * @param email Email da verificare
+     * @return true se l'email è gia presente
+     */
     public static boolean emailAlreadyTaken(String email){
         try
         {
@@ -256,6 +336,11 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
+    /**
+     * getRoomById Chiede al server di ottenere l'oggetto che rappresenza una stanza da un identificativo
+     * @param roomId Identificativo della stanza
+     * @return Oggetto che rappresenta la stanza
+     */
     public static Room getRoomById(int roomId) 
     {
         try
@@ -272,7 +357,11 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         }
        
     }
-    
+    /**
+     * recoverPassword Chiede al server di reimpostare la password 
+     * @param email Email al quale impostare e reinviare la nuova password
+     * @return true se l'operazione è andata a buon fine
+     */
     public static boolean recoverPassword(String email) 
     {
         try
@@ -288,8 +377,11 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
-    
-    // @author AndreaGirola
+    /***
+     * userAlreadyTaken Chiede al server di verificare se una nickname è gia presente nel database
+     * @param user Nickname da controllare
+     * @return true se già presente
+     */
     public static boolean userAlreadyTaken(String user){
         try
         {
@@ -304,7 +396,13 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
-    
+    /**
+     * checkWord Chiede al server di verificare una parola inserita all'interno del gioco
+     * @param word Parola da verificare
+     * @param roomId Identificativo della stanza di gioco (usato per estrapolare le fasi di gioco e la matrice)
+     * @param username Username dell'utente che inserisce la parola (Usato per assegnare i punteggi)
+     * @return Punteggio derivante dal controllo
+     */
     public static int checkWord(String word, int roomId,String username)
     {
         try
@@ -319,7 +417,12 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return -1; 
         }
     }
-
+    /**
+     * notifyClientsCount Eseguito dal server per notificare il numero di client connessi
+     * @param observable Interfaccia del client
+     * @param count Numero di clienti connessi
+     * @throws RemoteException 
+     */
     @Override
     public void notifyClientsCount(Object observable, int count) throws RemoteException 
     {
@@ -332,13 +435,24 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             
         }
     }
+    /**
+     * notifyClientsLobbyData Usato dal server per notificare il pacchetto dati della lobby
+     * @param observable Interfaccia del client
+     * @param data Pacchetto dati lobby
+     * @throws RemoteException 
+     */
     @Override
     public void notifyClientsLobbyData(Object observable, LobbyData data) throws RemoteException 
     {
         ClientManager.lobby = data;
         ClientManager.refreshLobbyRooms();
     }
-
+    /**
+     * notifyGameInitTimer Usato dal server per notificare il conteggio del timer iniziale di una fase di gioco
+     * @param observable Interfaccia del client
+     * @param timerCount Conteggio del timer
+     * @throws RemoteException 
+     */
     @Override
     public void notifyGameInitTimer(Object observable, int timerCount) throws RemoteException 
     {

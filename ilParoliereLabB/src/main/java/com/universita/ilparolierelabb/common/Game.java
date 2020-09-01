@@ -88,6 +88,22 @@ public class Game implements Serializable
         }
         return max;
     }
+    public String getBestGameScoreUsername()
+    {
+        int max = 0;
+        User usr;
+        User usrBest = null;
+        for(int i = 0; i < this._Initialusers.size();i++)
+        {
+            usr = this._Initialusers.get(i);
+            if(usr.getGamePoints() > max)
+            {
+                max = usr.getGamePoints();
+                usrBest = usr;
+            }
+        }
+        return usrBest.getUsername();
+    }
      public void resetPlayersReady() 
     {
         for(int i = 0; i < this._Initialusers.size();i++)

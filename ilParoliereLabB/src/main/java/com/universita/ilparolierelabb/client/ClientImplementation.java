@@ -15,7 +15,7 @@ import com.universita.ilparolierelabb.common.User;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
- *
+ * Implementazione dell'interfaccia RMI tra client->server e server->client
  * @author Momo
  * 
  */

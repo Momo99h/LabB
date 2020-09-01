@@ -7,13 +7,10 @@
 package com.universita.ilparolierelabb.client.frames;
 
 import com.universita.ilparolierelabb.client.ClientManager;
-import com.universita.ilparolierelabb.client.ClientState;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.UserStatus;
 import com.universita.ilparolierelabb.common.Utility;
 import com.universita.ilparolierelabb.common.Room;
-import java.awt.BorderLayout;
-import java.awt.Frame;
 
 /**
  *

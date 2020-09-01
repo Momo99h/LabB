@@ -6,13 +6,25 @@
 package com.universita.ilparolierelabb.client;
 
 /**
- *
+ * Enumerazione che rappresenta il risultato di una registrazione
  * @author Momo
  */
 public enum RegistrationResult 
 {
     Ok,
+    /**
+     * Registazione riuscita
+     */
     Failed,
+    /**
+     * Registazione fallita
+     */
     NotConfirmed,
+    /**
+     * Registazione in attesa
+     */
     Aborted
+    /**
+     * Registrazione abortita
+     */
 }

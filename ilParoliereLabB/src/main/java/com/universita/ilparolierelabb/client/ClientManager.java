@@ -9,7 +9,6 @@ import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.client.frames.*;
 import com.universita.ilparolierelabb.common.LobbyData;
 import com.universita.ilparolierelabb.common.UserStatus;
-import com.universita.ilparolierelabb.common.Rooms;
 import com.universita.ilparolierelabb.common.Room;
 
 /**
@@ -113,13 +112,11 @@ public class ClientManager
 
     public static void refreshGameInitTimer(int timerCount) 
     {
-        //clientFrame.refreshGameInitTimer(roomId,timerCount);
         gameFrame.refreshGameInitTimer(timerCount);
     }
 
     public static void setGameMatrix(String[][] matrix) 
     {
-         //clientFrame.setGameMatrix(roomId,matrix);
         gameFrame.setGameMatrix(matrix);
     }
     public static Room getRoomById(int roomId)

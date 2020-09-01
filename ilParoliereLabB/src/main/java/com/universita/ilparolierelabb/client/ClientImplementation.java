@@ -458,55 +458,96 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     {
         ClientManager.refreshGameInitTimer(timerCount);
     }
-
+    /**
+     * notifyGameMatrix Usato dal server per notificare la matrice di gioco
+     * @param observable Interfaccia del client
+     * @param matrix Matrice di gioco
+     * @throws RemoteException 
+     */
     @Override
     public void notifyGameMatrix(Object observable, String[][] matrix) throws RemoteException 
     {
         ClientManager.setGameMatrix(matrix);
     }
-
+    /**
+     * notifyGameRoomData Usato dal server per notificare i dati di una stanza
+     * @param observable Interfaccia del client
+     * @param room Oggetto che rappresenta la stanza
+     * @throws RemoteException 
+     */
     @Override
     public void notifyGameRoomData(Object observable, Room room) throws RemoteException 
     {
         ClientManager.refreshGameRoom();
     }
-
+    /**
+     * notifyGameTimer Usato dal server per notificare il valore del timer di gioco
+     * @param observable Interfaccia cliente
+     * @param timerCount Valore del timer
+     * @throws RemoteException 
+     */
     @Override
     public void notifyGameTimer(Object observable, int timerCount) throws RemoteException 
     {
        ClientManager.refreshGameTimer(timerCount);
     }
-
+    /**
+     * notifyClientsGameStarted Usato dal server per notificare che la fase di gioco è iniziata
+     * @param observable Interfaccia del client
+     * @throws RemoteException 
+     */
     @Override
     public void notifyClientsGameStarted(Object observable) throws RemoteException 
     {
         ClientManager.startGame();
     }
-
+    /**
+     * notifyWordGuessingState Usato dal server per notificare la visibilità dei controlli per l'analisi delle parole
+     * @param observable Interfaccia del client
+     * @param state Stato di visibilità dei controlli
+     * @throws RemoteException 
+     */
     @Override
     public void notifyWordGuessingState(Object observable, boolean state) throws RemoteException 
     {
         ClientManager.WordGuessingState(state);
     }
-
+    /**
+     * notifyRefreshTable Usato dal server per notificare l'aggiornamento dei dati di una stanza
+     * @param observable Interfaccia del client
+     * @throws RemoteException 
+     */
     @Override
     public void notifyRefreshTable(Object observable) throws RemoteException 
     {
         ClientManager.RefreshGameTable();
     }
-
+    /**
+     * notifyHeaderGameMessage Usato dal server per notificare il messaggio della stanza
+     * @param observable Interfaccia client
+     * @param Message Messaggio da visualizzare
+     * @throws RemoteException 
+     */
     @Override
     public void notifyHeaderGameMessage(Object observable, String Message) throws RemoteException 
     {
          ClientManager.setGameHeaderMessage(Message);
     }
-
+    /**
+     * notifyClientsGameFinished Usato dal server per notificare la fine di una fase di gioco
+     * @param observable Interfaccia del client
+     * @throws RemoteException 
+     */
     @Override
     public void notifyClientsGameFinished(Object observable) throws RemoteException 
     {
         ClientManager.stopGame();
     }
-    
+    /**
+     * getMyStatistics Chiede al server le statistiche di un giocatore
+     * @param user Username del giocatore
+     * @return Un array di stringhe che contiene le statistiche
+     */
     public static String[] getMyStatistics(String user) {
         try
         {
@@ -520,6 +561,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
         }
        
     }
+    /**
+     * getStatisticPoint1 Chiede al server l'analisi del punto 1 richiesta nella descrizione del progetto
+     * @return Matrice di dati
+     */
     public static String[][] getStatisticPoint1() 
     {
          try
@@ -533,6 +578,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
+    /**
+     * getStatisticPoint1b Chiede al server l'analisi del punto 1b richiesta nella descrizione del progetto
+     * @return Array di dati
+     */
     static String[] getStatisticPoint1b() 
     {
         try
@@ -546,7 +595,11 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
-     static String[][] getStatisticPoint1c() 
+    /**
+     * getStatisticPoint1c Chiede al server l'analisi del punto 1c richiesta nella descrizione del progetto
+     * @return Matrice di dati
+     */
+    static String[][] getStatisticPoint1c() 
      {
         try
         {
@@ -559,8 +612,12 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
-     static String[] getStatisticPoint1e() 
-     {
+    /**
+     * getStatisticPoint1e Chiede al server l'analisi del punto 1e richiesta nella descrizione del progetto
+     * @return Array di dati
+     */
+    static String[] getStatisticPoint1e() 
+    {
         try
         {
             return _server.getStatisticPoint1e();
@@ -572,7 +629,12 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
-    static String[][] getStatisticPoint2() {
+    /**
+     * getStatisticPoint2 Chiede al server l'analisi del punto 2 richiesta nella descrizione del progetto
+     * @return Matrice di dati
+     */
+    static String[][] getStatisticPoint2() 
+    {
          try
         {
             return _server.getStatisticPoint2();
@@ -584,6 +646,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
+    /**
+     * getStatisticPoint3 Chiede al server l'analisi del punto 3 richiesta nella descrizione del progetto
+     * @return Matrice di dati
+     */
     static String[][] getStatisticPoint3() 
     {
          try
@@ -597,6 +663,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
+    /**
+     * getStatisticPoint4 Chiede al server l'analisi del punto 4 richiesta nella descrizione del progetto
+     * @return Matrice di dati
+     */
     static String[][] getStatisticPoint4() 
     {
         try
@@ -610,6 +680,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
+    /**
+     * getStatisticPoint5 Chiede al server l'analisi del punto 5 richiesta nella descrizione del progetto
+     * @return Matrice di dati
+     */
     static String[][] getStatisticPoint5() 
     {
         try
@@ -623,6 +697,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
+    /**
+     * getStatisticPoint1d Chiede al server l'analisi del punto 1d richiesta nella descrizione del progetto
+     * @return Array di dati
+     */
     static String[] getStatisticPoint1d() 
     {
        
@@ -637,7 +715,12 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
-    
+    /**
+     * getDefinition Chiede al server di ottenere la definizione di una parola dal dizionario
+     * @param word Parola da analizzare
+     * @param RoomID Identificativo della stanza
+     * @return 
+     */
     static String getDefinition(String word,int RoomID) 
     {
         try
@@ -651,6 +734,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
+    /**
+     * getStatisticPoint7 Chiede al server l'analisi del punto 7 richiesta nella descrizione del progetto
+     * @return Matrice di dati
+     */
     static String[][] getStatisticPoint7() 
     {
         try
@@ -664,6 +751,10 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
+    /**
+     * getStatisticPoint8 Chiede al server l'analisi del punto 8 richiesta nella descrizione del progetto
+     * @return Array di dati
+     */
     static String[] getStatisticPoint8() 
     {
         try
@@ -677,8 +768,12 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
     }
-   static String[][] getStatisticPoint6() 
-   {
+    /**
+     * getStatisticPoint6 Chiede al server l'analisi del punto 6 richiesta nella descrizione del progetto
+     * @return Array di dati
+     */
+    static String[][] getStatisticPoint6() 
+    {
         try
         {
             return _server.getStatisticPoint6();
@@ -689,8 +784,12 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             System.exit(1);
             return null;
         }
-   }
-
+    }
+    /**
+     * notifyDisableRoom Utilizzato dal server per notificare di disabilitare una stanza di gioco
+     * @param observable Interfaccia client
+     * @throws RemoteException 
+     */
     @Override
     public void notifyDisableRoom(Object observable) throws RemoteException 
     {

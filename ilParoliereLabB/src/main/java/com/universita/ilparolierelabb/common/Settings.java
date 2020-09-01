@@ -15,7 +15,5 @@ public class Settings
     public static SQLConnectionParameters connectionParam = new SQLConnectionParameters();
     public static String serverName = "IlParoliereLabB - server";
     public static String clientName = "IlParoliereLabB - client";
-    public static String serverIcon_path = "/com/universita/ilparolierelabb/server/images/server_pic_icon.png";
-    public static String clientIcon_path = "/com/universita/ilparolierelabb/client/images/client_pic_icon.png";
     public static int emailCodeTimeOut = 10*60;
 }

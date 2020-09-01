@@ -25,9 +25,6 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
     public static ServerInterface _server = null;
     public static ClientImplementation _client;
 
- 
-
-
     private ClientImplementation() throws RemoteException 
     {
         super();

@@ -231,5 +231,10 @@ public class ClientManager
     {
         return ClientImplementation.getStatisticPoint6();
     }
+
+    public static void notifyDisableRoom() 
+    {
+       gameFrame.disableReady();
+    }
     
 }

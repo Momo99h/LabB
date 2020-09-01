@@ -156,12 +156,16 @@ public class ServerThread extends Thread implements ActionListener
                     break;
                 case Conclude:
                     //Invio a db
-                    if(gameArray[i].getBestGameScore() >= 1)
+                    if(gameArray[i].getBestGameScore() >= 50)
                     {
                         String msg = "Game finished! %s wins!";
                         String player = gameArray[i].getBestGameScoreUsername();
                         msg = String.format(msg, player);
                         ServerImplementation.notifyHeaderGameMessage(gameArray[i].getRoomID(),msg);
+                        ServerImplementation.notifyDisableRoom(gameArray[i].getRoomID());
+                        String msg2 = "Room %s finished in game %s -> Winner user: %s";
+                        msg2 = String.format(msg2, gameArray[i].getRoomID(),gameArray[i].getID(),player);
+                        ServerManager.addLogData(msg2);
                     }
                     else
                     {

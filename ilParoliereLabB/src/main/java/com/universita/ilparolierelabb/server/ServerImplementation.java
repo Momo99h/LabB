@@ -36,6 +36,8 @@ public class ServerImplementation extends Observable implements ServerInterface
 
     
 
+    
+
     private ServerImplementation() throws RemoteException 
     {
         super();
@@ -644,7 +646,25 @@ public class ServerImplementation extends Observable implements ServerInterface
         boolean b2 = ServerDBInterface.changePassword(email, passCrypto);
         return b && b2;
     }
-
+    public static void notifyDisableRoom(int roomID) 
+    {
+        ClientRoom g;
+        for(int i=0; i<ServerImplementation.GameClients.size();i++)
+        {
+            g = ServerImplementation.GameClients.get(i);
+            if(g.getRoomId() == roomID) 
+            {
+                try 
+                {
+                    g.getClient().getOb().notifyDisableRoom(rmiService);
+                } 
+                catch (RemoteException ex) 
+                {
+                    ex.printStackTrace();
+                }
+            }
+        }
+    }
     @Override
     public int checkWord(String word, int roomId,String username) throws RemoteException 
     {

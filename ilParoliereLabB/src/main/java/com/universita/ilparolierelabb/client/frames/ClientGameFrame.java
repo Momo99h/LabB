@@ -241,4 +241,9 @@ public class ClientGameFrame extends javax.swing.JFrame {
         gameUsrControl.resetWordSearch();
     }
 
+    public void disableReady() 
+    {
+        this.buttonReady.setEnabled(false);
+    }
+
 }

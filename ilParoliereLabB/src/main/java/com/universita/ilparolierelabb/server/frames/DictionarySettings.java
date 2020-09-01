@@ -3,6 +3,7 @@ package com.universita.ilparolierelabb.server.frames;
 
 import com.universita.ilparolierelabb.common.SettingsResult;
 import com.universita.ilparolierelabb.common.sql.*;
+import com.universita.ilparolierelabb.dictionary.DictionaryLoader;
 import com.universita.ilparolierelabb.server.ServerDBInterface;
 import com.universita.ilparolierelabb.server.ServerManager;
 import static com.universita.ilparolierelabb.server.ServerManager._DictionaryPath;
@@ -102,6 +103,7 @@ public class DictionarySettings extends JDialog {
             File file = fc.getSelectedFile();
             _DictionaryPath = file.getAbsolutePath();
             ServerDBInterface.setDictionaryPath(_DictionaryPath);
+            ServerManager._serverDictionary = DictionaryLoader.loadServerDictionary(_DictionaryPath);
             initFunctions();
         }
     }//GEN-LAST:event_btnSelectDictionaryActionPerformed

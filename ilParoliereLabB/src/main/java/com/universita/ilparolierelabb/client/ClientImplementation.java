@@ -576,6 +576,12 @@ public class ClientImplementation extends UnicastRemoteObject implements RemoteO
             return null;
         }
    }
+
+    @Override
+    public void notifyDisableRoom(Object observable) throws RemoteException 
+    {
+        ClientManager.notifyDisableRoom();
+    }
     
 
 

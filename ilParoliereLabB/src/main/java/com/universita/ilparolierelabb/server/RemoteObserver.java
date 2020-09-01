@@ -24,4 +24,5 @@ public interface RemoteObserver extends Remote
     public void notifyWordGuessingState(Object observable,boolean state) throws RemoteException;
     public void notifyRefreshTable(Object observable) throws RemoteException;
     public void notifyHeaderGameMessage(Object observable,String Message) throws RemoteException;
+    public void notifyDisableRoom(Object observable) throws RemoteException;
 }

@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
- *
+ * Classe usata in RMI, rappresenta la lista di tutte le stanza disponibili
  * @author Momo
  */
 public class Rooms implements Serializable
@@ -17,12 +17,22 @@ public class Rooms implements Serializable
     private ArrayList<Room> _rooms = new ArrayList<>();
     private boolean _dataChanged = false;
     private int _lastID = 0;
+    /**
+     * Costruttore vuoto
+     */
     public Rooms(){}
-    
+    /**
+     * Ottiene la lista di tutte le stanza
+     * @return ArrayList di oggetti Room
+     */
     public ArrayList<Room> getAllRoomsData()
     {
         return this._rooms;
     }
+    /**
+     * 
+     * @param rooms 
+     */
     public void setAllRoomsData(ArrayList<Room> rooms)
     {
         this._rooms = rooms;

@@ -277,6 +277,11 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
+    /**
+     * Notifica ai client il messaggio in header
+     * @param roomId Identificativo della stanza
+     * @param Message Messaggio da notificare
+     */
     public static synchronized void notifyHeaderGameMessage(int roomId,String Message)
     {
         ClientRoom g;
@@ -296,6 +301,11 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
+    /**
+     * Notifica ai client la visibilità dei controlli delle parole
+     * @param roomId Identificativo stanza
+     * @param state Stato di visibilità
+     */
     public static synchronized void notifyWordGuessingState(int roomId,boolean state)
     {
         ClientRoom g;
@@ -315,7 +325,11 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
-    
+    /**
+     * Notifica ai client il conteggio del timer della fase di gioco
+     * @param roomId Identificativo stanza
+     * @param timerCount Conteggio del timer
+     */
     public static synchronized void notifyGameTimer(int roomId, int timerCount) {
         ClientRoom g;
         for(int i=0; i<ServerImplementation.GameClients.size();i++)
@@ -358,6 +372,10 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
+    /**
+     * Notifica ai client i dati della fase di gioco
+     * @return true se l'operazione è andata a buon fine
+     */
     public static synchronized boolean notifyGameRoomData()
     {
         ClientRoom g;
@@ -379,6 +397,10 @@ public class ServerImplementation extends Observable implements ServerInterface
         }
         return success;
     }
+    /**
+     * Notifica ai client che la fase di gioco è iniziata
+     * @param roomId Identificativo della stanza
+     */
     public static synchronized void notifyGameRoomStarted(int roomId)
     {
         ClientRoom g;
@@ -398,6 +420,10 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
+    /**
+     * Notifica ai client che la fase di gioco è finita
+     * @param roomId Identificativo della stanza
+     */
     public static synchronized void notifyGameRoomFinished(int roomId)
     {
         ClientRoom g;
@@ -636,7 +662,12 @@ public class ServerImplementation extends Observable implements ServerInterface
     {
         return ServerManager.ObserversOnline();
     }
-
+    /**
+     * Resetta ed invia una nuova password dell'utente
+     * @param email Email utente
+     * @return true se l'operazione è andata a buon fine
+     * @throws RemoteException 
+     */
     @Override
     public boolean recoverPassword(String email) throws RemoteException 
     {
@@ -648,6 +679,10 @@ public class ServerImplementation extends Observable implements ServerInterface
         boolean b2 = ServerDBInterface.changePassword(email, passCrypto);
         return b && b2;
     }
+    /**
+     * Notifica ai client di disabilitare la stanza
+     * @param roomID Identificativo della stanza
+     */
     public static void notifyDisableRoom(int roomID) 
     {
         ClientRoom g;
@@ -667,6 +702,14 @@ public class ServerImplementation extends Observable implements ServerInterface
             }
         }
     }
+    /**
+     * Verifica la correttezza di una parola, analisi della matrice e del dizionario 
+     * @param word Parola da analizzare
+     * @param roomId Identificativo della stanza
+     * @param username Nome utente del giocatore
+     * @return Punteggio aquisito dall'analisi
+     * @throws RemoteException 
+     */
     @Override
     public int checkWord(String word, int roomId,String username) throws RemoteException 
     {
@@ -703,63 +746,109 @@ public class ServerImplementation extends Observable implements ServerInterface
         return score;
         
     }
-
+    /**
+     * Ottiene le statistiche di un utente
+     * @param user Nome utente
+     * @return Array di stinghe
+     * @throws RemoteException 
+     */
     @Override
     public String[] getMyStatistics(String user) throws RemoteException {
         return ServerDBInterface.getMyStatistics(user);
     }
-
+    /**
+     * Ottiene le statistiche del punto 1 richieste nella specifica del progetto
+     * @return Matrice di stringhe
+     * @throws RemoteException 
+     */
     @Override
     public String[][] getStatisticPoint1() throws RemoteException {
         return ServerDBInterface.getStatisticPoint1();
     }
-
+    /**
+     * Ottiene le statistiche del punto 1b richieste nella specifica del progetto
+     * @return Array di stringhe
+     * @throws RemoteException 
+     */
     @Override
     public String[] getStatisticPoint1b() throws RemoteException {
         
         return ServerDBInterface.getStatisticPoint1b();
 
     }
-
+    /**
+     * Ottiene le statistiche del punto 1c richieste nella specifica del progetto
+     * @return Matrice di stringhe
+     * @throws RemoteException 
+     */
     @Override
     public String[][] getStatisticPoint1c() throws RemoteException 
     {
         return ServerDBInterface.getStatisticPoint1c();
     }
-
+    /**
+     * Ottiene le statistiche del punto 1e richieste nella specifica del progetto
+     * @return Array di stringhe
+     * @throws RemoteException 
+     */
     @Override
     public String[] getStatisticPoint1e() throws RemoteException {
         return ServerDBInterface.getStatisticPoint1e();
     }
-
+    /**
+     * Ottiene le statistiche del punto 2 richieste nella specifica del progetto
+     * @return Matrice di stringhe
+     * @throws RemoteException 
+     */
     @Override
     public String[][] getStatisticPoint2() throws RemoteException {
         
         return ServerDBInterface.getStatisticPoint2();
 
     }
-
+    /**
+     * Ottiene le statistiche del punto 3 richieste nella specifica del progetto
+     * @return Matrice di stringhe
+     * @throws RemoteException 
+     */
     @Override
     public String[][] getStatisticPoint3() throws RemoteException 
     {
         return ServerDBInterface.getStatisticPoint3();
     }
-
+    /**
+     * Ottiene le statistiche del punto 4 richieste nella specifica del progetto
+     * @return Matrice di stringhe
+     * @throws RemoteException 
+     */
     @Override
     public String[][] getStatisticPoint4() throws RemoteException 
     {
         return ServerDBInterface.getStatisticPoint4();
     }
-
+    /**
+     * Ottiene le statistiche del punto 5 richieste nella specifica del progetto
+     * @return Matrice di stringhe
+     * @throws RemoteException 
+     */
     @Override
     public String[][] getStatisticPoint5() throws RemoteException {
         return ServerDBInterface.getStatisticPoint5();
     }
-
+    /**
+     * Ottiene le statistiche del punto 1d richieste nella specifica del progetto
+     * @return Array di stringhe
+     * @throws RemoteException 
+     */
     @Override
     public String[] getStatisticPoint1d() throws RemoteException {
                 return ServerDBInterface.getStatisticPoint1d();
     }
+    /**
+     * Ottiene la definizione di una parola cercandola nel dizionario
+     * @param word Parola da analizzare
+     * @return Definizione
+     */
     private String getJustDefinition(String word)
     {
         try
@@ -777,6 +866,13 @@ public class ServerImplementation extends Observable implements ServerInterface
                 return "Definition not found";     
             } 
     }
+    /**
+     * Ottiene la definizione di una parola nel dizionario e inserisce la ricerca nel database
+     * @param word Parola da analizzare
+     * @param RoomID Identificativo della stanza
+     * @return Definizione
+     * @throws RemoteException 
+     */
     @Override
     public String getDefinition(String word,int RoomID) throws RemoteException 
     {
@@ -802,19 +898,31 @@ public class ServerImplementation extends Observable implements ServerInterface
         }
         return "Definition not found";         
     }
-
+    /**
+     * Ottiene le statistiche del punto 7 richieste nella specifica del progetto
+     * @return Matrice di stringhe
+     * @throws RemoteException 
+     */
     @Override
     public String[][] getStatisticPoint7() throws RemoteException 
     {
         return ServerDBInterface.getStatisticPoint7();
     }
-
+    /**
+     * Ottiene le statistiche del punto 8 richieste nella specifica del progetto
+     * @return Array di stringhe
+     * @throws RemoteException 
+     */
     @Override
     public String[] getStatisticPoint8() throws RemoteException 
     {
         return ServerDBInterface.getStatisticPoint8();
     }
-
+    /**
+     * Ottiene le statistiche del punto 6 richieste nella specifica del progetto
+     * @return Matrice di stringhe
+     * @throws RemoteException 
+     */
     @Override
     public String[][] getStatisticPoint6() throws RemoteException 
     {

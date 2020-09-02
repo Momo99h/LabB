@@ -121,7 +121,10 @@ public class ServerManager
         s = String.format(s, roomId,gId);
         addLogData(s);
     }
-
+    /**
+     * Aggiorna le occorrenze delle lettere presenti nella matrice
+     * @param matrix matrice di gioco
+     */
     static void updateLetterOccurencies(String[][] matrix) 
     {
         ServerDBInterface.updateLetterOccurencies(matrix);

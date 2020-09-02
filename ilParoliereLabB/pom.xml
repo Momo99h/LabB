@@ -5,38 +5,27 @@
     <artifactId>ilParoliereLabB</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
-    <repositories>
-        <repository>
-            <id>unknown-jars-temp-repo</id>
-            <name>A</name>
-            <url>file:${project.basedir}/lib</url>
-        </repository>
-    </repositories>
     <dependencies>
         <dependency>
-            <groupId>ilparolierelabb.postgresql</groupId>
-            <artifactId>ilparolierelabb.postgresql</artifactId>
-            <version>42.2.11</version>
-        </dependency>
-        <dependency>
-            <groupId>ilparolierelabb</groupId>
-            <artifactId>ilparolierelabb.mysqlconnector</artifactId>
+            <groupId>com.universita.ilparolierelabb</groupId>
+            <artifactId>postgreconnector</artifactId>
             <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/librerie/postgreconnector-1.0.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>ilparolierelabb</groupId>
-            <artifactId>ilparolierelabb.javax-mail</artifactId>
+            <groupId>com.universita.ilparolierelabb</groupId>
+            <artifactId>javaxmail</artifactId>
             <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/librerie/javaxmail-1.0.jar</systemPath>
         </dependency>
         <dependency>
-            <groupId>javax.activation</groupId>
-            <artifactId>javax.activation-api</artifactId>
-            <version>1.2.0</version>
-        </dependency>
-        <dependency>
-            <groupId>unknown.binary</groupId>
-            <artifactId>AbsoluteLayout</artifactId>
-            <version>SNAPSHOT</version>
+            <groupId>com.universita.ilparolierelabb</groupId>
+            <artifactId>absolutelayout</artifactId>
+            <version>1.0</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/librerie/absolutelayout-1.0.jar</systemPath>
         </dependency>
     </dependencies>
     <properties>

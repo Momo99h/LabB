@@ -30,17 +30,26 @@ public class Rooms implements Serializable
         return this._rooms;
     }
     /**
-     * 
-     * @param rooms 
+     * Imposta la lista di tutte le stanze
+     * @param rooms ArrayList di oggetti Room
      */
     public void setAllRoomsData(ArrayList<Room> rooms)
     {
         this._rooms = rooms;
     }
+    /**
+     * Ottiene il nuemro di stanze presenti
+     * @return Numero di stanze
+     */
     public int getRoomsCount()
     {
         return this._rooms.size();
     }
+    /**
+     * Ottine un stanza dalla lista 
+     * @param id Identificativo della stanza
+     * @return Oggetto Room con quell'identificativo
+     */
     public Room getRoom(int id)
     {
         for(Room r : _rooms)
@@ -49,27 +58,51 @@ public class Rooms implements Serializable
         }
         return null;
     }
+    /**
+     * Ottiene una stanza dalla lista
+     * @param position Posizione nella lista
+     * @return Oggetto Room che si trova nella posizione passata come parametro nella lista
+     */
     public Room getRoomObject(int position)
     {
         return this._rooms.get(position);
     }
+    /**
+     * Aggiunge una stanza alla lista
+     * @param r Oggetto Room da aggiungere
+     */
     public void addRoom(Room r)
     {
         this._rooms.add(r);
         if(r.getId() > _lastID) _lastID = r.getId();
     }
+    /**
+     * Rimuove una stanza dalla lista
+     * @param r Oggetto Room da rimuovere
+     */
     public void removeRoom(Room r)
     {
         this._rooms.remove(r);
     }
+    /**
+     * Imposta che la lista ha avuto dei cambiamenti
+     * @param value Valore da impostare
+     */
     public void setDataChanged(Boolean value)
     {
         this._dataChanged = value;
     }
+    /**
+     * Ritorna se la lista ha dei cambiamenti
+     * @return true se la lista ha avuto die cambiamenti
+     */
     public Boolean isDataChanged()
     {
         return this._dataChanged;
     }
+    /**
+     * Conferma l'handling dei cambiamenti della lista
+     */
     public void confirmDataChanged()
     {
         this._dataChanged = false;

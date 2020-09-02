@@ -78,26 +78,4 @@ public class DictionaryLoader
             else if(s.startsWith("(inter.")) return ItemType.interiezione;
             else return ItemType.other;
     }
-
-        public static void main(String[] args) {
-                DictionaryLoader loader=new DictionaryLoader();
-                String file_dizionario= "C:\\Users\\Momo\\Desktop\\dict-it.oxt";
-                File dizionario=new File(file_dizionario);
-
-                try {
-
-                        Dictionary d=loader.loadDictionaryFromFile(dizionario);
-
-                        /*for(String key: d.getKeys()) {
-                                System.out.println(d.getTerm(key));
-                        }*/
-                        System.out.println(d.getSize());
-                        System.out.println(d.getTerm("dune"));
-
-                } catch (IOException e) {
-                        e.printStackTrace();
-                } catch (InvalidKey e) {
-                        e.printStackTrace();
-                }
-        }
 }

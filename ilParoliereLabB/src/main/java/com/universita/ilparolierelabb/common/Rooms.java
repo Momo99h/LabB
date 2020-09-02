@@ -107,14 +107,27 @@ public class Rooms implements Serializable
     {
         this._dataChanged = false;
     }
+    /**
+     * Ottiene l'ultimo identificativo della stanza
+     * @return Ultimo identificativo della stanza
+     */
     public int getLastID()
     {
         return this._lastID;
     }
+    /**
+     * Imposta l'ultimo identificativo della stanza
+     * @param value Valore da impostare
+     */
     public void setLastID(int value)
     {
         this._lastID = value;
     }
+    /**
+     * Controlla se un utente è presente in una stanza
+     * @param player Oggetto che rappresenta l'utente
+     * @return true se l'utente è in un stanza
+     */
     public boolean isPlayerInAnyRoom(User player)
     {
         for(int i = 0; i < _rooms.size(); i++)
@@ -123,6 +136,11 @@ public class Rooms implements Serializable
         }
         return false;
     }
+    /**
+     * Ritorna la Room dove un utente è presente
+     * @param player Oggeto che rappresenta l'utente
+     * @return Oggetto che rappresenta la stanza
+     */
     public Room getRoomWherePlayer(User player)
     {
         Room r = null;
@@ -133,6 +151,11 @@ public class Rooms implements Serializable
         }
         return null;
     }
+    /**
+     * Rimuove un utente dalla stanza in cui si trova
+     * @param player Oggetto che rappresenta l'utente
+     * @return true se il giocatore è stato rimosso
+     */
     public boolean removePlayerFromRoom(User player)
     {
         Room r = null;
@@ -147,6 +170,11 @@ public class Rooms implements Serializable
         }
         return false;
     }
+    /**
+     * Controlla se la stanza è pronta per iniziare le fasi di gioco
+     * @param roomId Identificativo della stanza
+     * @return true se la stanza è pronta
+     */
     public boolean isRoomReadyToPlay(int roomId)
     {
         Room r = getRoom(roomId);
@@ -158,6 +186,10 @@ public class Rooms implements Serializable
         }
         return true;
     }
+    /**
+     * Genera il pacchetto LobbyData dalla lista delle stanze
+     * @return Oggetto che rappresenta i dati della lobby
+     */
     public LobbyData createLobbyData()
     {
         LobbyData d = new LobbyData();
@@ -176,6 +208,11 @@ public class Rooms implements Serializable
         }
         return d;
     }
+    /**
+     * Ritorna la lista di giocatori all'interno di una stanza
+     * @param roomId Identificativo della stanza
+     * @return Array di oggetti User
+     */
     public User[] getListPlayersInRoom(int roomId)
     {
         return getRoom(roomId).getListPlayerIn();

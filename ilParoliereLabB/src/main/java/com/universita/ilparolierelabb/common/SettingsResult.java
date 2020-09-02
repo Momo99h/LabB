@@ -6,7 +6,7 @@
 package com.universita.ilparolierelabb.common;
 
 /**
- *
+ * Enumerativo che rappresenta il risultato di connessione verso il database e configurazione del server
  * @author Momo
  */
 public enum SettingsResult

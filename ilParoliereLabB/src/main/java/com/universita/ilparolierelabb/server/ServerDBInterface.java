@@ -267,9 +267,9 @@ public class ServerDBInterface
         
     }
     /**
-     * 
-     * @param g
-     * @return 
+     * Aggiunge un fase di gioco
+     * @param g Oggetto che rappresenta un fase di gioco
+     * @return true se l'operazione è andata a buon fine
      */
     public static boolean addGame(Game g)
     {
@@ -279,7 +279,11 @@ public class ServerDBInterface
         query = String.format(query, g.getRoomID(),g.getID(),g.getPlayersIn(), users,endusers,g.getBestGameScore() );
         return _db.executeQuery(query);
     }
-    
+    /**
+     * Ottiene le statistiche di un giocatore
+     * @param user Nome utente del giocatore
+     * @return Array di stringhe che rappresenza le statistiche, null se ha errori
+     */
     public static String[] getMyStatistics(String user){
         String[] stats = new String[3];
         try{
@@ -305,6 +309,10 @@ public class ServerDBInterface
         
         return stats; 
     }
+    /**
+     * Ottiene le statistiche del punto 1 richieste nelle specifiche del progetto
+     * @return Matrice di stringhe
+     */
     public static String[][] getStatisticPoint1(){
         try
         {
@@ -333,7 +341,10 @@ public class ServerDBInterface
             return null;
         }
     }
-    
+    /**
+     * Ottiene il percoso del dizionario
+     * @return Percoso del dizionario
+     */
     public static String getDictionaryPath()
     {
         try
@@ -349,6 +360,11 @@ public class ServerDBInterface
         }     
        
     }
+    /**
+     * Imposta il percorso del dizionario
+     * @param path Percorso del dizionario
+     * @return true se l'operazione è andata a buon fine
+     */
     public static Boolean setDictionaryPath(String path)
     {
         try
@@ -364,8 +380,11 @@ public class ServerDBInterface
             return false;
         } 
     }
-
-    static String[] getStatisticPoint1b() 
+    /**
+     * Ottiene le statistiche del punto 1b richieste nelle specifiche del progetto
+     * @return Array di stringhe
+     */
+    public static String[] getStatisticPoint1b() 
     {
         try
         {
@@ -399,8 +418,11 @@ public class ServerDBInterface
             return null;
         } 
     }
-
-    static String[][] getStatisticPoint1c() {
+    /**
+     * Ottiene le statistiche del punto 1c richieste nelle specifiche del progetto
+     * @return Matrice di stringhe
+     */
+    public static String[][] getStatisticPoint1c() {
         try
         {
             String query0 = "SELECT DISTINCT ON (RoomId , GameId)RoomId,GameId, MAX(AverageScore) AS AverageScore, NickName\n" +
@@ -437,8 +459,11 @@ public class ServerDBInterface
             return null;
         }
     }
-
-    static String[] getStatisticPoint1e() 
+    /**
+     * Ottiene le statistiche del punto 1e richieste nelle specifiche del progetto
+     * @return Array di stringhe
+     */
+    public static String[] getStatisticPoint1e() 
     {
          try
         {
@@ -473,8 +498,11 @@ public class ServerDBInterface
             return null;
         } 
     }
-
-    static String[][] getStatisticPoint2() 
+    /**
+     * Ottiene le statistiche del punto 2 richieste nelle specifiche del progetto
+     * @return Matrice di stringhe
+     */
+    public static String[][] getStatisticPoint2() 
     {
         try
         {
@@ -509,8 +537,11 @@ public class ServerDBInterface
             return null;
         }
     }
-
-    static String[][] getStatisticPoint3()
+    /**
+     * Ottiene le statistiche del punto 3 richieste nelle specifiche del progetto
+     * @return Matrice di stringhe
+     */
+    public static String[][] getStatisticPoint3()
     {
         try
         {
@@ -544,8 +575,11 @@ public class ServerDBInterface
             return null;
         }
     }
-
-    static String[][] getStatisticPoint4() 
+    /**
+     * Ottiene le statistiche del punto 4 richieste nelle specifiche del progetto
+     * @return Matrice di stringhe
+     */
+    public static String[][] getStatisticPoint4() 
     {
         try
         {
@@ -582,8 +616,11 @@ public class ServerDBInterface
             return null;
         }
     }
-
-    static String[][] getStatisticPoint5() 
+    /**
+     * Ottiene le statistiche del punto 5 richieste nelle specifiche del progetto
+     * @return Matrice di stringhe
+     */
+    public static String[][] getStatisticPoint5() 
     {
         try
         {
@@ -621,8 +658,11 @@ public class ServerDBInterface
             return null;
         }
     }
-
-    static String[] getStatisticPoint1d() 
+    /**
+     * Ottiene le statistiche del punto 1d richieste nelle specifiche del progetto
+     * @return Array di stringhe
+     */
+    public static String[] getStatisticPoint1d() 
     {
         try
         {
@@ -660,22 +700,31 @@ public class ServerDBInterface
             return null;
         } 
     }
-
-    static void insertWordDefinition(String word, String definition,int RoomID) 
+    /**
+     * Inserisce la definizione di una parola
+     * @param word Parola
+     * @param definition Definizione della parola
+     * @param RoomID Identificativo della stanza
+     * @return true se l'operazione è andata a buon fine
+     */
+    public static Boolean insertWordDefinition(String word, String definition,int RoomID) 
     {
         try
         {
             String query = "Insert into wordsdefinitions values ('%s','%s','%s')";
             query = String.format(query, word,definition,RoomID);
-            _db.executeQuery(query);
+            return _db.executeQuery(query);
         }
         catch(Exception e)
         {
-            
+            return false;
         }
     }
-
-    static String[][] getStatisticPoint7() 
+    /**
+     * Ottiene le statistiche del punto 7 richieste nelle specifiche del progetto
+     * @return Matrice di stringhe
+     */
+    public static String[][] getStatisticPoint7() 
     {
        try
         {
@@ -709,8 +758,11 @@ public class ServerDBInterface
             return null;
         }
     }
-
-    static String[] getStatisticPoint8() 
+    /**
+     * Ottiene le statistiche del punto 8 richieste nelle specifiche del progetto
+     * @return Array di stringhe
+     */
+    public static String[] getStatisticPoint8() 
     {
         try
         {
@@ -739,10 +791,13 @@ public class ServerDBInterface
             return null;
         } 
     }
-
-    static void updateLetterOccurencies(String[][] matrix) 
+    /**
+     * Aggiorna la ricorrenza delle lettere che appaiono nella matrice
+     * @param matrix Matrice di gioco
+     * @return true se l'operazione è andata a buon fine
+     */
+    public static boolean updateLetterOccurencies(String[][] matrix) 
     {
-       
        try
        {
            for(int i = 0; i < matrix.length; i++)
@@ -751,17 +806,20 @@ public class ServerDBInterface
                 {
                     String query = "Update lettersoccurencies set occurrency = occurrency + 1 where letter = '%s'";
                     query = String.format(query, matrix[i][j]);
-                    _db.executeQuery(query);
+                    return  _db.executeQuery(query);
                 }
            }
        }
        catch(Exception e)
        {
-           
+           return false;
        }
-       
+       return false;
     }
-
+    /**
+     * Ottiene le statistiche del punto 6 richieste nelle specifiche del progetto
+     * @return Matrice di stringhe
+     */
     static String[][] getStatisticPoint6() 
     {
         try
@@ -793,7 +851,12 @@ public class ServerDBInterface
             return null;
         }
     }
-
+    /**
+     * Cambia la password dell'amministratore
+     * @param adminUsername Nome utente dell'amministratore
+     * @param psw Nuova password
+     * @return true se l'operazione è andata a buon fine
+     */
     public static boolean changeAdminPassword(String adminUsername, String psw) 
     {
         String query = "Update admins set password = '%s' where username = '%s'";

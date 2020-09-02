@@ -63,7 +63,6 @@ public class ClientLogin extends javax.swing.JFrame {
         jLabel1.setText("Username:");
 
         textUsername.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        textUsername.setText("Pippo");
         textUsername.setToolTipText("Insert your username");
         textUsername.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -108,7 +107,6 @@ public class ClientLogin extends javax.swing.JFrame {
             }
         });
 
-        jPasswordField1.setText("Pippo");
         jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jPasswordField1ActionPerformed(evt);

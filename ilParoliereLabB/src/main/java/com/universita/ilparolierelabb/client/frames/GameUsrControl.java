@@ -111,8 +111,9 @@ public class GameUsrControl extends javax.swing.JPanel {
         panelContainer.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         panelContainer.add(matrixUsrControl, new org.netbeans.lib.awtextra.AbsoluteConstraints(375, 15, 164, -1));
 
-        Words.setText("Words founded");
+        Words.setText("Words found");
         panelContainer.add(Words, new org.netbeans.lib.awtextra.AbsoluteConstraints(19, 39, -1, -1));
+        Words.getAccessibleContext().setAccessibleName("Words found");
 
         label1.setText("Write here:");
         panelContainer.add(label1, new org.netbeans.lib.awtextra.AbsoluteConstraints(407, 212, -1, -1));

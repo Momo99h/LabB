@@ -1,8 +1,10 @@
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.common.ServerInterface;
+import com.universita.ilparolierelabb.common.RemoteObserver;
 import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.Room;
-import com.universita.ilparolierelabb.client.RegisterData;
+import com.universita.ilparolierelabb.common.RegisterData;
 import com.universita.ilparolierelabb.common.Game;
 import com.universita.ilparolierelabb.common.LobbyData;
 import com.universita.ilparolierelabb.common.Utility;

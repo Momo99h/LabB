@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.client;
 
+import com.universita.ilparolierelabb.common.RegisterData;
 import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.client.frames.*;
 import com.universita.ilparolierelabb.common.LobbyData;

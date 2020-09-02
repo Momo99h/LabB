@@ -5,7 +5,7 @@
  */
 package com.universita.ilparolierelabb.server;
 
-import com.universita.ilparolierelabb.client.RegisterData;
+import com.universita.ilparolierelabb.common.RegisterData;
 import com.universita.ilparolierelabb.common.Game;
 import com.universita.ilparolierelabb.common.Room;
 import com.universita.ilparolierelabb.common.User;
@@ -190,13 +190,24 @@ public class ServerDBInterface
         ResultTable val = _db.executeQueryRead(query);
         return (!val.get(0, 0).equals("0")); 
     }
+    /**
+     * Cambia la password di un account utente
+     * @param email Email dell'utente
+     * @param password Nuova password dell'utente
+     * @return true se l'operazione è andata a buon fine
+     */
     public static boolean changePassword(String email,String password)
     {
         String query = "Update Users set Password = '%s' WHERE Email = '%s' ";
         query = String.format(query,password,email);
         return _db.executeQuery(query);
     }
-
+    /**
+     * Aggiunge punti al punteggio totale di un giocatore
+     * @param username Nome utente del giocatore
+     * @param score Punteggio da aggiungere
+     * @return true se l'operazione è andata a buon fine
+     */
     public static boolean addScoreToPlayer(String username, int score) 
     {
         String query = "Select TotalPoints from UsersScore where Nickname = '%s'";
@@ -208,13 +219,28 @@ public class ServerDBInterface
         query = String.format(query, _score,username);
         return _db.executeQuery(query);
     }
+    /**
+     * Inserisce una parola scritta dal giocatore 
+     * @param username Username del giocatore
+     * @param word Parola inserita
+     * @param score Punteggio della parola
+     * @param roomId Identificativo della stanza
+     * @param gameId Identificativo della fase di gioco
+     * @param exist Esistenza nel dizionario
+     * @param explanation Definizione della parola
+     * @return true se l'operazione è andata a buon fine
+     */
     public static boolean addWordOfPlayer(String username,String word,int score,int roomId,int gameId,int exist,String explanation)
     {
         String query = "Insert into UsersWords (RoomID,GameID,Nickname,Word,InDictionary,Score,Explanation) Values ('%s','%s','%s','%s','%s','%s','%s')";
         query = String.format(query, roomId,gameId,username,word,exist,score,explanation);
         return _db.executeQuery(query);
     }
-    
+    /**
+     * Aggiunge una stanza
+     * @param r Oggetto che rappresenta stanza
+     * @return true se l'operazione è andata a buon fine
+     */
     public static boolean addRoom(Room r)
     {
         String query = "Insert into Rooms (RoomId,Name,Players,PlayersNicknames) Values ('%s','%s','%s','%s')";
@@ -222,7 +248,10 @@ public class ServerDBInterface
         query = String.format(query, r.getId(),r.getRoomName(),r.getPlayersNeeded(), users );
         return _db.executeQuery(query);
     }
-    
+    /**
+     * Ottiene l'ultimo identificativo delle stanze salvate
+     * @return Identificativo della stanza, 0 se ha errori/non esiste
+     */
     public static int getRoomLastId()
     {
         String query= "SELECT MAX(RoomId) FROM Rooms";
@@ -237,6 +266,11 @@ public class ServerDBInterface
         }
         
     }
+    /**
+     * 
+     * @param g
+     * @return 
+     */
     public static boolean addGame(Game g)
     {
         String query = "Insert into Games (RoomID,GameID,Players,PlayersNicknames,PlayersNicknamesEnd,GameFinalScore) Values ('%s','%s','%s','%s','%s','%s')";

@@ -1,7 +1,7 @@
 
 package com.universita.ilparolierelabb.server;
 
-import com.universita.ilparolierelabb.client.RegisterData;
+import com.universita.ilparolierelabb.common.RegisterData;
 import com.universita.ilparolierelabb.common.Game;
 import com.universita.ilparolierelabb.common.Room;
 import com.universita.ilparolierelabb.common.Settings;

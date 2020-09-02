@@ -1,12 +1,10 @@
 
-package com.universita.ilparolierelabb.server;
+package com.universita.ilparolierelabb.common;
 
 /**
- *
+ * Interfaccia del client
  * @author Momo
  */
-import com.universita.ilparolierelabb.common.LobbyData;
-import com.universita.ilparolierelabb.common.Room;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

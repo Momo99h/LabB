@@ -9,7 +9,7 @@ import com.universita.ilparolierelabb.client.ClientManager;
 import com.universita.ilparolierelabb.client.RegistrationResult;
 import com.universita.ilparolierelabb.common.Settings;
 import com.universita.ilparolierelabb.common.Utility;
-import com.universita.ilparolierelabb.client.RegisterData;
+import com.universita.ilparolierelabb.common.RegisterData;
 import javax.swing.JDialog;
 
 /**

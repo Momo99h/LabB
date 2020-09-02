@@ -3,18 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.universita.ilparolierelabb.server;
-
-import com.universita.ilparolierelabb.common.User;
-import com.universita.ilparolierelabb.common.Room;
-import com.universita.ilparolierelabb.client.RegisterData;
-import com.universita.ilparolierelabb.common.LobbyData;
-import com.universita.ilparolierelabb.common.UserStatus;
+package com.universita.ilparolierelabb.common;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- *
+ * Interfaccia del server
  * @author Momo
  */
 public interface ServerInterface extends Remote 

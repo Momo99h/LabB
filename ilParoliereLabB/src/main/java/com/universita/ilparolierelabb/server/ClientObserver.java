@@ -5,6 +5,7 @@
  */
 package com.universita.ilparolierelabb.server;
 
+import com.universita.ilparolierelabb.common.RemoteObserver;
 import java.io.Serializable;
 import java.util.Observable;
 import java.util.Observer;

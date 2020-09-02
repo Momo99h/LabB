@@ -13,7 +13,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
+ * Interfaccio di collocquio prioritaria verso database PostgreSQL.
  * @author Momo
  */
 public class PostgreSQLEngine extends sqlEngine

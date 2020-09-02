@@ -3,7 +3,7 @@ package com.universita.ilparolierelabb.common;
 import java.io.Serializable;
 
 /**
- *
+ * Enumerativo usato in RMI, che rappresenta lo stato di un giocatore
  * @author Momo
  */
 public enum UserStatus implements Serializable

@@ -14,7 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 /**
- *
+ * Interfaccio di collocquio prioritaria verso database MYSQL.
  * @author Momo
  */
 public class MySQLEngine extends sqlEngine

@@ -1,14 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+/**
+ * 
+ * Progetto laboratorio B
+ * 
+ * Mohamed Hussein,   737787
+ * Anrea Girola,      740724
+ * Vanessa Squillace, 728078
+ * Simone Spagnolo,   737742
+ * 
  */
 package com.universita.ilparolierelabb.server;
 
 import com.universita.ilparolierelabb.common.RegisterData;
 import com.universita.ilparolierelabb.common.Game;
 import com.universita.ilparolierelabb.common.Room;
-import com.universita.ilparolierelabb.common.User;
 import com.universita.ilparolierelabb.common.UserStatus;
 import com.universita.ilparolierelabb.common.sql.*;
 

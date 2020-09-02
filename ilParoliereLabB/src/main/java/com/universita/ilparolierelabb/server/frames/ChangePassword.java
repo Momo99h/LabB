@@ -1,16 +1,20 @@
-
+/**
+ * 
+ * Progetto laboratorio B
+ * 
+ * Mohamed Hussein,   737787
+ * Anrea Girola,      740724
+ * Vanessa Squillace, 728078
+ * Simone Spagnolo,   737742
+ * 
+ */
 package com.universita.ilparolierelabb.server.frames;
 
 import com.universita.ilparolierelabb.common.Settings;
-import com.universita.ilparolierelabb.common.SettingsResult;
 import com.universita.ilparolierelabb.common.Utility;
-import com.universita.ilparolierelabb.common.sql.*;
 import com.universita.ilparolierelabb.server.ServerDBInterface;
 import com.universita.ilparolierelabb.server.ServerManager;
-import static com.universita.ilparolierelabb.server.ServerManager._DictionaryPath;
-import java.io.File;
 import javax.swing.JDialog;
-import javax.swing.JFileChooser;
 
 /**
  *

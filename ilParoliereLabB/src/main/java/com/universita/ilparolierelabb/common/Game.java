@@ -210,7 +210,10 @@ public class Game implements Serializable
      * @return Identificativo della stanza
      */
     public int getRoomID(){return this._roomid;}
-
+    /**
+     * Ritorna la lista degli oggetti che rappresentano i giocatori all'inizio della fase di gioco
+     * @return Array di oggetti che rappreenzano i giocatori
+     */
     public User[] getListInitialPlayerIn()
     {
         User[] s = new User[this._Initialusers.size()];
@@ -220,6 +223,10 @@ public class Game implements Serializable
         }
         return s;
     }
+    /**
+     * Ritorna la lista degli oggetti che rappresentano i giocatori alla fine della fase di gioco
+     * @return Array di oggetti che rappreenzano i giocatori
+     */
     public User[] getListEndPlayersIn()
     {
         User[] s = new User[this._Endusers.size()];
@@ -229,6 +236,11 @@ public class Game implements Serializable
         }
         return s;
     }
+    /**
+     * Ritorna una stringa con i nomi dei giocatori suddivisi da un separatore all'inizio della fase di gioco
+     * @param separator separatore
+     * @return Stringa con separatore
+     */
     public String getListInitialPlayersIn(String separator)
     {
         User[] user = getListInitialPlayerIn();
@@ -237,6 +249,11 @@ public class Game implements Serializable
             users += s.getUsername() + separator;
         return users;
     }
+    /**
+     * Ritorna una stringa con i nomi dei giocatori suddivisi da un separatore alla fine della fase di gioco
+     * @param separator separatore
+     * @return Stringa con separatore
+     */
     public String getListEndPlayersIn(String separator)
     {
         User[] user = getListEndPlayersIn();
@@ -245,12 +262,19 @@ public class Game implements Serializable
             users += s.getUsername() + separator;
         return users;
     }
-    
+    /**
+     * Ritorna il numero di giocatori all'intrno della fase di gioco
+     * @return Numero di giocatori all'interno della fase di gioco
+     */
     public int getPlayersIn()
     {
         return this._Initialusers.size();
     }
-    
+    /**
+     * Controlla se un giocatore è all'interno della fase di gioco
+     * @param username Nome del giocatore
+     * @return true se il giocatore è all'interno
+     */
     public boolean isPlayerIn(String username) 
     {
        for(int i = 0; i < _Initialusers.size(); i++)
@@ -262,6 +286,10 @@ public class Game implements Serializable
        }
        return false;
     }
+    /**
+     * Rimuove un giocatore dalla fase di gioco
+     * @param username Nome del giocatore
+     */
     public void removePlayer(String username) 
     {
        for(int i = 0; i < _Endusers.size(); i++)
